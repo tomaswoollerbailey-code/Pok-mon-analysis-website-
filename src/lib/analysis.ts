@@ -1,4 +1,3 @@
-import type { Currency } from './pricing';
 import type { ArchetypeLists, Dataset, ResultRow, Source } from './types';
 
 export type TopCut = 'auto' | 'top8' | 'top16' | 'top32' | 'top10pct';
@@ -17,8 +16,6 @@ export interface Filters {
   topCut: TopCut;
   /** Drop archetypes that rotate out at the next rotation (projected post-rotation meta). */
   hideRotating: boolean;
-  /** Display currency for prices (doesn't affect the analysis). */
-  currency: Currency;
 }
 
 export const DEFAULT_FILTERS: Filters = {
@@ -30,7 +27,6 @@ export const DEFAULT_FILTERS: Filters = {
   minPlayers: 0,
   topCut: 'auto',
   hideRotating: false,
-  currency: 'usd',
 };
 
 export const TOP_CUT_LABELS: Record<TopCut, string> = {
