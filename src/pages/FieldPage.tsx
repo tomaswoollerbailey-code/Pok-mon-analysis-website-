@@ -1,7 +1,7 @@
 import { DeckName } from '../components/DeckName';
 import { Fragment, useMemo, useState } from 'react';
 import { RotationBadge } from '../components/RotationBadge';
-import { fieldWinRates, metaSummary, SHRINK_GAMES, type Filters } from '../lib/analysis';
+import { fieldWinRates, isOther, metaSummary, SHRINK_GAMES, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
 import { Empty } from './MetaPage';
@@ -12,7 +12,8 @@ const CANDIDATES = 20;
 /** Expected field → expected win rate for every deck ("what should I play?"). */
 export function FieldPage({ data, filters }: { data: Dataset; filters: Filters }) {
   const meta = useMemo(() => metaSummary(data, filters), [data, filters]);
-  const top = meta.rows.slice(0, FIELD_SIZE);
+  const rows = meta.rows.filter((r) => !isOther(data, r.archetype));
+  const top = rows.slice(0, FIELD_SIZE);
   const defaults = useMemo(() => new Map(top.map((r) => [r.archetype, Math.round(r.share * 1000) / 10])), [meta]);
   const [edits, setEdits] = useState<Map<number, number>>(new Map());
   const [open, setOpen] = useState<number | null>(null);
@@ -23,7 +24,7 @@ export function FieldPage({ data, filters }: { data: Dataset; filters: Filters }
   const scale = listed > 100 ? 100 / listed : 1; // over 100%: normalise, no "other"
   const other = Math.max(0, 100 - listed) / 100;
   const field = shares.map((e) => ({ archetype: e.archetype, share: (e.pct * scale) / 100 }));
-  const candidates = meta.rows.slice(0, CANDIDATES).map((r) => r.archetype);
+  const candidates = rows.slice(0, CANDIDATES).map((r) => r.archetype);
   const results = useMemo(() => fieldWinRates(data, filters, field, other, candidates), [data, filters, JSON.stringify(field), other, candidates.join()]);
   const totalGames = results.reduce((s, r) => s + r.games, 0);
 

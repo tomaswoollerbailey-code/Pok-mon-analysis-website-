@@ -21,6 +21,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
   const a = data.archetypes.findIndex((x) => x.key === aKey);
   const [lists, setLists] = useState<ArchetypeLists | null | 'none'>(null);
   const [topOnly, setTopOnly] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   useEffect(() => {
     setLists(null);
     loadLists(aKey).then(setLists, () => setLists('none'));
@@ -37,7 +38,8 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
   const cut = TOP_CUT_LABELS[filters.topCut];
 
   if (a < 0) return <Empty>Unknown archetype.</Empty>;
-  const best = results.filter((r) => r[2] > 0).slice().sort((x, y) => x[2] - y[2] || x[0] - y[0]).slice(0, 25);
+  // Best placing first; among equal placings, bigger events first (a Regional win beats a 40-player online win).
+  const best = results.filter((r) => r[2] > 0).slice().sort((x, y) => x[2] - y[2] || data.tournaments[y[0]].players - data.tournaments[x[0]].players || x[0] - y[0]).slice(0, 25);
 
   return (
     <>
@@ -68,18 +70,23 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
             <h2>Card usage</h2>
             <p>{usage ? `${int(usage.lists)} decklists` : 'Share of lists playing each card and average copies when played.'}</p>
           </div>
-          <label className="check"><input type="checkbox" checked={topOnly} onChange={(e) => setTopOnly(e.target.checked)} /> {cut} lists only</label>
+          <div className="actions">
+            <label className="check"><input type="checkbox" checked={topOnly} onChange={(e) => setTopOnly(e.target.checked)} /> {cut} lists only</label>
+            <label className="check"><input type="checkbox" checked={showAll} onChange={(e) => setShowAll(e.target.checked)} /> Show rare techs</label>
+          </div>
         </header>
         {lists === null ? <div className="loading">Loading decklists…</div>
           : lists === 'none' || !usage || !usage.lists ? <Empty>No decklists published for this archetype with the current filters.</Empty>
           : (
             <div className="three-col">
               {CATS.map(({ key, label }) => {
-                const rows = usage.cards.filter((u) => lists.cards[u.card].category === key);
+                // Core cards first; one-off techs (<10% of lists) only when asked for.
+                const all = usage.cards.filter((u) => lists.cards[u.card].category === key);
+                const rows = showAll ? all : all.filter((u) => u.inclusion >= 0.1);
                 if (!rows.length) return null;
                 return (
                   <div key={key}>
-                    <h3>{label}</h3>
+                    <h3>{label}{!showAll && all.length > rows.length ? <span className="muted"> · {all.length - rows.length} rarer</span> : null}</h3>
                     <SortTable<CardUsage>
                       rows={rows}
                       rowKey={(u) => u.card}
