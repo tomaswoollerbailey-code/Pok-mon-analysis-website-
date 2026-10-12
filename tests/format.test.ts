@@ -17,8 +17,10 @@ describe('current format window', () => {
       t('offline', 'new-offline', CURRENT_FORMAT.inPerson),
       t('offline', 'expanded', '2026-06-01', 'EXPANDED'),
       t('japan', 'jp', '2026-02-01'),
+      t('offline', 'champions-league', '2026-09-20', 'STANDARD-JP'),
     ], 'now');
-    expect(dataset.tournaments.map((x) => x.id).sort()).toEqual(['jp', 'new-offline', 'new-online']);
+    expect(dataset.tournaments.map((x) => x.id).sort()).toEqual(['champions-league', 'jp', 'new-offline', 'new-online']);
+    expect(dataset.tournaments.find((x) => x.id === 'champions-league')!.source).toBe('japan');
     expect(dataset.format).toEqual(CURRENT_FORMAT);
   });
 });

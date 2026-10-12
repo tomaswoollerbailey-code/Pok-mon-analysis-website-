@@ -5,7 +5,7 @@ import { DeckName } from '../components/DeckName';
 import { RotationBadge } from '../components/RotationBadge';
 import { convert, formatMoney } from '../lib/pricing';
 import { SortTable, type Column } from '../components/SortTable';
-import { metaSummary, TOP_CUT_LABELS, type ArchetypeStats, type Filters } from '../lib/analysis';
+import { isOther, metaSummary, TOP_CUT_LABELS, type ArchetypeStats, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
 import { href } from '../router';
@@ -14,8 +14,9 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
   const m = useMemo(() => metaSummary(data, filters), [data, filters]);
   const name = (a: number) => data.archetypes[a].name;
   const cut = TOP_CUT_LABELS[filters.topCut];
-  const leader = m.rows[0];
-  const bestConv = [...m.rows].filter((r) => r.players >= Math.max(10, m.identified * 0.01)).sort((a, b) => b.conversion - a.conversion)[0];
+  const ranked = m.rows.filter((r) => !isOther(data, r.archetype));
+  const leader = ranked[0];
+  const bestConv = [...ranked].filter((r) => r.players >= Math.max(10, m.identified * 0.01)).sort((a, b) => b.conversion - a.conversion)[0];
 
   const columns: Column<ArchetypeStats>[] = [
     { key: 'name', label: 'Deck', render: (r) => <DeckName a={data.archetypes[r.archetype]} />, sort: (r) => name(r.archetype) },
@@ -24,7 +25,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     { key: 'topCut', label: cut, numeric: true, render: (r) => int(r.topCut), sort: (r) => r.topCut, title: `Pilots finishing in the ${cut}` },
     { key: 'topCutShare', label: `${cut} share`, numeric: true, render: (r) => pct(r.topCutShare), sort: (r) => r.topCutShare, title: `Share of all ${cut} slots` },
     { key: 'conversion', label: 'Conversion', numeric: true, render: (r) => pct(r.conversion), sort: (r) => r.conversion, title: `Pilots reaching the ${cut} ÷ pilots` },
-    { key: 'winRate', label: 'Win rate', numeric: true, render: (r) => pct(r.winRate), sort: (r) => r.winRate ?? -1, title: 'Match win rate where records are available (online events); ties count as half' },
+    { key: 'winRate', label: 'Win rate', numeric: true, render: (r) => pct(r.winRate), sort: (r) => r.winRate ?? -1, title: 'Head-to-head win rate vs other decks in online events (mirrors excluded); ties count as half' },
     { key: 'record', label: 'W-L-T', numeric: true, render: (r) => (r.wins + r.losses + r.ties ? `${r.wins}-${r.losses}-${r.ties}` : '—') },
     ...(data.prices ? [{
       key: 'price', label: 'Deck price', numeric: true,
@@ -53,7 +54,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
           </p>
         </div>
         <div className="podium">
-          {m.rows.slice(0, 3).map((r, i) => {
+          {ranked.slice(0, 3).map((r, i) => {
             const a = data.archetypes[r.archetype];
             const price = a.price ? convert(a.price, filters.currency, data.prices?.fx) : undefined;
             return (
@@ -107,7 +108,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
       <section className="card">
         <header className="card-head">
           <h2>All archetypes</h2>
-          <p>Click a column to sort. Win rates come from events that publish records, which are mostly online.</p>
+          <p>Click a column to sort. Win rate and W-L-T are head-to-head games against other decks in online events (mirrors excluded).</p>
         </header>
         <SortTable rows={m.rows} columns={columns} initial="players" rowKey={(r) => r.archetype} limit={30} />
       </section>

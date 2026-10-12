@@ -3,7 +3,7 @@ import { DeckName } from '../components/DeckName';
 import { useMemo, useState } from 'react';
 import { divergingFill } from '../colors';
 import { useTooltip } from '../components/Tooltip';
-import { matchupMatrix, metaSummary, type Filters } from '../lib/analysis';
+import { isOther, matchupMatrix, metaSummary, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
 import { Empty } from './MetaPage';
@@ -12,7 +12,7 @@ export function MatchupsPage({ data, filters }: { data: Dataset; filters: Filter
   const [size, setSize] = useState(12);
   const [minGames, setMinGames] = useState(10);
   const { ref, show, hide, node } = useTooltip();
-  const top = useMemo(() => metaSummary(data, filters).rows.slice(0, size).map((r) => r.archetype), [data, filters, size]);
+  const top = useMemo(() => metaSummary(data, filters).rows.filter((r) => !isOther(data, r.archetype)).slice(0, size).map((r) => r.archetype), [data, filters, size]);
   const m = useMemo(() => matchupMatrix(data, filters, top), [data, filters, top]);
   const total = m.flat().reduce((s, c) => s + c.games, 0) / 2;
   const name = (a: number) => data.archetypes[a].name;

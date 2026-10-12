@@ -51,12 +51,12 @@ describe('metaSummary', () => {
     const m = metaSummary(d, F({ topCut: 'top8' }));
     expect(m).toMatchObject({ tournaments: 2, players: 7, identified: 6, topCutSlots: 4 });
     const zard = m.rows.find((r) => r.archetype === idx('Charizard Pidgeot'))!;
-    expect(zard).toMatchObject({ players: 3, topCut: 2, wins: 4, losses: 1, ties: 1, wins1st: 1 });
+    expect(zard).toMatchObject({ players: 3, topCut: 2, wins: 1, losses: 0, ties: 1, wins1st: 1 });
     expect(zard.share).toBeCloseTo(0.5);
     expect(zard.conversion).toBeCloseTo(2 / 3);
-    expect(zard.winRate).toBeCloseTo(4.5 / 6);
+    expect(zard.winRate).toBeCloseTo(1.5 / 2); // from non-mirror pairings: beat Gardevoir, tied once
     const gard = m.rows.find((r) => r.archetype === idx('Gardevoir ex'))!;
-    expect(gard.winRate).toBeCloseTo(2 / 3); // offline rows have no games recorded
+    expect(gard.winRate).toBeCloseTo(0.5 / 2);
   });
 
   it('filters by source and top 10%', () => {

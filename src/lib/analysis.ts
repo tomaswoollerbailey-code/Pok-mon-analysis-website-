@@ -73,7 +73,7 @@ export interface ArchetypeStats {
   wins: number;
   losses: number;
   ties: number;
-  /** Match win rate, ties counted as half a win; null without recorded games. */
+  /** Win rate vs other decks from pairings (mirrors excluded), ties as half; null without games. */
   winRate: number | null;
   wins1st: number;
 }
@@ -97,7 +97,7 @@ export function metaSummary(d: Dataset, f: Filters): MetaSummary {
   const keep = archetypeMask(d, f);
   const by = new Map<number, ArchetypeStats>();
   let players = 0, identified = 0, topCutSlots = 0;
-  for (const [ti, a, placing, w, l, t] of d.results) {
+  for (const [ti, a, placing] of d.results) {
     if (!mask[ti] || (a >= 0 && !keep[a])) continue;
     players++;
     const inCut = placing > 0 && placing <= cutSize(f.topCut, d.tournaments[ti].players);
@@ -109,7 +109,15 @@ export function metaSummary(d: Dataset, f: Filters): MetaSummary {
     s.players++;
     if (inCut) s.topCut++;
     if (placing === 1) s.wins1st++;
-    s.wins += w; s.losses += l; s.ties += t;
+  }
+  // Win rate from head-to-head games against other decks (mirrors excluded). Standings
+  // records include byes and drops, which skew every deck below 50%.
+  for (const [ti, a, b, o] of d.matches) {
+    if (!mask[ti]) continue;
+    const sa = by.get(a), sb = by.get(b);
+    if (o === 1) { if (sa) sa.wins++; if (sb) sb.losses++; }
+    else if (o === -1) { if (sa) sa.losses++; if (sb) sb.wins++; }
+    else { if (sa) sa.ties++; if (sb) sb.ties++; }
   }
   const rows = [...by.values()];
   for (const s of rows) {
@@ -236,6 +244,9 @@ export function archetypeResults(d: Dataset, f: Filters, archetype: number): Res
     .filter(([ti, a]) => a === archetype && mask[ti])
     .sort((x, y) => x[0] - y[0] || (x[2] || Infinity) - (y[2] || Infinity));
 }
+
+/** Limitless's catch-all bucket for unrecognised decks: kept in tables, left out of rankings. */
+export const isOther = (d: Dataset, a: number) => d.archetypes[a]?.key === 'other';
 
 export function formatsIn(d: Dataset): string[] {
   return [...new Set(d.tournaments.map((t) => t.format))].sort();
