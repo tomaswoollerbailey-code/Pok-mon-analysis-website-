@@ -15,7 +15,7 @@ Only completed Standard events since the last rotation count (April 2026: G mark
 
 - **Meta**: meta share, conversion (the share of a deck's players who finished in the Top 8 online, or the Top 10% at majors), win rate, price, rotation status and tournament wins per deck.
 - **Trends**: weekly meta share for up to 8 decks, with a table view.
-- **Matchups**: a deck-vs-deck win-rate heatmap from online pairings, with a minimum-games threshold.
+- **Matchups**: a deck-vs-deck win-rate heatmap from online pairings, covering every deck with at least 1% of the field in the chosen period.
 - **Field planner**: set the field you expect and every deck is ranked by expected win rate against it ("what should I play?").
 - **Tournaments**: a searchable event list; each event page shows its deck breakdown and standings.
 - **Deck pages**: rotation status, a price breakdown of a real recent list (with a TCGplayer buy link and per-card Cardmarket links), and best finishes.
@@ -63,6 +63,7 @@ src/  React + Vite site that loads public/data/ and computes everything in the b
 
 - `src/lib/limitless/online.ts` normalises Limitless Play API responses.
 - `src/lib/limitless/offline.ts` parses limitlesstcg.com pages. It maps columns by header text, not position, and falls back to cell text when `data-*` attributes are missing. If the site layout changes and the scraper reports zero tournaments, fix it here.
+- `src/router.ts` and `src/lib/routes.ts` give every page a real URL (`/decks/<deck>`); `scripts/prerender.ts` writes a static HTML file per page (with its own title and description), a sitemap and robots.txt after the Vite build. For a custom domain build with `SITE_BASE=/ SITE_URL=https://example.com`.
 - `src/lib/build.ts` builds the compact dataset; `src/lib/analysis.ts` has every metric (pure functions, covered by `npm test`).
 
 ## Tests

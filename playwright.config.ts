@@ -16,7 +16,7 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    command: 'npx vite build --outDir dist-e2e && npx tsx tests/e2e/fixture.ts dist-e2e/data && npx vite preview --outDir dist-e2e --port 4174 --strictPort',
+    command: 'SITE_BASE=/ npx vite build --outDir dist-e2e && npx tsx tests/e2e/fixture.ts dist-e2e/data && SITE_URL=http://localhost:4174 npx tsx scripts/prerender.ts dist-e2e && npx vite preview --outDir dist-e2e --port 4174 --strictPort',
     url: 'http://localhost:4174',
     timeout: 120_000,
     reuseExistingServer: !process.env.CI,

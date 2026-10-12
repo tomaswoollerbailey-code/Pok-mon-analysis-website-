@@ -14,7 +14,7 @@ test.afterEach(async ({ page }) => {
   expect(overflow, 'horizontal scroll').toBeLessThanOrEqual(1);
 });
 
-const go = (page: Page, route: string) => page.goto(`./#/${route}`);
+const go = (page: Page, route: string) => page.goto(`./${route}`);
 
 test('meta overview shows the snapshot and full table', async ({ page }) => {
   await go(page, '');
@@ -74,9 +74,15 @@ test('trends draw a chart', async ({ page }) => {
   await expect(page.locator('svg.line-chart path[stroke]').first()).toBeVisible();
 });
 
-test('matchups render a heatmap', async ({ page }) => {
+test('matchups render a heatmap of every deck for the period, with no extra pickers', async ({ page }) => {
   await go(page, 'matchups');
   await expect(page.locator('table.heat td.cell').first()).toBeVisible();
+  await expect(page.locator('main select')).toHaveCount(0);
+  const rows = await page.locator('table.heat tbody tr').count();
+  await page.locator('.filters-btn').click();
+  await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '14d' }).click();
+  await expect(page.getByText(/in this period/)).toBeVisible();
+  expect(await page.locator('table.heat tbody tr').count()).toBeLessThanOrEqual(rows);
 });
 
 test('field planner re-ranks when the field changes and expands a breakdown', async ({ page }) => {
@@ -90,7 +96,7 @@ test('field planner re-ranks when the field changes and expands a breakdown', as
 });
 
 test('deck page shows rotation year, price and a TCGplayer link, but no card usage', async ({ page }) => {
-  await go(page, 'deck/deck-charlie');
+  await go(page, 'decks/deck-charlie');
   await expect(page.getByRole('heading', { name: 'Card usage' })).toHaveCount(0);
   await expect(page.locator('.rot-line')).toContainText('2027');
   await expect(page.getByText(/Deck price:/)).toBeVisible();
@@ -121,6 +127,47 @@ test('filters panel uses chips and has no date inputs', async ({ page }) => {
   await expect(page.locator('input[type="date"]')).toHaveCount(0);
   await page.getByRole('button', { name: 'Reset filters' }).click();
   await expect(page.locator('.filters-summary')).toContainText('Since 2026 rotation');
+});
+
+test('pages have real URLs: in-site links navigate without a reload', async ({ page }) => {
+  await go(page, '');
+  await page.evaluate(() => { (window as any).__alive = true; });
+  await page.locator('.podium-card').first().click();
+  await expect(page).toHaveURL(/\/decks\/[^/]+$/);
+  await expect(page.locator('.deck-title')).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.locator('.podium-card')).toHaveCount(3);
+  // Deck names inside clickable table rows stop propagation; they must still navigate in-app.
+  await page.locator('main table.data a.deck-name').first().click();
+  await expect(page).toHaveURL(/\/decks\/[^/]+$/);
+  expect(await page.evaluate(() => (window as any).__alive), 'page reloaded').toBe(true);
+});
+
+test('old #/ links redirect to the new URLs', async ({ page }) => {
+  await page.goto('./#/deck/deck-charlie');
+  await expect(page).toHaveURL(/\/decks\/deck-charlie$/);
+  await expect(page.locator('.deck-title')).toBeVisible();
+  await page.goto('./#/trends');
+  await expect(page).toHaveURL(/\/trends$/);
+});
+
+test('every page is prerendered with its own title, description and canonical', async ({ request }) => {
+  const html = await (await request.get('./decks/deck-charlie/')).text();
+  expect(html).toMatch(/<title>Deck Charlie deck list, meta share &amp; price/);
+  expect(html).toMatch(/<meta name="description" content="Deck Charlie:/);
+  expect(html).toContain('<link rel="canonical" href="http://localhost:4174/decks/deck-charlie/"');
+  expect(html).toMatch(/<h1>Deck Charlie deck list/);
+  const sitemap = await (await request.get('./sitemap.xml')).text();
+  expect(sitemap).toContain('/decks/deck-charlie/</loc>');
+  expect(await (await request.get('./robots.txt')).text()).toContain('Sitemap:');
+});
+
+test('the page title follows the page you are on', async ({ page }) => {
+  await go(page, 'trends');
+  await expect(page).toHaveTitle(/meta trends/);
+  await page.getByRole('link', { name: 'Matchups' }).first().click();
+  await expect(page).toHaveTitle(/matchup win rates/);
 });
 
 test('theme toggle switches to dark', async ({ page }) => {
