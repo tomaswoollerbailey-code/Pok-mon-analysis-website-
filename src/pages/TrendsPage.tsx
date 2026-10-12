@@ -1,70 +1,72 @@
-import { DeckIcons } from '../components/Brand';
-import { useMemo, useState } from 'react';
-import { LineChart } from '../components/LineChart';
-import { SERIES_SLOTS, seriesVar, useStableSlots } from '../colors';
-import { metaSummary, metaTrend, type Filters } from '../lib/analysis';
+import { useMemo } from 'react';
+import { DeckName } from '../components/DeckName';
+import { Delta, Sparkline, trendOf } from '../components/Sparkline';
+import { SortTable, type Column } from '../components/SortTable';
+import { metaMovers, MOVER_MIN_PLAYERS, type Filters, type Mover } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
-import { pct, shortDate } from '../format';
+import { int, pct, shortDate } from '../format';
 import { Empty } from './MetaPage';
 
+const BOARD = 6;
+
 export function TrendsPage({ data, filters }: { data: Dataset; filters: Filters }) {
-  const ranked = useMemo(() => metaSummary(data, filters).rows.map((r) => r.archetype), [data, filters]);
-  const [picked, setPicked] = useState<number[] | null>(null);
-  const [showTable, setShowTable] = useState(false);
-  const selected = (picked ?? ranked.slice(0, 6)).filter((a) => ranked.includes(a)).slice(0, SERIES_SLOTS);
-  const slots = useStableSlots(selected);
-  const trend = useMemo(() => metaTrend(data, filters, selected), [data, filters, selected.join()]);
+  const m = useMemo(() => metaMovers(data, filters), [data, filters]);
+  if (!m) return <Empty>Not enough recent events in this period to compare. Try a longer period.</Empty>;
+  if (!m.rows.length) return <Empty>No deck has {MOVER_MIN_PLAYERS}+ players in the last two windows. Try a longer period.</Empty>;
 
-  if (!ranked.length) return <Empty />;
+  const rising = m.rows.filter((r) => r.delta > 0).slice(0, BOARD);
+  const falling = m.rows.filter((r) => r.delta < 0).slice(-BOARD).reverse();
+  const range = (w: { from: string; to: string }) => `${shortDate(w.from)}–${shortDate(w.to)}`;
+  const weeks = m.days % 7 === 0 ? `${m.days / 7} week${m.days === 7 ? '' : 's'}` : `${m.days} days`;
 
-  const toggle = (a: number) => {
-    const cur = selected;
-    setPicked(cur.includes(a) ? cur.filter((x) => x !== a) : cur.length >= SERIES_SLOTS ? cur : [...cur, a]);
-  };
+  const columns: Column<Mover>[] = [
+    { key: 'name', label: 'Deck', render: (r) => <DeckName a={data.archetypes[r.archetype]} />, sort: (r) => data.archetypes[r.archetype].name },
+    { key: 'now', label: 'Share now', shortLabel: 'Now', numeric: true, render: (r) => pct(r.now), sort: (r) => r.now, title: range(m.now) },
+    { key: 'before', label: 'Before', numeric: true, hideOnMobile: true, render: (r) => pct(r.before), sort: (r) => r.before, title: range(m.before) },
+    { key: 'delta', label: 'Change', numeric: true, render: (r) => <Delta value={r.delta} />, sort: (r) => r.delta },
+    { key: 'spark', label: 'Weekly share', hideOnMobile: true, render: (r) => <Sparkline values={r.spark} trend={trendOf(r.delta)} /> },
+    { key: 'players', label: 'Players', numeric: true, hideOnMobile: true, render: (r) => int(r.players), sort: (r) => r.players, title: 'Players on the deck across both windows' },
+  ];
 
   return (
-    <section className="card">
-      <header className="card-head">
-        <h2>Meta share over time</h2>
-        <p>Weekly share of players with a known deck. Pick up to {SERIES_SLOTS} archetypes.</p>
-      </header>
-      <div className="legend" role="group" aria-label="Archetypes shown">
-        {ranked.slice(0, 20).map((a) => {
-          const on = selected.includes(a);
-          return (
-            <button key={a} className={`chip ${on ? 'on' : ''}`} aria-pressed={on} onClick={() => toggle(a)} disabled={!on && selected.length >= SERIES_SLOTS}>
-              <span className="swatch" style={{ background: on ? seriesVar(slots.get(a)!) : 'transparent' }} />
-              <DeckIcons icons={data.archetypes[a].icons} size={18} />
-              {data.archetypes[a].name}
-            </button>
-          );
-        })}
-      </div>
-      {trend.weeks.length < 2 ? (
-        <Empty>Need at least two weeks of tournaments in this period to draw a trend.</Empty>
-      ) : (
-        <LineChart
-          x={trend.weeks}
-          xLabel={shortDate}
-          yFormat={(v) => pct(v, 0)}
-          series={trend.series.map((s) => ({ id: s.archetype, label: data.archetypes[s.archetype].name, slot: slots.get(s.archetype)!, values: s.values }))}
-        />
-      )}
-      <button className="link-btn" onClick={() => setShowTable(!showTable)}>{showTable ? 'Hide table' : 'Show as table'}</button>
-      {showTable && (
-        <div className="table-wrap">
-          <table className="data">
-            <thead>
-              <tr><th>Week of</th><th className="num">Players</th>{trend.series.map((s) => <th key={s.archetype} className="num">{data.archetypes[s.archetype].name}</th>)}</tr>
-            </thead>
-            <tbody>
-              {trend.weeks.map((w, i) => (
-                <tr key={w}><td>{shortDate(w)}</td><td className="num">{trend.totals[i]}</td>{trend.series.map((s) => <td key={s.archetype} className="num">{pct(s.values[i])}</td>)}</tr>
-              ))}
-            </tbody>
-          </table>
+    <>
+      <section className="card">
+        <header className="card-head">
+          <h2>What’s moving</h2>
+          <p>
+            Meta share in the last {weeks} ({range(m.now)}) vs the {weeks} before ({range(m.before)}).
+            Decks with at least {MOVER_MIN_PLAYERS} players across both. Change is in percentage points.
+          </p>
+        </header>
+        <div className="movers">
+          <MoverList title="Rising" rows={rising} data={data} empty="Nothing gained share." />
+          <MoverList title="Falling" rows={falling} data={data} empty="Nothing lost share." />
         </div>
-      )}
-    </section>
+      </section>
+      <section className="card">
+        <header className="card-head"><h2>Every deck</h2></header>
+        <SortTable rows={m.rows} columns={columns} initial="delta" rowKey={(r) => r.archetype} limit={25} />
+      </section>
+    </>
+  );
+}
+
+function MoverList({ title, rows, data, empty }: { title: string; rows: Mover[]; data: Dataset; empty: string }) {
+  return (
+    <div className="mover-list">
+      <h3>{title}</h3>
+      {rows.length ? (
+        <ol>
+          {rows.map((r) => (
+            <li key={r.archetype}>
+              <DeckName a={data.archetypes[r.archetype]} size={22} />
+              <Sparkline values={r.spark} trend={trendOf(r.delta)} />
+              <span className="mover-now">{pct(r.now)}</span>
+              <Delta value={r.delta} />
+            </li>
+          ))}
+        </ol>
+      ) : <p className="muted">{empty}</p>}
+    </div>
   );
 }

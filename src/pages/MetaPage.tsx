@@ -4,13 +4,16 @@ import { DeckName } from '../components/DeckName';
 import { RotationBadge } from '../components/RotationBadge';
 import { convert, formatMoney } from '../lib/pricing';
 import { SortTable, type Column } from '../components/SortTable';
-import { isOther, metaSummary, SOURCE_CAPS, cutLabel, type ArchetypeStats, type Filters } from '../lib/analysis';
+import { Delta, Sparkline, trendOf } from '../components/Sparkline';
+import { isOther, metaMovers, metaSummary, SOURCE_CAPS, cutLabel, type ArchetypeStats, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
-import { int, pct } from '../format';
+import { int, pct, shortDate } from '../format';
 import { href } from '../router';
 
 export function MetaPage({ data, filters }: { data: Dataset; filters: Filters }) {
   const m = useMemo(() => metaSummary(data, filters), [data, filters]);
+  const movers = useMemo(() => metaMovers(data, filters), [data, filters]);
+  const move = useMemo(() => new Map(movers?.rows.map((r) => [r.archetype, r]) ?? []), [movers]);
   const name = (a: number) => data.archetypes[a].name;
   const cut = cutLabel(filters);
   const caps = SOURCE_CAPS[filters.source];
@@ -35,6 +38,12 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
         </span>
       ), sort: (r) => r.share, title: `% of ${playersWord} on the deck`,
     },
+    ...(movers ? [{
+      key: 'trend', label: 'Trend', hideOnMobile: true,
+      title: `Change in share, ${shortDate(movers.now.from)}–${shortDate(movers.now.to)} vs the ${movers.days} days before. The line is weekly share.`,
+      render: (r: ArchetypeStats) => { const t = move.get(r.archetype); return t ? <span className="trend-cell"><Sparkline values={t.spark} trend={trendOf(t.delta)} width={56} /><Delta value={t.delta} /></span> : <span className="muted">—</span>; },
+      sort: (r: ArchetypeStats) => move.get(r.archetype)?.delta ?? -1,
+    } as Column<ArchetypeStats>] : []),
     { key: 'conversion', label: 'Conversion', shortLabel: 'Conv.', numeric: true, render: (r) => pct(r.conversion), sort: (r) => r.conversion, title: `% of its ${playersWord} who made the ${cut}` },
     ...(hasWinRates ? [{
       key: 'winRate', label: 'Win rate', shortLabel: 'Win %', numeric: true,

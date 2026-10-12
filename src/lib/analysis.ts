@@ -193,6 +193,68 @@ export function metaTrend(d: Dataset, f: Filters, archetypes: number[]): TrendSe
   };
 }
 
+export interface Mover {
+  archetype: number;
+  /** Share in the recent window and the window before it. */
+  now: number;
+  before: number;
+  /** now − before, as a fraction (0.012 = +1.2 points). */
+  delta: number;
+  /** Players with the deck across both windows (sample size). */
+  players: number;
+  /** Weekly share over the selected period, for a sparkline. */
+  spark: (number | null)[];
+}
+
+export interface Movers {
+  /** Length of each window in days. */
+  days: number;
+  now: { from: string; to: string };
+  before: { from: string; to: string };
+  rows: Mover[];
+}
+
+/** Decks need this many players across both windows to count as moving. */
+export const MOVER_MIN_PLAYERS = 20;
+
+const shiftDays = (iso: string, days: number) => {
+  const d = new Date(`${iso}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+};
+
+/**
+ * Who is rising and falling: share in the last `days` (counting back from the latest event in the
+ * filters) vs the `days` before. Rows are every named deck with enough players, biggest change first.
+ * Default window: 2 weeks online (1 week for a 14-day period), 4 weeks offline, where events are sparse.
+ */
+export function metaMovers(d: Dataset, f: Filters, days?: number): Movers | null {
+  const mask = tournamentMask(d, f);
+  const dates = d.tournaments.filter((_, i) => mask[i]).map((t) => t.date).sort();
+  if (!dates.length) return null;
+  const latest = dates[dates.length - 1];
+  const span = (Date.parse(latest) - Date.parse(dates[0])) / 864e5;
+  const w = days ?? (f.source === 'offline' ? 28 : span <= 14 ? 7 : 14);
+  const nowFrom = shiftDays(latest, -w + 1), beforeFrom = shiftDays(latest, -2 * w + 1);
+  const keep = archetypeMask(d, f);
+  const n = d.archetypes.length;
+  const cNow = new Array(n).fill(0), cBefore = new Array(n).fill(0);
+  let tNow = 0, tBefore = 0;
+  for (const [ti, a] of d.results) {
+    if (!mask[ti] || a < 0 || !keep[a]) continue;
+    const date = d.tournaments[ti].date;
+    if (date >= nowFrom) { tNow++; cNow[a]++; } else if (date >= beforeFrom) { tBefore++; cBefore[a]++; }
+  }
+  if (!tNow || !tBefore) return null;
+  const candidates = d.archetypes.map((_, a) => a).filter((a) => !isOther(d, a) && cNow[a] + cBefore[a] >= MOVER_MIN_PLAYERS);
+  const trend = metaTrend(d, f, candidates);
+  const rows = candidates.map((a, i): Mover => {
+    const now = cNow[a] / tNow, before = cBefore[a] / tBefore;
+    return { archetype: a, now, before, delta: now - before, players: cNow[a] + cBefore[a], spark: trend.series[i].values };
+  }).sort((x, y) => y.delta - x.delta);
+  return { days: w, now: { from: nowFrom, to: latest }, before: { from: beforeFrom, to: shiftDays(nowFrom, -1) }, rows };
+}
+
 export interface MatchupCell {
   wins: number;
   losses: number;

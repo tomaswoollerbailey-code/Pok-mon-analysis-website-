@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cardUsage, DEFAULT_FILTERS, matchupMatrix, metaSummary, metaTrend, weekStart, type Filters } from '../src/lib/analysis';
+import { cardUsage, DEFAULT_FILTERS, matchupMatrix, metaMovers, metaSummary, metaTrend, weekStart, type Filters } from '../src/lib/analysis';
 import { archetypeKey } from '../src/lib/archetype';
 import { buildDataset } from '../src/lib/build';
 import type { RawStanding, RawTournament } from '../src/lib/types';
@@ -118,5 +118,33 @@ describe('top cut', () => {
     // Offline event of 20 players: the Top 10% is 2 places, so only the winner of the 3 listed counts.
     expect(metaSummary(d, F({ source: 'offline' })).topCutSlots).toBe(1);
     expect(metaSummary(d, F({ source: 'online' })).topCutSlots).toBe(3);
+  });
+});
+
+describe('metaMovers', () => {
+  // Two online events a week apart: Deck Alpha grows from 1 of 4 players to 3 of 4.
+  const ev = (id: string, date: string, decks: string[]): RawTournament => ({
+    source: 'online', id, name: id, date, format: 'STANDARD', players: decks.length, url: '', fetchedAt: '',
+    standings: decks.map((n, i) => st(`${id}-${i}`, i + 1, n)),
+  });
+  const many = (n: number, deck: string) => Array.from({ length: n }, () => deck);
+  const { dataset } = buildDataset([
+    ev('w1', '2026-10-01', [...many(10, 'Deck Alpha'), ...many(30, 'Deck Beta')]),
+    ev('w2', '2026-10-08', [...many(30, 'Deck Alpha'), ...many(10, 'Deck Beta')]),
+  ], 'now');
+  const key = (k: string) => dataset.archetypes.findIndex((a) => a.key === k);
+
+  it('compares the recent window with the one before, biggest riser first', () => {
+    const m = metaMovers(dataset, F(), 7)!;
+    expect(m.now).toEqual({ from: '2026-10-02', to: '2026-10-08' });
+    expect(m.before).toEqual({ from: '2026-09-25', to: '2026-10-01' });
+    expect(m.rows.map((r) => r.archetype)).toEqual([key('deck-alpha'), key('deck-beta')]);
+    expect(m.rows[0]).toMatchObject({ now: 0.75, before: 0.25, players: 40 });
+    expect(m.rows[0].delta).toBeCloseTo(0.5);
+    expect(m.rows[0].spark).toEqual([0.25, 0.75]);
+  });
+
+  it('returns null when the earlier window has no events', () => {
+    expect(metaMovers(dataset, F(), 3)).toBeNull();
   });
 });
