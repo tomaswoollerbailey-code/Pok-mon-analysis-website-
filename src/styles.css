@@ -258,6 +258,14 @@ a.bar-label:hover { color: var(--accent-ink); text-decoration: none; }
 .spark { display: block; color: var(--muted); }
 .spark.up { color: var(--good); }
 .spark.down { color: var(--bad); }
+.report-movers { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+.mover-list, .winner-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.mover-list li { display: flex; align-items: center; gap: 10px; }
+.mover-list .deck-name { flex: 1; min-width: 0; }
+.mover-share { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.winner-list li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.winner-event { display: grid; min-width: 0; }
+.winner-event small { color: var(--muted); font-size: 12px; text-transform: capitalize; }
 .delta { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; text-align: right; font-size: 13px; }
 .delta.up { color: var(--good); }
 .delta.down { color: var(--bad); }
@@ -379,6 +387,7 @@ td.small { font-size: 12px; color: var(--ink-2); }
   /* Top three as a swipeable row. */
   .podium { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; }
   .podium::-webkit-scrollbar { display: none; }
+  .report-movers { grid-template-columns: 1fr; }
   .podium-card { flex: 0 0 78%; scroll-snap-align: start; }
 
   .hide-sm { display: none; }

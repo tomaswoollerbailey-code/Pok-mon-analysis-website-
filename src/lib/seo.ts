@@ -1,6 +1,6 @@
 // Per-page titles, descriptions and a crawlable text summary. Used to prerender every page at
 // build time (scripts/prerender.ts) and to keep document.title right while browsing.
-import { DEFAULT_FILTERS, metaSummary } from './analysis';
+import { DEFAULT_FILTERS, metaSummary, weeklyReport } from './analysis';
 import type { Route } from './routes';
 import type { Dataset } from './types';
 
@@ -51,6 +51,24 @@ export function pageMeta(d: Dataset | null, route: Route): PageMeta {
       const text = `${t.name}: ${t.players} players, ${t.date}. Deck breakdown and standings from Limitless.`;
       return { title: `${t.name} results & decks · ${SITE}`, description: text, summary: [text] };
     }
+    case 'report': {
+      const r = d && weeklyReport(d);
+      if (!d || !r) return { title: `Weekly Pokémon TCG meta report · ${SITE}`, description: 'The week in the Pokémon TCG meta: top decks, risers, fallers and event winners.', summary: [] };
+      const name = (a: number) => d.archetypes[a].name;
+      const list = (xs: { archetype: number; delta: number }[]) => xs.map((x) => `${name(x.archetype)} (${x.delta > 0 ? '+' : '−'}${Math.abs(x.delta * 100).toFixed(1)} pts)`).join(', ');
+      const week = `${r.from} to ${r.to}`;
+      const lead = `${name(r.top[0].archetype)} led the online meta with ${pct(r.top[0].share)} across ${r.events} events (${week}).`;
+      return {
+        title: `Pokémon TCG weekly meta report, ${week} · ${SITE}`,
+        description: `${lead} Risers, fallers and event winners.`,
+        summary: [
+          lead,
+          `Top decks: ${r.top.slice(0, 5).map((t) => `${name(t.archetype)} ${pct(t.share)}`).join(', ')}.`,
+          ...(r.risers.length ? [`Risers: ${list(r.risers)}.`] : []),
+          ...(r.fallers.length ? [`Fallers: ${list(r.fallers)}.`] : []),
+        ],
+      };
+    }
     case 'trends':
       return { title: `Pokémon TCG meta trends · ${SITE}`, description: `Weekly meta share for the top Pokémon TCG Standard decks ${since}.`, summary: [] };
     case 'matchups':
@@ -85,7 +103,7 @@ export function pageMeta(d: Dataset | null, route: Route): PageMeta {
 /** Every page worth prerendering. */
 export function allRoutes(d: Dataset): Route[] {
   return [
-    { page: 'meta' }, { page: 'trends' }, { page: 'matchups' }, { page: 'field' }, { page: 'tournaments' }, { page: 'methodology' },
+    { page: 'meta' }, { page: 'trends' }, { page: 'matchups' }, { page: 'field' }, { page: 'tournaments' }, { page: 'report' }, { page: 'methodology' },
     ...d.archetypes.filter((a) => a.key !== 'other').map((a): Route => ({ page: 'deck', key: a.key })),
     ...d.tournaments.map((t): Route => ({ page: 'tournament', key: t.key })),
   ];

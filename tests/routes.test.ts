@@ -17,7 +17,7 @@ const { dataset: d } = buildDataset([t], 'now');
 
 describe('routes', () => {
   it('round-trips every route through its path', () => {
-    const routes: Route[] = [{ page: 'meta' }, { page: 'trends' }, { page: 'field' }, { page: 'methodology' }, { page: 'tournaments' }, { page: 'deck', key: 'a b' }, { page: 'tournament', key: 'online-1' }];
+    const routes: Route[] = [{ page: 'meta' }, { page: 'trends' }, { page: 'field' }, { page: 'methodology' }, { page: 'report' }, { page: 'tournaments' }, { page: 'deck', key: 'a b' }, { page: 'tournament', key: 'online-1' }];
     for (const r of routes) expect(parsePath(routePath(r))).toEqual(r);
     expect(routePath({ page: 'deck', key: 'deck-alpha' })).toBe('decks/deck-alpha');
     expect(parsePath('/decks/deck-alpha/')).toEqual({ page: 'deck', key: 'deck-alpha' });
