@@ -3,6 +3,7 @@
 ## Working with the owner
 - Keep replies **short and clear**: a few bullets, no long explanations. The owner has little time to read.
 - Build features first and polish the design later.
+- **Audience: worldwide.** Finish and polish the site before any promotion or affiliate links.
 - **Focus: meta tools only.** The main user is a competitive player preparing for an event. No collection tracker (removed Oct 2026); don't add collection or scanning features.
 - The owner wants Claude to do the work end to end: merge PRs and trigger workflows.
 
@@ -15,7 +16,7 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 ## Layout
 - `scripts/fetch-online.ts`, `scripts/fetch-offline.ts`, `scripts/fetch-japan.ts` → `data/raw/` (committed cache); `scripts/build-dataset.ts` → `public/data/` (built in CI, gitignored)
 - `src/lib/`: parsers (`limitless/`), `build.ts`, `analysis.ts`, `rotation.ts` (rotating sets config), `decktext.ts` (TCG Live list parser, used by the deck checker)
-- `src/pages/`: Meta, Trends, Matchups, Tournaments, Deck
+- `src/pages/`: Meta, Trends, Matchups, Field planner, Tournaments, Deck
 - Workflows:
   - `update-data.yml`: daily fetch and commit; online 60 days, in-person 90 days, capped per run
   - `deploy.yml`: builds and deploys Pages after each data update or push to main
@@ -34,6 +35,5 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 
 ## Roadmap (agreed next)
 1. Deck checker: paste a list and compare it with the meta version.
-2. Expected win rate vs the field (matchups × meta share).
-3. What should I play? (best deck or counter-pick for an expected field).
+2. Done: Field planner (expected win rate vs an editable field, "what should I play?").
 Later: tech finder, card lookup, regional meta, budget view, design polish. Also fetch in-person decklists from each event's single decklists page instead of one page per player.

@@ -8,6 +8,7 @@ import { href, useRoute } from './router';
 import { DeckPage } from './pages/DeckPage';
 import { MatchupsPage } from './pages/MatchupsPage';
 import { MetaPage } from './pages/MetaPage';
+import { FieldPage } from './pages/FieldPage';
 import { TournamentPage } from './pages/TournamentPage';
 import { TournamentsPage } from './pages/TournamentsPage';
 import { TrendsPage } from './pages/TrendsPage';
@@ -27,6 +28,7 @@ const NAV = [
   { page: 'meta', label: 'Meta', href: href.meta },
   { page: 'trends', label: 'Trends', href: href.trends },
   { page: 'matchups', label: 'Matchups', href: href.matchups },
+  { page: 'field', label: 'Field planner', href: href.field },
   { page: 'tournaments', label: 'Tournaments', href: href.tournaments },
 ] as const;
 
@@ -67,7 +69,7 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups'} />
+              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
             )}
             {effective.source === 'japan' && route.page !== 'tournament' && (
               <div className="notice" role="status">
@@ -82,6 +84,7 @@ export function App() {
             {route.page === 'meta' && <MetaPage data={data} filters={effective} />}
             {route.page === 'trends' && <TrendsPage data={data} filters={effective} />}
             {route.page === 'matchups' && <MatchupsPage data={data} filters={effective} />}
+            {route.page === 'field' && <FieldPage data={data} filters={effective} />}
             {route.page === 'tournaments' && <TournamentsPage data={data} filters={effective} />}
             {route.page === 'tournament' && <TournamentPage data={data} tKey={route.key} />}
             {route.page === 'deck' && <DeckPage data={data} filters={effective} aKey={route.key} />}
