@@ -207,9 +207,11 @@ export function parseDecklist(html: string): Card[] {
     const heading = $(col).children().first().text();
     const category = SECTION.find(([re]) => re.test(heading))?.[1];
     if (!category) return;
-    $(col).find('.decklist-card, [class*="card"]').each((_, el) => {
+    // Each card is a .decklist-card; its children (links, spans) also carry "card" classes,
+    // so only fall back to a looser selector when the page has no .decklist-card at all.
+    const nodes = $(col).find('.decklist-card').length ? $(col).find('.decklist-card') : $(col).find('[data-count], [class*="card"]:has(.card-count)');
+    nodes.each((_, el) => {
       const node = $(el);
-      if (node.find('.decklist-card').length) return; // container, not a card
       const count = toInt(node.find('.card-count').text() || node.attr('data-count'));
       const name = (node.find('.card-name').text() || node.attr('data-name') || '').trim();
       if (!count || !name) return;

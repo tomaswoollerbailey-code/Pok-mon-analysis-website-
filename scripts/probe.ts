@@ -50,9 +50,17 @@ await step(`offline: decklist ${listId}`, async () => {
   if (!listId) throw new Error('no list id found');
   const html = await get(`${LIMITLESS_SITE}/decks/list/${listId}`, 'text');
   const $ = cheerio.load(html);
+  console.log('first cards:', clip($('.decklist-card').slice(0, 2).toArray().map((c) => $.html(c).replace(/\s+/g, ' ')).join('\n'), 1500));
   const node = $('[class*="decklist"]').first();
   console.log('decklist html:', clip($.html(node).replace(/\s+/g, ' '), 2500));
   console.log('parsed:', JSON.stringify(parseDecklist(html).slice(0, 6)));
+});
+await step('offline: list URL variants', async () => {
+  for (const q of ['?time=all&show=500', '?show=100', '?time=all', '?page=2']) {
+    const html = await get(`${LIMITLESS_SITE}/tournaments${q}`, 'text');
+    const parsed = parseTournamentList(html);
+    console.log(`${q}: ${parsed.length} tournaments, oldest ${parsed.at(-1)?.date}`);
+  }
 });
 let onlineId = '';
 await step('online: tournaments', async () => {
