@@ -3,9 +3,11 @@
 // Usage: tsx scripts/prerender.ts [outDir]   (SITE_URL = public origin + base path, no trailing slash)
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { DEFAULT_FILTERS, tournamentMask } from '../src/lib/analysis';
+import { averageList, deckText } from '../src/lib/decklist';
 import { allRoutes, pageMeta } from '../src/lib/seo';
 import { routePath } from '../src/lib/routes';
-import type { Dataset } from '../src/lib/types';
+import type { ArchetypeLists, Dataset } from '../src/lib/types';
 
 const out = process.argv[2] ?? 'dist';
 const site = (process.env.SITE_URL ?? 'https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-').replace(/\/$/, '');
@@ -14,10 +16,22 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const template = await readFile(join(out, 'index.html'), 'utf8');
 const data = JSON.parse(await readFile(join(out, 'data', 'dataset.json'), 'utf8')) as Dataset;
 
+const mask = tournamentMask(data, DEFAULT_FILTERS);
+
+/** The average list as plain text, so "<deck> deck list" searches find the list itself. */
+async function deckListHtml(key: string): Promise<string> {
+  try {
+    const l = JSON.parse(await readFile(join(out, 'data', 'lists', `${key}.json`), 'utf8')) as ArchetypeLists;
+    const avg = averageList(l.cards, l.lists.filter((r) => mask[r[0]]));
+    if (!avg) return '';
+    return `<h2>Average decklist (${avg.lists} lists)</h2><pre>${esc(deckText(avg.cards))}</pre>`;
+  } catch { return ''; }
+}
+
 // GitHub Pages serves each page as a folder, so the canonical URL ends with a slash.
 const urlOf = (path: string) => `${site}/${path}${path ? '/' : ''}`;
 
-function render(route: Parameters<typeof pageMeta>[1]) {
+function render(route: Parameters<typeof pageMeta>[1], extra = '') {
   const m = pageMeta(data, route);
   const path = routePath(route);
   const canonical = urlOf(path);
@@ -31,7 +45,7 @@ function render(route: Parameters<typeof pageMeta>[1]) {
     `<meta property="og:url" content="${esc(canonical)}" />`,
     `<meta name="twitter:card" content="summary" />`,
   ].join('\n    ');
-  const body = `<div id="root"><main><h1>${esc(m.title.split(' · ')[0])}</h1>${m.summary.map((p) => `<p>${esc(p)}</p>`).join('')}</main></div>`;
+  const body = `<div id="root"><main><h1>${esc(m.title.split(' · ')[0])}</h1>${m.summary.map((p) => `<p>${esc(p)}</p>`).join('')}${extra}</main></div>`;
   const html = template
     .replace(/<title>[\s\S]*?<\/title>/, '')
     .replace(/<meta name="description"[^>]*>/, '')
@@ -42,7 +56,7 @@ function render(route: Parameters<typeof pageMeta>[1]) {
 
 const routes = allRoutes(data);
 for (const route of routes) {
-  const { path, html } = render(route);
+  const { path, html } = render(route, route.page === 'deck' ? await deckListHtml(route.key) : '');
   const file = join(out, path, 'index.html');
   await mkdir(dirname(file), { recursive: true });
   await writeFile(file, html);

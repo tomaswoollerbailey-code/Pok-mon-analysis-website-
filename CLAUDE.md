@@ -41,6 +41,8 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Matchups follow the period filter only:** the deck-count and min-games pickers were removed; every deck with ≥1% share gets a row and column (`MIN_SHARE`, `MIN_GAMES` in `MatchupsPage.tsx`). Showing all 100+ decks would be unreadable. |
 | 2026-10-12 | **Trends reworked:** the multi-line chart was replaced by risers/fallers boards and a movers table (`metaMovers()` in `analysis.ts`, `Sparkline`/`Delta` components), and the Meta table got a Trend column. Then simplified to the single every-deck table. |
 | 2026-10-12 | **Period is stored as days** (`Filters.periodDays`); the app derives `from` from the newest event each load, so a saved period keeps working as data updates (it used to turn into stale "Custom dates"). Every page with a filter bar uses it: Meta, Trends, Matchups, Field planner, Tournaments, Deck pages. `LineChart` and the series colour slots were deleted. |
+| 2026-10-12 | **Decklists on deck pages:** the "average list" = each card's mean copies across the lists in the filters, rounded to a full deck by largest remainder, printings merged (`src/lib/decklist.ts`). A picker shows the 10 best recent real lists. "Copy for TCG Live" exports the shown list (round-trips through `decktext.ts`). Prerendered deck pages include the average list as text for search. |
+| 2026-10-12 | **Next after decklists (agreed):** Cloudflare Web Analytics, then Field planner presets and share links. Weekly report, share images and methodology wait until there's traffic. |
 | 2026-10-12 | **No promotion or affiliate links** until the site is finished and polished. |
 
 ## Current state (live)
@@ -50,16 +52,15 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Matchups:** a win-rate heatmap from online pairings of every deck with ≥1% of the field in the chosen period (about 20–25 decks). No pickers; cells under 10 games are greyed. Deck names stick to the left and wrap on phones.
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
-- **Deck pages:** rotation status, deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
+- **Deck pages:** rotation status, a **Decklist** card (the average list across the period's lists, with % of lists playing each card, or one of the 10 best recent lists) with a **Copy for TCG Live** button, deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
 - **Filters and theme:** see the decisions above. Theme is light, dark or system. Deck sprites are hotlinked from `r2.limitlesstcg.net/pokemon/gen9/{icon}.png` (ask Limitless before launch, or self-host).
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
 ## Roadmap
 **Next to build (agreed order, not started).** Real page URLs are done (see decisions).
-1. **"Copy for TCG Live" button** on every deck. `decktext.ts` already parses that format.
-2. **Methodology page:** sources, update times, how win rates, shares and rotation status are calculated. Builds trust with competitive players.
-3. **Weekly meta report page,** generated automatically: risers, fallers, top lists.
-4. **Share images:** an auto-generated preview card for each deck and report on Discord, Reddit and X.
+1. **Methodology page:** sources, update times, how win rates, shares and rotation status are calculated. Builds trust with competitive players.
+2. **Weekly meta report page,** generated automatically: risers, fallers, top lists.
+3. **Share images:** an auto-generated preview card for each deck and report on Discord, Reddit and X.
 
 **Then:** a deck checker (paste a TCG Live list, compare it with the meta version).
 
