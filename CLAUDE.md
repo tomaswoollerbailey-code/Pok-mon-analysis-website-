@@ -15,7 +15,12 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 - Claude does the work end to end: branch, PR, merge, trigger workflows, and check the result.
 - Every feature ships clean and readable. No "make it pretty later" debt. Keep the site **sharp and simple**.
 - Tom can't send email through Claude (the Gmail connector isn't connected). Give him drafts to send himself.
-- Don't use a work Claude account or work PC for this project (employer terms and code-ownership risk). To save usage, use Sonnet for routine work and Opus for big features, and batch requests.
+- Don't use a work Claude account or work PC for this project (employer terms and code-ownership risk).
+- **Saving usage (agreed Oct 2026):**
+  - Sessions default to **Sonnet** (`.claude/settings.json`). Tom switches to `/model opus` only for big design decisions; Claude says when one needs it.
+  - Grunt work (CI/Actions logs, code searches, data checks, test runs) goes to the **`scout`** subagent (`.claude/agents/scout.md`, Haiku). Feature code stays in the main session.
+  - **One feature per chat:** start fresh with "read CLAUDE.md, then build X", and clear the chat once it's merged. Long chats are the biggest cost.
+  - Batch requests into one message.
 
 ## Decisions log
 | Date | Decision |
