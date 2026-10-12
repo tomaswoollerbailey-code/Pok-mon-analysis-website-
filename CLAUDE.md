@@ -1,8 +1,35 @@
 # Murkrow Meta: project memory
 
+## Mission
+Build **Murkrow Meta** into a fun, clean, easy-to-read and secure Pokémon TCG meta website. It should earn a decent side income and have room to grow, for example sister sites for other card games built on the same engine.
+
+## Claude's role
+Act as a professional web developer, Pokémon TCG expert, designer, data analyst, and advertising and marketing lead. Bring opinions and recommendations, not just options.
+
+## Product principles
+- **Built for the player prepping for an event:** what's winning, what to play, how to tune a deck and what it costs.
+- **Easy to read first:** one clear headline number per view, plain-English labels, no jargon without a tooltip.
+- **Trustworthy data:** always show sources, dates and sample sizes. Never invent or estimate numbers silently. Flag small samples.
+- **Fun:** the Murkrow personality, deck sprites and a light touch of copy, without clutter.
+- **Fast and mobile-first:** a static site, no horizontal scroll, works on a phone at an event.
+- **Secure:**
+  - No accounts or user data unless truly needed. Secrets live only in GitHub Actions secrets.
+  - No third-party scripts except what's essential, such as fonts and privacy-friendly analytics.
+  - Keep dependencies updated, and never commit keys.
+- **Respect data sources:** polite request rates, credit Limitless, and ask before commercial use or heavy hotlinking.
+
+## Business plan (agreed order)
+1. Finish and polish the site. **No promotion or affiliate links until it's ready.**
+2. Then add privacy-friendly analytics, launch on Reddit, Discord and X, and gather feedback.
+3. Monetise:
+   - Affiliate links first: TCGplayer, then Cardmarket.
+   - Display ads once traffic justifies them.
+   - Optionally a premium tier or sponsorships later.
+4. Grow with sister sites for other games (for example One Piece via Limitless) on the same codebase.
+
 ## Working with the owner
 - Keep replies **short and clear**: a few bullets, no long explanations. The owner has little time to read.
-- Build features first and polish the design later.
+- Every feature ships clean and readable. No "make it pretty later" debt.
 - **Audience: worldwide.** Finish and polish the site before any promotion or affiliate links.
 - **Focus: meta tools only.** The main user is a competitive player preparing for an event. No collection tracker (removed Oct 2026); don't add collection or scanning features.
 - The owner wants Claude to do the work end to end: merge PRs and trigger workflows.
@@ -26,7 +53,7 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
   - `update-data.yml`: daily fetch and commit; online 60 days, in-person 90 days, capped per run
   - `deploy.yml`: builds and deploys Pages after each data update or push to main
   - `probe.yml`: prints live page and API structure to the job log, for checking parsers
-  - `ci.yml`: tests and build
+  - `ci.yml`: unit tests, build and Playwright browser tests (desktop + mobile)
 
 ## Prices
 - `scripts/fetch-prices.ts` runs daily. It reads TCGplayer (USD) and Cardmarket (EUR) prices from the newest Limitless decklist pages and writes `data/raw/prices.json`, with USD→EUR/MYR exchange rates from frankfurter (fallback: open.er-api).
