@@ -28,7 +28,7 @@ describe('parseStandings', () => {
   it('maps columns by header and extracts deck + list', () => {
     const s = parseStandings(fx('offline-standings.html'));
     expect(s).toHaveLength(3);
-    expect(s[0]).toMatchObject({ name: 'Player One', placing: 1, country: 'US', archetype: { id: '281', name: 'charizard pidgeot' }, listId: '9001' });
+    expect(s[0]).toMatchObject({ name: 'Player One', placing: 1, country: 'US', archetype: { id: '281', name: 'Charizard Pidgeot', icons: ['charizard', 'pidgeot'], fromIcons: true }, listId: '9001' });
     expect(s[1]).toMatchObject({ name: 'Player Two', placing: 2, country: 'CA', archetype: { id: '300', name: 'Gardevoir ex' } });
     expect(s[1].listId).toBeUndefined();
     expect(s[2]).toMatchObject({ archetype: { name: 'Other' }, record: { wins: 10, losses: 2, ties: 1 } });

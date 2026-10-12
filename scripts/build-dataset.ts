@@ -5,7 +5,7 @@ import { buildDataset } from '../src/lib/build';
 import type { RawTournament } from '../src/lib/types';
 import { OUT_DIR, RAW_DIR, listJson, readJson, writeJson } from './util';
 
-const files = [...(await listJson(join(RAW_DIR, 'online'))), ...(await listJson(join(RAW_DIR, 'offline')))];
+const files = (await Promise.all(['online', 'offline', 'japan'].map((s) => listJson(join(RAW_DIR, s))))).flat();
 const raw = await Promise.all(files.map((f) => readJson<RawTournament>(f)));
 const { dataset, lists, standings } = buildDataset(raw);
 

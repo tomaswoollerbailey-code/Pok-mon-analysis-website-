@@ -1,7 +1,8 @@
 // Shared data model. "Raw" types are what the fetch scripts write to data/raw/,
 // "Dataset" types are the compact bundle the website loads from public/data/.
 
-export type Source = 'online' | 'offline';
+/** japan = official City League results (top finishers only, Japanese card pool). */
+export type Source = 'online' | 'offline' | 'japan';
 
 export type CardCategory = 'pokemon' | 'trainer' | 'energy';
 
@@ -27,7 +28,8 @@ export interface RawStanding {
   placing: number | null;
   record?: Record3;
   dropped?: boolean;
-  archetype: { id?: string; name: string } | null;
+  /** icons: Pokémon icon names Limitless shows for the deck, used to match names across sources. */
+  archetype: { id?: string; name: string; icons?: string[]; fromIcons?: true } | null;
   decklist?: Card[];
 }
 

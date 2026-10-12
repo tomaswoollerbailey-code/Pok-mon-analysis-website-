@@ -69,6 +69,11 @@ export function App() {
             {route.page !== 'tournament' && (
               <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups'} />
             )}
+            {effective.source === 'japan' && route.page !== 'tournament' && (
+              <div className="notice" role="status">
+                Japan: official City League results (top finishers only, Japanese card pool, which runs about two months ahead of international releases). Shares are of top placements, not of all players. There’s no matchup or win-rate data.
+              </div>
+            )}
             {effective.hideRotating && route.page !== 'tournaments' && data.rotation && (
               <div className="notice" role="status">
                 Projected post-rotation meta: decks whose signature Pokémon rotate with the {data.rotation.label} ({data.rotation.sets.join(', ')}) are excluded and shares are recalculated without them.

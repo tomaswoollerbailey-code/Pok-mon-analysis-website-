@@ -32,6 +32,9 @@ jobs:
       - name: Fetch in-person tournaments (limitlesstcg.com)
         continue-on-error: true
         run: npm run fetch:offline -- --days ${{ inputs.offline_days || '90' }}
+      - name: Fetch Japanese City Leagues (limitlesstcg.com/tournaments/jp)
+        continue-on-error: true
+        run: npm run fetch:japan -- --days 60
       - name: Check the dataset builds
         run: npm run build:data
       - name: Commit raw data
