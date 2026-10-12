@@ -53,8 +53,8 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     ...(data.prices ? [{
       key: 'price', label: 'Price', numeric: true, hideOnMobile: true,
       title: 'Median cost of its recent lists at current market prices',
-      render: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return formatMoney(p ? convert(p, filters.currency, data.prices?.fx) : undefined, filters.currency); },
-      sort: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return (p && convert(p, filters.currency, data.prices?.fx)) ?? -1; },
+      render: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return formatMoney(p ? convert(p, 'usd', data.prices?.fx) : undefined, 'usd'); },
+      sort: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return (p && convert(p, 'usd', data.prices?.fx)) ?? -1; },
     } as Column<ArchetypeStats>] : []),
     { key: 'rotation', label: year ? `${year} rotation` : 'Rotation', hideOnMobile: true, render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} year={year} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
     { key: 'players', label: 'Players', hideOnMobile: true, numeric: true, render: (r) => int(r.players), sort: (r) => r.players },
@@ -79,7 +79,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
         <div className="podium">
           {ranked.slice(0, 3).map((r, i) => {
             const a = data.archetypes[r.archetype];
-            const price = a.price ? convert(a.price, filters.currency, data.prices?.fx) : undefined;
+            const price = a.price ? convert(a.price, 'usd', data.prices?.fx) : undefined;
             return (
               <a key={r.archetype} className="podium-card" href={href.deck(a.key)}>
                 <span className="rank">#{i + 1}</span>
@@ -89,7 +89,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
                 <span className="podium-stats">
                   <span>{cut} rate <b>{pct(r.conversion)}</b></span>
                   {r.winRate != null && <span>Win <b>{pct(r.winRate)}</b></span>}
-                  {price != null && <span>{formatMoney(price, filters.currency)}</span>}
+                  {price != null && <span>{formatMoney(price, 'usd')}</span>}
                 </span>
               </a>
             );

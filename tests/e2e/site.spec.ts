@@ -31,9 +31,7 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   await page.getByRole('radio', { name: 'Offline' }).click();
   await expect(sub).not.toHaveText(before!);
   await page.getByRole('radio', { name: 'Online' }).click();
-  // Secondary filters sit behind the "Filters" button.
-  await page.locator('.filters-btn').click();
-  await page.getByRole('switch', { name: /Post-rotation/ }).check();
+  await page.getByRole('switch', { name: /rotation/ }).click();
   await expect(page.getByText('Projected post-rotation meta (2027)')).toBeVisible();
   await expect(page.locator('table.data tbody').getByText('Rotates')).toHaveCount(0);
 });
@@ -75,18 +73,16 @@ test('trends is one table of every deck that follows the period filter', async (
   await expect(page.locator('main table.data')).toHaveCount(1);
   await expect(page.locator('main table.data .delta').first()).toContainText('pts');
   await expect(page.getByText(/in the last 4 weeks/)).toBeVisible();
-  await page.locator('.filters-btn').click();
   await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '30d' }).click();
   await expect(page.getByText(/in the last 15 days/)).toBeVisible();
 });
 
 test('a saved period keeps working after a reload', async ({ page }) => {
   await go(page, '');
-  await page.locator('.filters-btn').click();
   await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '90d' }).click();
   const sub = await page.locator('.hero-sub').textContent();
   await page.reload();
-  await expect(page.locator('.filters-summary')).toContainText('Last 90 days');
+  await expect(page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '90d' })).toBeChecked();
   await expect(page.locator('.hero-sub')).toHaveText(sub!);
 });
 
@@ -103,7 +99,6 @@ test('matchups render a heatmap of every deck for the period, with no extra pick
   await expect(page.locator('table.heat td.cell').first()).toBeVisible();
   await expect(page.locator('main select')).toHaveCount(0);
   const rows = await page.locator('table.heat tbody tr').count();
-  await page.locator('.filters-btn').click();
   await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '14d' }).click();
   await expect(page.getByText(/in this period/)).toBeVisible();
   expect(await page.locator('table.heat tbody tr').count()).toBeLessThanOrEqual(rows);
@@ -160,14 +155,14 @@ test('phones get a bottom tab bar', async ({ page, isMobile }) => {
   await expect(page.getByRole('heading', { name: 'What should I play?' })).toBeVisible();
 });
 
-test('filters panel uses chips and has no date inputs', async ({ page }) => {
+test('filters are always visible, with no date inputs or price picker', async ({ page }) => {
   await go(page, '');
-  await page.locator('.filters-btn').click();
   await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '30d' }).click();
-  await expect(page.locator('.filters-summary')).toContainText('Last 30 days');
+  await expect(page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '30d' })).toBeChecked();
   await expect(page.locator('input[type="date"]')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Reset filters' }).click();
-  await expect(page.locator('.filters-summary')).toContainText('Since 2026 rotation');
+  await expect(page.getByRole('radiogroup', { name: 'Prices' })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Reset' }).click();
+  await expect(page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: 'Since rotation' })).toBeChecked();
 });
 
 test('pages have real URLs: in-site links navigate without a reload', async ({ page }) => {
@@ -223,7 +218,7 @@ test('methodology page explains the numbers and is linked from the footer', asyn
   await page.locator('footer').getByRole('link', { name: 'How the numbers work' }).click();
   await expect(page.getByRole('heading', { name: 'Methodology' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Field planner' })).toBeVisible();
-  await expect(page.locator('.filters-btn')).toHaveCount(0);
+  await expect(page.locator('.toolbar')).toHaveCount(0);
   await expect(page).toHaveTitle(/Methodology/);
 });
 
@@ -235,6 +230,6 @@ test('weekly report shows top decks, movers and winners, and is linked from the 
   await expect(page.getByRole('heading', { name: 'Risers' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Fallers' })).toBeVisible();
   await expect(page.locator('.winner-list li').first()).toBeVisible();
-  await expect(page.locator('.filters-btn')).toHaveCount(0);
+  await expect(page.locator('.toolbar')).toHaveCount(0);
   await expect(page).toHaveTitle(/weekly meta report/);
 });
