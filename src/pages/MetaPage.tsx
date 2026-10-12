@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { BarChart } from '../components/BarChart';
 import { RotationBadge } from '../components/RotationBadge';
+import { convert, formatMoney } from '../lib/pricing';
 import { SortTable, type Column } from '../components/SortTable';
 import { metaSummary, TOP_CUT_LABELS, type ArchetypeStats, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
@@ -23,6 +24,12 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     { key: 'conversion', label: 'Conversion', numeric: true, render: (r) => pct(r.conversion), sort: (r) => r.conversion, title: `Pilots reaching the ${cut} ÷ pilots` },
     { key: 'winRate', label: 'Win rate', numeric: true, render: (r) => pct(r.winRate), sort: (r) => r.winRate ?? -1, title: 'Match win rate where records are available (online events); ties count as half' },
     { key: 'record', label: 'W-L-T', numeric: true, render: (r) => (r.wins + r.losses + r.ties ? `${r.wins}-${r.losses}-${r.ties}` : '—') },
+    ...(data.prices ? [{
+      key: 'price', label: 'Deck price', numeric: true,
+      title: 'Median cost of its recent lists at current market prices',
+      render: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return formatMoney(p ? convert(p, filters.currency, data.prices?.fx) : undefined, filters.currency); },
+      sort: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return (p && convert(p, filters.currency, data.prices?.fx)) ?? -1; },
+    }] : []),
     { key: 'rotation', label: 'Rotation', render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
     { key: 'wins1st', label: 'Wins', numeric: true, render: (r) => int(r.wins1st), sort: (r) => r.wins1st, title: 'Tournaments won' },
   ];

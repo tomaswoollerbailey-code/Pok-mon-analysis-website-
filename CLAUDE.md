@@ -22,6 +22,11 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
   - `probe.yml`: prints live page and API structure to the job log, for checking parsers
   - `ci.yml`: tests and build
 
+## Prices
+- `scripts/fetch-prices.ts` runs daily. It reads TCGplayer (USD) and Cardmarket (EUR) prices from the newest Limitless decklist pages and writes `data/raw/prices.json`, with USD→EUR/MYR exchange rates from frankfurter (fallback: open.er-api).
+- MYR is converted from USD. It is not a local Malaysian price. The Shiny app has no public API; asking contact@getshiny.io is pending.
+- Live prices: a TCGplayer mass-entry link and per-card Cardmarket links.
+
 ## Notes
 - The dev sandbox can't reach Limitless or github.io. Check parsers through the Probe workflow logs.
 - Rotation assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). This is unconfirmed; change it in `src/lib/rotation.ts`.

@@ -35,6 +35,9 @@ jobs:
       - name: Fetch Japanese City Leagues (limitlesstcg.com/tournaments/jp)
         continue-on-error: true
         run: npm run fetch:japan -- --days 60
+      - name: Refresh card prices (TCGplayer / Cardmarket via Limitless) and exchange rates
+        continue-on-error: true
+        run: npm run fetch:prices
       - name: Check the dataset builds
         run: npm run build:data
       - name: Commit raw data

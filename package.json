@@ -13,8 +13,9 @@
     "fetch:online": "tsx scripts/fetch-online.ts",
     "fetch:offline": "tsx scripts/fetch-offline.ts",
     "fetch:japan": "tsx scripts/fetch-japan.ts",
+    "fetch:prices": "tsx scripts/fetch-prices.ts",
     "build:data": "tsx scripts/build-dataset.ts",
-    "data": "npm run fetch:online && npm run fetch:offline && npm run fetch:japan && npm run build:data"
+    "data": "npm run fetch:online && npm run fetch:offline && npm run fetch:japan && npm run fetch:prices && npm run build:data"
   },
   "dependencies": {
     "react": "^19.3.0",

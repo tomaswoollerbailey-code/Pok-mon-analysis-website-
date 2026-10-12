@@ -42,7 +42,7 @@ describe('parseStandings', () => {
 describe('parseDecklist', () => {
   it('reads card columns', () => {
     expect(parseDecklist(fx('offline-decklist.html'))).toEqual([
-      { category: 'pokemon', name: 'Charizard ex', count: 3, set: 'OBF', number: '125' },
+      { category: 'pokemon', name: 'Charizard ex', count: 3, set: 'OBF', number: '125', price: { usd: 12.34, eur: 10.5, tcgplayerId: '509658', cardmarketUrl: 'https://www.cardmarket.com/en/Pokemon/Products/Singles/Obsidian-Flames/Charizard-ex-OBF125' } },
       { category: 'pokemon', name: 'Pidgey', count: 1, set: 'MEW', number: '16' },
       { category: 'trainer', name: 'Rare Candy', count: 4 },
       { category: 'energy', name: 'Fire Energy', count: 5 },

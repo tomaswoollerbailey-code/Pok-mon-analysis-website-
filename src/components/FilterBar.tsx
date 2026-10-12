@@ -76,6 +76,14 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
           </select>
         </label>
       )}
+      <label>
+        <span>Currency</span>
+        <select value={filters.currency} onChange={(e) => set('currency', e.target.value as Filters['currency'])}>
+          <option value="usd">USD (TCGplayer)</option>
+          <option value="eur">EUR (Cardmarket)</option>
+          <option value="myr">MYR (converted)</option>
+        </select>
+      </label>
       {rotationLabel && (
         <button
           className={`toggle ${filters.hideRotating ? 'on' : ''}`}

@@ -1,8 +1,9 @@
 // Turns raw per-tournament files into the compact bundle the website loads.
 import { archetypeKey, cardKey } from './archetype';
+import { archetypePrice, attachPrices, cheapestByName } from './pricing';
 import { classifyArchetype, ROTATION, rotatingCardNames } from './rotation';
 import type {
-  ArchetypeInfo, ArchetypeLists, CardInfo, Dataset, ListRow, MatchRow, RawTournament,
+  ArchetypeInfo, ArchetypeLists, CardInfo, Dataset, ListRow, MatchRow, PricesFile, RawTournament,
   ResultRow, StandingsFile, TournamentInfo,
 } from './types';
 
@@ -12,7 +13,7 @@ export interface BuiltDataset {
   standings: StandingsFile[];
 }
 
-export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION): BuiltDataset {
+export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION, prices?: PricesFile): BuiltDataset {
   const sorted = [...raw].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
 
   const archetypes: ArchetypeInfo[] = [];
@@ -115,6 +116,17 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     archetypes[a].rotation = classifyArchetype(archetypes[a].name, b.cards, b.lists, rotating);
   }
 
+  if (prices) {
+    const keyToName = new Map<string, string>();
+    for (const b of listsByArch.values()) for (const c of b.cards) keyToName.set(cardKey(c), c.name);
+    const cheap = cheapestByName(prices.cards, keyToName);
+    for (const [a, b] of listsByArch) {
+      attachPrices(b.cards, prices.cards, cheap);
+      const p = archetypePrice({ archetype: archetypes[a], cards: b.cards, lists: b.lists });
+      if (p.lists) archetypes[a].price = p;
+    }
+  }
+
   const lists: ArchetypeLists[] = [...listsByArch.entries()].map(([a, b]) => ({
     archetype: archetypes[a],
     cards: b.cards,
@@ -122,7 +134,11 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
   }));
 
   return {
-    dataset: { generatedAt, archetypes, tournaments, results, matches, rotation: { label: rotation.label, sets: rotation.sets } },
+    dataset: {
+      generatedAt, archetypes, tournaments, results, matches,
+      rotation: { label: rotation.label, sets: rotation.sets },
+      ...(prices ? { prices: { asOf: prices.fetchedAt, ...(prices.fx ? { fx: prices.fx } : {}) } } : {}),
+    },
     lists,
     standings,
   };
