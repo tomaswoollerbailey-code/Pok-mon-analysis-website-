@@ -4,7 +4,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { DEFAULT_FILTERS, tournamentMask } from '../src/lib/analysis';
-import { averageList, deckText } from '../src/lib/decklist';
+import { deckText, listCards, topLists } from '../src/lib/decklist';
 import { allRoutes, pageMeta } from '../src/lib/seo';
 import { routePath } from '../src/lib/routes';
 import type { ArchetypeLists, Dataset } from '../src/lib/types';
@@ -18,13 +18,14 @@ const data = JSON.parse(await readFile(join(out, 'data', 'dataset.json'), 'utf8'
 
 const mask = tournamentMask(data, DEFAULT_FILTERS);
 
-/** The average list as plain text, so "<deck> deck list" searches find the list itself. */
+/** The best recent list as plain text, so "<deck> deck list" searches find the list itself. */
 async function deckListHtml(key: string): Promise<string> {
   try {
     const l = JSON.parse(await readFile(join(out, 'data', 'lists', `${key}.json`), 'utf8')) as ArchetypeLists;
-    const avg = averageList(l.cards, l.lists.filter((r) => mask[r[0]]));
-    if (!avg) return '';
-    return `<h2>Average decklist (${avg.lists} lists)</h2><pre>${esc(deckText(avg.cards))}</pre>`;
+    const best = topLists(data, l, mask, 8)[0];
+    if (!best) return '';
+    const t = data.tournaments[best[0]];
+    return `<h2>Top decklist: #${best[1]} at ${esc(t.name)}</h2><pre>${esc(deckText(listCards(l.cards, best)))}</pre>`;
   } catch { return ''; }
 }
 

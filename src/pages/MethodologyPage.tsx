@@ -106,13 +106,17 @@ export function MethodologyPage({ data }: { data: Dataset | null }) {
       <section className="card prose">
         <h2>Decklists and prices</h2>
         <dl>
-          <dt>Average list</dt>
+          <dt>Top finishes</dt>
           <dd>
-            Each card’s mean number of copies across the lists in your filters, rounded to a full 60 cards, with different printings of a card merged. The percentage beside a card is the share of lists playing it.
+            Real lists that finished in the top 8, 16 or 32 of an event in your period, best placing first. Only events that publish lists are included, so some placings have no list.
+          </dd>
+          <dt>Most played</dt>
+          <dd>
+            Lists grouped when they have exactly the same cards and copies (different printings of a card count as the same). Only lists played more than once are shown, most common first.
           </dd>
           <dt>Prices</dt>
           <dd>
-            A daily snapshot of TCGplayer (USD) and Cardmarket (EUR) market prices, read from Limitless decklist pages. MYR is the USD price converted at a daily exchange rate, not a Malaysian shop price. These are market prices, not what a shop will charge, and new cards swing in their first weeks. “Cheapest printings” prices each card at its lowest printing.
+            A daily snapshot of TCGplayer (USD) and Cardmarket (EUR) market prices, read from Limitless decklist pages. MYR is the USD price converted at a daily exchange rate, not a Malaysian shop price. These are market prices, not what a shop will charge, and new cards swing in their first weeks.
           </dd>
         </dl>
       </section>
