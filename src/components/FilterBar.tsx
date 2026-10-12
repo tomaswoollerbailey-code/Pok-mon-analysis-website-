@@ -13,12 +13,6 @@ const PERIODS: { label: string; short: string; days: number | null }[] = [
 ];
 const CURRENCIES: Currency[] = ['usd', 'eur', 'myr'];
 
-function daysAgo(latest: string, days: number) {
-  const d = new Date(`${latest}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() - days);
-  return d.toISOString().slice(0, 10);
-}
-
 /** A row of tap-chips for one choice. */
 function Chips<T extends string>({ label, value, options, onPick }: {
   label: string;
@@ -40,20 +34,18 @@ function Chips<T extends string>({ label, value, options, onPick }: {
   );
 }
 
-export function FilterBar({ filters, onChange, latest, rotation }: {
+export function FilterBar({ filters, onChange, rotation }: {
   filters: Filters;
   onChange: (f: Filters) => void;
   /** The next rotation (e.g. H mark, 2027); omitted when the dataset has no rotation info. */
   rotation?: { label: string; year?: number };
-  /** Most recent tournament date: periods count back from it so an old dataset still shows data. */
-  latest: string;
 }) {
   const [open, setOpen] = useState(false);
   const set = <K extends keyof Filters>(k: K, v: Filters[K]) => onChange({ ...filters, [k]: v });
-  const period = PERIODS.find((p) => (p.days == null ? !filters.from && !filters.to : filters.from === daysAgo(latest, p.days) && !filters.to));
-  const summary = [period?.label ?? 'Custom dates', filters.currency.toUpperCase(), filters.hideRotating ? (rotation?.year ? `After ${rotation.year} rotation` : 'Post-rotation') : '']
+  const period = PERIODS.find((p) => p.days === filters.periodDays) ?? PERIODS[PERIODS.length - 1];
+  const summary = [period.label, filters.currency.toUpperCase(), filters.hideRotating ? (rotation?.year ? `After ${rotation.year} rotation` : 'Post-rotation') : '']
     .filter(Boolean).join(' · ');
-  const changed = JSON.stringify({ ...filters, source: DEFAULT_FILTERS.source }) !== JSON.stringify(DEFAULT_FILTERS);
+  const changed = filters.periodDays !== DEFAULT_FILTERS.periodDays || filters.currency !== DEFAULT_FILTERS.currency || filters.hideRotating !== DEFAULT_FILTERS.hideRotating;
 
   return (
     <div className={`toolbar ${open ? 'open' : ''}`} role="group" aria-label="Filters">
@@ -75,9 +67,9 @@ export function FilterBar({ filters, onChange, latest, rotation }: {
       <div className="filters-panel">
         <Chips
           label="Period"
-          value={period ? String(period.days) : undefined}
+          value={String(period.days)}
           options={PERIODS.map((p) => ({ value: String(p.days), label: p.short }))}
-          onPick={(v) => { const p = PERIODS.find((x) => String(x.days) === v)!; onChange({ ...filters, from: p.days == null ? '' : daysAgo(latest, p.days), to: '' }); }}
+          onPick={(v) => set('periodDays', PERIODS.find((x) => String(x.days) === v)!.days)}
         />
         <Chips label="Prices" value={filters.currency} options={CURRENCIES.map((c) => ({ value: c, label: c.toUpperCase() }))} onPick={(v) => set('currency', v)} />
         {rotation && (

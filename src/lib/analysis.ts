@@ -7,7 +7,10 @@ export interface Filters {
   /** Online and offline are analysed separately: they publish different data (see SOURCE_CAPS). */
   source: Source;
   format: string; // '' = any
-  from: string; // YYYY-MM-DD, '' = open
+  /** The Period chip: last N days counted back from the newest event (null = since the rotation). */
+  periodDays: number | null;
+  /** Derived from periodDays by the app; '' = open. */
+  from: string; // YYYY-MM-DD
   to: string;
   minPlayers: number;
   /** No picker in the UI: always 'auto' (Top 8 online, Top 10% offline). */
@@ -21,6 +24,7 @@ export interface Filters {
 export const DEFAULT_FILTERS: Filters = {
   source: 'online',
   format: 'STANDARD',
+  periodDays: null,
   from: '',
   to: '',
   minPlayers: 0,
@@ -214,7 +218,7 @@ export interface Movers {
   rows: Mover[];
 }
 
-/** Decks need this many players across both windows to count as moving. */
+/** Below this many players across both windows the change is flagged as a small sample. */
 export const MOVER_MIN_PLAYERS = 20;
 
 const shiftDays = (iso: string, days: number) => {
@@ -223,18 +227,24 @@ const shiftDays = (iso: string, days: number) => {
   return d.toISOString().slice(0, 10);
 };
 
+/** Window length in days for metaMovers (see below). */
+export function moverWindow(f: Pick<Filters, 'periodDays' | 'source'>): number {
+  const half = f.periodDays ? Math.ceil(f.periodDays / 2) : 28;
+  return f.source === 'offline' ? Math.max(28, half) : half;
+}
+
 /**
  * Who is rising and falling: share in the last `days` (counting back from the latest event in the
- * filters) vs the `days` before. Rows are every named deck with enough players, biggest change first.
- * Default window: 2 weeks online (1 week for a 14-day period), 4 weeks offline, where events are sparse.
+ * filters) vs the `days` before. Rows are every named deck seen in either window, biggest change first.
+ * Default window: half the chosen period (7, 15 or 45 days), or 4 weeks when the period is the whole
+ * rotation. Offline events are sparse, so offline windows are at least 4 weeks.
  */
 export function metaMovers(d: Dataset, f: Filters, days?: number): Movers | null {
   const mask = tournamentMask(d, f);
   const dates = d.tournaments.filter((_, i) => mask[i]).map((t) => t.date).sort();
   if (!dates.length) return null;
   const latest = dates[dates.length - 1];
-  const span = (Date.parse(latest) - Date.parse(dates[0])) / 864e5;
-  const w = days ?? (f.source === 'offline' ? 28 : span <= 14 ? 7 : 14);
+  const w = days ?? moverWindow(f);
   const nowFrom = shiftDays(latest, -w + 1), beforeFrom = shiftDays(latest, -2 * w + 1);
   const keep = archetypeMask(d, f);
   const n = d.archetypes.length;
@@ -246,7 +256,7 @@ export function metaMovers(d: Dataset, f: Filters, days?: number): Movers | null
     if (date >= nowFrom) { tNow++; cNow[a]++; } else if (date >= beforeFrom) { tBefore++; cBefore[a]++; }
   }
   if (!tNow || !tBefore) return null;
-  const candidates = d.archetypes.map((_, a) => a).filter((a) => !isOther(d, a) && cNow[a] + cBefore[a] >= MOVER_MIN_PLAYERS);
+  const candidates = d.archetypes.map((_, a) => a).filter((a) => !isOther(d, a) && cNow[a] + cBefore[a] > 0);
   const trend = metaTrend(d, f, candidates);
   const rows = candidates.map((a, i): Mover => {
     const now = cNow[a] / tNow, before = cBefore[a] / tBefore;

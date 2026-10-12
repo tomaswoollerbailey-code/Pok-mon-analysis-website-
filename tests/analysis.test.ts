@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cardUsage, DEFAULT_FILTERS, matchupMatrix, metaMovers, metaSummary, metaTrend, weekStart, type Filters } from '../src/lib/analysis';
+import { cardUsage, DEFAULT_FILTERS, matchupMatrix, metaMovers, moverWindow, metaSummary, metaTrend, weekStart, type Filters } from '../src/lib/analysis';
 import { archetypeKey } from '../src/lib/archetype';
 import { buildDataset } from '../src/lib/build';
 import type { RawStanding, RawTournament } from '../src/lib/types';
@@ -142,6 +142,15 @@ describe('metaMovers', () => {
     expect(m.rows[0]).toMatchObject({ now: 0.75, before: 0.25, players: 40 });
     expect(m.rows[0].delta).toBeCloseTo(0.5);
     expect(m.rows[0].spark).toEqual([0.25, 0.75]);
+  });
+
+  it('sizes the window from the period: half of it, or 4 weeks for the whole rotation', () => {
+    expect(moverWindow(F({ periodDays: 14 }))).toBe(7);
+    expect(moverWindow(F({ periodDays: 30 }))).toBe(15);
+    expect(moverWindow(F({ periodDays: 90 }))).toBe(45);
+    expect(moverWindow(F())).toBe(28);
+    expect(moverWindow(F({ source: 'offline', periodDays: 14 }))).toBe(28); // sparse events
+    expect(metaMovers(dataset, F({ periodDays: 14 }))!.days).toBe(7);
   });
 
   it('returns null when the earlier window has no events', () => {
