@@ -1,12 +1,11 @@
 import { DeckIcons } from '../components/Brand';
-import { SOURCE_LABELS } from '../components/FilterBar';
 import { useEffect, useMemo, useState } from 'react';
 import { DeckList } from '../components/DeckList';
 import { RotationBadge } from '../components/RotationBadge';
 import { loadLists } from '../data';
-import { archetypeResults, metaSummary, cutLabel, type Filters } from '../lib/analysis';
+import { metaSummary, cutLabel, type Filters } from '../lib/analysis';
 import type { ArchetypeLists, Dataset } from '../lib/types';
-import { date, int, pct } from '../format';
+import { int, pct } from '../format';
 import { href } from '../router';
 import { Empty, Tile } from './MetaPage';
 
@@ -21,12 +20,9 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
   const summary = useMemo(() => metaSummary(data, filters), [data, filters]);
   const stats = summary.rows.find((r) => r.archetype === a);
   const rank = summary.rows.findIndex((r) => r.archetype === a) + 1;
-  const results = useMemo(() => (a >= 0 ? archetypeResults(data, filters, a) : []), [data, filters, a]);
   const cut = cutLabel(filters);
 
   if (a < 0) return <Empty>Unknown archetype.</Empty>;
-  // Best placing first; among equal placings, bigger events first (a Regional win beats a 40-player online win).
-  const best = results.filter((r) => r[2] > 0).slice().sort((x, y) => x[2] - y[2] || data.tournaments[y[0]].players - data.tournaments[x[0]].players || x[0] - y[0]).slice(0, 25);
 
   return (
     <>
@@ -62,30 +58,6 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
 
       {aKey !== 'other' && lists && lists !== 'none' && <DeckList data={data} filters={filters} lists={lists} />}
 
-      <section className="card">
-        <header className="card-head"><h2>Best finishes</h2></header>
-        {best.length ? (
-          <div className="table-wrap">
-            <table className="data">
-              <thead><tr><th className="num">Place</th><th>Event</th><th>Date</th><th className="num">Players</th><th className="num">Record</th></tr></thead>
-              <tbody>
-                {best.map((r, i) => {
-                  const t = data.tournaments[r[0]];
-                  return (
-                    <tr key={i}>
-                      <td className="num">{r[2]}</td>
-                      <td><a href={href.tournament(t.key)}>{t.name}</a> <span className={`badge ${t.source}`}>{SOURCE_LABELS[t.source]}</span></td>
-                      <td className="nowrap">{date(t.date)}</td>
-                      <td className="num">{int(t.players)}</td>
-                      <td className="num">{r[3] + r[4] + r[5] ? `${r[3]}-${r[4]}-${r[5]}` : '—'}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        ) : <Empty>No placings recorded.</Empty>}
-      </section>
     </>
   );
 }

@@ -32,9 +32,9 @@ const d = { tournaments: [{ date: '2026-10-01', players: 50 }, { date: '2026-10-
 const al = (rows: ListRow[]) => ({ cards, lists: rows }) as unknown as ArchetypeLists;
 
 describe('topLists', () => {
-  it('keeps the top cut, ordered by placing then newest', () => {
+  it('keeps the top cut, newest event first then best placing', () => {
     const l = al([...lists, [2, 1, []]]);
-    expect(topLists(d, l, [true, true, true], 8).map((r) => [r[0], r[1]])).toEqual([[2, 1], [0, 1], [1, 2], [2, 5]]);
+    expect(topLists(d, l, [true, true, true], 8).map((r) => [r[0], r[1]])).toEqual([[2, 1], [2, 5], [1, 2], [0, 1]]);
     expect(topLists(d, l, [true, true, true], 1)).toHaveLength(2);
     expect(topLists(d, l, [false, true, false], 8)).toHaveLength(1);
   });

@@ -30,11 +30,11 @@ export function listCards(cards: CardInfo[], row: ListRow): DeckCard[] {
   return row[2].map(([ci, n]): DeckCard => ({ category: cards[ci].category, name: cards[ci].name, set: cards[ci].set, number: cards[ci].number, count: n })).sort(byCategory);
 }
 
-/** Lists that finished in the top `cut`, best placing first, then newest, then biggest event. */
+/** Lists that finished in the top `cut`, newest event first, then best placing. */
 export function topLists(d: Dataset, l: ArchetypeLists, mask: boolean[], cut: number): ListRow[] {
   return l.lists
     .filter((r) => mask[r[0]] && r[1] > 0 && r[1] <= cut)
-    .sort((a, b) => a[1] - b[1] || d.tournaments[b[0]].date.localeCompare(d.tournaments[a[0]].date) || d.tournaments[b[0]].players - d.tournaments[a[0]].players);
+    .sort((a, b) => d.tournaments[b[0]].date.localeCompare(d.tournaments[a[0]].date) || a[1] - b[1] || d.tournaments[b[0]].players - d.tournaments[a[0]].players);
 }
 
 /** Identical lists grouped together, most-played first (ties: best finish, then newest). */

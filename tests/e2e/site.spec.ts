@@ -132,8 +132,9 @@ test('deck page shows top finishes and most-played lists, and copies one for TCG
   await go(page, 'decks/deck-charlie');
   await expect(page.getByRole('heading', { name: 'Decklists' })).toBeVisible();
   await expect(page.locator('.list-item').first()).toBeVisible();
-  await expect(page.locator('.decklist-col').first()).toBeVisible(); // the best list opens by default
+  await expect(page.locator('.decklist-col').first()).toBeHidden(); // lists start closed
   await page.getByRole('button', { name: 'Top 16' }).click();
+  await page.locator('.list-item summary').first().click();
   await page.getByRole('button', { name: 'Copy for TCG Live' }).first().click();
   await expect(page.getByRole('button', { name: 'Copied ✓' })).toBeVisible();
   const text = await page.evaluate(() => navigator.clipboard.readText());
