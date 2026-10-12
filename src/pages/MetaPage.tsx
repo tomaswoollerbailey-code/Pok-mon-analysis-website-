@@ -20,21 +20,21 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
 
   const columns: Column<ArchetypeStats>[] = [
     { key: 'name', label: 'Deck', render: (r) => <DeckName a={data.archetypes[r.archetype]} />, sort: (r) => name(r.archetype) },
-    { key: 'players', label: 'Players', numeric: true, render: (r) => int(r.players), sort: (r) => r.players },
+    { key: 'players', label: 'Players', hideOnMobile: true, numeric: true, render: (r) => int(r.players), sort: (r) => r.players },
     { key: 'share', label: 'Meta share', numeric: true, render: (r) => pct(r.share), sort: (r) => r.share },
-    { key: 'topCut', label: cut, numeric: true, render: (r) => int(r.topCut), sort: (r) => r.topCut, title: `Pilots finishing in the ${cut}` },
-    { key: 'topCutShare', label: `${cut} share`, numeric: true, render: (r) => pct(r.topCutShare), sort: (r) => r.topCutShare, title: `Share of all ${cut} slots` },
+    { key: 'topCut', label: cut, hideOnMobile: true, numeric: true, render: (r) => int(r.topCut), sort: (r) => r.topCut, title: `Pilots finishing in the ${cut}` },
+    { key: 'topCutShare', label: `${cut} share`, hideOnMobile: true, numeric: true, render: (r) => pct(r.topCutShare), sort: (r) => r.topCutShare, title: `Share of all ${cut} slots` },
     { key: 'conversion', label: 'Conversion', numeric: true, render: (r) => pct(r.conversion), sort: (r) => r.conversion, title: `Pilots reaching the ${cut} ÷ pilots` },
     { key: 'winRate', label: 'Win rate', numeric: true, render: (r) => pct(r.winRate), sort: (r) => r.winRate ?? -1, title: 'Head-to-head win rate vs other decks in online events (mirrors excluded); ties count as half' },
-    { key: 'record', label: 'W-L-T', numeric: true, render: (r) => (r.wins + r.losses + r.ties ? `${r.wins}-${r.losses}-${r.ties}` : '—') },
+    { key: 'record', label: 'W-L-T', hideOnMobile: true, numeric: true, render: (r) => (r.wins + r.losses + r.ties ? `${r.wins}-${r.losses}-${r.ties}` : '—') },
     ...(data.prices ? [{
-      key: 'price', label: 'Deck price', numeric: true,
+      key: 'price', label: 'Deck price', numeric: true, hideOnMobile: true,
       title: 'Median cost of its recent lists at current market prices',
       render: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return formatMoney(p ? convert(p, filters.currency, data.prices?.fx) : undefined, filters.currency); },
       sort: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return (p && convert(p, filters.currency, data.prices?.fx)) ?? -1; },
     }] : []),
-    { key: 'rotation', label: 'Rotation', render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
-    { key: 'wins1st', label: 'Wins', numeric: true, render: (r) => int(r.wins1st), sort: (r) => r.wins1st, title: 'Tournaments won' },
+    { key: 'rotation', label: 'Rotation', hideOnMobile: true, render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
+    { key: 'wins1st', label: 'Wins', hideOnMobile: true, numeric: true, render: (r) => int(r.wins1st), sort: (r) => r.wins1st, title: 'Tournaments won' },
   ];
 
   const rotShare = m.rows.filter((r) => data.archetypes[r.archetype].rotation?.status === 'rotates').reduce((x, r) => x + r.share, 0);

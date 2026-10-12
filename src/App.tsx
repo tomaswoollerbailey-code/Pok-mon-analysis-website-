@@ -27,11 +27,11 @@ function readFilters(): Filters {
 }
 
 const NAV = [
-  { page: 'meta', label: 'Meta', href: href.meta },
-  { page: 'trends', label: 'Trends', href: href.trends },
-  { page: 'matchups', label: 'Matchups', href: href.matchups },
-  { page: 'field', label: 'Field planner', href: href.field },
-  { page: 'tournaments', label: 'Tournaments', href: href.tournaments },
+  { page: 'meta', label: 'Meta', short: 'Meta', href: href.meta },
+  { page: 'trends', label: 'Trends', short: 'Trends', href: href.trends },
+  { page: 'matchups', label: 'Matchups', short: 'Matchups', href: href.matchups },
+  { page: 'field', label: 'Field planner', short: 'Planner', href: href.field },
+  { page: 'tournaments', label: 'Tournaments', short: 'Events', href: href.tournaments },
 ] as const;
 
 export function App() {
@@ -62,6 +62,15 @@ export function App() {
         <ThemeToggle />
       </header>
 
+      <nav className="tabbar" aria-label="Sections">
+        {NAV.map((n) => (
+          <a key={n.page} href={n.href} className={active === n.page ? 'on' : ''} aria-current={active === n.page ? 'page' : undefined}>
+            <TabIcon page={n.page} />
+            <span>{n.short}</span>
+          </a>
+        ))}
+      </nav>
+
       <main>
         {error ? (
           <NoData error={error} />
@@ -72,7 +81,7 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
+              <FilterBar key={route.page} filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
             )}
             {effective.source === 'japan' && route.page !== 'tournament' && (
               <div className="notice" role="status">
@@ -113,5 +122,21 @@ function NoData({ error }: { error?: string }) {
       <pre>npm run data</pre>
       <p>This fetches online events from the Limitless Play API and in-person events from limitlesstcg.com, then writes <code>public/data/</code>.</p>
     </div>
+  );
+}
+
+/** Simple line icons for the phone tab bar. */
+function TabIcon({ page }: { page: string }) {
+  const paths: Record<string, string> = {
+    meta: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
+    trends: 'M3 17l6-6 4 4 8-8M15 7h6v6',
+    matchups: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
+    field: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2z',
+    tournaments: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4',
+  };
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d={paths[page]} />
+    </svg>
   );
 }

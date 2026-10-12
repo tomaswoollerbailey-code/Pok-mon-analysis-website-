@@ -29,6 +29,7 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Brand:** "Meta Lab" → "Murkrow Meta" → **The Crow's Nest**. Never use Pokémon names in the brand, domain or logo (trademark risk). |
 | 2026-10-12 | **Win rate** = head-to-head pairings vs other decks, mirrors excluded. Standings records (with byes and drops) read low. |
 | 2026-10-12 | **No promotion or affiliate links** until the site is finished and polished. |
+| 2026-10-12 | **Mobile-first, app-style shell:** a bottom tab bar on phones, filters behind one button (the source switch stays visible), 16px inputs, safe-area insets, a swipeable top-3, and secondary table columns hidden. |
 | 2026-10-12 | Don't use a work Claude account for this project. To save usage, use Sonnet for routine work and batch requests. |
 
 ## Current state (live)
@@ -41,6 +42,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Deck pages:** rotation status, card usage (core cards, a rare-techs toggle, top-cut-only), deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
 - **Filters:** International, Online, In person or Japan; period ("Since rotation" by default); format; top cut; currency (USD, EUR, MYR); Post-rotation; and under "More", dates and minimum players.
 - **Theme:** light, dark or system. Deck sprites are hotlinked from Limitless.
+- **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
 ## Roadmap
 **Agreed order:**
