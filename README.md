@@ -1,4 +1,6 @@
-# Murkrow Meta: Pokémon TCG meta analysis
+# The Crow's Nest: Pokémon TCG meta analysis
+
+*Spot the meta before it lands.*
 
 A static website that analyses the Pokémon TCG meta from both **online** and **in-person** tournaments published on Limitless:
 

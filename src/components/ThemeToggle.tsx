@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 type Theme = 'system' | 'light' | 'dark';
-const KEY = 'murkrow.theme';
+const KEY = 'crowsnest.theme';
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>(() => {

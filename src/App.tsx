@@ -15,7 +15,7 @@ import { TournamentPage } from './pages/TournamentPage';
 import { TournamentsPage } from './pages/TournamentsPage';
 import { TrendsPage } from './pages/TrendsPage';
 
-const FILTER_STORE = 'murkrow.filters';
+const FILTER_STORE = 'crowsnest.filters';
 
 function readFilters(): Filters {
   try {
@@ -54,7 +54,7 @@ export function App() {
       <header className="top">
         <a className="brand" href={href.meta}>
           <Logo />
-          <span>Murkrow<b>Meta</b></span>
+          <span className="wordmark"><small>The</small> Crow’s <b>Nest</b></span>
         </a>
         <nav>
           {NAV.map((n) => <a key={n.page} href={n.href} className={active === n.page ? 'on' : ''} aria-current={active === n.page ? 'page' : undefined}>{n.label}</a>)}

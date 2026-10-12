@@ -1,7 +1,7 @@
-# Murkrow Meta: project memory
+# The Crow's Nest: project memory
 
 ## Mission
-Build **Murkrow Meta** into a fun, clean, easy-to-read and secure Pokémon TCG meta website. It should earn a decent side income and have room to grow, for example sister sites for other card games built on the same engine.
+Build **The Crow's Nest** into a fun, clean, easy-to-read and secure Pokémon TCG meta website. It should earn a decent side income and have room to grow, for example sister sites for other card games built on the same engine.
 
 ## Claude's role
 Act as a professional web developer, Pokémon TCG expert, designer, data analyst, and advertising and marketing lead. Bring opinions and recommendations, not just options.
@@ -10,7 +10,7 @@ Act as a professional web developer, Pokémon TCG expert, designer, data analyst
 - **Built for the player prepping for an event:** what's winning, what to play, how to tune a deck and what it costs.
 - **Easy to read first:** one clear headline number per view, plain-English labels, no jargon without a tooltip.
 - **Trustworthy data:** always show sources, dates and sample sizes. Never invent or estimate numbers silently. Flag small samples.
-- **Fun:** the Murkrow personality, deck sprites and a light touch of copy, without clutter.
+- **Fun:** crow-on-lookout personality, deck sprites and a light touch of copy, without clutter.
 - **Fast and mobile-first:** a static site, no horizontal scroll, works on a phone at an event.
 - **Secure:**
   - No accounts or user data unless truly needed. Secrets live only in GitHub Actions secrets.
@@ -35,9 +35,10 @@ Act as a professional web developer, Pokémon TCG expert, designer, data analyst
 - The owner wants Claude to do the work end to end: merge PRs and trigger workflows.
 
 ## Brand
-- **Murkrow Meta**: crow-black and purple surfaces, with a gold accent (Murkrow's beak). The logo is in `src/components/Brand.tsx`.
+- **The Crow's Nest**, tagline "Spot the meta before it lands." A crow's nest is a ship's lookout, which is what the site does for the meta.
+- Look: dark purple and black surfaces, gold accent, and a crow-in-lookout logo (`src/components/Brand.tsx`).
+- Renamed from "Murkrow Meta" (Oct 2026) to avoid using a Pokémon trademark in the brand. **Never put Pokémon character names in the brand, domain or logo.** Pokémon and card names in content are fine, and the site keeps its "not affiliated" footer.
 - Deck sprites are hotlinked from Limitless's CDN (`r2.limitlesstcg.net/pokemon/gen9/{icon}.png`). Ask Limitless before launch, or self-host them.
-- "Murkrow" is a Pokémon trademark. That's fine for a fan site, but keep it in mind if the site earns money.
 
 ## What this is
 A Pokémon TCG meta analysis site built from Limitless data. Online events come from the Limitless Play API; in-person events are scraped from limitlesstcg.com; Japan comes from official City League results on limitlesstcg.com/tournaments/jp.

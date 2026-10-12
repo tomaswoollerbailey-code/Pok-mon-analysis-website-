@@ -1,11 +1,14 @@
-/** Murkrow-inspired mark: wide-brim hat, dark head, gold beak, red eye. */
+/** The Crow's Nest mark: a crow keeping lookout from a ship's crow's nest. */
 export function Logo({ size = 28 }: { size?: number }) {
   return (
     <svg viewBox="0 0 32 32" width={size} height={size} aria-hidden className="logo">
-      <circle cx="16" cy="19" r="9" fill="var(--crow-body)" />
-      <path d="M3 13.5c4-1.6 8.5-2.4 13-2.4s9 .8 13 2.4c-3.5.3-6.8.4-9.4.3L16 3l-3.6 10.8c-2.6.1-5.9 0-9.4-.3Z" fill="var(--crow-hat)" />
-      <path d="M21 19.5 29 22l-8 1.8Z" fill="var(--gold)" />
-      <circle cx="19.2" cy="17.6" r="1.6" fill="#e5484d" />
+      <path d="M16 2v8" stroke="var(--crow-mast)" strokeWidth="2" strokeLinecap="round" />
+      <path d="M16 3.2 22 5l-6 1.8Z" fill="var(--gold)" />
+      <circle cx="15" cy="15.5" r="6.2" fill="var(--crow-body)" />
+      <path d="M20.2 14.6 26 16.4l-5.8 1.4Z" fill="var(--gold)" />
+      <circle cx="17.2" cy="14.4" r="1.25" fill="#f2f0f7" />
+      <path d="M6 19.5h20l-2 9.5H8Z" fill="var(--crow-mast)" />
+      <path d="M7.1 23h17.8M7.8 26.3h16.4" stroke="var(--page)" strokeWidth="1.1" opacity=".55" />
     </svg>
   );
 }
