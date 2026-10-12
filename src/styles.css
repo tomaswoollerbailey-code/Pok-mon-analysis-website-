@@ -96,6 +96,21 @@ select:focus-visible, input:focus-visible, button:focus-visible, a:focus-visible
 .link-btn.more { margin-top: 8px; }
 .check { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); }
 
+/* Rotation */
+.toggle { display: inline-flex; align-items: center; gap: 6px; border: 0; background: var(--surface); box-shadow: 0 0 0 1px var(--ring); border-radius: 6px; padding: 6px 10px; min-height: 32px; cursor: pointer; color: var(--ink-2); }
+.toggle.on { color: var(--ink); box-shadow: 0 0 0 1.5px var(--accent); }
+.toggle-box { width: 14px; height: 14px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px var(--axis); display: inline-grid; place-items: center; font-size: 11px; line-height: 1; }
+.toggle.on .toggle-box { background: var(--accent); box-shadow: none; color: #fff; }
+.notice { background: var(--surface-2); border-radius: 8px; padding: 8px 12px; color: var(--ink-2); font-size: 13px; }
+.rot { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; white-space: nowrap; color: var(--ink-2); }
+.rot.small { font-size: 11px; margin-left: 6px; }
+.rot-icon { display: inline-grid; place-items: center; width: 14px; height: 14px; border-radius: 50%; font-size: 9px; font-weight: 700; color: #fff; }
+.rot-survives .rot-icon { background: #0ca30c; }
+.rot-impacted .rot-icon { background: #fab219; color: #0b0b0b; }
+.rot-rotates .rot-icon { background: #d03b3b; }
+.rot-unknown .rot-icon { background: var(--muted); }
+.rot-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+
 /* Stat tiles */
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
 .tile { background: var(--surface); border-radius: 10px; box-shadow: 0 0 0 1px var(--ring); padding: 12px 16px; min-width: 0; }

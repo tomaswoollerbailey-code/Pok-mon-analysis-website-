@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { BarChart } from '../components/BarChart';
+import { RotationBadge } from '../components/RotationBadge';
 import { SortTable, type Column } from '../components/SortTable';
 import { metaSummary, TOP_CUT_LABELS, type ArchetypeStats, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
@@ -22,6 +23,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     { key: 'conversion', label: 'Conversion', numeric: true, render: (r) => pct(r.conversion), sort: (r) => r.conversion, title: `Pilots reaching the ${cut} ÷ pilots` },
     { key: 'winRate', label: 'Win rate', numeric: true, render: (r) => pct(r.winRate), sort: (r) => r.winRate ?? -1, title: 'Match win rate where records are available (online events); ties count as half' },
     { key: 'record', label: 'W-L-T', numeric: true, render: (r) => (r.wins + r.losses + r.ties ? `${r.wins}-${r.losses}-${r.ties}` : '—') },
+    { key: 'rotation', label: 'Rotation', render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
     { key: 'wins1st', label: 'Wins', numeric: true, render: (r) => int(r.wins1st), sort: (r) => r.wins1st, title: 'Tournaments won' },
   ];
 
@@ -34,6 +36,11 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
         <Tile label="Players" value={int(m.players)} note={m.identified < m.players ? `${int(m.identified)} with a known deck` : undefined} />
         <Tile label="Archetypes" value={int(m.rows.length)} />
         {leader && <Tile label="Most played" value={pct(leader.share)} note={name(leader.archetype)} />}
+        {data.rotation && !filters.hideRotating && (() => {
+          const rot = m.rows.filter((r) => data.archetypes[r.archetype].rotation?.status === 'rotates');
+          const share = rot.reduce((x, r) => x + r.share, 0);
+          return <Tile label="Meta that rotates" value={pct(share)} note={`${int(rot.length)} archetypes`} />;
+        })()}
         {bestConv && <Tile label={`Best ${cut} conversion`} value={pct(bestConv.conversion)} note={`${name(bestConv.archetype)} · ${int(bestConv.players)} pilots`} />}
       </div>
 

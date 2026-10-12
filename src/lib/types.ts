@@ -59,9 +59,18 @@ export interface RawTournament {
 
 // ---------- Compact dataset loaded by the site ----------
 
+export type RotationStatus = 'survives' | 'impacted' | 'rotates' | 'unknown';
+
+export interface ArchetypeRotation {
+  status: RotationStatus;
+  /** Core cards (in ≥50% of lists) that rotate, most copies first. */
+  cards: string[];
+}
+
 export interface ArchetypeInfo {
   key: string;
   name: string;
+  rotation?: ArchetypeRotation;
 }
 
 export interface TournamentInfo {
@@ -92,6 +101,8 @@ export interface Dataset {
   tournaments: TournamentInfo[];
   results: ResultRow[];
   matches: MatchRow[];
+  /** The upcoming rotation the archetype statuses were computed for. */
+  rotation?: { label: string; sets: string[] };
 }
 
 export interface CardInfo {
@@ -99,6 +110,8 @@ export interface CardInfo {
   name: string;
   set?: string;
   number?: string;
+  /** No legal printing remains after the next rotation. */
+  rotates?: true;
 }
 
 /** Per-archetype decklists: [tournamentIdx, placing, [[cardIdx, count], ...]] */

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { RotationBadge } from '../components/RotationBadge';
 import { SortTable } from '../components/SortTable';
 import { loadLists } from '../data';
 import { archetypeResults, cardUsage, metaSummary, TOP_CUT_LABELS, type CardUsage, type Filters } from '../lib/analysis';
@@ -40,6 +41,14 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
       <div className="page-head">
         <a href={href.meta} className="back">← Meta overview</a>
         <h1>{data.archetypes[a].name}</h1>
+        {data.rotation && (
+          <p className="rot-line">
+            <RotationBadge rotation={data.archetypes[a].rotation} />
+            {data.archetypes[a].rotation?.cards.length
+              ? <span> Core cards leaving Standard with the {data.rotation.label}: {data.archetypes[a].rotation!.cards.join(', ')}.</span>
+              : data.archetypes[a].rotation?.status === 'survives' ? <span> None of its core cards rotate with the {data.rotation.label}.</span> : null}
+          </p>
+        )}
       </div>
       {!stats ? <Empty>No results for this archetype with the current filters.</Empty> : (
         <div className="tiles">
@@ -73,7 +82,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
                       rowKey={(u) => u.card}
                       initial="inclusion"
                       columns={[
-                        { key: 'name', label: 'Card', render: (u) => { const c = lists.cards[u.card]; return <>{c.name}{c.set && <span className="muted"> {c.set} {c.number}</span>}</>; }, sort: (u) => lists.cards[u.card].name },
+                        { key: 'name', label: 'Card', render: (u) => { const c = lists.cards[u.card]; return <>{c.name}{c.set && <span className="muted"> {c.set} {c.number}</span>}{c.rotates && <span className="rot rot-rotates small" title="No printing outside the rotating sets"><span className="rot-icon" aria-hidden>✕</span>Rotates</span>}</>; }, sort: (u) => lists.cards[u.card].name },
                         { key: 'inclusion', label: 'Played', numeric: true, render: (u) => <span className="usage"><span className="usage-bar" style={{ width: `${u.inclusion * 100}%` }} />{pct(u.inclusion, 0)}</span>, sort: (u) => u.inclusion },
                         { key: 'avg', label: 'Avg', numeric: true, render: (u) => u.avgCount.toFixed(2), sort: (u) => u.avgCount, title: 'Average copies in lists that play it' },
                       ]}
