@@ -291,15 +291,21 @@ table.data tbody tr:last-child td { border-bottom: 0; }
 
 /* Heatmap */
 .heat-wrap { position: relative; }
-table.heat { border-collapse: separate; border-spacing: 2px; font-size: 12px; }
+table.heat { border-collapse: separate; border-spacing: 2px; font-size: 13px; }
 table.heat th { font-weight: 550; color: var(--ink-2); }
 table.heat .row-head { position: sticky; left: 0; z-index: 1; background: var(--surface); text-align: left; padding-right: 10px; white-space: nowrap; max-width: 220px; overflow: hidden; }
 table.heat .col-head { height: 150px; vertical-align: bottom; padding: 0 0 4px; text-align: center; }
 table.heat .col-head span { display: block; margin: 0 auto 6px; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; max-height: 120px; overflow: hidden; text-overflow: ellipsis; }
 table.heat .corner { color: var(--muted); font-size: 11px; vertical-align: bottom; text-align: right; padding-right: 8px; }
-table.heat td { width: 54px; min-width: 54px; height: 36px; text-align: center; border-radius: 6px; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 550; }
+table.heat td { width: 56px; min-width: 56px; height: 40px; text-align: center; border-radius: 6px; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 650; transition: box-shadow .1s ease; }
 table.heat td.thin { background: var(--surface-2); color: var(--muted); font-weight: 400; }
 table.heat td.mirror { color: var(--muted); background: transparent; }
+.heat-controls { justify-content: space-between; align-items: center; }
+table.heat td.cell.hot { box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--ink) 25%, transparent); }
+table.heat td.cell:hover { box-shadow: inset 0 0 0 2px var(--ink); }
+table.heat .row-head.hot, table.heat .col-head.hot { color: var(--ink); font-weight: 700; }
+table.heat .avg { font-weight: 700; border-radius: 6px; margin-right: 6px; }
+table.heat .avg-head { color: var(--ink); }
 .scale { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); margin-left: auto; }
 .scale-bar { width: 140px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, color-mix(in oklab, var(--div-neg) 85%, var(--div-mid)), var(--div-mid), color-mix(in oklab, var(--div-pos) 85%, var(--div-mid))); }
 
