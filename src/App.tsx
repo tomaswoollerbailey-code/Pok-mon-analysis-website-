@@ -22,7 +22,8 @@ function readFilters(): Filters {
   try {
     const v = JSON.parse(localStorage.getItem(FILTER_STORE) || 'null');
     if (!v) return DEFAULT_FILTERS;
-    const f: Filters = { ...DEFAULT_FILTERS, ...v, topCut: 'auto' }; // no top-cut picker any more
+    // No top-cut picker any more; dates always come from the Period chip, so stale saved dates are dropped.
+    const f: Filters = { ...DEFAULT_FILTERS, ...v, topCut: 'auto', from: '', to: '' };
     return f.source in SOURCE_CAPS ? f : { ...f, source: DEFAULT_FILTERS.source }; // old 'all' value
   } catch {
     return DEFAULT_FILTERS;
@@ -48,8 +49,14 @@ export function App() {
 
   const formats = useMemo(() => (data ? formatsIn(data) : []), [data]);
   // Fall back to "any format" when the stored format isn't in this dataset.
-  const effective = data && filters.format && !formats.includes(filters.format) ? { ...filters, format: '' } : filters;
   const latest = data?.tournaments[0]?.date ?? new Date().toISOString().slice(0, 10);
+  const effective = useMemo<Filters>(() => ({
+    ...filters,
+    format: data && filters.format && !formats.includes(filters.format) ? '' : filters.format,
+    // The period counts back from the newest event, so it stays right as new data arrives.
+    from: filters.periodDays ? daysAgo(latest, filters.periodDays) : '',
+    to: '',
+  }), [filters, data, formats, latest]);
   // Keep the tab title and description in step with the page (prerendered copies cover first load).
   useEffect(() => {
     const m = pageMeta(data, route);
@@ -90,7 +97,7 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar key={route.page} filters={effective} onChange={setFilters} latest={latest} rotation={data.rotation} />
+              <FilterBar key={route.page} filters={effective} onChange={setFilters} rotation={data.rotation} />
             )}
             {route.page !== 'tournament' && route.page !== 'matchups' && route.page !== 'field' && (
               <p className="source-note"><b>{SOURCE_CAPS[effective.source].label}:</b> {SOURCE_CAPS[effective.source].blurb}</p>
@@ -119,6 +126,12 @@ export function App() {
       </footer>
     </div>
   );
+}
+
+function daysAgo(latest: string, days: number) {
+  const d = new Date(`${latest}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() - days);
+  return d.toISOString().slice(0, 10);
 }
 
 function NoData({ error }: { error?: string }) {

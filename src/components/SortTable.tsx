@@ -15,12 +15,13 @@ export interface Column<T> {
 
 const cls = (c: { numeric?: boolean; hideOnMobile?: boolean }) => [c.numeric && 'num', c.hideOnMobile && 'hide-sm'].filter(Boolean).join(' ');
 
-export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
+export function SortTable<T>({ rows, columns, initial, rowKey, limit, rowClass }: {
   rows: T[];
   columns: Column<T>[];
   initial: string;
   rowKey: (row: T) => string | number;
   limit?: number;
+  rowClass?: (row: T) => string | undefined;
 }) {
   const [sortKey, setSortKey] = useState(initial);
   const [desc, setDesc] = useState(true);
@@ -52,7 +53,7 @@ export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
         </thead>
         <tbody>
           {shown.map((r) => (
-            <tr key={rowKey(r)}>
+            <tr key={rowKey(r)} className={rowClass?.(r)}>
               {columns.map((c) => <td key={c.key} className={cls(c)}>{c.render(r)}</td>)}
             </tr>
           ))}

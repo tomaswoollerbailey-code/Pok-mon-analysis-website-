@@ -69,14 +69,25 @@ test('matchups explain and switch when a source has no pairings', async ({ page 
   await expect(page.locator('table.heat td.cell').first()).toBeVisible();
 });
 
-test('trends show risers, fallers and every deck', async ({ page }) => {
+test('trends is one table of every deck that follows the period filter', async ({ page }) => {
   await go(page, 'trends');
   await expect(page.getByRole('heading', { name: 'What’s moving' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Rising' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Falling' })).toBeVisible();
-  await expect(page.locator('.mover-list li').first()).toBeVisible();
-  await expect(page.locator('.mover-list .delta').first()).toContainText('pts');
-  await expect(page.getByRole('heading', { name: 'Every deck' })).toBeVisible();
+  await expect(page.locator('main table.data')).toHaveCount(1);
+  await expect(page.locator('main table.data .delta').first()).toContainText('pts');
+  await expect(page.getByText(/in the last 4 weeks/)).toBeVisible();
+  await page.locator('.filters-btn').click();
+  await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '30d' }).click();
+  await expect(page.getByText(/in the last 15 days/)).toBeVisible();
+});
+
+test('a saved period keeps working after a reload', async ({ page }) => {
+  await go(page, '');
+  await page.locator('.filters-btn').click();
+  await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '90d' }).click();
+  const sub = await page.locator('.hero-sub').textContent();
+  await page.reload();
+  await expect(page.locator('.filters-summary')).toContainText('Last 90 days');
+  await expect(page.locator('.hero-sub')).toHaveText(sub!);
 });
 
 test('meta table has a trend column on desktop', async ({ page, isMobile }) => {
