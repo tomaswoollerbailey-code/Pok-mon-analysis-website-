@@ -1,8 +1,9 @@
 // Turns raw per-tournament files into the compact bundle the website loads.
 import { archetypeKey, cardKey } from './archetype';
-import { classifyArchetype, ROTATION, rotatingCardNames } from './rotation';
+import { archetypePrice, attachPrices, cheapestByName } from './pricing';
+import { classifyArchetype, CURRENT_FORMAT, formatStart, ROTATION, rotatingCardNames } from './rotation';
 import type {
-  ArchetypeInfo, ArchetypeLists, CardInfo, Dataset, ListRow, MatchRow, RawTournament,
+  ArchetypeInfo, ArchetypeLists, CardInfo, Dataset, ListRow, MatchRow, PricesFile, RawTournament,
   ResultRow, StandingsFile, TournamentInfo,
 } from './types';
 
@@ -12,14 +13,30 @@ export interface BuiltDataset {
   standings: StandingsFile[];
 }
 
-export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION): BuiltDataset {
-  const sorted = [...raw].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
+export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION, prices?: PricesFile): BuiltDataset {
+  // Current format only: online / in-person events from the last rotation on, Standard only.
+  const current = raw.filter((t) => {
+    const start = formatStart(t.source);
+    return (!start || t.date >= start) && (t.source === 'japan' || t.format === 'STANDARD');
+  });
+  const sorted = [...current].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
 
   const archetypes: ArchetypeInfo[] = [];
   const archIdx = new Map<string, number>();
   const archNameVotes = new Map<string, Map<string, number>>();
-  const archetypeOf = (name: string | undefined): number => {
+  const iconVotes = new Map<number, Map<string, number>>();
+  const archetypeOf = (name: string | undefined, icons?: string[]): number => {
     if (!name) return -1;
+    const idx = archetypeIdxFor(name);
+    if (icons?.length) {
+      const v = iconVotes.get(idx) ?? new Map<string, number>();
+      const k = icons.join(' ');
+      v.set(k, (v.get(k) ?? 0) + 1);
+      iconVotes.set(idx, v);
+    }
+    return idx;
+  };
+  const archetypeIdxFor = (name: string): number => {
     const key = archetypeKey(name);
     const votes = archNameVotes.get(key) ?? new Map<string, number>();
     votes.set(name, (votes.get(name) ?? 0) + 1);
@@ -65,7 +82,7 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     const playerArch = new Map<string, number>();
     const rows: StandingsFile['standings'] = [];
     for (const s of t.standings) {
-      const a = archetypeOf(nameOf(s.archetype));
+      const a = archetypeOf(nameOf(s.archetype), s.archetype?.icons);
       playerArch.set(s.playerId, a);
       const r = s.record ?? { wins: 0, losses: 0, ties: 0 };
       results.push([tIdx, a, s.placing ?? 0, r.wins, r.losses, r.ties]);
@@ -102,17 +119,30 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     }
   }
 
-  // Display the most common spelling of each archetype.
-  for (const a of archetypes) {
+  // Display the most common spelling and icon set of each archetype.
+  archetypes.forEach((a, i) => {
     const votes = [...(archNameVotes.get(a.key) ?? new Map()).entries()].sort((x, y) => y[1] - x[1]);
     if (votes.length) a.name = votes[0][0];
-  }
+    const icons = [...(iconVotes.get(i) ?? new Map()).entries()].sort((x, y) => y[1] - x[1])[0];
+    if (icons) a.icons = icons[0].split(' ');
+  });
 
   // Rotation: a card rotates when every printing seen anywhere in the data is from a rotating set.
   const rotating = rotatingCardNames([...listsByArch.values()].flatMap((b) => b.cards), rotation.sets);
   for (const [a, b] of listsByArch) {
     for (const c of b.cards) if (rotating.has(c.name)) c.rotates = true;
     archetypes[a].rotation = classifyArchetype(archetypes[a].name, b.cards, b.lists, rotating);
+  }
+
+  if (prices) {
+    const keyToName = new Map<string, string>();
+    for (const b of listsByArch.values()) for (const c of b.cards) keyToName.set(cardKey(c), c.name);
+    const cheap = cheapestByName(prices.cards, keyToName);
+    for (const [a, b] of listsByArch) {
+      attachPrices(b.cards, prices.cards, cheap);
+      const p = archetypePrice({ archetype: archetypes[a], cards: b.cards, lists: b.lists });
+      if (p.lists) archetypes[a].price = p;
+    }
   }
 
   const lists: ArchetypeLists[] = [...listsByArch.entries()].map(([a, b]) => ({
@@ -122,7 +152,12 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
   }));
 
   return {
-    dataset: { generatedAt, archetypes, tournaments, results, matches, rotation: { label: rotation.label, sets: rotation.sets } },
+    dataset: {
+      generatedAt, archetypes, tournaments, results, matches,
+      rotation: { label: rotation.label, sets: rotation.sets },
+      format: CURRENT_FORMAT,
+      ...(prices ? { prices: { asOf: prices.fetchedAt, ...(prices.fx ? { fx: prices.fx } : {}) } } : {}),
+    },
     lists,
     standings,
   };

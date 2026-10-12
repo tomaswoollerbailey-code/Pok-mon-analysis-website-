@@ -1,3 +1,4 @@
+import { DeckIcons } from '../components/Brand';
 import { useMemo, useState } from 'react';
 import { LineChart } from '../components/LineChart';
 import { SERIES_SLOTS, seriesVar, useStableSlots } from '../colors';
@@ -33,6 +34,7 @@ export function TrendsPage({ data, filters }: { data: Dataset; filters: Filters 
           return (
             <button key={a} className={`chip ${on ? 'on' : ''}`} aria-pressed={on} onClick={() => toggle(a)} disabled={!on && selected.length >= SERIES_SLOTS}>
               <span className="swatch" style={{ background: on ? seriesVar(slots.get(a)!) : 'transparent' }} />
+              <DeckIcons icons={data.archetypes[a].icons} size={18} />
               {data.archetypes[a].name}
             </button>
           );

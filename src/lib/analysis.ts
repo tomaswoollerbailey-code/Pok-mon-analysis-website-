@@ -1,3 +1,4 @@
+import type { Currency } from './pricing';
 import type { ArchetypeLists, Dataset, ResultRow, Source } from './types';
 
 export type TopCut = 'top8' | 'top16' | 'top32' | 'top10pct';
@@ -12,6 +13,8 @@ export interface Filters {
   topCut: TopCut;
   /** Drop archetypes that rotate out at the next rotation (projected post-rotation meta). */
   hideRotating: boolean;
+  /** Display currency for prices (doesn't affect the analysis). */
+  currency: Currency;
 }
 
 export const DEFAULT_FILTERS: Filters = {
@@ -22,6 +25,7 @@ export const DEFAULT_FILTERS: Filters = {
   minPlayers: 0,
   topCut: 'top8',
   hideRotating: false,
+  currency: 'usd',
 };
 
 export const TOP_CUT_LABELS: Record<TopCut, string> = {
@@ -235,4 +239,75 @@ export function archetypeResults(d: Dataset, f: Filters, archetype: number): Res
 
 export function formatsIn(d: Dataset): string[] {
   return [...new Set(d.tournaments.map((t) => t.format))].sort();
+}
+
+// ---------- Field planner ----------
+
+/** Shrink a matchup toward 50% so small samples don't dominate: k phantom games at 50%. */
+export const SHRINK_GAMES = 10;
+export const shrunk = (w: number, l: number, t: number, k = SHRINK_GAMES) => (w + t / 2 + k / 2) / (w + l + t + k);
+
+export interface FieldEntry {
+  archetype: number;
+  /** Expected share of opponents, 0–1. Entries plus `other` should sum to 1. */
+  share: number;
+}
+
+export interface FieldResult {
+  archetype: number;
+  /** Expected match win rate against the field. */
+  expected: number;
+  /** Share of the field covered by matchups with at least `minGames` real games. */
+  coverage: number;
+  games: number;
+  /** Per-opponent contribution, for the breakdown view. */
+  vs: { archetype: number; share: number; winRate: number; games: number }[];
+  /** Win rate against everything outside the listed field (from all its games). */
+  vsOther: number;
+}
+
+/**
+ * Expected win rate of each candidate deck against an expected field. Matchups use shrunk win
+ * rates; mirrors count as 50%; the unlisted "other" slice uses the deck's overall win rate.
+ */
+export function fieldWinRates(
+  d: Dataset,
+  f: Filters,
+  field: FieldEntry[],
+  other: number,
+  candidates: number[],
+  minGames = 10,
+): FieldResult[] {
+  const mask = tournamentMask(d, f);
+  const ids = [...new Set([...candidates, ...field.map((e) => e.archetype)])];
+  const m = matchupMatrix(d, f, ids);
+  const pos = new Map(ids.map((a, i) => [a, i]));
+  const overall = new Map<number, [number, number, number]>();
+  for (const [ti, a, b, o] of d.matches) {
+    if (!mask[ti]) continue;
+    for (const [x, r] of [[a, o], [b, -o]] as const) {
+      const s = overall.get(x) ?? [0, 0, 0];
+      if (r === 1) s[0]++; else if (r === -1) s[1]++; else s[2]++;
+      overall.set(x, s);
+    }
+  }
+  return candidates
+    .map((a) => {
+      const i = pos.get(a)!;
+      let expected = 0, covered = 0, games = 0;
+      const vs = field.map((e) => {
+        if (e.archetype === a) { expected += e.share * 0.5; covered += e.share; return { archetype: e.archetype, share: e.share, winRate: 0.5, games: 0 }; }
+        const c = m[i][pos.get(e.archetype)!];
+        const wr = shrunk(c.wins, c.losses, c.ties);
+        expected += e.share * wr;
+        games += c.games;
+        if (c.games >= minGames) covered += e.share;
+        return { archetype: e.archetype, share: e.share, winRate: wr, games: c.games };
+      });
+      const o = overall.get(a) ?? [0, 0, 0];
+      const vsOther = shrunk(o[0], o[1], o[2]);
+      expected += other * vsOther;
+      return { archetype: a, expected, coverage: covered / Math.max(1e-9, 1 - other), games, vs, vsOther };
+    })
+    .sort((x, y) => y.expected - x.expected);
 }

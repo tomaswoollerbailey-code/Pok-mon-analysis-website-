@@ -1,10 +1,11 @@
+import { DeckIcons } from '../components/Brand';
+import { DeckName } from '../components/DeckName';
 import { useMemo, useState } from 'react';
 import { divergingFill } from '../colors';
 import { useTooltip } from '../components/Tooltip';
 import { matchupMatrix, metaSummary, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
-import { href } from '../router';
 import { Empty } from './MetaPage';
 
 export function MatchupsPage({ data, filters }: { data: Dataset; filters: Filters }) {
@@ -46,13 +47,13 @@ export function MatchupsPage({ data, filters }: { data: Dataset; filters: Filter
             <thead>
               <tr>
                 <th className="corner">vs →</th>
-                {top.map((a) => <th key={a} className="col-head"><span>{name(a)}</span></th>)}
+                {top.map((a) => <th key={a} className="col-head" title={name(a)}><span>{name(a)}</span><DeckIcons icons={data.archetypes[a].icons} size={20} /></th>)}
               </tr>
             </thead>
             <tbody>
               {top.map((a, i) => (
                 <tr key={a}>
-                  <th className="row-head"><a href={href.deck(data.archetypes[a].key)}>{name(a)}</a></th>
+                  <th className="row-head"><DeckName a={data.archetypes[a]} size={20} /></th>
                   {top.map((b, j) => {
                     const c = m[i][j];
                     if (i === j) return <td key={b} className="mirror">—</td>;

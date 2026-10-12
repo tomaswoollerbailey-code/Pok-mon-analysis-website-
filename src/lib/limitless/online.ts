@@ -85,7 +85,7 @@ export function normaliseStanding(s: ApiStanding): RawStanding {
     placing: s.placing ?? null,
     ...(s.record ? { record: { wins: s.record.wins ?? 0, losses: s.record.losses ?? 0, ties: s.record.ties ?? 0 } } : {}),
     ...(s.drop != null ? { dropped: true } : {}),
-    archetype: deckName ? { ...(s.deck?.id ? { id: s.deck.id } : {}), name: deckName } : null,
+    archetype: deckName ? { ...(s.deck?.id ? { id: s.deck.id } : {}), name: deckName, ...(s.deck?.icons?.length ? { icons: s.deck.icons.map((i) => i.toLowerCase()) } : {}) } : null,
     ...(normaliseDecklist(s.decklist) ? { decklist: normaliseDecklist(s.decklist) } : {}),
   };
 }

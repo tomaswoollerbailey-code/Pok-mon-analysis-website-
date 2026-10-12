@@ -1,4 +1,6 @@
-# Meta Lab: Pokémon TCG meta analysis
+# The Crow's Nest: Pokémon TCG meta analysis
+
+*Spot the meta before it lands.*
 
 A static website that analyses the Pokémon TCG meta from both **online** and **in-person** tournaments published on Limitless:
 
@@ -58,6 +60,11 @@ src/  React + Vite site that loads public/data/ and computes everything in the b
 - `src/lib/limitless/online.ts` normalises Limitless Play API responses.
 - `src/lib/limitless/offline.ts` parses limitlesstcg.com pages. It maps columns by header text, not position, and falls back to cell text when `data-*` attributes are missing. If the site layout changes and the scraper reports zero tournaments, fix it here.
 - `src/lib/build.ts` builds the compact dataset; `src/lib/analysis.ts` has every metric (all pure functions, covered by `npm test`).
+
+## Tests
+
+- `npm test` runs the unit tests for the parsers, the dataset builder and every metric.
+- `npm run test:e2e` runs the browser tests (Playwright) against a build that uses synthetic fixture data (`tests/e2e/fixture.ts`). They click through every page on desktop and mobile. CI runs them on every PR. In a sandbox with a preinstalled Chromium, set `PW_CHROMIUM_PATH`.
 
 ## Automation
 

@@ -6,12 +6,21 @@ export type Source = 'online' | 'offline' | 'japan';
 
 export type CardCategory = 'pokemon' | 'trainer' | 'energy';
 
+/** Market prices Limitless shows next to each card (TCGplayer in USD, Cardmarket in EUR). */
+export interface CardPrice {
+  usd?: number;
+  eur?: number;
+  tcgplayerId?: string;
+  cardmarketUrl?: string;
+}
+
 export interface Card {
   category: CardCategory;
   name: string;
   set?: string;
   number?: string;
   count: number;
+  price?: CardPrice;
 }
 
 export interface Record3 {
@@ -72,7 +81,19 @@ export interface ArchetypeRotation {
 export interface ArchetypeInfo {
   key: string;
   name: string;
+  /** Pokémon icon names Limitless uses for the deck (e.g. ["dragapult", "dusknoir"]). */
+  icons?: string[];
   rotation?: ArchetypeRotation;
+  /** Median cost of its recent lists at current prices. */
+  price?: { usd?: number; eur?: number; lists: number };
+}
+
+export interface PricesFile {
+  fetchedAt: string;
+  /** cardKey → price */
+  cards: Record<string, CardPrice>;
+  /** Exchange rates (1 USD = x) from a public ECB-based feed. */
+  fx?: { date: string; source: string; usd: { EUR?: number; MYR?: number } };
 }
 
 export interface TournamentInfo {
@@ -105,6 +126,9 @@ export interface Dataset {
   matches: MatchRow[];
   /** The upcoming rotation the archetype statuses were computed for. */
   rotation?: { label: string; sets: string[] };
+  prices?: { asOf: string; fx?: PricesFile['fx'] };
+  /** The Standard format the data covers (from the last rotation). */
+  format?: { label: string; marks: string; online: string; inPerson: string };
 }
 
 export interface CardInfo {
@@ -114,6 +138,9 @@ export interface CardInfo {
   number?: string;
   /** No legal printing remains after the next rotation. */
   rotates?: true;
+  price?: CardPrice;
+  /** Cheapest USD/EUR price across every printing of this card name seen in the data. */
+  cheapest?: { usd?: number; eur?: number };
 }
 
 /** Per-archetype decklists: [tournamentIdx, placing, [[cardIdx, count], ...]] */

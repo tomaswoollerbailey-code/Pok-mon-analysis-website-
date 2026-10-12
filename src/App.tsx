@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Logo } from './components/Brand';
 import { FilterBar } from './components/FilterBar';
+import { ThemeToggle } from './components/ThemeToggle';
 import { loadDataset } from './data';
 import { DEFAULT_FILTERS, formatsIn, type Filters } from './lib/analysis';
 import type { Dataset } from './lib/types';
@@ -8,11 +10,12 @@ import { href, useRoute } from './router';
 import { DeckPage } from './pages/DeckPage';
 import { MatchupsPage } from './pages/MatchupsPage';
 import { MetaPage } from './pages/MetaPage';
+import { FieldPage } from './pages/FieldPage';
 import { TournamentPage } from './pages/TournamentPage';
 import { TournamentsPage } from './pages/TournamentsPage';
 import { TrendsPage } from './pages/TrendsPage';
 
-const FILTER_STORE = 'metalab.filters';
+const FILTER_STORE = 'crowsnest.filters';
 
 function readFilters(): Filters {
   try {
@@ -27,6 +30,7 @@ const NAV = [
   { page: 'meta', label: 'Meta', href: href.meta },
   { page: 'trends', label: 'Trends', href: href.trends },
   { page: 'matchups', label: 'Matchups', href: href.matchups },
+  { page: 'field', label: 'Field planner', href: href.field },
   { page: 'tournaments', label: 'Tournaments', href: href.tournaments },
 ] as const;
 
@@ -49,12 +53,13 @@ export function App() {
     <div className="app">
       <header className="top">
         <a className="brand" href={href.meta}>
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M2 12h7m6 0h7" stroke="currentColor" strokeWidth="2" /><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
-          Meta Lab
+          <Logo />
+          <span className="wordmark"><small>The</small> Crow’s <b>Nest</b></span>
         </a>
         <nav>
           {NAV.map((n) => <a key={n.page} href={n.href} className={active === n.page ? 'on' : ''} aria-current={active === n.page ? 'page' : undefined}>{n.label}</a>)}
         </nav>
+        <ThemeToggle />
       </header>
 
       <main>
@@ -67,7 +72,7 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups'} />
+              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
             )}
             {effective.source === 'japan' && route.page !== 'tournament' && (
               <div className="notice" role="status">
@@ -82,6 +87,7 @@ export function App() {
             {route.page === 'meta' && <MetaPage data={data} filters={effective} />}
             {route.page === 'trends' && <TrendsPage data={data} filters={effective} />}
             {route.page === 'matchups' && <MatchupsPage data={data} filters={effective} />}
+            {route.page === 'field' && <FieldPage data={data} filters={effective} />}
             {route.page === 'tournaments' && <TournamentsPage data={data} filters={effective} />}
             {route.page === 'tournament' && <TournamentPage data={data} tKey={route.key} />}
             {route.page === 'deck' && <DeckPage data={data} filters={effective} aKey={route.key} />}
@@ -92,7 +98,8 @@ export function App() {
       <footer>
         Tournament data from <a href="https://limitlesstcg.com" target="_blank" rel="noreferrer">Limitless TCG</a> (in person) and{' '}
         <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online).
-        {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
+        {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>}
+        {data?.format && <> Covers completed {data.format.label} events ({data.format.marks} marks) since the last rotation: online from {date(data.format.online)}, in person from {date(data.format.inPerson)}.</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
       </footer>
     </div>
   );

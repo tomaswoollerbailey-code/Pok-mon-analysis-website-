@@ -3,7 +3,7 @@
 // They map table columns by header text rather than position so small layout
 // changes on the site don't silently shift data into the wrong field.
 import * as cheerio from 'cheerio';
-import type { Card, CardCategory, RawStanding } from '../types';
+import type { Card, CardCategory, CardPrice, RawStanding } from '../types';
 
 export const LIMITLESS_SITE = 'https://limitlesstcg.com';
 
@@ -243,6 +243,30 @@ export function parseTournamentHeader(html: string): { name?: string; date?: str
   return { ...(name ? { name } : {}), ...(date ? { date } : {}), ...(players ? { players } : {}), ...(format ? { format } : {}) };
 }
 
+function money(text: string): number | undefined {
+  const m = text.replace(/\s/g, '').match(/(\d+(?:[.,]\d{1,2})?)/);
+  return m ? Number(m[1].replace(',', '.')) : undefined;
+}
+
+/** TCGplayer (USD) and Cardmarket (EUR) prices and links shown next to a decklist card. */
+export function priceOf(node: Row): CardPrice | undefined {
+  const usdA = node.find('.card-price.usd').first();
+  const eurA = node.find('.card-price.eur').first();
+  const usd = usdA.length ? money(usdA.text()) : undefined;
+  const eur = eurA.length ? money(eurA.text()) : undefined;
+  let tcgplayerId: string | undefined;
+  try { tcgplayerId = decodeURIComponent(usdA.attr('href') || '').match(/tcgplayer\.com\/product\/(\d+)/)?.[1]; } catch { /* malformed */ }
+  const cm = eurA.attr('href');
+  const cardmarketUrl = cm && /cardmarket\.com/.test(cm) ? cm.split('?')[0] : undefined;
+  const p: CardPrice = {
+    ...(usd != null ? { usd } : {}),
+    ...(eur != null ? { eur } : {}),
+    ...(tcgplayerId ? { tcgplayerId } : {}),
+    ...(cardmarketUrl ? { cardmarketUrl } : {}),
+  };
+  return Object.keys(p).length ? p : undefined;
+}
+
 const SECTION: Array<[RegExp, CardCategory]> = [
   [/pok[eé]mon/i, 'pokemon'],
   [/trainer/i, 'trainer'],
@@ -270,7 +294,8 @@ export function parseDecklist(html: string): Card[] {
       if (!count || !name) return;
       const set = node.attr('data-set')?.trim();
       const number = node.attr('data-number')?.trim();
-      cards.push({ category, name, count, ...(set ? { set } : {}), ...(number ? { number } : {}) });
+      const price = priceOf(node);
+      cards.push({ category, name, count, ...(set ? { set } : {}), ...(number ? { number } : {}), ...(price ? { price } : {}) });
     });
   });
   if (cards.length) return cards;

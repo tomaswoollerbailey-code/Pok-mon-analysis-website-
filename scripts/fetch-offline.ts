@@ -1,5 +1,5 @@
 // Scrape in-person tournaments from limitlesstcg.com into data/raw/offline/.
-//   npm run fetch:offline -- --days 365 --min-players 64
+//   npm run fetch:offline -- --min-players 64   (default: since the last rotation)
 // The site has no JSON API, so requests are slow and spaced out on purpose.
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -7,10 +7,11 @@ import {
   LIMITLESS_SITE, parseDecklist, parseStandings, parseTournamentHeader, parseTournamentList,
 } from '../src/lib/limitless/offline';
 import type { RawTournament } from '../src/lib/types';
-import { RAW_DIR, createFetcher, exists, isoDaysAgo, writeJson } from './util';
+import { CURRENT_FORMAT } from '../src/lib/rotation';
+import { RAW_DIR, createFetcher, exists, writeJson } from './util';
 
 const { values: args } = parseArgs({ options: {
-  days: { type: 'string', default: '90' },
+  since: { type: 'string', default: CURRENT_FORMAT.inPerson },
   'min-players': { type: 'string', default: '0' },
   format: { type: 'string', default: 'STANDARD' },
   'list-url': { type: 'string', default: `${LIMITLESS_SITE}/tournaments?time=all&show=500` },
@@ -22,7 +23,7 @@ const { values: args } = parseArgs({ options: {
   refresh: { type: 'boolean', default: false },
 } });
 
-const since = isoDaysAgo(Number(args.days));
+const since = args.since!;
 const minPlayers = Number(args['min-players']);
 const wantFormat = args.format?.toUpperCase();
 const withLists = !args['no-decklists'];
