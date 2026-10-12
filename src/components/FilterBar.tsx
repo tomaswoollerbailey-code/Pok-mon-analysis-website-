@@ -13,10 +13,12 @@ function daysAgo(latest: string, days: number) {
   return d.toISOString().slice(0, 10);
 }
 
-export function FilterBar({ filters, onChange, formats, latest, showTopCut = true }: {
+export function FilterBar({ filters, onChange, formats, latest, rotationLabel, showTopCut = true }: {
   filters: Filters;
   onChange: (f: Filters) => void;
   formats: string[];
+  /** e.g. "H regulation mark"; omitted when the dataset has no rotation info. */
+  rotationLabel?: string;
   /** Most recent tournament date — presets count back from it so an old dataset still shows data. */
   latest: string;
   showTopCut?: boolean;
@@ -71,6 +73,17 @@ export function FilterBar({ filters, onChange, formats, latest, showTopCut = tru
             {Object.entries(TOP_CUT_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
         </label>
+      )}
+      {rotationLabel && (
+        <button
+          className={`toggle ${filters.hideRotating ? 'on' : ''}`}
+          aria-pressed={filters.hideRotating}
+          title={`Remove decks whose signature Pokémon leave Standard with the ${rotationLabel} rotation, and recompute shares as a post-rotation meta`}
+          onClick={() => set('hideRotating', !filters.hideRotating)}
+        >
+          <span className="toggle-box" aria-hidden>{filters.hideRotating ? '✓' : ''}</span>
+          Hide rotating decks
+        </button>
       )}
       <button className="link-btn" onClick={() => onChange(DEFAULT_FILTERS)}>Reset</button>
     </div>

@@ -67,7 +67,12 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} showTopCut={route.page !== 'trends' && route.page !== 'matchups'} />
+              <FilterBar filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups'} />
+            )}
+            {effective.hideRotating && route.page !== 'tournaments' && data.rotation && (
+              <div className="notice" role="status">
+                Projected post-rotation meta: decks whose signature Pokémon rotate with the {data.rotation.label} ({data.rotation.sets.join(', ')}) are excluded and shares are recalculated without them.
+              </div>
             )}
             {route.page === 'meta' && <MetaPage data={data} filters={effective} />}
             {route.page === 'trends' && <TrendsPage data={data} filters={effective} />}

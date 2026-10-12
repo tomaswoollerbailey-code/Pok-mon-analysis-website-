@@ -1,5 +1,6 @@
 // Turns raw per-tournament files into the compact bundle the website loads.
 import { archetypeKey, cardKey } from './archetype';
+import { classifyArchetype, ROTATION, rotatingCardNames } from './rotation';
 import type {
   ArchetypeInfo, ArchetypeLists, CardInfo, Dataset, ListRow, MatchRow, RawTournament,
   ResultRow, StandingsFile, TournamentInfo,
@@ -11,7 +12,7 @@ export interface BuiltDataset {
   standings: StandingsFile[];
 }
 
-export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString()): BuiltDataset {
+export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION): BuiltDataset {
   const sorted = [...raw].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
 
   const archetypes: ArchetypeInfo[] = [];
@@ -98,11 +99,22 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     if (votes.length) a.name = votes[0][0];
   }
 
+  // Rotation: a card rotates when every printing seen anywhere in the data is from a rotating set.
+  const rotating = rotatingCardNames([...listsByArch.values()].flatMap((b) => b.cards), rotation.sets);
+  for (const [a, b] of listsByArch) {
+    for (const c of b.cards) if (rotating.has(c.name)) c.rotates = true;
+    archetypes[a].rotation = classifyArchetype(archetypes[a].name, b.cards, b.lists, rotating);
+  }
+
   const lists: ArchetypeLists[] = [...listsByArch.entries()].map(([a, b]) => ({
     archetype: archetypes[a],
     cards: b.cards,
     lists: b.lists,
   }));
 
-  return { dataset: { generatedAt, archetypes, tournaments, results, matches }, lists, standings };
+  return {
+    dataset: { generatedAt, archetypes, tournaments, results, matches, rotation: { label: rotation.label, sets: rotation.sets } },
+    lists,
+    standings,
+  };
 }

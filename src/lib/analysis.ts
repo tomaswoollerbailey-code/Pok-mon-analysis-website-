@@ -9,6 +9,8 @@ export interface Filters {
   to: string;
   minPlayers: number;
   topCut: TopCut;
+  /** Drop archetypes that rotate out at the next rotation (projected post-rotation meta). */
+  hideRotating: boolean;
 }
 
 export const DEFAULT_FILTERS: Filters = {
@@ -18,6 +20,7 @@ export const DEFAULT_FILTERS: Filters = {
   to: '',
   minPlayers: 0,
   topCut: 'top8',
+  hideRotating: false,
 };
 
 export const TOP_CUT_LABELS: Record<TopCut, string> = {
@@ -46,6 +49,11 @@ export function tournamentMask(d: Dataset, f: Filters): boolean[] {
       (!f.to || t.date <= f.to) &&
       t.players >= f.minPlayers,
   );
+}
+
+/** Archetype mask: false for archetypes hidden by the rotation toggle. */
+export function archetypeMask(d: Dataset, f: Filters): boolean[] {
+  return d.archetypes.map((a) => !(f.hideRotating && a.rotation?.status === 'rotates'));
 }
 
 export interface ArchetypeStats {
@@ -81,10 +89,11 @@ export function winRate(w: number, l: number, t: number): number | null {
 
 export function metaSummary(d: Dataset, f: Filters): MetaSummary {
   const mask = tournamentMask(d, f);
+  const keep = archetypeMask(d, f);
   const by = new Map<number, ArchetypeStats>();
   let players = 0, identified = 0, topCutSlots = 0;
   for (const [ti, a, placing, w, l, t] of d.results) {
-    if (!mask[ti]) continue;
+    if (!mask[ti] || (a >= 0 && !keep[a])) continue;
     players++;
     const inCut = placing > 0 && placing <= cutSize(f.topCut, d.tournaments[ti].players);
     if (a < 0) continue;
@@ -131,8 +140,9 @@ export function metaTrend(d: Dataset, f: Filters, archetypes: number[]): TrendSe
   weeks.forEach((w, i) => weekIdx.set(w, i));
   const totals = weeks.map(() => 0);
   const counts = new Map(archetypes.map((a) => [a, weeks.map(() => 0)]));
+  const keep = archetypeMask(d, f);
   for (const [ti, a] of d.results) {
-    if (!mask[ti] || a < 0) continue;
+    if (!mask[ti] || a < 0 || !keep[a]) continue;
     const wi = weekIdx.get(weekOf[ti])!;
     totals[wi]++;
     const c = counts.get(a);
