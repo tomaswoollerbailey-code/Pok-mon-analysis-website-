@@ -7,7 +7,7 @@
 
 ## What this is
 A Pokémon TCG meta analysis site built from Limitless data. Online events come from the Limitless Play API; in-person events are scraped from limitlesstcg.com.
-- Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website/ (public repo, GitHub Pages via Actions)
+- Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/ (public repo, GitHub Pages via Actions)
 - Stack: Vite + React + TS. Static site; all analysis runs in the browser.
 
 ## Layout
