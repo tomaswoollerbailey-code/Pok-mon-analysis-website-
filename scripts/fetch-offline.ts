@@ -10,7 +10,7 @@ import type { RawTournament } from '../src/lib/types';
 import { RAW_DIR, createFetcher, exists, isoDaysAgo, writeJson } from './util';
 
 const { values: args } = parseArgs({ options: {
-  days: { type: 'string', default: '365' },
+  days: { type: 'string', default: '90' },
   'min-players': { type: 'string', default: '0' },
   format: { type: 'string', default: 'STANDARD' },
   'list-url': { type: 'string', default: `${LIMITLESS_SITE}/tournaments?time=all&show=500` },
