@@ -30,6 +30,9 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   const before = await sub.textContent();
   await page.getByRole('radio', { name: 'Online' }).click();
   await expect(sub).not.toHaveText(before!);
+  // On phones the secondary filters sit behind the "Filters" button.
+  const filters = page.locator('.filters-btn');
+  if (await filters.isVisible()) await filters.click();
   await page.getByRole('button', { name: 'Post-rotation' }).click();
   await expect(page.getByText('Projected post-rotation meta')).toBeVisible();
   await expect(page.locator('table.data tbody').getByText('Rotates')).toHaveCount(0);
@@ -73,6 +76,15 @@ test('tournament search and detail page', async ({ page }) => {
   await page.getByRole('searchbox').fill('online event 1');
   await page.getByRole('link', { name: /Test online event 1$/ }).first().click();
   await expect(page.getByRole('heading', { name: 'Standings' })).toBeVisible();
+});
+
+test('phones get a bottom tab bar', async ({ page, isMobile }) => {
+  await go(page, '');
+  const tabbar = page.locator('nav.tabbar');
+  if (!isMobile) { await expect(tabbar).toBeHidden(); return; }
+  await expect(tabbar).toBeVisible();
+  await tabbar.getByRole('link', { name: 'Planner' }).click();
+  await expect(page.getByRole('heading', { name: 'What should I play?' })).toBeVisible();
 });
 
 test('theme toggle switches to dark', async ({ page }) => {

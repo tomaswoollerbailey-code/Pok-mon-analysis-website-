@@ -7,7 +7,11 @@ export interface Column<T> {
   sort?: (row: T) => number | string;
   numeric?: boolean;
   title?: string;
+  /** Hide this column on phone-width screens. */
+  hideOnMobile?: boolean;
 }
+
+const cls = (c: { numeric?: boolean; hideOnMobile?: boolean }) => [c.numeric && 'num', c.hideOnMobile && 'hide-sm'].filter(Boolean).join(' ');
 
 export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
   rows: T[];
@@ -34,7 +38,7 @@ export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
         <thead>
           <tr>
             {columns.map((c) => (
-              <th key={c.key} className={c.numeric ? 'num' : ''} title={c.title} aria-sort={sortKey === c.key ? (desc ? 'descending' : 'ascending') : undefined}>
+              <th key={c.key} className={cls(c)} title={c.title} aria-sort={sortKey === c.key ? (desc ? 'descending' : 'ascending') : undefined}>
                 {c.sort ? (
                   <button onClick={() => { if (sortKey === c.key) setDesc(!desc); else { setSortKey(c.key); setDesc(true); } }}>
                     {c.label}{sortKey === c.key ? (desc ? ' ↓' : ' ↑') : ''}
@@ -47,7 +51,7 @@ export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
         <tbody>
           {shown.map((r) => (
             <tr key={rowKey(r)}>
-              {columns.map((c) => <td key={c.key} className={c.numeric ? 'num' : ''}>{c.render(r)}</td>)}
+              {columns.map((c) => <td key={c.key} className={cls(c)}>{c.render(r)}</td>)}
             </tr>
           ))}
         </tbody>

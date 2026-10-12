@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { DEFAULT_FILTERS, TOP_CUT_LABELS, type Filters, type TopCut } from '../lib/analysis';
 
 export const SOURCE_LABELS = { all: 'International', online: 'Online', offline: 'In person', japan: 'Japan' } as const;
@@ -28,8 +29,10 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
   const set = <K extends keyof Filters>(k: K, v: Filters[K]) => onChange({ ...filters, [k]: v });
   const activePreset = PRESETS.find((p) => (p.days == null ? !filters.from && !filters.to : filters.from === daysAgo(latest, p.days) && !filters.to));
   const custom = !!(filters.from || filters.to || filters.minPlayers);
+  const [open, setOpen] = useState(false);
+  const summary = [activePreset?.label ?? 'Custom dates', filters.format ? filters.format[0] + filters.format.slice(1).toLowerCase() : 'Any format', filters.currency.toUpperCase(), filters.hideRotating ? 'Post-rotation' : ''].filter(Boolean).join(' · ');
   return (
-    <div className="toolbar" role="group" aria-label="Filters">
+    <div className={`toolbar ${open ? 'open' : ''}`} role="group" aria-label="Filters">
       <div className="toolbar-row">
         <div className="seg" role="radiogroup" aria-label="Source">
           {(['all', 'online', 'offline', 'japan'] as const).map((s) => (
@@ -38,6 +41,11 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
             </button>
           ))}
         </div>
+        <button className="filters-btn" aria-expanded={open} onClick={() => setOpen(!open)}>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden><path d="M4 6h16M7 12h10M10 18h4" /></svg>
+          <span className="filters-summary">{summary}</span>
+        </button>
+        <div className="filters-rest">
         <label className="field-inline">
           <span>Period</span>
           <select
@@ -94,6 +102,7 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
             <button className="link-btn" onClick={() => onChange(DEFAULT_FILTERS)}>Reset all</button>
           </div>
         </details>
+        </div>
       </div>
     </div>
   );
