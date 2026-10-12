@@ -42,7 +42,7 @@ export function TournamentPage({ data, tKey }: { data: Dataset; tKey: string }) 
         </p>
       </div>
       <div className="tiles">
-        {t.source === 'japan' ? <Tile label="Placings published" value={int(t.players)} note="Attendance not listed" /> : <Tile label="Players" value={int(t.players)} />}
+        <Tile label="Players" value={int(t.players)} />
         <Tile label="Archetypes" value={int(breakdown.length)} />
         {breakdown[0] && <Tile label="Most played" value={pct(breakdown[0].share)} note={name(breakdown[0].a)} />}
       </div>

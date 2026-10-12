@@ -6,9 +6,10 @@ import { useTooltip } from '../components/Tooltip';
 import { isOther, matchupMatrix, metaSummary, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
+import { OnlineOnly } from '../components/OnlineOnly';
 import { Empty } from './MetaPage';
 
-export function MatchupsPage({ data, filters }: { data: Dataset; filters: Filters }) {
+export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filters: Filters; onFilters: (f: Filters) => void }) {
   const [size, setSize] = useState(12);
   const [minGames, setMinGames] = useState(10);
   const { ref, show, hide, node } = useTooltip();
@@ -17,6 +18,7 @@ export function MatchupsPage({ data, filters }: { data: Dataset; filters: Filter
   const total = m.flat().reduce((s, c) => s + c.games, 0) / 2;
   const name = (a: number) => data.archetypes[a].name;
 
+  if (filters.source === 'offline') return <OnlineOnly what="Matchups" filters={filters} onFilters={onFilters} />;
   if (!top.length) return <Empty />;
 
   return (
@@ -24,8 +26,8 @@ export function MatchupsPage({ data, filters }: { data: Dataset; filters: Filter
       <header className="card-head">
         <h2>Matchups</h2>
         <p>
-          Row archetype’s win rate against the column archetype, from {int(total)} games in online events with published pairings
-          (in-person events on Limitless don’t publish round-by-round pairings). Ties count as half a win; mirrors are excluded.
+          How often the row deck beats the column deck, from {int(total)} online games. Blue = row deck favoured, red = unfavoured.
+          Ties count as half a win; mirrors are excluded.
         </p>
       </header>
       <div className="filter-bar inline">

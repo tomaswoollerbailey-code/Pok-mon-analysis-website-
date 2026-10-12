@@ -20,7 +20,7 @@ test('meta overview shows the snapshot and full table', async ({ page }) => {
   await go(page, '');
   await expect(page.getByText('Meta snapshot')).toBeVisible();
   await expect(page.locator('.podium-card')).toHaveCount(3);
-  await expect(page.getByRole('heading', { name: 'All archetypes' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'The meta' })).toBeVisible();
   await expect(page.locator('table.data tbody tr').first()).toBeVisible();
 });
 
@@ -28,8 +28,9 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   await go(page, '');
   const sub = page.locator('.hero-sub');
   const before = await sub.textContent();
-  await page.getByRole('radio', { name: 'Online' }).click();
+  await page.getByRole('radio', { name: 'Offline' }).click();
   await expect(sub).not.toHaveText(before!);
+  await page.getByRole('radio', { name: 'All' }).click();
   // On phones the secondary filters sit behind the "Filters" button.
   const filters = page.locator('.filters-btn');
   if (await filters.isVisible()) await filters.click();
@@ -38,10 +39,28 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   await expect(page.locator('table.data tbody').getByText('Rotates')).toHaveCount(0);
 });
 
-test('Japan view is separate and labelled', async ({ page }) => {
+test('offline view hides win rates', async ({ page }) => {
   await go(page, '');
-  await page.getByRole('radio', { name: 'Japan' }).click();
-  await expect(page.getByText(/official City League results/)).toBeVisible();
+  await page.getByRole('radio', { name: 'Offline' }).click();
+  await expect(page.locator('h1')).toContainText('offline');
+  await expect(page.getByRole('columnheader', { name: /Win rate/ })).toHaveCount(0);
+});
+
+test('All, Offline and Online tabs, with one meta table', async ({ page, isMobile }) => {
+  await go(page, '');
+  await expect(page.getByRole('radio')).toHaveText(['All', 'Offline', 'Online']);
+  await expect(page.locator('main table.data')).toHaveCount(1);
+  // Inline share bars on desktop; phones show just the % to fit the screen.
+  if (!isMobile) await expect(page.locator('.share-bar').first()).toBeVisible();
+});
+
+test('matchups explain and switch when a source has no pairings', async ({ page }) => {
+  await go(page, '');
+  await page.getByRole('radio', { name: 'Offline' }).click();
+  await go(page, 'matchups');
+  await expect(page.getByText('Matchups use online events')).toBeVisible();
+  await page.getByRole('button', { name: 'Show all events' }).click();
+  await expect(page.locator('table.heat td.cell').first()).toBeVisible();
 });
 
 test('trends draw a chart', async ({ page }) => {

@@ -17,13 +17,15 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 ## Decisions log
 | Date | Decision |
 |---|---|
-| 2026-10-12 | Data comes from Limitless: the Play API for online events, limitlesstcg.com for in-person and Japanese events. No other sources. |
+| 2026-10-12 | Data comes from Limitless: the Play API for online events, limitlesstcg.com for offline (in-person) majors. No other sources. |
 | 2026-10-12 | Static site on GitHub Pages. The repo is **public**, because Pages on a private repo needs a paid plan. |
 | 2026-10-12 | **Worldwide** audience, not SEA-only. SEA touches like MYR prices are optional extras. |
 | 2026-10-12 | **Meta tools only.** The collection tracker, CSV import and "Can I build?" were built, then **removed**. No collection or card-scanning features. |
 | 2026-10-12 | **Main user:** a competitive player preparing for an event. |
 | 2026-10-12 | **Data window:** completed Standard events since the last rotation. Online from 2026-03-26 (TCG Live), in person from 2026-04-10 (Play! Pokémon); G rotated out, H, I and J are legal. |
-| 2026-10-12 | **Japan** is its own source (official City Leagues, plus JP-format majors like Champions League), never mixed into International. Pokecabook, the official Players site and weekly Gym Battles were rejected: same data or unreliable. |
+| 2026-10-12 | **Views: All (default), Offline, Online.** All combines both; win rates and matchups always come from the online part. Pages adapt via `SOURCE_CAPS`: Offline hides win rates, and Matchups / Field planner show a "needs online data" card with a one-tap switch. Top cut "Auto" is resolved per event: Top 8 online, Top 10% offline. Offline shares are of the *listed* standings (mostly top finishers). |
+| 2026-10-12 | **Japan removed completely** for now (tab, fetch, data and code). It used official City League results from limitlesstcg.com/tournaments/jp, which is recoverable from git history (PRs #10 and #15). Pokecabook, the official Players site and weekly Gym Battles were rejected earlier as duplicate or unreliable. Japanese-format events (e.g. Champions League) are excluded from the data. |
+| 2026-10-12 | **Meta page = one table.** Inline share bars replace the separate chart. Phones show Deck, Share, Conv. and Win % with short labels. |
 | 2026-10-12 | **Rotation preview** assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). Unconfirmed. "Post-rotation" toggle. |
 | 2026-10-12 | **Prices:** a daily snapshot of TCGplayer USD and Cardmarket EUR read from Limitless decklist pages, plus MYR converted from USD. "Live" prices come only via the TCGplayer mass-entry link. The Shiny app has no API, so Tom will email contact@getshiny.io himself. |
 | 2026-10-12 | **Brand:** "Meta Lab" → "Murkrow Meta" → **The Crow's Nest**. Never use Pokémon names in the brand, domain or logo (trademark risk). |
@@ -34,13 +36,13 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 
 ## Current state (live)
 Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
-- **Meta:** a snapshot hero ("X leads with Y%") with the top-3 deck cards, a meta share bar chart, and a sortable table (share, top-cut, conversion, win rate, W-L-T, deck price, rotation, wins).
+- **Meta:** a snapshot hero ("X leads with Y%") with the top-3 deck cards, then one sortable table: rank, deck, share (inline bar), conversion, win rate, price, rotation, players and wins, with a glossary in its header.
 - **Trends:** weekly share lines for up to 8 decks, with a table view.
 - **Matchups:** a win-rate heatmap from online pairings with a minimum-games filter.
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
 - **Deck pages:** rotation status, card usage (core cards, a rare-techs toggle, top-cut-only), deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
-- **Filters:** International, Online, In person or Japan; period ("Since rotation" by default); format; top cut; currency (USD, EUR, MYR); Post-rotation; and under "More", dates and minimum players.
+- **Filters:** All, Offline or Online; period ("Since rotation" by default); top cut (Auto by default); currency (USD, EUR, MYR); Post-rotation; and under "More", dates and minimum players. A one-line source note under the filters explains what that source covers. The meta page shows a short glossary.
 - **Theme:** light, dark or system. Deck sprites are hotlinked from Limitless.
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
@@ -74,17 +76,17 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 ## Architecture
 - Stack: Vite + React + TypeScript. Static site; all analysis runs in the browser.
 - Data flow:
-  - `scripts/fetch-online.ts`, `scripts/fetch-offline.ts`, `scripts/fetch-japan.ts` and `scripts/fetch-prices.ts` write to `data/raw/`, which is the committed cache.
+  - `scripts/fetch-online.ts`, `scripts/fetch-offline.ts` and `scripts/fetch-prices.ts` write to `data/raw/`, which is the committed cache.
   - `scripts/build-dataset.ts` writes `public/data/`, which is built in CI and gitignored.
 - `src/lib/`:
   - `limitless/`: parsers, with columns mapped by header text
-  - `build.ts`: dataset builder, including the format filter, Japan routing and icon votes
+  - `build.ts`: dataset builder, including the format filter (current Standard only) and icon votes
   - `analysis.ts`: all metrics and the Field planner
   - `rotation.ts`: `CURRENT_FORMAT` and `ROTATION` config
   - `pricing.ts`, `decktext.ts`, `cardname.ts`, `archetype.ts`
 - `src/pages/`: Meta, Trends, Matchups, Field, Tournaments, Tournament, Deck. Shared UI is in `src/components/`.
 - Workflows:
-  - `update-data.yml`: daily at 06:17 UTC. Fetches online, then in-person, then Japan, then prices, and commits `data/raw`, rebasing onto main first. Capped per run: online 400 events or 30 min; in person 25 events with 64 lists each, or 40 min; Japan 60 events or 25 min.
+  - `update-data.yml`: daily at 06:17 UTC. Fetches online, then offline, then prices, and commits `data/raw`, rebasing onto main first. Capped per run: online 400 events or 30 min; offline 25 events with 64 lists each, or 40 min.
   - `deploy.yml`: builds and deploys Pages after each data update or push to main.
   - `ci.yml`: unit tests, build, and Playwright end-to-end tests on desktop and mobile.
   - `probe.yml`: manual. Prints the structure of live Limitless pages and API responses to the job log, for checking parsers.
@@ -105,4 +107,4 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Backfill:** in-person and online history back to April is still filling in, over a few daily runs from 2026-10-12.
 - **Rotation sets:** the H rotation set list is assumed, not announced.
 - **Prices:** they appear once `data/raw/prices.json` exists, after the first run that includes `fetch-prices`.
-- **Data volume:** in person is only major events (Regionals, ICs, Worlds). That means few events between seasons.
+- **Data volume:** offline is only major events (Regionals, ICs, Worlds). That means few events between seasons.

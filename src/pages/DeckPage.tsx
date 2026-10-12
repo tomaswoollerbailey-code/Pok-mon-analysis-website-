@@ -5,7 +5,7 @@ import { DeckPrice } from '../components/DeckPrice';
 import { RotationBadge } from '../components/RotationBadge';
 import { SortTable } from '../components/SortTable';
 import { loadLists } from '../data';
-import { archetypeResults, cardUsage, metaSummary, TOP_CUT_LABELS, type CardUsage, type Filters } from '../lib/analysis';
+import { archetypeResults, cardUsage, metaSummary, cutLabel, type CardUsage, type Filters } from '../lib/analysis';
 import type { ArchetypeLists, CardCategory, Dataset } from '../lib/types';
 import { date, int, pct } from '../format';
 import { href } from '../router';
@@ -35,7 +35,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
     () => (lists && lists !== 'none' ? cardUsage(data, lists, filters, topOnly) : null),
     [data, lists, filters, topOnly],
   );
-  const cut = TOP_CUT_LABELS[filters.topCut];
+  const cut = cutLabel(filters);
 
   if (a < 0) return <Empty>Unknown archetype.</Empty>;
   // Best placing first; among equal placings, bigger events first (a Regional win beats a 40-player online win).
@@ -59,7 +59,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
         <div className="tiles">
           <Tile label="Meta share" value={pct(stats.share)} note={`#${rank} · ${int(stats.players)} players`} />
           <Tile label={`${cut} conversion`} value={pct(stats.conversion)} note={`${int(stats.topCut)} ${cut} finishes`} />
-          <Tile label="Win rate" value={pct(stats.winRate)} note={stats.wins + stats.losses + stats.ties ? `${stats.wins}-${stats.losses}-${stats.ties}` : 'No records'} />
+          {stats.winRate != null && <Tile label="Win rate" value={pct(stats.winRate)} note={`${stats.wins}-${stats.losses}-${stats.ties} vs other decks`} />}
           <Tile label="Tournament wins" value={int(stats.wins1st)} />
         </div>
       )}

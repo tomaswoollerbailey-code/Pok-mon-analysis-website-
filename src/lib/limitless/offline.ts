@@ -197,41 +197,6 @@ export function parseStandings(html: string): OfflineStanding[] {
   return best;
 }
 
-export interface JapanTournamentSummary {
-  id: string;
-  name: string;
-  date: string;
-  prefecture?: string;
-  shop?: string;
-  url: string;
-}
-
-/** Parse limitlesstcg.com/tournaments/jp (official City League results). */
-export function parseJapanTournamentList(html: string): JapanTournamentSummary[] {
-  const $ = cheerio.load(html);
-  const out = new Map<string, JapanTournamentSummary>();
-  $('tr').each((_, tr) => {
-    const row = $(tr);
-    const href = row.find('a[href*="/tournaments/jp/"]').first().attr('href') || '';
-    const id = href.match(/\/tournaments\/jp\/(\d+)/)?.[1];
-    if (!id) return;
-    const cells = row.find('td');
-    const date = parseDate(row.attr('data-date') || '') ?? parseDate(cells.eq(0).text());
-    if (!date) return;
-    const prefecture = (row.attr('data-city') || cells.eq(1).text()).trim() || undefined;
-    const shop = (row.attr('data-shop') || cells.eq(2).text()).trim() || undefined;
-    out.set(id, {
-      id,
-      name: `City League ${prefecture ?? id}`,
-      date,
-      ...(prefecture ? { prefecture } : {}),
-      ...(shop ? { shop } : {}),
-      url: `${LIMITLESS_SITE}/tournaments/jp/${id}`,
-    });
-  });
-  return [...out.values()];
-}
-
 /** Pull tournament metadata (name, date, player count) from a tournament page header. */
 export function parseTournamentHeader(html: string): { name?: string; date?: string; players?: number; format?: string } {
   const $ = cheerio.load(html);

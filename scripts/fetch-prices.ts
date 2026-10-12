@@ -1,4 +1,4 @@
-// Refresh card prices daily from the newest in-person and Japan decklists on limitlesstcg.com
+// Refresh card prices daily from the newest in-person decklists on limitlesstcg.com
 // (each list shows TCGplayer USD and Cardmarket EUR per card), plus USD→EUR/MYR exchange rates.
 // Writes data/raw/prices.json.
 import { join } from 'node:path';
@@ -15,7 +15,7 @@ const { values: args } = parseArgs({ options: {
 } });
 
 const get = createFetcher({ delayMs: Number(args.delay) });
-const raw = (await Promise.all(['offline', 'japan'].map((s) => listJson(join(RAW_DIR, s))))).flat();
+const raw = (await Promise.all(['offline'].map((s) => listJson(join(RAW_DIR, s))))).flat();
 const events = (await Promise.all(raw.map((f) => readJson<RawTournament>(f))))
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, Number(args.events));

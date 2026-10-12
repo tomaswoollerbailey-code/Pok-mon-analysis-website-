@@ -16,9 +16,9 @@ export const CURRENT_FORMAT = {
   inPerson: '2026-04-10',
 };
 
-/** First date counted for a source (Japan runs its own rotation schedule and keeps its own window). */
-export function formatStart(source: 'online' | 'offline' | 'japan'): string | null {
-  return source === 'online' ? CURRENT_FORMAT.online : source === 'offline' ? CURRENT_FORMAT.inPerson : null;
+/** First date counted for a source. */
+export function formatStart(source: 'online' | 'offline'): string {
+  return source === 'online' ? CURRENT_FORMAT.online : CURRENT_FORMAT.inPerson;
 }
 
 export const ROTATION = {

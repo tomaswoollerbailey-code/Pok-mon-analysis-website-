@@ -14,13 +14,9 @@ export interface BuiltDataset {
 }
 
 export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION, prices?: PricesFile): BuiltDataset {
-  // Japanese-format majors listed with the in-person events (e.g. Champions League) belong with Japan.
-  const routed = raw.map((t) => (t.source === 'offline' && t.format === 'STANDARD-JP' ? { ...t, source: 'japan' as const } : t));
-  // Current format only: online / in-person events from the last rotation on, Standard only.
-  const current = routed.filter((t) => {
-    const start = formatStart(t.source);
-    return (!start || t.date >= start) && (t.source === 'japan' || t.format === 'STANDARD');
-  });
+  // Current format only: online / in-person events from the last rotation on, international
+  // Standard only (Japanese-format events such as Champions League are left out).
+  const current = raw.filter((t) => (t.source === 'online' || t.source === 'offline') && t.date >= formatStart(t.source) && t.format === 'STANDARD');
   const sorted = [...current].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
 
   const archetypes: ArchetypeInfo[] = [];
