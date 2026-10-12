@@ -108,6 +108,13 @@ footer { max-width: 1240px; margin: 0 auto; width: 100%; padding: 20px 16px 32px
 .page-head { display: flex; flex-direction: column; gap: 6px; }
 .page-head p { margin: 0; color: var(--ink-2); }
 .back { font-size: 13px; color: var(--muted); }
+.prose { display: grid; gap: 10px; }
+.prose p, .prose ul, .prose dl { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.55; }
+.prose ul { padding-left: 20px; display: grid; gap: 4px; }
+.prose dl { display: grid; gap: 12px; }
+.prose dt { color: var(--ink); font-weight: 650; }
+.prose dd { margin: 2px 0 0; }
+.prose .footnote { margin: 0; }
 .footnote { color: var(--muted); font-size: 12px; margin: 12px 0 0; }
 .notice { background: var(--accent-soft); color: var(--ink-2); border-radius: 10px; padding: 9px 14px; font-size: 13px; }
 

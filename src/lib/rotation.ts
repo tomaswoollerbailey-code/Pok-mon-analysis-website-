@@ -51,7 +51,8 @@ export function rotatingCardNames(printings: Iterable<{ name: string; set?: stri
   return new Set([...seen].filter((n) => !legal.has(n)));
 }
 
-const CORE = 0.5; // a card in at least half of an archetype's lists is part of its core
+/** A card in at least this share of an archetype's lists is part of its core. */
+export const CORE_SHARE = 0.5;
 
 /**
  * Classify an archetype from its decklists:
@@ -74,7 +75,7 @@ export function classifyArchetype(name: string, cards: CardInfo[], lists: ListRo
     for (const n of names) inclusion.set(n, (inclusion.get(n) ?? 0) + 1);
   }
   const category = new Map(cards.map((c) => [c.name, c.category]));
-  const core = [...inclusion.entries()].filter(([, k]) => k / lists.length >= CORE).map(([n]) => n);
+  const core = [...inclusion.entries()].filter(([, k]) => k / lists.length >= CORE_SHARE).map(([n]) => n);
   const lost = core.filter((n) => rotatingNames.has(n)).sort((a, b) => (copies.get(b) ?? 0) - (copies.get(a) ?? 0));
   if (!lost.length) return { status: 'survives', cards: [] };
 

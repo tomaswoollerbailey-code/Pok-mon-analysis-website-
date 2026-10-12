@@ -216,3 +216,12 @@ test('theme toggle switches to dark', async ({ page }) => {
   await page.getByRole('button', { name: /Theme/ }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
+
+test('methodology page explains the numbers and is linked from the footer', async ({ page }) => {
+  await go(page, '');
+  await page.locator('footer').getByRole('link', { name: 'How the numbers work' }).click();
+  await expect(page.getByRole('heading', { name: 'Methodology' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Field planner' })).toBeVisible();
+  await expect(page.locator('.filters-btn')).toHaveCount(0);
+  await expect(page).toHaveTitle(/Methodology/);
+});
