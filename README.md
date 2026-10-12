@@ -24,6 +24,16 @@ A card counts as rotating only if no printing outside those sets appears anywher
 
 Win rates count ties as half a win. Archetype names are normalised (case, accents and punctuation are ignored), so the same deck from online and in-person events is merged.
 
+## Collection and "Can I build it?"
+
+- **Collection** (`#/collection`): import a CSV export from Collectr, TCGplayer, TCG Collector, Dragon Shield, Eyevo or similar apps.
+  - Columns are detected by header name, and you can remap them before importing.
+  - You can also paste a Pokémon TCG Live or Limitless decklist to add its cards, or edit quantities by hand.
+  - The collection is stored in the visitor's browser (`localStorage`). Nothing is uploaded. Export CSV backs it up or moves it to another device.
+- **Can I build?** (`#/build`): ranks the top 30 archetypes for the current filters by how much of their closest real recent list you already own, and shows the biggest gaps.
+  - Any printing of a card counts toward owning it. Basic Energy is assumed unless you switch that off.
+  - Each deck page shows the closest list, every missing card, and a "Copy missing cards" button.
+
 ## Getting started
 
 ```bash

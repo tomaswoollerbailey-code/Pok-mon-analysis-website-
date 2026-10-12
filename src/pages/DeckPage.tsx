@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { CollectionPanel } from '../components/CollectionPanel';
 import { RotationBadge } from '../components/RotationBadge';
 import { SortTable } from '../components/SortTable';
 import { loadLists } from '../data';
@@ -93,6 +94,8 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
             </div>
           )}
       </section>
+
+      {lists && lists !== 'none' && <CollectionPanel data={data} filters={filters} lists={lists} />}
 
       <section className="card">
         <header className="card-head"><h2>Best finishes</h2></header>
