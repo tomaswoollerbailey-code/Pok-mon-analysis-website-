@@ -104,6 +104,14 @@ test('matchups render a heatmap of every deck for the period, with no extra pick
   expect(await page.locator('table.heat tbody tr').count()).toBeLessThanOrEqual(rows);
 });
 
+test('matchups can be ordered by win rate and show an average column', async ({ page }) => {
+  await go(page, 'matchups');
+  await expect(page.locator('table.heat td.avg').first()).toBeVisible();
+  await page.getByRole('radio', { name: 'Best win rate' }).click();
+  const avgs = (await page.locator('table.heat td.avg').allTextContents()).map((t) => parseInt(t)).filter((n) => !isNaN(n));
+  expect(avgs).toEqual([...avgs].sort((a, b) => b - a));
+});
+
 test('field planner re-ranks when the field changes and expands a breakdown', async ({ page }) => {
   await go(page, 'field');
   const first = page.locator('tr.clickable').first();
