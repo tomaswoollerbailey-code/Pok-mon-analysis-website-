@@ -1,6 +1,6 @@
 import { DeckIcons } from '../components/Brand';
 import { DeckName } from '../components/DeckName';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { divergingFill } from '../colors';
 import { useTooltip } from '../components/Tooltip';
 import { isOther, matchupMatrix, metaSummary, type Filters } from '../lib/analysis';
@@ -9,11 +9,18 @@ import { int, pct } from '../format';
 import { OnlineOnly } from '../components/OnlineOnly';
 import { Empty } from './MetaPage';
 
+/** Decks with at least this share of the field in the chosen period get a row and a column. */
+const MIN_SHARE = 0.01;
+/** Cells with fewer games are shown greyed out as a rough guide. */
+const MIN_GAMES = 10;
+
 export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filters: Filters; onFilters: (f: Filters) => void }) {
-  const [size, setSize] = useState(12);
-  const [minGames, setMinGames] = useState(10);
   const { ref, show, hide, node } = useTooltip();
-  const top = useMemo(() => metaSummary(data, filters).rows.filter((r) => !isOther(data, r.archetype)).slice(0, size).map((r) => r.archetype), [data, filters, size]);
+  const top = useMemo(() => {
+    const rows = metaSummary(data, filters).rows.filter((r) => !isOther(data, r.archetype));
+    const big = rows.filter((r) => r.share >= MIN_SHARE);
+    return (big.length >= 2 ? big : rows.slice(0, 8)).map((r) => r.archetype); // tiny samples: just the top decks
+  }, [data, filters]);
   const m = useMemo(() => matchupMatrix(data, filters, top), [data, filters, top]);
   const total = m.flat().reduce((s, c) => s + c.games, 0) / 2;
   const name = (a: number) => data.archetypes[a].name;
@@ -26,17 +33,11 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
       <header className="card-head">
         <h2>Matchups</h2>
         <p>
-          How often the row deck beats the column deck, from {int(total)} online games. Blue = row deck favoured, red = unfavoured.
-          Ties count as half a win; mirrors are excluded.
+          How often the row deck beats the column deck: every deck with at least {pct(MIN_SHARE, 0)} of the field ({top.length} decks), from {int(total)} online games in this period.
+          Blue = row deck favoured, red = unfavoured. Ties count as half a win; mirrors are excluded.
         </p>
       </header>
       <div className="filter-bar inline">
-        <label><span>Archetypes</span>
-          <select value={size} onChange={(e) => setSize(Number(e.target.value))}>{[8, 12, 16, 20].map((n) => <option key={n}>{n}</option>)}</select>
-        </label>
-        <label><span>Min games per cell</span>
-          <select value={minGames} onChange={(e) => setMinGames(Number(e.target.value))}>{[1, 5, 10, 20, 50].map((n) => <option key={n}>{n}</option>)}</select>
-        </label>
         <div className="scale" aria-hidden>
           <span>25%</span><span className="scale-bar" /><span>75%+</span>
         </div>
@@ -59,7 +60,7 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
                   {top.map((b, j) => {
                     const c = m[i][j];
                     if (i === j) return <td key={b} className="mirror">—</td>;
-                    const ok = c.games >= minGames && c.winRate != null;
+                    const ok = c.games >= MIN_GAMES && c.winRate != null;
                     const tip = (
                       <>
                         <div className="tip-title">{name(a)} vs {name(b)}</div>
@@ -72,10 +73,11 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
                       <td
                         key={b}
                         className={ok ? 'cell' : 'cell thin'}
+                        aria-label={`${name(a)} vs ${name(b)}: ${c.games ? `${pct(c.winRate)} over ${c.games} games` : 'no games'}`}
                         style={ok ? { background: divergingFill(c.winRate!) } : undefined}
                         onMouseMove={(e) => show(e, tip)}
                       >
-                        {ok ? pct(c.winRate, 0) : c.games ? <span className="muted">{c.games}g</span> : ''}
+                        {c.games ? pct(c.winRate, 0) : ''}
                       </td>
                     );
                   })}
@@ -86,7 +88,7 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
           {node}
         </div>
       )}
-      <p className="footnote">Cells under the minimum show the game count only (e.g. “4g”).</p>
+      <p className="footnote">Grey cells have fewer than {MIN_GAMES} games, so treat them as a rough guide. Hover or tap a cell for its record. Change the period with Filters.</p>
     </section>
   );
 }

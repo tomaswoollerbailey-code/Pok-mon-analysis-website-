@@ -74,9 +74,15 @@ test('trends draw a chart', async ({ page }) => {
   await expect(page.locator('svg.line-chart path[stroke]').first()).toBeVisible();
 });
 
-test('matchups render a heatmap', async ({ page }) => {
+test('matchups render a heatmap of every deck for the period, with no extra pickers', async ({ page }) => {
   await go(page, 'matchups');
   await expect(page.locator('table.heat td.cell').first()).toBeVisible();
+  await expect(page.locator('main select')).toHaveCount(0);
+  const rows = await page.locator('table.heat tbody tr').count();
+  await page.locator('.filters-btn').click();
+  await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '14d' }).click();
+  await expect(page.getByText(/in this period/)).toBeVisible();
+  expect(await page.locator('table.heat tbody tr').count()).toBeLessThanOrEqual(rows);
 });
 
 test('field planner re-ranks when the field changes and expands a breakdown', async ({ page }) => {
@@ -132,6 +138,9 @@ test('pages have real URLs: in-site links navigate without a reload', async ({ p
   await page.goBack();
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator('.podium-card')).toHaveCount(3);
+  // Deck names inside clickable table rows stop propagation; they must still navigate in-app.
+  await page.locator('main table.data a.deck-name').first().click();
+  await expect(page).toHaveURL(/\/decks\/[^/]+$/);
   expect(await page.evaluate(() => (window as any).__alive), 'page reloaded').toBe(true);
 });
 

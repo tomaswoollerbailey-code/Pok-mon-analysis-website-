@@ -15,7 +15,7 @@ Only completed Standard events since the last rotation count (April 2026: G mark
 
 - **Meta**: meta share, conversion (the share of a deck's players who finished in the Top 8 online, or the Top 10% at majors), win rate, price, rotation status and tournament wins per deck.
 - **Trends**: weekly meta share for up to 8 decks, with a table view.
-- **Matchups**: a deck-vs-deck win-rate heatmap from online pairings, with a minimum-games threshold.
+- **Matchups**: a deck-vs-deck win-rate heatmap from online pairings, covering every deck with at least 1% of the field in the chosen period.
 - **Field planner**: set the field you expect and every deck is ranked by expected win rate against it ("what should I play?").
 - **Tournaments**: a searchable event list; each event page shows its deck breakdown and standings.
 - **Deck pages**: rotation status, a price breakdown of a real recent list (with a TCGplayer buy link and per-card Cardmarket links), and best finishes.

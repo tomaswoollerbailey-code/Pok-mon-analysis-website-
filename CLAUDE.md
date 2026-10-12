@@ -38,13 +38,14 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Brand:** "Meta Lab" → "Murkrow Meta" → **The Crow's Nest** (other options considered: Murk Meta, Crowsight, Nightcrow, Caw Meta). **Never use Pokémon names in the brand, domain or logo** (trademark risk). |
 | 2026-10-12 | **Mobile-first, app-style shell:** a bottom tab bar on phones, filters behind one button (the source switch stays visible), 16px inputs, safe-area insets, a swipeable top-3, secondary table columns hidden. |
 | 2026-10-12 | **Real page URLs:** `/decks/<key>`, `/tournaments/<key>`, `/trends`, `/matchups`, `/field`, `/tournaments` (History API, in-site links navigate without a reload; old `#/...` links redirect). `npm run build` runs `scripts/prerender.ts` after Vite: a static HTML file per page with its own title, description, canonical and a text summary (`src/lib/seo.ts`), plus `404.html` (app-shell fallback), `sitemap.xml` and `robots.txt`. Vite `base` is absolute: default `/Pok-mon-analysis-website-/`; on a custom domain build with `SITE_BASE=/` and `SITE_URL=https://<domain>` (robots.txt only counts at a domain root). |
+| 2026-10-12 | **Matchups follow the period filter only:** the deck-count and min-games pickers were removed; every deck with ≥1% share gets a row and column (`MIN_SHARE`, `MIN_GAMES` in `MatchupsPage.tsx`). Showing all 100+ decks would be unreadable. |
 | 2026-10-12 | **No promotion or affiliate links** until the site is finished and polished. |
 
 ## Current state (live)
 Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Meta:** a snapshot hero ("X leads online with Y%") with the top-3 deck cards, then one sortable table: rank, deck, share (inline bar), conversion, win rate, price, 2027 rotation, players and wins. A glossary sits in the table header (hidden on phones).
 - **Trends:** weekly share lines for up to 8 decks, with a table view.
-- **Matchups:** a win-rate heatmap from online pairings with a minimum-games filter.
+- **Matchups:** a win-rate heatmap from online pairings of every deck with ≥1% of the field in the chosen period (about 20–25 decks). No pickers; cells under 10 games are greyed. Deck names stick to the left and wrap on phones.
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
 - **Deck pages:** rotation status, deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.

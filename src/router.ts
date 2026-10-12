@@ -27,7 +27,8 @@ export function useRoute(): Route {
   });
   useEffect(() => {
     const show = () => { setRoute(current()); window.scrollTo(0, 0); };
-    // Plain left-clicks on in-site links navigate without a page reload.
+    // Plain left-clicks on in-site links navigate without a page reload. Capture phase, so links
+    // whose React handlers stop propagation (deck names inside clickable rows) are covered too.
     const onClick = (e: MouseEvent) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const a = (e.target as Element).closest?.('a');
@@ -39,8 +40,8 @@ export function useRoute(): Route {
       show();
     };
     addEventListener('popstate', show);
-    document.addEventListener('click', onClick);
-    return () => { removeEventListener('popstate', show); document.removeEventListener('click', onClick); };
+    document.addEventListener('click', onClick, true);
+    return () => { removeEventListener('popstate', show); document.removeEventListener('click', onClick, true); };
   }, []);
   return route;
 }
