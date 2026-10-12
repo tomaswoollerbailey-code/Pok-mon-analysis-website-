@@ -30,7 +30,7 @@ const deadline = Date.now() + Number(args['time-budget']) * 60_000;
 
 async function listTournaments(): Promise<ApiTournamentSummary[]> {
   const found: ApiTournamentSummary[] = [];
-  for (let page = 1; page < 200; page++) {
+  for (let page = 1; page < 2000; page++) {
     const params = new URLSearchParams({ game: args.game!, limit: '50', page: String(page) });
     if (args.format) params.set('format', args.format);
     const batch: ApiTournamentSummary[] = await get(`${PLAY_API}/tournaments?${params}`);
