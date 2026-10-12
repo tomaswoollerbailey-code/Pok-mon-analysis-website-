@@ -1,9 +1,9 @@
+import { DeckName } from '../components/DeckName';
 import { Fragment, useMemo, useState } from 'react';
 import { RotationBadge } from '../components/RotationBadge';
 import { fieldWinRates, metaSummary, SHRINK_GAMES, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
-import { href } from '../router';
 import { Empty } from './MetaPage';
 
 const FIELD_SIZE = 10;
@@ -43,7 +43,7 @@ export function FieldPage({ data, filters }: { data: Dataset; filters: Filters }
           <tbody>
             {shares.map((e) => (
               <tr key={e.archetype}>
-                <td>{name(e.archetype)}</td>
+                <td><DeckName a={data.archetypes[e.archetype]} size={20} link={false} /></td>
                 <td className="num">
                   <input
                     className="pct-input"
@@ -80,7 +80,7 @@ export function FieldPage({ data, filters }: { data: Dataset; filters: Filters }
                   return (
                     <Fragment key={r.archetype}>
                       <tr className="clickable" onClick={() => setOpen(open === r.archetype ? null : r.archetype)}>
-                        <td><a href={href.deck(data.archetypes[r.archetype].key)} onClick={(e) => e.stopPropagation()}>{name(r.archetype)}</a></td>
+                        <td><DeckName a={data.archetypes[r.archetype]} /></td>
                         <td><span className="meter" aria-hidden><span style={{ width: `${r.expected * 100}%` }} /></span> <strong>{pct(r.expected)}</strong></td>
                         <td className="num">{r.coverage < 0.5 ? <span className="muted" title="Few games: treat with caution">{pct(r.coverage, 0)} ⚠</span> : pct(r.coverage, 0)}</td>
                         <td className="small">{best ? `${name(best.archetype)} ${pct(best.winRate, 0)}` : '—'}</td>

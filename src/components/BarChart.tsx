@@ -4,6 +4,8 @@ import { useTooltip } from './Tooltip';
 export interface Bar {
   id: string | number;
   label: string;
+  /** Shown before the label, e.g. deck sprites. */
+  lead?: ReactNode;
   value: number;
   valueLabel: string;
   href?: string;
@@ -24,7 +26,7 @@ export function BarChart({ bars, max }: { bars: Bar[]; max?: number }) {
           onFocus={(e) => { const r = e.currentTarget.getBoundingClientRect(); show({ clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }, b.tip); }}
           onBlur={hide}
         >
-          {b.href ? <a className="bar-label" href={b.href}>{b.label}</a> : <span className="bar-label">{b.label}</span>}
+          {b.href ? <a className="bar-label" href={b.href}>{b.lead}<span>{b.label}</span></a> : <span className="bar-label">{b.lead}<span>{b.label}</span></span>}
           <div className="bar-track">
             <div className="bar-fill" style={{ width: `${top ? (b.value / top) * 100 : 0}%` }} />
           </div>

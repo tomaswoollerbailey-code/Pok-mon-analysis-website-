@@ -1,3 +1,4 @@
+import { DeckName } from '../components/DeckName';
 import { SOURCE_LABELS } from '../components/FilterBar';
 import { useMemo, useState } from 'react';
 import { SortTable } from '../components/SortTable';
@@ -21,7 +22,7 @@ export function TournamentsPage({ data, filters }: { data: Dataset; filters: Fil
 
   const winner = (i: number) => {
     const a = winners.get(i);
-    return a == null ? '—' : a < 0 ? 'Unknown deck' : <a href={href.deck(data.archetypes[a].key)}>{data.archetypes[a].name}</a>;
+    return a == null ? '—' : a < 0 ? 'Unknown deck' : <DeckName a={data.archetypes[a]} size={20} />;
   };
 
   return (

@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { BarChart } from '../components/BarChart';
+import { DeckIcons } from '../components/Brand';
+import { DeckName } from '../components/DeckName';
 import { RotationBadge } from '../components/RotationBadge';
 import { convert, formatMoney } from '../lib/pricing';
 import { SortTable, type Column } from '../components/SortTable';
@@ -16,7 +18,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
   const bestConv = [...m.rows].filter((r) => r.players >= Math.max(10, m.identified * 0.01)).sort((a, b) => b.conversion - a.conversion)[0];
 
   const columns: Column<ArchetypeStats>[] = [
-    { key: 'name', label: 'Archetype', render: (r) => <a href={href.deck(data.archetypes[r.archetype].key)}>{name(r.archetype)}</a>, sort: (r) => name(r.archetype) },
+    { key: 'name', label: 'Deck', render: (r) => <DeckName a={data.archetypes[r.archetype]} />, sort: (r) => name(r.archetype) },
     { key: 'players', label: 'Players', numeric: true, render: (r) => int(r.players), sort: (r) => r.players },
     { key: 'share', label: 'Meta share', numeric: true, render: (r) => pct(r.share), sort: (r) => r.share },
     { key: 'topCut', label: cut, numeric: true, render: (r) => int(r.topCut), sort: (r) => r.topCut, title: `Pilots finishing in the ${cut}` },
@@ -34,22 +36,47 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     { key: 'wins1st', label: 'Wins', numeric: true, render: (r) => int(r.wins1st), sort: (r) => r.wins1st, title: 'Tournaments won' },
   ];
 
+  const rotShare = m.rows.filter((r) => data.archetypes[r.archetype].rotation?.status === 'rotates').reduce((x, r) => x + r.share, 0);
+
   if (!m.tournaments) return <Empty />;
 
   return (
     <>
-      <div className="tiles">
-        <Tile label="Tournaments" value={int(m.tournaments)} />
-        <Tile label="Players" value={int(m.players)} note={m.identified < m.players ? `${int(m.identified)} with a known deck` : undefined} />
-        <Tile label="Archetypes" value={int(m.rows.length)} />
-        {leader && <Tile label="Most played" value={pct(leader.share)} note={name(leader.archetype)} />}
-        {data.rotation && !filters.hideRotating && (() => {
-          const rot = m.rows.filter((r) => data.archetypes[r.archetype].rotation?.status === 'rotates');
-          const share = rot.reduce((x, r) => x + r.share, 0);
-          return <Tile label="Meta that rotates" value={pct(share)} note={`${int(rot.length)} archetypes`} />;
-        })()}
-        {bestConv && <Tile label={`Best ${cut} conversion`} value={pct(bestConv.conversion)} note={`${name(bestConv.archetype)} · ${int(bestConv.players)} pilots`} />}
-      </div>
+      <section className="hero">
+        <div className="hero-text">
+          <p className="eyebrow">Meta snapshot</p>
+          <h1>{leader ? <>{name(leader.archetype)} leads with {pct(leader.share)}</> : 'The meta'}</h1>
+          <p className="hero-sub">
+            {int(m.tournaments)} tournaments · {int(m.players)} players
+            {m.identified < m.players ? ` (${int(m.identified)} with a known deck)` : ''} · {int(m.rows.length)} archetypes
+            {data.rotation && !filters.hideRotating && rotShare > 0 ? <> · <strong>{pct(rotShare)}</strong> of the field rotates</> : null}
+          </p>
+        </div>
+        <div className="podium">
+          {m.rows.slice(0, 3).map((r, i) => {
+            const a = data.archetypes[r.archetype];
+            const price = a.price ? convert(a.price, filters.currency, data.prices?.fx) : undefined;
+            return (
+              <a key={r.archetype} className="podium-card" href={href.deck(a.key)}>
+                <span className="rank">#{i + 1}</span>
+                <DeckIcons icons={a.icons} size={44} />
+                <span className="podium-name">{a.name}</span>
+                <span className="podium-share">{pct(r.share)}</span>
+                <span className="podium-stats">
+                  <span>{cut} conv. <b>{pct(r.conversion)}</b></span>
+                  {r.winRate != null && <span>Win <b>{pct(r.winRate)}</b></span>}
+                  {price != null && <span>{formatMoney(price, filters.currency)}</span>}
+                </span>
+              </a>
+            );
+          })}
+        </div>
+        {bestConv && (
+          <p className="hero-note">
+            Best {cut} conversion: <a href={href.deck(data.archetypes[bestConv.archetype].key)}>{name(bestConv.archetype)}</a> at {pct(bestConv.conversion)} from {int(bestConv.players)} pilots.
+          </p>
+        )}
+      </section>
 
       <section className="card">
         <header className="card-head">
@@ -60,6 +87,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
           bars={m.rows.slice(0, 15).map((r) => ({
             id: r.archetype,
             label: name(r.archetype),
+            lead: <DeckIcons icons={data.archetypes[r.archetype].icons} size={22} />,
             value: r.share,
             valueLabel: pct(r.share),
             href: href.deck(data.archetypes[r.archetype].key),

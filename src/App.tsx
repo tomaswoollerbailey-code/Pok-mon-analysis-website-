@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Logo } from './components/Brand';
 import { FilterBar } from './components/FilterBar';
+import { ThemeToggle } from './components/ThemeToggle';
 import { loadDataset } from './data';
 import { DEFAULT_FILTERS, formatsIn, type Filters } from './lib/analysis';
 import type { Dataset } from './lib/types';
@@ -13,7 +15,7 @@ import { TournamentPage } from './pages/TournamentPage';
 import { TournamentsPage } from './pages/TournamentsPage';
 import { TrendsPage } from './pages/TrendsPage';
 
-const FILTER_STORE = 'metalab.filters';
+const FILTER_STORE = 'murkrow.filters';
 
 function readFilters(): Filters {
   try {
@@ -51,12 +53,13 @@ export function App() {
     <div className="app">
       <header className="top">
         <a className="brand" href={href.meta}>
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M2 12h7m6 0h7" stroke="currentColor" strokeWidth="2" /><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
-          Meta Lab
+          <Logo />
+          <span>Murkrow<b>Meta</b></span>
         </a>
         <nav>
           {NAV.map((n) => <a key={n.page} href={n.href} className={active === n.page ? 'on' : ''} aria-current={active === n.page ? 'page' : undefined}>{n.label}</a>)}
         </nav>
+        <ThemeToggle />
       </header>
 
       <main>

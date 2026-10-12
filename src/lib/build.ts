@@ -19,8 +19,19 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
   const archetypes: ArchetypeInfo[] = [];
   const archIdx = new Map<string, number>();
   const archNameVotes = new Map<string, Map<string, number>>();
-  const archetypeOf = (name: string | undefined): number => {
+  const iconVotes = new Map<number, Map<string, number>>();
+  const archetypeOf = (name: string | undefined, icons?: string[]): number => {
     if (!name) return -1;
+    const idx = archetypeIdxFor(name);
+    if (icons?.length) {
+      const v = iconVotes.get(idx) ?? new Map<string, number>();
+      const k = icons.join(' ');
+      v.set(k, (v.get(k) ?? 0) + 1);
+      iconVotes.set(idx, v);
+    }
+    return idx;
+  };
+  const archetypeIdxFor = (name: string): number => {
     const key = archetypeKey(name);
     const votes = archNameVotes.get(key) ?? new Map<string, number>();
     votes.set(name, (votes.get(name) ?? 0) + 1);
@@ -66,7 +77,7 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     const playerArch = new Map<string, number>();
     const rows: StandingsFile['standings'] = [];
     for (const s of t.standings) {
-      const a = archetypeOf(nameOf(s.archetype));
+      const a = archetypeOf(nameOf(s.archetype), s.archetype?.icons);
       playerArch.set(s.playerId, a);
       const r = s.record ?? { wins: 0, losses: 0, ties: 0 };
       results.push([tIdx, a, s.placing ?? 0, r.wins, r.losses, r.ties]);
@@ -103,11 +114,13 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     }
   }
 
-  // Display the most common spelling of each archetype.
-  for (const a of archetypes) {
+  // Display the most common spelling and icon set of each archetype.
+  archetypes.forEach((a, i) => {
     const votes = [...(archNameVotes.get(a.key) ?? new Map()).entries()].sort((x, y) => y[1] - x[1]);
     if (votes.length) a.name = votes[0][0];
-  }
+    const icons = [...(iconVotes.get(i) ?? new Map()).entries()].sort((x, y) => y[1] - x[1])[0];
+    if (icons) a.icons = icons[0].split(' ');
+  });
 
   // Rotation: a card rotates when every printing seen anywhere in the data is from a rotating set.
   const rotating = rotatingCardNames([...listsByArch.values()].flatMap((b) => b.cards), rotation.sets);

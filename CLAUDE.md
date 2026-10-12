@@ -1,4 +1,4 @@
-# Meta Lab: project memory
+# Murkrow Meta: project memory
 
 ## Working with the owner
 - Keep replies **short and clear**: a few bullets, no long explanations. The owner has little time to read.
@@ -6,6 +6,11 @@
 - **Audience: worldwide.** Finish and polish the site before any promotion or affiliate links.
 - **Focus: meta tools only.** The main user is a competitive player preparing for an event. No collection tracker (removed Oct 2026); don't add collection or scanning features.
 - The owner wants Claude to do the work end to end: merge PRs and trigger workflows.
+
+## Brand
+- **Murkrow Meta**: crow-black and purple surfaces, with a gold accent (Murkrow's beak). The logo is in `src/components/Brand.tsx`.
+- Deck sprites are hotlinked from Limitless's CDN (`r2.limitlesstcg.net/pokemon/gen9/{icon}.png`). Ask Limitless before launch, or self-host them.
+- "Murkrow" is a Pokémon trademark. That's fine for a fan site, but keep it in mind if the site earns money.
 
 ## What this is
 A Pokémon TCG meta analysis site built from Limitless data. Online events come from the Limitless Play API; in-person events are scraped from limitlesstcg.com; Japan comes from official City League results on limitlesstcg.com/tournaments/jp.
@@ -31,7 +36,8 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 ## Notes
 - The dev sandbox can't reach Limitless or github.io. Check parsers through the Probe workflow logs.
 - Rotation assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). This is unconfirmed; change it in `src/lib/rotation.ts`.
-- Run `npm test` before every push.
+- Run `npm test` and `npm run test:e2e` (with `PW_CHROMIUM_PATH=/opt/pw-browsers/chromium` in the sandbox) before every push.
+- Don't merge to main while an Update data run is in progress. It rebases now, but merging still triggers extra deploys.
 
 ## Roadmap (agreed next)
 1. Deck checker: paste a list and compare it with the meta version.

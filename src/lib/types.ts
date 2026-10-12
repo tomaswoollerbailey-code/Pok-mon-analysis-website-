@@ -81,6 +81,8 @@ export interface ArchetypeRotation {
 export interface ArchetypeInfo {
   key: string;
   name: string;
+  /** Pokémon icon names Limitless uses for the deck (e.g. ["dragapult", "dusknoir"]). */
+  icons?: string[];
   rotation?: ArchetypeRotation;
   /** Median cost of its recent lists at current prices. */
   price?: { usd?: number; eur?: number; lists: number };

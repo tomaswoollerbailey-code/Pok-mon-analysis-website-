@@ -1,3 +1,4 @@
+import { DeckIcons } from '../components/Brand';
 import { SOURCE_LABELS } from '../components/FilterBar';
 import { useEffect, useMemo, useState } from 'react';
 import { DeckPrice } from '../components/DeckPrice';
@@ -42,7 +43,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
     <>
       <div className="page-head">
         <a href={href.meta} className="back">← Meta overview</a>
-        <h1>{data.archetypes[a].name}</h1>
+        <h1 className="deck-title"><DeckIcons icons={data.archetypes[a].icons} size={48} />{data.archetypes[a].name}</h1>
         {data.rotation && (
           <p className="rot-line">
             <RotationBadge rotation={data.archetypes[a].rotation} />
