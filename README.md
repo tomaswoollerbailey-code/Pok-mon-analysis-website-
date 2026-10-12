@@ -63,6 +63,7 @@ src/  React + Vite site that loads public/data/ and computes everything in the b
 
 - `src/lib/limitless/online.ts` normalises Limitless Play API responses.
 - `src/lib/limitless/offline.ts` parses limitlesstcg.com pages. It maps columns by header text, not position, and falls back to cell text when `data-*` attributes are missing. If the site layout changes and the scraper reports zero tournaments, fix it here.
+- `src/router.ts` and `src/lib/routes.ts` give every page a real URL (`/decks/<deck>`); `scripts/prerender.ts` writes a static HTML file per page (with its own title and description), a sitemap and robots.txt after the Vite build. For a custom domain build with `SITE_BASE=/ SITE_URL=https://example.com`.
 - `src/lib/build.ts` builds the compact dataset; `src/lib/analysis.ts` has every metric (pure functions, covered by `npm test`).
 
 ## Tests

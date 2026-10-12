@@ -6,6 +6,7 @@ import { loadDataset } from './data';
 import { DEFAULT_FILTERS, formatsIn, SOURCE_CAPS, type Filters } from './lib/analysis';
 import type { Dataset } from './lib/types';
 import { date } from './format';
+import { pageMeta } from './lib/seo';
 import { href, useRoute } from './router';
 import { DeckPage } from './pages/DeckPage';
 import { MatchupsPage } from './pages/MatchupsPage';
@@ -49,6 +50,12 @@ export function App() {
   // Fall back to "any format" when the stored format isn't in this dataset.
   const effective = data && filters.format && !formats.includes(filters.format) ? { ...filters, format: '' } : filters;
   const latest = data?.tournaments[0]?.date ?? new Date().toISOString().slice(0, 10);
+  // Keep the tab title and description in step with the page (prerendered copies cover first load).
+  useEffect(() => {
+    const m = pageMeta(data, route);
+    document.title = m.title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', m.description);
+  }, [data, route]);
   const active = route.page === 'tournament' ? 'tournaments' : route.page === 'deck' ? 'meta' : route.page;
 
   return (

@@ -37,6 +37,7 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Prices:** a daily snapshot of TCGplayer USD and Cardmarket EUR read from Limitless decklist pages, plus MYR converted from USD (not a Malaysian shop price). "Live" prices come only via the TCGplayer mass-entry link. The Shiny app has no public API. |
 | 2026-10-12 | **Brand:** "Meta Lab" → "Murkrow Meta" → **The Crow's Nest** (other options considered: Murk Meta, Crowsight, Nightcrow, Caw Meta). **Never use Pokémon names in the brand, domain or logo** (trademark risk). |
 | 2026-10-12 | **Mobile-first, app-style shell:** a bottom tab bar on phones, filters behind one button (the source switch stays visible), 16px inputs, safe-area insets, a swipeable top-3, secondary table columns hidden. |
+| 2026-10-12 | **Real page URLs:** `/decks/<key>`, `/tournaments/<key>`, `/trends`, `/matchups`, `/field`, `/tournaments` (History API, in-site links navigate without a reload; old `#/...` links redirect). `npm run build` runs `scripts/prerender.ts` after Vite: a static HTML file per page with its own title, description, canonical and a text summary (`src/lib/seo.ts`), plus `404.html` (app-shell fallback), `sitemap.xml` and `robots.txt`. Vite `base` is absolute: default `/Pok-mon-analysis-website-/`; on a custom domain build with `SITE_BASE=/` and `SITE_URL=https://<domain>` (robots.txt only counts at a domain root). |
 | 2026-10-12 | **No promotion or affiliate links** until the site is finished and polished. |
 
 ## Current state (live)
@@ -51,12 +52,11 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
 ## Roadmap
-**Next to build (agreed order, not started):**
-1. **Real page URLs** (`/decks/dragapult` instead of `#/deck/...`), each with its own title and description. This is the biggest lever for Google traffic ("dragapult deck list"). GitHub Pages is static, so this needs prerendering (or a 404.html fallback); decide the approach when starting.
-2. **"Copy for TCG Live" button** on every deck. `decktext.ts` already parses that format.
-3. **Methodology page:** sources, update times, how win rates, shares and rotation status are calculated. Builds trust with competitive players.
-4. **Weekly meta report page,** generated automatically: risers, fallers, top lists.
-5. **Share images:** an auto-generated preview card for each deck and report on Discord, Reddit and X.
+**Next to build (agreed order, not started).** Real page URLs are done (see decisions).
+1. **"Copy for TCG Live" button** on every deck. `decktext.ts` already parses that format.
+2. **Methodology page:** sources, update times, how win rates, shares and rotation status are calculated. Builds trust with competitive players.
+3. **Weekly meta report page,** generated automatically: risers, fallers, top lists.
+4. **Share images:** an auto-generated preview card for each deck and report on Discord, Reddit and X.
 
 **Then:** a deck checker (paste a TCG Live list, compare it with the meta version).
 
@@ -90,6 +90,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
   - `analysis.ts`: all metrics, `SOURCE_CAPS` and the Field planner
   - `rotation.ts`: `CURRENT_FORMAT` and `ROTATION` config
   - `pricing.ts`, `decktext.ts`, `cardname.ts`, `archetype.ts`
+- `src/lib/routes.ts` (pure route paths, shared with build scripts), `src/lib/seo.ts` (titles, descriptions, page list), `src/router.ts` (base-aware links and navigation), `scripts/prerender.ts`.
 - `src/pages/`: Meta, Trends, Matchups, Field, Tournaments, Tournament, Deck. Shared UI is in `src/components/`.
 - Tests: unit tests in `tests/*.test.ts` (HTML fixtures in `tests/fixtures/`), and Playwright end-to-end tests in `tests/e2e/` that run against synthetic data from `tests/e2e/fixture.ts` on desktop and mobile.
 - Workflows:
@@ -101,6 +102,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 ## How to work in this repo
 - **Branch and PRs:** the working branch is `claude/pokemon-meta-analysis-site-wa6cwi`. After a squash merge, reset it to `origin/main` and push with `--force-with-lease` (it only holds already-merged history). Then open a PR, subscribe to its activity, and squash-merge with `expectedHeadSha` once CI is green. A push to `main` triggers a deploy (about 2 minutes).
 - **GitHub tools:** the GitHub and PR-subscription tools are deferred. After a worker restart, load them with ToolSearch (`select:mcp__github__create_pull_request,mcp__github__merge_pull_request,mcp__claude-code-remote__subscribe_pr_activity`). There is no `gh` CLI.
+- **Local dev** serves at `/`; production builds use the GitHub Pages base. E2E builds with `SITE_BASE=/` and prerenders into `dist-e2e`.
 - **Before every push:** run `npm test` and `npm run test:e2e` (in the sandbox prefix e2e with `PW_CHROMIUM_PATH=/opt/pw-browsers/chromium`). The stop hook complains about unpushed commits, so push the branch.
 - **Checking real data:** the sandbox can't reach Limitless or github.io. Pull `data/raw`, run `npm run build:data` and `npx vite build`, serve with `vite preview`, and screenshot with Playwright. Check parsers through the Probe workflow logs.
 - **Sandbox gotcha:** never put the `pkill -f` pattern for the preview server in the same command as the text of the launch command, because it kills its own shell. Run `pkill -f "[v]ite preview"` as a separate call, and check screenshots aren't stale files from an earlier run.

@@ -6,7 +6,7 @@
   "description": "Pok\u00e9mon TCG meta analysis for online and offline tournaments, built from Limitless data.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && tsx scripts/prerender.ts dist",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
