@@ -71,7 +71,7 @@ export function DeckList({ data, filters, lists }: { data: Dataset; filters: Fil
           <h2>Decklists</h2>
           <p>
             {view === 'top'
-              ? `Lists that finished in the top ${cut}, best placing first.`
+              ? `Lists that finished in the top ${cut}, newest first.`
               : `Identical lists (same cards and copies) played more than once, most common first. ${int(total)} lists in this period.`}
           </p>
         </div>
@@ -92,23 +92,23 @@ export function DeckList({ data, filters, lists }: { data: Dataset; filters: Fil
         {(view === 'top'
           ? top.slice(0, shown).map((r) => ({ r, key: `${r[0]}|${r[1]}|${r[2].length}`, count: 0, events: 0 }))
           : common.filter((g) => g.count > 1).slice(0, shown).map((g) => ({ r: g.row, key: `${g.row[0]}|${g.row[1]}|${g.count}`, count: g.count, events: g.events }))
-        ).map(({ r, key, count, events }, i) => {
+        ).map(({ r, key, count, events }) => {
           const t = event(r);
           return (
-            <details key={key} className="list-item" open={i === 0 && view === 'top'}>
+            <details key={key} className="list-item" >
               <summary>
-                {view === 'top'
-                  ? <span className="list-rank">#{r[1]}</span>
-                  : <span className="list-rank">×{count}</span>}
-                <span className="list-title">
-                  <a href={href.tournament(t.key)} onClick={(e) => e.stopPropagation()}>{t.name}</a>
-                  <span className={`badge ${t.source}`}>{SOURCE_LABELS[t.source]}</span>
-                </span>
-                <span className="list-meta">
-                  {view === 'common'
-                    ? `${events} event${events === 1 ? '' : 's'}${r[1] ? ` · best #${r[1]}` : ''} · `
-                    : `${int(t.players)} players · `}
-                  {date(t.date)}
+                <span className="list-rank">{view === 'top' ? `#${r[1]}` : `×${count}`}</span>
+                <span className="list-main">
+                  <span className="list-title">
+                    {view === 'top'
+                      ? <a href={href.tournament(t.key)} onClick={(e) => e.stopPropagation()}>{t.name}</a>
+                      : `${events} event${events === 1 ? '' : 's'}${r[1] ? ` · best finish #${r[1]}` : ''}`}
+                  </span>
+                  <span className="list-meta">
+                    {view === 'common' && <><a href={href.tournament(t.key)} onClick={(e) => e.stopPropagation()}>{t.name}</a> · </>}
+                    <span className={`badge ${t.source}`}>{SOURCE_LABELS[t.source]}</span>
+                    {view === 'top' && ` ${int(t.players)} players ·`} {date(t.date)}
+                  </span>
                 </span>
               </summary>
               <ListBody lists={lists} row={r} />
