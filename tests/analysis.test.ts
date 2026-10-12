@@ -107,16 +107,16 @@ describe('cardUsage', () => {
   });
 });
 
-describe('auto top cut', () => {
-  it('uses Top 8 online and Top 10% offline, per event in All', async () => {
+describe('top cut', () => {
+  it('is fixed per source: Top 8 online, Top 10% offline', async () => {
     const { resolveCut, cutLabel } = await import('../src/lib/analysis');
     expect(resolveCut('auto', 'online')).toBe('top8');
     expect(resolveCut('auto', 'offline')).toBe('top10pct');
     expect(resolveCut('top32', 'offline')).toBe('top32');
+    expect(cutLabel({ topCut: 'auto', source: 'online' })).toBe('Top 8');
     expect(cutLabel({ topCut: 'auto', source: 'offline' })).toBe('Top 10%');
-    expect(cutLabel({ topCut: 'auto', source: 'all' })).toBe('Top cut');
-    // In All, the online event uses Top 8 and the offline one Top 10% (2 of 20 players).
-    const m = metaSummary(d, F({ source: 'all' }));
-    expect(m.topCutSlots).toBe(3 + 1);
+    // Offline event of 20 players: the Top 10% is 2 places, so only the winner of the 3 listed counts.
+    expect(metaSummary(d, F({ source: 'offline' })).topCutSlots).toBe(1);
+    expect(metaSummary(d, F({ source: 'online' })).topCutSlots).toBe(3);
   });
 });

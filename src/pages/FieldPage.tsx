@@ -88,7 +88,7 @@ export function FieldPage({ data, filters, onFilters }: { data: Dataset; filters
                         <td className="num">{r.coverage < 0.5 ? <span className="muted" title="Few games: treat with caution">{pct(r.coverage, 0)} ⚠</span> : pct(r.coverage, 0)}</td>
                         <td className="small">{best ? `${name(best.archetype)} ${pct(best.winRate, 0)}` : '—'}</td>
                         <td className="small">{worst && worst !== best ? `${name(worst.archetype)} ${pct(worst.winRate, 0)}` : '—'}</td>
-                        <td><RotationBadge rotation={data.archetypes[r.archetype].rotation} /></td>
+                        <td><RotationBadge rotation={data.archetypes[r.archetype].rotation} year={data.rotation?.year} /></td>
                       </tr>
                       {open === r.archetype && (
                         <tr className="detail">

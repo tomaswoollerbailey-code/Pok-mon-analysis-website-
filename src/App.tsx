@@ -21,7 +21,7 @@ function readFilters(): Filters {
   try {
     const v = JSON.parse(localStorage.getItem(FILTER_STORE) || 'null');
     if (!v) return DEFAULT_FILTERS;
-    const f = { ...DEFAULT_FILTERS, ...v };
+    const f: Filters = { ...DEFAULT_FILTERS, ...v, topCut: 'auto' }; // no top-cut picker any more
     return f.source in SOURCE_CAPS ? f : { ...f, source: DEFAULT_FILTERS.source }; // old 'all' value
   } catch {
     return DEFAULT_FILTERS;
@@ -83,14 +83,14 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar key={route.page} filters={effective} onChange={setFilters} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
+              <FilterBar key={route.page} filters={effective} onChange={setFilters} latest={latest} rotation={data.rotation} />
             )}
             {route.page !== 'tournament' && route.page !== 'matchups' && route.page !== 'field' && (
               <p className="source-note"><b>{SOURCE_CAPS[effective.source].label}:</b> {SOURCE_CAPS[effective.source].blurb}</p>
             )}
             {effective.hideRotating && route.page !== 'tournaments' && data.rotation && (
               <div className="notice" role="status">
-                Projected post-rotation meta: decks whose signature Pokémon rotate with the {data.rotation.label} ({data.rotation.sets.join(', ')}) are excluded and shares are recalculated without them.
+                Projected post-rotation meta{data.rotation.year ? ` (${data.rotation.year})` : ''}: decks whose signature Pokémon rotate out{data.rotation.year ? ` in ${data.rotation.year}` : ''} with the {data.rotation.label} ({data.rotation.sets.join(', ')}) are hidden and shares are recalculated without them.
               </div>
             )}
             {route.page === 'meta' && <MetaPage data={data} filters={effective} />}
@@ -108,7 +108,7 @@ export function App() {
         Tournament data from <a href="https://limitlesstcg.com" target="_blank" rel="noreferrer">Limitless TCG</a> (in person) and{' '}
         <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online).
         {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>}
-        {data?.format && <> Covers completed {data.format.label} events ({data.format.marks} marks) since the last rotation: online from {date(data.format.online)}, in person from {date(data.format.inPerson)}.</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
+        {data?.format && <> Covers completed Standard events since the {data.format.rotatedYear} rotation ({data.format.marks} marks legal): online from {date(data.format.online)}, offline from {date(data.format.inPerson)}.{data.rotation?.year ? ` The next rotation is expected in ${data.rotation.year} (${data.rotation.label}).` : ''}</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
       </footer>
     </div>
   );

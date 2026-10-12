@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 /** The Crow's Nest mark: a crow keeping lookout from a ship's crow's nest. */
 export function Logo({ size = 28 }: { size?: number }) {
   return (
@@ -15,15 +17,27 @@ export function Logo({ size = 28 }: { size?: number }) {
 
 const ICON_BASE = 'https://r2.limitlesstcg.net/pokemon/gen9/';
 
-/** Pokémon sprites Limitless uses for a deck. Hidden quietly if an image is missing. */
+/** A stack of face-down cards with a question mark, for decks without sprites (e.g. "Other"). */
+function PlaceholderIcon({ size }: { size: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} className="deck-placeholder" aria-hidden>
+      <rect x="2.5" y="5" width="12" height="16" rx="2.4" transform="rotate(-10 8.5 13)" fill="var(--surface-3)" stroke="var(--axis)" strokeWidth="1" />
+      <rect x="8.5" y="3" width="12" height="16" rx="2.4" transform="rotate(8 14.5 11)" fill="var(--surface-2)" stroke="var(--muted)" strokeWidth="1" />
+      <text x="14.5" y="14.9" textAnchor="middle" fontSize="9.5" fontWeight="800" fill="var(--gold)" transform="rotate(8 14.5 11)">?</text>
+    </svg>
+  );
+}
+
+/** Pokémon sprites Limitless uses for a deck; the placeholder shows when there are none or they fail to load. */
 export function DeckIcons({ icons, size = 24 }: { icons?: string[]; size?: number }) {
+  const [failed, setFailed] = useState<ReadonlySet<string>>(new Set());
   // Fixed width (room for two overlapping sprites) keeps names aligned in lists.
   const width = Math.round(size * 1.75);
-  if (!icons?.length) return <span className="deck-icons" style={{ width, height: size }} aria-hidden />;
+  const shown = (icons ?? []).slice(0, 2).filter((i) => !failed.has(i));
   return (
     <span className="deck-icons" style={{ width, height: size }} aria-hidden>
-      {icons.slice(0, 2).map((i) => (
-        <img key={i} src={`${ICON_BASE}${i}.png`} width={size} height={size} loading="lazy" alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+      {shown.length === 0 ? <PlaceholderIcon size={size} /> : shown.map((i) => (
+        <img key={i} src={`${ICON_BASE}${i}.png`} width={size} height={size} loading="lazy" alt="" onError={() => setFailed((f) => new Set(f).add(i))} />
       ))}
     </span>
   );

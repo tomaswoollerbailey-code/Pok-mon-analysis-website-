@@ -8,7 +8,7 @@ export function OnlineOnly({ what, filters, onFilters }: { what: string; filters
       <p>
         {what} need round-by-round results. Only online events publish those; offline majors only publish final standings.
       </p>
-      <button className="primary" onClick={() => onFilters({ ...filters, source: 'all' })}>Show all events</button>
+      <button className="primary" onClick={() => onFilters({ ...filters, source: 'online' })}>Show online data</button>
     </section>
   );
 }

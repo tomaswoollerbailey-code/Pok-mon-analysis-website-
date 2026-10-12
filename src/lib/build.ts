@@ -13,7 +13,12 @@ export interface BuiltDataset {
   standings: StandingsFile[];
 }
 
-export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION, prices?: PricesFile): BuiltDataset {
+export function buildDataset(
+  raw: RawTournament[],
+  generatedAt = new Date().toISOString(),
+  rotation: { label: string; sets: string[]; year?: number } = ROTATION,
+  prices?: PricesFile,
+): BuiltDataset {
   // Current format only: online / in-person events from the last rotation on, international
   // Standard only (Japanese-format events such as Champions League are left out).
   const current = raw.filter((t) => (t.source === 'online' || t.source === 'offline') && t.date >= formatStart(t.source) && t.format === 'STANDARD');
@@ -122,7 +127,8 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     const votes = [...(archNameVotes.get(a.key) ?? new Map()).entries()].sort((x, y) => y[1] - x[1]);
     if (votes.length) a.name = votes[0][0];
     const icons = [...(iconVotes.get(i) ?? new Map()).entries()].sort((x, y) => y[1] - x[1])[0];
-    if (icons) a.icons = icons[0].split(' ');
+    // Limitless's catch-all "Other" points at a sprite that doesn't exist, so the site draws its own icon.
+    if (icons && a.key !== 'other') a.icons = icons[0].split(' ');
   });
 
   // Rotation: a card rotates when every printing seen anywhere in the data is from a rotating set.
@@ -139,7 +145,7 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     for (const [a, b] of listsByArch) {
       attachPrices(b.cards, prices.cards, cheap);
       const p = archetypePrice({ archetype: archetypes[a], cards: b.cards, lists: b.lists });
-      if (p.lists) archetypes[a].price = p;
+      if (p.lists && archetypes[a].key !== 'other') archetypes[a].price = p; // a mixed bucket has no real price
     }
   }
 
@@ -152,7 +158,7 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
   return {
     dataset: {
       generatedAt, archetypes, tournaments, results, matches,
-      rotation: { label: rotation.label, sets: rotation.sets },
+      rotation: { label: rotation.label, sets: rotation.sets, ...(rotation.year ? { year: rotation.year } : {}) },
       format: CURRENT_FORMAT,
       ...(prices ? { prices: { asOf: prices.fetchedAt, ...(prices.fx ? { fx: prices.fx } : {}) } } : {}),
     },

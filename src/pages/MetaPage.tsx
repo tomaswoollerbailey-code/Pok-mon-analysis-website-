@@ -20,7 +20,8 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
   const leader = ranked[0];
   const maxShare = Math.max(...ranked.map((r) => r.share), 0.0001);
   const rank = new Map(ranked.map((r, i) => [r.archetype, i + 1]));
-  const where = filters.source === 'online' ? ' online' : filters.source === 'offline' ? ' offline' : '';
+  const where = filters.source === 'online' ? ' online' : ' offline';
+  const year = data.rotation?.year;
 
   // One table carries everything: share is drawn inline, so there's no separate chart.
   const columns: Column<ArchetypeStats>[] = [
@@ -46,7 +47,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
       render: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return formatMoney(p ? convert(p, filters.currency, data.prices?.fx) : undefined, filters.currency); },
       sort: (r: ArchetypeStats) => { const p = data.archetypes[r.archetype].price; return (p && convert(p, filters.currency, data.prices?.fx)) ?? -1; },
     } as Column<ArchetypeStats>] : []),
-    { key: 'rotation', label: 'Rotation', hideOnMobile: true, render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
+    { key: 'rotation', label: year ? `${year} rotation` : 'Rotation', hideOnMobile: true, render: (r) => <RotationBadge rotation={data.archetypes[r.archetype].rotation} year={year} />, sort: (r) => ['survives', 'unknown', 'impacted', 'rotates'].indexOf(data.archetypes[r.archetype].rotation?.status ?? 'unknown') },
     { key: 'players', label: 'Players', hideOnMobile: true, numeric: true, render: (r) => int(r.players), sort: (r) => r.players },
     { key: 'wins1st', label: 'Wins', hideOnMobile: true, numeric: true, render: (r) => int(r.wins1st), sort: (r) => r.wins1st, title: 'Tournaments won' },
   ];
@@ -59,11 +60,11 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     <>
       <section className="hero">
         <div className="hero-text">
-          <p className="eyebrow">Meta snapshot{data.format ? ` · ${data.format.label}` : ''}</p>
+          <p className="eyebrow">Meta snapshot{data.format ? ` · since the ${data.format.rotatedYear} rotation` : ''}</p>
           <h1>{leader ? <>{name(leader.archetype)} leads{where} with {pct(leader.share)}</> : 'The meta'}</h1>
           <p className="hero-sub">
             {int(m.tournaments)} {caps.events} · {int(m.players)} {playersWord} · {int(ranked.length)} decks
-            {data.rotation && !filters.hideRotating && rotShare > 0 ? <> · <strong>{pct(rotShare)}</strong> of the field rotates</> : null}
+            {data.rotation && !filters.hideRotating && rotShare > 0 ? <> · <strong>{pct(rotShare)}</strong> of the field rotates{year ? ` in ${year}` : ''}</> : null}
           </p>
         </div>
         <div className="podium">
@@ -92,7 +93,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
           <h2>The meta</h2>
           <dl className="glossary">
             <div><dt>Meta share</dt><dd>% of {playersWord} on the deck</dd></div>
-            <div><dt>Conversion</dt><dd>% who made the {cut}</dd></div>
+            <div><dt>Conversion</dt><dd>% of its {playersWord} who finished in the {cut}</dd></div>
             {hasWinRates && <div><dt>Win rate</dt><dd>games won vs other decks (online)</dd></div>}
           </dl>
         </header>

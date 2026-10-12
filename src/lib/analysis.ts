@@ -4,12 +4,13 @@ import type { ArchetypeLists, Dataset, ResultRow, Source } from './types';
 export type TopCut = 'auto' | 'top8' | 'top16' | 'top32' | 'top10pct';
 
 export interface Filters {
-  /** 'all' = online + offline. Win rates and matchups always come from the online part. */
-  source: View;
+  /** Online and offline are analysed separately: they publish different data (see SOURCE_CAPS). */
+  source: Source;
   format: string; // '' = any
   from: string; // YYYY-MM-DD, '' = open
   to: string;
   minPlayers: number;
+  /** No picker in the UI: always 'auto' (Top 8 online, Top 10% offline). */
   topCut: TopCut;
   /** Drop archetypes that rotate out at the next rotation (projected post-rotation meta). */
   hideRotating: boolean;
@@ -18,7 +19,7 @@ export interface Filters {
 }
 
 export const DEFAULT_FILTERS: Filters = {
-  source: 'all',
+  source: 'online',
   format: 'STANDARD',
   from: '',
   to: '',
@@ -44,9 +45,8 @@ export function resolveCut(cut: TopCut, source: Source): Exclude<TopCut, 'auto'>
   return cut !== 'auto' ? cut : source === 'offline' ? 'top10pct' : 'top8';
 }
 
-/** Label for the cut in use, e.g. "Top 10%"; "Top cut" when All mixes both. */
-export const cutLabel = (f: Pick<Filters, 'topCut' | 'source'>) =>
-  f.topCut === 'auto' && f.source === 'all' ? 'Top cut' : TOP_CUT_LABELS[resolveCut(f.topCut, f.source === 'all' ? 'online' : f.source)];
+/** Label for the cut in use: "Top 8" online, "Top 10%" offline. */
+export const cutLabel = (f: Pick<Filters, 'topCut' | 'source'>) => TOP_CUT_LABELS[resolveCut(f.topCut, f.source)];
 
 export function cutSize(cut: Exclude<TopCut, 'auto'>, players: number): number {
   switch (cut) {
@@ -61,7 +61,7 @@ export function cutSize(cut: Exclude<TopCut, 'auto'>, players: number): number {
 export function tournamentMask(d: Dataset, f: Filters): boolean[] {
   return d.tournaments.map(
     (t) =>
-      (f.source === 'all' || t.source === f.source) &&
+      t.source === f.source &&
       (!f.format || t.format === f.format) &&
       (!f.from || t.date >= f.from) &&
       (!f.to || t.date <= f.to) &&
@@ -74,14 +74,8 @@ export function archetypeMask(d: Dataset, f: Filters): boolean[] {
   return d.archetypes.map((a) => !(f.hideRotating && a.rotation?.status === 'rotates'));
 }
 
-export type View = 'all' | Source;
-
-/** What each view can show. Pages use this to hide metrics a view doesn't have. */
-export const SOURCE_CAPS: Record<View, { label: string; events: string; matchups: boolean; blurb: string }> = {
-  all: {
-    label: 'All', events: 'events', matchups: true,
-    blurb: 'Online and offline together. Win rates and matchups use the online games.',
-  },
+/** What each source can show. Pages use this to hide metrics a source doesn't have. */
+export const SOURCE_CAPS: Record<Source, { label: string; events: string; matchups: boolean; blurb: string }> = {
   online: {
     label: 'Online', events: 'online events', matchups: true,
     blurb: 'Limitless Play events with 32+ players.',
