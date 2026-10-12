@@ -1,5 +1,5 @@
 /**
- * Normalise a card name so the same card matches across collection apps and decklists:
+ * Normalise a card name so the same card matches across decklist sources:
  * "Boss’s Orders (Ghetsis) - 172/182" → "boss's orders", "Basic Fire Energy" → "fire energy".
  */
 export function normaliseCardName(name: string): string {
