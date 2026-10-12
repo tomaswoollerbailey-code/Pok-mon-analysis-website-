@@ -31,10 +31,9 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   await page.getByRole('radio', { name: 'Offline' }).click();
   await expect(sub).not.toHaveText(before!);
   await page.getByRole('radio', { name: 'All' }).click();
-  // On phones the secondary filters sit behind the "Filters" button.
-  const filters = page.locator('.filters-btn');
-  if (await filters.isVisible()) await filters.click();
-  await page.getByRole('button', { name: 'Post-rotation' }).click();
+  // Secondary filters sit behind the "Filters" button.
+  await page.locator('.filters-btn').click();
+  await page.getByRole('switch', { name: /Post-rotation/ }).check();
   await expect(page.getByText('Projected post-rotation meta')).toBeVisible();
   await expect(page.locator('table.data tbody').getByText('Rotates')).toHaveCount(0);
 });
@@ -104,6 +103,16 @@ test('phones get a bottom tab bar', async ({ page, isMobile }) => {
   await expect(tabbar).toBeVisible();
   await tabbar.getByRole('link', { name: 'Planner' }).click();
   await expect(page.getByRole('heading', { name: 'What should I play?' })).toBeVisible();
+});
+
+test('filters panel uses chips and has no date inputs', async ({ page }) => {
+  await go(page, '');
+  await page.locator('.filters-btn').click();
+  await page.getByRole('radiogroup', { name: 'Period' }).getByRole('radio', { name: '30d' }).click();
+  await expect(page.locator('.filters-summary')).toContainText('Last 30 days');
+  await expect(page.locator('input[type="date"]')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Reset filters' }).click();
+  await expect(page.locator('.filters-summary')).toContainText('Since rotation');
 });
 
 test('theme toggle switches to dark', async ({ page }) => {

@@ -77,7 +77,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
                 <span className="podium-name">{a.name}</span>
                 <span className="podium-share">{pct(r.share)}</span>
                 <span className="podium-stats">
-                  <span>Makes {cut} <b>{pct(r.conversion)}</b></span>
+                  <span>{cut} rate <b>{pct(r.conversion)}</b></span>
                   {r.winRate != null && <span>Win <b>{pct(r.winRate)}</b></span>}
                   {price != null && <span>{formatMoney(price, filters.currency)}</span>}
                 </span>
@@ -94,7 +94,6 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
             <div><dt>Meta share</dt><dd>% of {playersWord} on the deck</dd></div>
             <div><dt>Conversion</dt><dd>% who made the {cut}</dd></div>
             {hasWinRates && <div><dt>Win rate</dt><dd>games won vs other decks (online)</dd></div>}
-            <div><dd className="muted">Tap a column to sort</dd></div>
           </dl>
         </header>
         <SortTable rows={m.rows} columns={columns} initial="share" rowKey={(r) => r.archetype} limit={25} />

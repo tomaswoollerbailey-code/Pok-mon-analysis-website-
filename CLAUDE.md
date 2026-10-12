@@ -25,6 +25,7 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Data window:** completed Standard events since the last rotation. Online from 2026-03-26 (TCG Live), in person from 2026-04-10 (Play! Pokémon); G rotated out, H, I and J are legal. |
 | 2026-10-12 | **Views: All (default), Offline, Online.** All combines both; win rates and matchups always come from the online part. Pages adapt via `SOURCE_CAPS`: Offline hides win rates, and Matchups / Field planner show a "needs online data" card with a one-tap switch. Top cut "Auto" is resolved per event: Top 8 online, Top 10% offline. Offline shares are of the *listed* standings (mostly top finishers). |
 | 2026-10-12 | **Japan removed completely** for now (tab, fetch, data and code). It used official City League results from limitlesstcg.com/tournaments/jp, which is recoverable from git history (PRs #10 and #15). Pokecabook, the official Players site and weekly Gym Battles were rejected earlier as duplicate or unreliable. Japanese-format events (e.g. Champions League) are excluded from the data. |
+| 2026-10-12 | **Filters = source switch + one Filters button** that opens tap-chips: Period (14d / 30d / 90d / Rotation), Top cut (Auto / 8 / 16 / 32 / 10%), Prices (USD / EUR / MYR), and a Post-rotation switch. Custom dates and minimum players were removed for simplicity. Keep the site **sharp and simple**. |
 | 2026-10-12 | **Meta page = one table.** Inline share bars replace the separate chart. Phones show Deck, Share, Conv. and Win % with short labels. |
 | 2026-10-12 | **Rotation preview** assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). Unconfirmed. "Post-rotation" toggle. |
 | 2026-10-12 | **Prices:** a daily snapshot of TCGplayer USD and Cardmarket EUR read from Limitless decklist pages, plus MYR converted from USD. "Live" prices come only via the TCGplayer mass-entry link. The Shiny app has no API, so Tom will email contact@getshiny.io himself. |
@@ -42,7 +43,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
 - **Deck pages:** rotation status, card usage (core cards, a rare-techs toggle, top-cut-only), deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
-- **Filters:** All, Offline or Online; period ("Since rotation" by default); top cut (Auto by default); currency (USD, EUR, MYR); Post-rotation; and under "More", dates and minimum players. A one-line source note under the filters explains what that source covers. The meta page shows a short glossary.
+- **Filters:** an All / Offline / Online switch plus a Filters button showing a summary. It opens chips for period, top cut and prices, and a Post-rotation switch. A one-line note explains the source. The glossary sits in the meta table header and is hidden on phones.
 - **Theme:** light, dark or system. Deck sprites are hotlinked from Limitless.
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
