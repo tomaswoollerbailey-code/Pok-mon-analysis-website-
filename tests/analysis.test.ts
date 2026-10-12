@@ -47,16 +47,22 @@ describe('buildDataset', () => {
 });
 
 describe('metaSummary', () => {
-  it('computes share, conversion and win rate', () => {
-    const m = metaSummary(d, F({ topCut: 'top8' }));
-    expect(m).toMatchObject({ tournaments: 2, players: 7, identified: 6, topCutSlots: 4 });
+  it('computes share, conversion and win rate for one source', () => {
+    const m = metaSummary(d, F({ source: 'online', topCut: 'top8' }));
+    expect(m).toMatchObject({ tournaments: 1, players: 4, identified: 3, topCutSlots: 3 });
     const zard = m.rows.find((r) => r.archetype === idx('Charizard Pidgeot'))!;
-    expect(zard).toMatchObject({ players: 3, topCut: 2, wins: 1, losses: 0, ties: 1, wins1st: 1 });
-    expect(zard.share).toBeCloseTo(0.5);
-    expect(zard.conversion).toBeCloseTo(2 / 3);
+    expect(zard).toMatchObject({ players: 2, topCut: 2, wins: 1, losses: 0, ties: 1, wins1st: 1 });
+    expect(zard.share).toBeCloseTo(2 / 3);
+    expect(zard.conversion).toBe(1);
     expect(zard.winRate).toBeCloseTo(1.5 / 2); // from non-mirror pairings: beat Gardevoir, tied once
     const gard = m.rows.find((r) => r.archetype === idx('Gardevoir ex'))!;
     expect(gard.winRate).toBeCloseTo(0.5 / 2);
+  });
+
+  it('never mixes sources', () => {
+    const m = metaSummary(d, F({ source: 'offline' }));
+    expect(m).toMatchObject({ tournaments: 1, players: 3 });
+    expect(m.rows.every((r) => r.winRate == null)).toBe(true); // in-person events have no pairings
   });
 
   it('filters by source and top 10%', () => {
@@ -70,10 +76,12 @@ describe('metaTrend', () => {
   it('buckets by ISO week', () => {
     expect(weekStart('2026-10-11')).toBe('2026-10-05');
     expect(weekStart('2026-10-05')).toBe('2026-10-05');
-    const t = metaTrend(d, F(), [idx('Gardevoir ex')]);
-    expect(t.weeks).toEqual(['2026-09-28', '2026-10-05']);
-    expect(t.series[0].values[0]).toBeCloseTo(2 / 3);
-    expect(t.series[0].values[1]).toBeCloseTo(1 / 3);
+    const online = metaTrend(d, F({ source: 'online' }), [idx('Gardevoir ex')]);
+    expect(online.weeks).toEqual(['2026-10-05']);
+    expect(online.series[0].values[0]).toBeCloseTo(1 / 3);
+    const offline = metaTrend(d, F({ source: 'offline' }), [idx('Gardevoir ex')]);
+    expect(offline.weeks).toEqual(['2026-09-28']);
+    expect(offline.series[0].values[0]).toBeCloseTo(2 / 3);
   });
 });
 
@@ -96,5 +104,16 @@ describe('cardUsage', () => {
     expect(zard).toMatchObject({ inclusion: 1, avgCount: 2.5 });
     const candy = u.cards.find((c) => l.cards[c.card].name === 'Rare Candy')!;
     expect(candy.inclusion).toBe(0.5);
+  });
+});
+
+describe('auto top cut', () => {
+  it('uses Top 8 online and in Japan, Top 10% in person', async () => {
+    const { resolveCut, cutLabel } = await import('../src/lib/analysis');
+    expect(resolveCut('auto', 'online')).toBe('top8');
+    expect(resolveCut('auto', 'japan')).toBe('top8');
+    expect(resolveCut('auto', 'offline')).toBe('top10pct');
+    expect(resolveCut('top32', 'offline')).toBe('top32');
+    expect(cutLabel({ topCut: 'auto', source: 'offline' })).toBe('Top 10%');
   });
 });

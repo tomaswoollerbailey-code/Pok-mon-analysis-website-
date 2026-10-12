@@ -20,7 +20,7 @@ test('meta overview shows the snapshot and full table', async ({ page }) => {
   await go(page, '');
   await expect(page.getByText('Meta snapshot')).toBeVisible();
   await expect(page.locator('.podium-card')).toHaveCount(3);
-  await expect(page.getByRole('heading', { name: 'All archetypes' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'All decks' })).toBeVisible();
   await expect(page.locator('table.data tbody tr').first()).toBeVisible();
 });
 
@@ -28,8 +28,9 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   await go(page, '');
   const sub = page.locator('.hero-sub');
   const before = await sub.textContent();
-  await page.getByRole('radio', { name: 'Online' }).click();
+  await page.getByRole('radio', { name: 'In person' }).click();
   await expect(sub).not.toHaveText(before!);
+  await page.getByRole('radio', { name: 'Online' }).click();
   // On phones the secondary filters sit behind the "Filters" button.
   const filters = page.locator('.filters-btn');
   if (await filters.isVisible()) await filters.click();
@@ -41,7 +42,23 @@ test('source filter and post-rotation toggle change the results', async ({ page 
 test('Japan view is separate and labelled', async ({ page }) => {
   await go(page, '');
   await page.getByRole('radio', { name: 'Japan' }).click();
-  await expect(page.getByText(/official City League results/)).toBeVisible();
+  await expect(page.getByText(/City League top finishes/)).toBeVisible();
+  await expect(page.locator('h1')).toContainText('in Japan');
+  await expect(page.getByRole('columnheader', { name: /Win rate/ })).toHaveCount(0);
+});
+
+test('only Online, In person and Japan tabs', async ({ page }) => {
+  await go(page, '');
+  await expect(page.getByRole('radio')).toHaveText(['Online', 'In person', 'Japan']);
+});
+
+test('matchups explain and switch when a source has no pairings', async ({ page }) => {
+  await go(page, '');
+  await page.getByRole('radio', { name: 'In person' }).click();
+  await go(page, 'matchups');
+  await expect(page.getByText('Matchups use online events')).toBeVisible();
+  await page.getByRole('button', { name: 'Show online data' }).click();
+  await expect(page.locator('table.heat td.cell').first()).toBeVisible();
 });
 
 test('trends draw a chart', async ({ page }) => {

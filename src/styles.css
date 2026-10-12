@@ -132,6 +132,15 @@ footer { max-width: 1240px; margin: 0 auto; width: 100%; padding: 20px 16px 32px
 .podium-stats { grid-area: stats; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
 .podium-stats b { color: var(--ink-2); font-weight: 600; }
 
+/* Source note and glossary */
+.source-note { margin: -4px 2px 0; font-size: 12.5px; color: var(--muted); }
+.source-note b { color: var(--ink-2); font-weight: 650; }
+.glossary { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; font-size: 12px; color: var(--muted); }
+.glossary div { display: flex; gap: 5px; }
+.glossary dt { font-weight: 650; color: var(--ink-2); }
+.glossary dd { margin: 0; }
+.online-only p { max-width: 560px; }
+
 /* Deck identity */
 .deck-name { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 550; min-width: 0; }
 a.deck-name:hover { color: var(--accent-ink); text-decoration: none; }
@@ -307,7 +316,7 @@ td.small { font-size: 12px; color: var(--ink-2); }
   /* Filters: source switch always visible; the rest behind one button. */
   .toolbar { padding: 8px; }
   .toolbar-row { gap: 8px; }
-  .toolbar .seg { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .toolbar .seg { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); }
   .toolbar .seg button { padding: 8px 4px; font-size: 13px; }
   .filters-btn { display: flex; align-items: center; gap: 8px; width: 100%; border: 0; background: var(--surface-2); border-radius: 10px; padding: 10px 12px; color: var(--ink-2); font-size: 13px; font-weight: 550; cursor: pointer; text-align: left; min-height: 44px; }
   .filters-summary { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

@@ -3,7 +3,7 @@ import { Logo } from './components/Brand';
 import { FilterBar } from './components/FilterBar';
 import { ThemeToggle } from './components/ThemeToggle';
 import { loadDataset } from './data';
-import { DEFAULT_FILTERS, formatsIn, type Filters } from './lib/analysis';
+import { DEFAULT_FILTERS, formatsIn, SOURCE_CAPS, type Filters } from './lib/analysis';
 import type { Dataset } from './lib/types';
 import { date } from './format';
 import { href, useRoute } from './router';
@@ -20,7 +20,9 @@ const FILTER_STORE = 'crowsnest.filters';
 function readFilters(): Filters {
   try {
     const v = JSON.parse(localStorage.getItem(FILTER_STORE) || 'null');
-    return v ? { ...DEFAULT_FILTERS, ...v } : DEFAULT_FILTERS;
+    if (!v) return DEFAULT_FILTERS;
+    const f = { ...DEFAULT_FILTERS, ...v };
+    return f.source in SOURCE_CAPS ? f : { ...f, source: DEFAULT_FILTERS.source }; // old 'all' value
   } catch {
     return DEFAULT_FILTERS;
   }
@@ -81,12 +83,10 @@ export function App() {
         ) : (
           <>
             {route.page !== 'tournament' && (
-              <FilterBar key={route.page} filters={effective} onChange={setFilters} formats={formats} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
+              <FilterBar key={route.page} filters={effective} onChange={setFilters} latest={latest} rotationLabel={data.rotation?.label} showTopCut={route.page !== 'trends' && route.page !== 'matchups' && route.page !== 'field'} />
             )}
-            {effective.source === 'japan' && route.page !== 'tournament' && (
-              <div className="notice" role="status">
-                Japan: official City League results (top finishers only, Japanese card pool, which runs about two months ahead of international releases). Shares are of top placements, not of all players. There’s no matchup or win-rate data.
-              </div>
+            {route.page !== 'tournament' && route.page !== 'matchups' && route.page !== 'field' && (
+              <p className="source-note"><b>{SOURCE_CAPS[effective.source].label}:</b> {SOURCE_CAPS[effective.source].blurb}</p>
             )}
             {effective.hideRotating && route.page !== 'tournaments' && data.rotation && (
               <div className="notice" role="status">
@@ -95,8 +95,8 @@ export function App() {
             )}
             {route.page === 'meta' && <MetaPage data={data} filters={effective} />}
             {route.page === 'trends' && <TrendsPage data={data} filters={effective} />}
-            {route.page === 'matchups' && <MatchupsPage data={data} filters={effective} />}
-            {route.page === 'field' && <FieldPage data={data} filters={effective} />}
+            {route.page === 'matchups' && <MatchupsPage data={data} filters={effective} onFilters={setFilters} />}
+            {route.page === 'field' && <FieldPage data={data} filters={effective} onFilters={setFilters} />}
             {route.page === 'tournaments' && <TournamentsPage data={data} filters={effective} />}
             {route.page === 'tournament' && <TournamentPage data={data} tKey={route.key} />}
             {route.page === 'deck' && <DeckPage data={data} filters={effective} aKey={route.key} />}

@@ -1,11 +1,11 @@
 import type { Currency } from './pricing';
 import type { ArchetypeLists, Dataset, ResultRow, Source } from './types';
 
-export type TopCut = 'top8' | 'top16' | 'top32' | 'top10pct';
+export type TopCut = 'auto' | 'top8' | 'top16' | 'top32' | 'top10pct';
 
 export interface Filters {
-  /** 'all' = international (online + in person); Japan is a different card pool, so it's kept apart. */
-  source: 'all' | Source;
+  /** Each source is analysed on its own: they publish different data (see SOURCE_CAPS). */
+  source: Source;
   format: string; // '' = any
   from: string; // YYYY-MM-DD, '' = open
   to: string;
@@ -18,24 +18,36 @@ export interface Filters {
 }
 
 export const DEFAULT_FILTERS: Filters = {
-  source: 'all',
+  source: 'online',
   format: 'STANDARD',
   from: '',
   to: '',
   minPlayers: 0,
-  topCut: 'top8',
+  topCut: 'auto',
   hideRotating: false,
   currency: 'usd',
 };
 
 export const TOP_CUT_LABELS: Record<TopCut, string> = {
+  auto: 'Auto',
   top8: 'Top 8',
   top16: 'Top 16',
   top32: 'Top 32',
   top10pct: 'Top 10%',
 };
 
-export function cutSize(cut: TopCut, players: number): number {
+/**
+ * "Auto" picks a cut that means something for the source: Top 8 for online events and City
+ * Leagues, Top 10% for in-person majors (a Top 8 of a 2,000-player Regional is 0.4% of the field).
+ */
+export function resolveCut(cut: TopCut, source: Source): Exclude<TopCut, 'auto'> {
+  return cut !== 'auto' ? cut : source === 'offline' ? 'top10pct' : 'top8';
+}
+
+/** Label for the cut actually in use, e.g. "Top 10%". */
+export const cutLabel = (f: Pick<Filters, 'topCut' | 'source'>) => TOP_CUT_LABELS[resolveCut(f.topCut, f.source)];
+
+export function cutSize(cut: Exclude<TopCut, 'auto'>, players: number): number {
   switch (cut) {
     case 'top8': return 8;
     case 'top16': return 16;
@@ -48,7 +60,7 @@ export function cutSize(cut: TopCut, players: number): number {
 export function tournamentMask(d: Dataset, f: Filters): boolean[] {
   return d.tournaments.map(
     (t) =>
-      (f.source === 'all' ? t.source !== 'japan' : t.source === f.source) &&
+      t.source === f.source &&
       (!f.format || t.format === f.format) &&
       (!f.from || t.date >= f.from) &&
       (!f.to || t.date <= f.to) &&
@@ -60,6 +72,22 @@ export function tournamentMask(d: Dataset, f: Filters): boolean[] {
 export function archetypeMask(d: Dataset, f: Filters): boolean[] {
   return d.archetypes.map((a) => !(f.hideRotating && a.rotation?.status === 'rotates'));
 }
+
+/** What each source can show. Pages use this to hide metrics a source doesn't publish. */
+export const SOURCE_CAPS: Record<Source, { label: string; events: string; matchups: boolean; conversion: boolean; blurb: string }> = {
+  online: {
+    label: 'Online', events: 'online events', matchups: true, conversion: true,
+    blurb: 'Limitless Play events with 32+ players and published decklists. Includes round-by-round results, so win rates and matchups are available.',
+  },
+  offline: {
+    label: 'In person', events: 'in-person majors', matchups: false, conversion: true,
+    blurb: 'Regionals, Internationals and Worlds from Limitless. Shares are of the published standings (mostly day-two and top finishers), and conversion uses the Top 10% by default. There are no round-by-round results, so no win rates or matchups.',
+  },
+  japan: {
+    label: 'Japan', events: 'City Leagues', matchups: false, conversion: false,
+    blurb: 'Official City League top finishes plus Champions League. Japan plays a different card pool (new sets arrive about two months earlier), so it previews the next international meta. Shares are of top placements.',
+  },
+};
 
 export interface ArchetypeStats {
   archetype: number;
@@ -100,7 +128,7 @@ export function metaSummary(d: Dataset, f: Filters): MetaSummary {
   for (const [ti, a, placing] of d.results) {
     if (!mask[ti] || (a >= 0 && !keep[a])) continue;
     players++;
-    const inCut = placing > 0 && placing <= cutSize(f.topCut, d.tournaments[ti].players);
+    const inCut = placing > 0 && placing <= cutSize(resolveCut(f.topCut, f.source), d.tournaments[ti].players);
     if (a < 0) continue;
     identified++;
     if (inCut) topCutSlots++;
@@ -218,7 +246,7 @@ export function cardUsage(
   let n = 0;
   for (const [ti, placing, cards] of lists.lists) {
     if (!mask[ti]) continue;
-    if (topCutOnly && !(placing > 0 && placing <= cutSize(f.topCut, d.tournaments[ti].players))) continue;
+    if (topCutOnly && !(placing > 0 && placing <= cutSize(resolveCut(f.topCut, f.source), d.tournaments[ti].players))) continue;
     n++;
     for (const [ci, count] of cards) {
       let u = by.get(ci);

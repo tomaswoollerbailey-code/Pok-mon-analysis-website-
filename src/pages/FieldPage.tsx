@@ -4,13 +4,14 @@ import { RotationBadge } from '../components/RotationBadge';
 import { fieldWinRates, isOther, metaSummary, SHRINK_GAMES, type Filters } from '../lib/analysis';
 import type { Dataset } from '../lib/types';
 import { int, pct } from '../format';
+import { OnlineOnly } from '../components/OnlineOnly';
 import { Empty } from './MetaPage';
 
 const FIELD_SIZE = 10;
 const CANDIDATES = 20;
 
 /** Expected field → expected win rate for every deck ("what should I play?"). */
-export function FieldPage({ data, filters }: { data: Dataset; filters: Filters }) {
+export function FieldPage({ data, filters, onFilters }: { data: Dataset; filters: Filters; onFilters: (f: Filters) => void }) {
   const meta = useMemo(() => metaSummary(data, filters), [data, filters]);
   const rows = meta.rows.filter((r) => !isOther(data, r.archetype));
   const top = rows.slice(0, FIELD_SIZE);
@@ -28,6 +29,7 @@ export function FieldPage({ data, filters }: { data: Dataset; filters: Filters }
   const results = useMemo(() => fieldWinRates(data, filters, field, other, candidates), [data, filters, JSON.stringify(field), other, candidates.join()]);
   const totalGames = results.reduce((s, r) => s + r.games, 0);
 
+  if (filters.source !== 'online') return <OnlineOnly what="Field planner results" filters={filters} onFilters={onFilters} />;
   if (!top.length) return <Empty />;
 
   return (

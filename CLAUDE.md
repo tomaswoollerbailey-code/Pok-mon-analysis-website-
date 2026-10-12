@@ -23,6 +23,7 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Meta tools only.** The collection tracker, CSV import and "Can I build?" were built, then **removed**. No collection or card-scanning features. |
 | 2026-10-12 | **Main user:** a competitive player preparing for an event. |
 | 2026-10-12 | **Data window:** completed Standard events since the last rotation. Online from 2026-03-26 (TCG Live), in person from 2026-04-10 (Play! Pokémon); G rotated out, H, I and J are legal. |
+| 2026-10-12 | **Three sources, never mixed:** Online (the default), In person and Japan. The "International" (combined) view was removed. Pages adapt via `SOURCE_CAPS`: in person and Japan hide win rates; Japan hides conversion; Matchups and the Field planner need Online and offer a one-tap switch. Top cut "Auto" = Top 8 online and in Japan, Top 10% in person. In-person shares are of the *listed* standings (mostly top finishers). |
 | 2026-10-12 | **Japan** is its own source (official City Leagues, plus JP-format majors like Champions League), never mixed into International. Pokecabook, the official Players site and weekly Gym Battles were rejected: same data or unreliable. |
 | 2026-10-12 | **Rotation preview** assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). Unconfirmed. "Post-rotation" toggle. |
 | 2026-10-12 | **Prices:** a daily snapshot of TCGplayer USD and Cardmarket EUR read from Limitless decklist pages, plus MYR converted from USD. "Live" prices come only via the TCGplayer mass-entry link. The Shiny app has no API, so Tom will email contact@getshiny.io himself. |
@@ -40,7 +41,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
 - **Deck pages:** rotation status, card usage (core cards, a rare-techs toggle, top-cut-only), deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
-- **Filters:** International, Online, In person or Japan; period ("Since rotation" by default); format; top cut; currency (USD, EUR, MYR); Post-rotation; and under "More", dates and minimum players.
+- **Filters:** Online, In person or Japan; period ("Since rotation" by default); top cut (Auto by default); currency (USD, EUR, MYR); Post-rotation; and under "More", dates and minimum players. A one-line source note under the filters explains what that source covers. The meta page shows a short glossary.
 - **Theme:** light, dark or system. Deck sprites are hotlinked from Limitless.
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 

@@ -40,8 +40,9 @@ describe('Japan in the dataset', () => {
     expect(d.archetypes.map((a) => a.name).sort()).toEqual(['Dragapult Dusknoir', 'Mega Lucario Hariyama']);
   });
 
-  it('keeps Japan out of the international view', () => {
-    expect(metaSummary(d, DEFAULT_FILTERS).players).toBe(1);
+  it('keeps Japan in its own view', () => {
+    expect(metaSummary(d, { ...DEFAULT_FILTERS, source: 'offline' }).players).toBe(1);
+    expect(metaSummary(d, DEFAULT_FILTERS).players).toBe(0); // default is Online
     expect(metaSummary(d, { ...DEFAULT_FILTERS, source: 'japan', minPlayers: 64 }).players).toBe(2);
   });
 });

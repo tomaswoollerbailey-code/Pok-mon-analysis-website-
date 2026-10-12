@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { DEFAULT_FILTERS, TOP_CUT_LABELS, type Filters, type TopCut } from '../lib/analysis';
+import { cutLabel, DEFAULT_FILTERS, TOP_CUT_LABELS, type Filters, type TopCut } from '../lib/analysis';
 
-export const SOURCE_LABELS = { all: 'International', online: 'Online', offline: 'In person', japan: 'Japan' } as const;
+export const SOURCE_LABELS = { online: 'Online', offline: 'In person', japan: 'Japan' } as const;
 
 const PRESETS: { label: string; days: number | null }[] = [
   { label: 'Last 14 days', days: 14 },
@@ -16,10 +16,9 @@ function daysAgo(latest: string, days: number) {
   return d.toISOString().slice(0, 10);
 }
 
-export function FilterBar({ filters, onChange, formats, latest, rotationLabel, showTopCut = true }: {
+export function FilterBar({ filters, onChange, latest, rotationLabel, showTopCut = true }: {
   filters: Filters;
   onChange: (f: Filters) => void;
-  formats: string[];
   /** e.g. "H regulation mark"; omitted when the dataset has no rotation info. */
   rotationLabel?: string;
   /** Most recent tournament date — presets count back from it so an old dataset still shows data. */
@@ -30,12 +29,12 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
   const activePreset = PRESETS.find((p) => (p.days == null ? !filters.from && !filters.to : filters.from === daysAgo(latest, p.days) && !filters.to));
   const custom = !!(filters.from || filters.to || filters.minPlayers);
   const [open, setOpen] = useState(false);
-  const summary = [activePreset?.label ?? 'Custom dates', filters.format ? filters.format[0] + filters.format.slice(1).toLowerCase() : 'Any format', filters.currency.toUpperCase(), filters.hideRotating ? 'Post-rotation' : ''].filter(Boolean).join(' · ');
+  const summary = [SOURCE_LABELS[filters.source], activePreset?.label ?? 'Custom dates', cutLabel(filters), filters.currency.toUpperCase(), filters.hideRotating ? 'Post-rotation' : ''].filter(Boolean).join(' · ');
   return (
     <div className={`toolbar ${open ? 'open' : ''}`} role="group" aria-label="Filters">
       <div className="toolbar-row">
         <div className="seg" role="radiogroup" aria-label="Source">
-          {(['all', 'online', 'offline', 'japan'] as const).map((s) => (
+          {(['online', 'offline', 'japan'] as const).map((s) => (
             <button key={s} role="radio" aria-checked={filters.source === s} className={filters.source === s ? 'on' : ''} onClick={() => set('source', s)}>
               {SOURCE_LABELS[s]}
             </button>
@@ -59,18 +58,11 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
             {!activePreset && <option value="custom">Custom</option>}
           </select>
         </label>
-        <label className="field-inline">
-          <span>Format</span>
-          <select value={filters.format} onChange={(e) => set('format', e.target.value)}>
-            <option value="">Any</option>
-            {formats.map((f) => <option key={f} value={f}>{f[0] + f.slice(1).toLowerCase()}</option>)}
-          </select>
-        </label>
         {showTopCut && (
           <label className="field-inline">
             <span>Cut</span>
             <select value={filters.topCut} onChange={(e) => set('topCut', e.target.value as TopCut)}>
-              {Object.entries(TOP_CUT_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+              {Object.entries(TOP_CUT_LABELS).map(([k, v]) => <option key={k} value={k}>{k === 'auto' ? `Auto (${cutLabel({ ...filters, topCut: 'auto' })})` : v}</option>)}
             </select>
           </label>
         )}
