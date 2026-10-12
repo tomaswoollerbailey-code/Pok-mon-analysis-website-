@@ -69,9 +69,22 @@ test('matchups explain and switch when a source has no pairings', async ({ page 
   await expect(page.locator('table.heat td.cell').first()).toBeVisible();
 });
 
-test('trends draw a chart', async ({ page }) => {
+test('trends show risers, fallers and every deck', async ({ page }) => {
   await go(page, 'trends');
-  await expect(page.locator('svg.line-chart path[stroke]').first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'What’s moving' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Rising' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Falling' })).toBeVisible();
+  await expect(page.locator('.mover-list li').first()).toBeVisible();
+  await expect(page.locator('.mover-list .delta').first()).toContainText('pts');
+  await expect(page.getByRole('heading', { name: 'Every deck' })).toBeVisible();
+});
+
+test('meta table has a trend column on desktop', async ({ page, isMobile }) => {
+  await go(page, '');
+  const header = page.getByRole('columnheader', { name: /Trend/ });
+  if (isMobile) { await expect(header).toBeHidden(); return; }
+  await expect(header).toBeVisible();
+  await expect(page.locator('main table.data .trend-cell svg.spark').first()).toBeVisible();
 });
 
 test('matchups render a heatmap of every deck for the period, with no extra pickers', async ({ page }) => {
