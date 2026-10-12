@@ -6,6 +6,7 @@ A static website that analyses the Pokémon TCG meta from both **online** and **
 | --- | --- | --- |
 | Online | [Limitless Play API](https://docs.limitlesstcg.com/developer.html) (`play.limitlesstcg.com/api`) | Standings, records, decklists, round-by-round pairings |
 | In person | [limitlesstcg.com/tournaments](https://limitlesstcg.com/tournaments) (HTML; no public API) | Standings, archetypes, decklists |
+| Japan | [limitlesstcg.com/tournaments/jp](https://limitlesstcg.com/tournaments/jp) (official City League results) | Top finishers and their decklists; no attendance or pairings |
 
 ## What the site shows
 
@@ -37,6 +38,7 @@ Run each step on its own if you want to tune it:
 ```bash
 npm run fetch:online  -- --days 60 --min-players 32 --format STANDARD   # optional: LIMITLESS_API_KEY=...
 npm run fetch:offline -- --days 90 --min-players 0 --format STANDARD   # --no-decklists for a quicker scrape
+npm run fetch:japan   -- --days 60
 npm run build:data
 ```
 

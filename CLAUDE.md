@@ -7,12 +7,13 @@
 - The owner wants Claude to do the work end to end: merge PRs and trigger workflows.
 
 ## What this is
-A Pokémon TCG meta analysis site built from Limitless data. Online events come from the Limitless Play API; in-person events are scraped from limitlesstcg.com.
+A Pokémon TCG meta analysis site built from Limitless data. Online events come from the Limitless Play API; in-person events are scraped from limitlesstcg.com; Japan comes from official City League results on limitlesstcg.com/tournaments/jp.
+- Japan is its own source (different card pool) and is excluded from the "International" view. It has top finishers only: no attendance, win rates or matchups.
 - Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/ (public repo, GitHub Pages via Actions)
 - Stack: Vite + React + TS. Static site; all analysis runs in the browser.
 
 ## Layout
-- `scripts/fetch-online.ts`, `scripts/fetch-offline.ts` → `data/raw/` (committed cache); `scripts/build-dataset.ts` → `public/data/` (built in CI, gitignored)
+- `scripts/fetch-online.ts`, `scripts/fetch-offline.ts`, `scripts/fetch-japan.ts` → `data/raw/` (committed cache); `scripts/build-dataset.ts` → `public/data/` (built in CI, gitignored)
 - `src/lib/`: parsers (`limitless/`), `build.ts`, `analysis.ts`, `rotation.ts` (rotating sets config), `decktext.ts` (TCG Live list parser, used by the deck checker)
 - `src/pages/`: Meta, Trends, Matchups, Tournaments, Deck
 - Workflows:

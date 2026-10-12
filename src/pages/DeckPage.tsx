@@ -1,3 +1,4 @@
+import { SOURCE_LABELS } from '../components/FilterBar';
 import { useEffect, useMemo, useState } from 'react';
 import { RotationBadge } from '../components/RotationBadge';
 import { SortTable } from '../components/SortTable';
@@ -106,7 +107,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
                   return (
                     <tr key={i}>
                       <td className="num">{r[2]}</td>
-                      <td><a href={href.tournament(t.key)}>{t.name}</a> <span className={`badge ${t.source}`}>{t.source === 'online' ? 'Online' : 'In person'}</span></td>
+                      <td><a href={href.tournament(t.key)}>{t.name}</a> <span className={`badge ${t.source}`}>{SOURCE_LABELS[t.source]}</span></td>
                       <td className="nowrap">{date(t.date)}</td>
                       <td className="num">{int(t.players)}</td>
                       <td className="num">{r[3] + r[4] + r[5] ? `${r[3]}-${r[4]}-${r[5]}` : '—'}</td>

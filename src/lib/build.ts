@@ -31,6 +31,15 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     return archIdx.get(key)!;
   };
 
+  // Japanese pages only show deck icons; reuse the international name for the same icon set.
+  const iconNames = new Map<string, string>();
+  for (const t of raw) for (const s of t.standings) {
+    const a = s.archetype;
+    if (a?.icons?.length && !a.fromIcons) iconNames.set(a.icons.join(' '), a.name);
+  }
+  const nameOf = (a: RawTournament['standings'][number]['archetype']) =>
+    a && a.fromIcons && a.icons ? iconNames.get(a.icons.join(' ')) ?? a.name : a?.name;
+
   const tournaments: TournamentInfo[] = [];
   const results: ResultRow[] = [];
   const matches: MatchRow[] = [];
@@ -56,7 +65,7 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     const playerArch = new Map<string, number>();
     const rows: StandingsFile['standings'] = [];
     for (const s of t.standings) {
-      const a = archetypeOf(s.archetype?.name);
+      const a = archetypeOf(nameOf(s.archetype));
       playerArch.set(s.playerId, a);
       const r = s.record ?? { wins: 0, losses: 0, ties: 0 };
       results.push([tIdx, a, s.placing ?? 0, r.wins, r.losses, r.ties]);

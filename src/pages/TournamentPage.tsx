@@ -1,3 +1,4 @@
+import { SOURCE_LABELS } from '../components/FilterBar';
 import { useEffect, useMemo, useState } from 'react';
 import { BarChart } from '../components/BarChart';
 import { loadStandings } from '../data';
@@ -34,12 +35,12 @@ export function TournamentPage({ data, tKey }: { data: Dataset; tKey: string }) 
         <a href={href.tournaments} className="back">← Tournaments</a>
         <h1>{t.name}</h1>
         <p>
-          {date(t.date)} · <span className={`badge ${t.source}`}>{t.source === 'online' ? 'Online' : 'In person'}</span> · {t.format}
+          {date(t.date)} · <span className={`badge ${t.source}`}>{SOURCE_LABELS[t.source]}</span> · {t.format}
           {t.organizer ? ` · ${t.organizer}` : ''} · <a href={t.url} target="_blank" rel="noreferrer">View on Limitless ↗</a>
         </p>
       </div>
       <div className="tiles">
-        <Tile label="Players" value={int(t.players)} />
+        {t.source === 'japan' ? <Tile label="Placings published" value={int(t.players)} note="Attendance not listed" /> : <Tile label="Players" value={int(t.players)} />}
         <Tile label="Archetypes" value={int(breakdown.length)} />
         {breakdown[0] && <Tile label="Most played" value={pct(breakdown[0].share)} note={name(breakdown[0].a)} />}
       </div>

@@ -162,6 +162,7 @@ table.data tr:hover td { background: var(--surface-2); }
 .badge::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
 .badge.online::before { background: var(--online); }
 .badge.offline::before { background: var(--offline); }
+.badge.japan::before { background: var(--series-3); }
 .usage { position: relative; display: inline-block; min-width: 64px; }
 .usage-bar { position: absolute; left: 0; bottom: -3px; height: 2px; background: var(--series-1); border-radius: 2px; }
 

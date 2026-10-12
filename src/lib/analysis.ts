@@ -3,6 +3,7 @@ import type { ArchetypeLists, Dataset, ResultRow, Source } from './types';
 export type TopCut = 'top8' | 'top16' | 'top32' | 'top10pct';
 
 export interface Filters {
+  /** 'all' = international (online + in person); Japan is a different card pool, so it's kept apart. */
   source: 'all' | Source;
   format: string; // '' = any
   from: string; // YYYY-MM-DD, '' = open
@@ -43,11 +44,11 @@ export function cutSize(cut: TopCut, players: number): number {
 export function tournamentMask(d: Dataset, f: Filters): boolean[] {
   return d.tournaments.map(
     (t) =>
-      (f.source === 'all' || t.source === f.source) &&
+      (f.source === 'all' ? t.source !== 'japan' : t.source === f.source) &&
       (!f.format || t.format === f.format) &&
       (!f.from || t.date >= f.from) &&
       (!f.to || t.date <= f.to) &&
-      t.players >= f.minPlayers,
+      (t.source === 'japan' || t.players >= f.minPlayers),
   );
 }
 

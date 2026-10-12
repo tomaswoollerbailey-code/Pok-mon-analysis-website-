@@ -1,5 +1,7 @@
 import { DEFAULT_FILTERS, TOP_CUT_LABELS, type Filters, type TopCut } from '../lib/analysis';
 
+export const SOURCE_LABELS = { all: 'International', online: 'Online', offline: 'In person', japan: 'Japan' } as const;
+
 const PRESETS: { label: string; days: number | null }[] = [
   { label: 'Last 14 days', days: 14 },
   { label: 'Last 30 days', days: 30 },
@@ -28,9 +30,9 @@ export function FilterBar({ filters, onChange, formats, latest, rotationLabel, s
   return (
     <div className="filter-bar" role="group" aria-label="Filters">
       <div className="seg" role="radiogroup" aria-label="Source">
-        {(['all', 'online', 'offline'] as const).map((s) => (
+        {(['all', 'online', 'offline', 'japan'] as const).map((s) => (
           <button key={s} role="radio" aria-checked={filters.source === s} className={filters.source === s ? 'on' : ''} onClick={() => set('source', s)}>
-            {s === 'all' ? 'All events' : s === 'online' ? 'Online' : 'In person'}
+            {SOURCE_LABELS[s]}
           </button>
         ))}
       </div>

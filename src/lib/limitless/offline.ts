@@ -138,11 +138,29 @@ function deckOf($: $, row: Row, cell: Row | undefined): RawStanding['archetype']
   const imgs = (link.length ? link : scope).find('img');
   const fromTitle = (link.attr('title') || link.attr('data-tooltip') || '').trim();
   const fromText = link.text().trim() || (cell?.text().trim() ?? '');
-  const fromImgs = imgs.toArray().map((i) => ($(i).attr('alt') || '').trim()).filter(Boolean).join(' ');
-  const name = dataDeck || fromTitle || fromText || fromImgs;
+  const icons = imgs.toArray().map((i) => ($(i).attr('alt') || '').trim().toLowerCase()).filter(Boolean);
+  const name = dataDeck || fromTitle || fromText || iconsToName(icons);
   if (!name) return null;
   const id = link.attr('href')?.match(/\/decks\/([^/?#]+)/)?.[1];
-  return { ...(id ? { id } : {}), name };
+  return {
+    ...(id ? { id } : {}),
+    name,
+    ...(icons.length ? { icons } : {}),
+    ...(!dataDeck && !fromTitle && !fromText && icons.length ? { fromIcons: true as const } : {}),
+  };
+}
+
+/** "lucario-mega", "hariyama" → "Mega Lucario Hariyama" (fallback when a page only shows icons). */
+export function iconsToName(icons: string[]): string {
+  const title = (w: string) => w.charAt(0).toUpperCase() + w.slice(1);
+  return icons
+    .map((icon) => {
+      const parts = icon.split('-');
+      const mega = parts.indexOf('mega');
+      if (mega > 0) parts.splice(mega, 1), parts.unshift('mega');
+      return parts.map(title).join(' ');
+    })
+    .join(' ');
 }
 
 /** Parse the standings table on a limitlesstcg.com/tournaments/{id} page. */
@@ -171,12 +189,47 @@ export function parseStandings(html: string): OfflineStanding[] {
         placing,
         ...(rec ? { record: { wins: +rec[1], losses: +rec[2], ties: +rec[3] } } : {}),
         archetype: deckOf($, row, cell('deck')),
-        ...(listHref ? { listId: listHref.match(/\/decks\/list\/([^/?#]+)/)![1] } : {}),
+        ...(listHref ? { listId: listHref.match(/\/decks\/list\/((?:jp\/)?[^/?#]+)/)![1] } : {}),
       });
     });
     if (rows.length > best.length) best = rows;
   });
   return best;
+}
+
+export interface JapanTournamentSummary {
+  id: string;
+  name: string;
+  date: string;
+  prefecture?: string;
+  shop?: string;
+  url: string;
+}
+
+/** Parse limitlesstcg.com/tournaments/jp (official City League results). */
+export function parseJapanTournamentList(html: string): JapanTournamentSummary[] {
+  const $ = cheerio.load(html);
+  const out = new Map<string, JapanTournamentSummary>();
+  $('tr').each((_, tr) => {
+    const row = $(tr);
+    const href = row.find('a[href*="/tournaments/jp/"]').first().attr('href') || '';
+    const id = href.match(/\/tournaments\/jp\/(\d+)/)?.[1];
+    if (!id) return;
+    const cells = row.find('td');
+    const date = parseDate(row.attr('data-date') || '') ?? parseDate(cells.eq(0).text());
+    if (!date) return;
+    const prefecture = (row.attr('data-city') || cells.eq(1).text()).trim() || undefined;
+    const shop = (row.attr('data-shop') || cells.eq(2).text()).trim() || undefined;
+    out.set(id, {
+      id,
+      name: `City League ${prefecture ?? id}`,
+      date,
+      ...(prefecture ? { prefecture } : {}),
+      ...(shop ? { shop } : {}),
+      url: `${LIMITLESS_SITE}/tournaments/jp/${id}`,
+    });
+  });
+  return [...out.values()];
 }
 
 /** Pull tournament metadata (name, date, player count) from a tournament page header. */
