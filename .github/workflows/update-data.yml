@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       online_days: { description: 'Online look-back (days)', default: '60' }
-      offline_days: { description: 'In-person look-back (days)', default: '180' }
+      offline_days: { description: 'In-person look-back (days)', default: '90' }
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
         run: npm run fetch:online -- --days ${{ inputs.online_days || '60' }}
       - name: Fetch in-person tournaments (limitlesstcg.com)
         continue-on-error: true
-        run: npm run fetch:offline -- --days ${{ inputs.offline_days || '180' }}
+        run: npm run fetch:offline -- --days ${{ inputs.offline_days || '90' }}
       - name: Check the dataset builds
         run: npm run build:data
       - name: Commit raw data

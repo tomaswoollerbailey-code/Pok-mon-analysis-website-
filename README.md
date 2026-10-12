@@ -29,7 +29,7 @@ Run each step on its own if you want to tune it:
 
 ```bash
 npm run fetch:online  -- --days 60 --min-players 32 --format STANDARD   # optional: LIMITLESS_API_KEY=...
-npm run fetch:offline -- --days 365 --min-players 0 --format STANDARD   # --no-decklists for a quicker scrape
+npm run fetch:offline -- --days 90 --min-players 0 --format STANDARD   # --no-decklists for a quicker scrape
 npm run build:data
 ```
 
