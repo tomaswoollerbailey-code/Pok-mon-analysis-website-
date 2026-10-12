@@ -8,6 +8,8 @@ import { href, useRoute } from './router';
 import { DeckPage } from './pages/DeckPage';
 import { MatchupsPage } from './pages/MatchupsPage';
 import { MetaPage } from './pages/MetaPage';
+import { BuildPage } from './pages/BuildPage';
+import { CollectionPage } from './pages/CollectionPage';
 import { TournamentPage } from './pages/TournamentPage';
 import { TournamentsPage } from './pages/TournamentsPage';
 import { TrendsPage } from './pages/TrendsPage';
@@ -28,6 +30,8 @@ const NAV = [
   { page: 'trends', label: 'Trends', href: href.trends },
   { page: 'matchups', label: 'Matchups', href: href.matchups },
   { page: 'tournaments', label: 'Tournaments', href: href.tournaments },
+  { page: 'build', label: 'Can I build?', href: href.build },
+  { page: 'collection', label: 'Collection', href: href.collection },
 ] as const;
 
 export function App() {
@@ -58,7 +62,9 @@ export function App() {
       </header>
 
       <main>
-        {error ? (
+        {route.page === 'collection' ? (
+          <CollectionPage />
+        ) : error ? (
           <NoData error={error} />
         ) : !data ? (
           <div className="card loading">Loading tournament data…</div>
@@ -77,6 +83,7 @@ export function App() {
             {route.page === 'meta' && <MetaPage data={data} filters={effective} />}
             {route.page === 'trends' && <TrendsPage data={data} filters={effective} />}
             {route.page === 'matchups' && <MatchupsPage data={data} filters={effective} />}
+            {route.page === 'build' && <BuildPage data={data} filters={effective} />}
             {route.page === 'tournaments' && <TournamentsPage data={data} filters={effective} />}
             {route.page === 'tournament' && <TournamentPage data={data} tKey={route.key} />}
             {route.page === 'deck' && <DeckPage data={data} filters={effective} aKey={route.key} />}
