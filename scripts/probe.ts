@@ -62,6 +62,25 @@ await step('offline: list URL variants', async () => {
     console.log(`${q}: ${parsed.length} tournaments, oldest ${parsed.at(-1)?.date}`);
   }
 });
+let jpId = '';
+await step('japan: tournament list', async () => {
+  const html = await get(`${LIMITLESS_SITE}/tournaments/jp`, 'text');
+  structure(html);
+  const $ = cheerio.load(html);
+  console.log('links:', $('a[href*="/tournaments/jp"]').toArray().slice(0, 12).map((a) => $(a).attr('href')).join('  '));
+  const parsed = parseTournamentList(html);
+  console.log(`parsed ${parsed.length}; first 3:`, JSON.stringify(parsed.slice(0, 3)));
+  jpId = $('a[href^="/tournaments/jp/"]').first().attr('href')?.split('/').pop() ?? '';
+});
+await step(`japan: tournament ${jpId}`, async () => {
+  if (!jpId) throw new Error('no jp id');
+  const html = await get(`${LIMITLESS_SITE}/tournaments/jp/${jpId}`, 'text');
+  structure(html);
+  const $ = cheerio.load(html);
+  console.log('infobox:', clip($('.infobox, [class*="info"]').first().text().replace(/\s+/g, ' '), 600));
+  console.log('parsed standings:', JSON.stringify(parseStandings(html).slice(0, 3)));
+  console.log('list links:', $('a[href*="/decks/list"]').toArray().slice(0, 5).map((a) => $(a).attr('href')).join('  '));
+});
 let onlineId = '';
 await step('online: tournaments', async () => {
   const list = await get(`${PLAY_API}/tournaments?game=PTCG&format=STANDARD&limit=50`);
