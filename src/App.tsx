@@ -10,6 +10,7 @@ import { pageMeta } from './lib/seo';
 import { href, useRoute } from './router';
 import { DeckPage } from './pages/DeckPage';
 import { MatchupsPage } from './pages/MatchupsPage';
+import { ReportPage } from './pages/ReportPage';
 import { MethodologyPage } from './pages/MethodologyPage';
 import { MetaPage } from './pages/MetaPage';
 import { FieldPage } from './pages/FieldPage';
@@ -32,11 +33,12 @@ function readFilters(): Filters {
 }
 
 const NAV = [
-  { page: 'meta', label: 'Meta', short: 'Meta', href: href.meta },
-  { page: 'trends', label: 'Trends', short: 'Trends', href: href.trends },
-  { page: 'matchups', label: 'Matchups', short: 'Matchups', href: href.matchups },
-  { page: 'field', label: 'Field planner', short: 'Planner', href: href.field },
-  { page: 'tournaments', label: 'Tournaments', short: 'Events', href: href.tournaments },
+  { page: 'meta', label: 'Meta', short: 'Meta', href: href.meta, tab: true },
+  { page: 'trends', label: 'Trends', short: 'Trends', href: href.trends, tab: true },
+  { page: 'matchups', label: 'Matchups', short: 'Matchups', href: href.matchups, tab: true },
+  { page: 'field', label: 'Field planner', short: 'Planner', href: href.field, tab: true },
+  { page: 'tournaments', label: 'Tournaments', short: 'Events', href: href.tournaments, tab: true },
+  { page: 'report', label: 'Weekly report', short: 'Report', href: href.report, tab: false },
 ] as const;
 
 export function App() {
@@ -80,7 +82,7 @@ export function App() {
       </header>
 
       <nav className="tabbar" aria-label="Sections">
-        {NAV.map((n) => (
+        {NAV.filter((n) => n.tab).map((n) => (
           <a key={n.page} href={n.href} className={active === n.page ? 'on' : ''} aria-current={active === n.page ? 'page' : undefined}>
             <TabIcon page={n.page} />
             <span>{n.short}</span>
@@ -91,6 +93,8 @@ export function App() {
       <main>
         {route.page === 'methodology' ? (
           <MethodologyPage data={data} />
+        ) : route.page === 'report' && data?.tournaments.length ? (
+          <ReportPage data={data} />
         ) : error ? (
           <NoData error={error} />
         ) : !data ? (
@@ -123,7 +127,7 @@ export function App() {
 
       <footer>
         Tournament data from <a href="https://limitlesstcg.com" target="_blank" rel="noreferrer">Limitless TCG</a> (in person) and{' '}
-        <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online). <a href={href.methodology}>How the numbers work</a>.
+        <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online). <a href={href.report}>Weekly report</a>. <a href={href.methodology}>How the numbers work</a>.
         {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>}
         {data?.format && <> Covers completed Standard events since the {data.format.rotatedYear} rotation ({data.format.marks} marks legal): online from {date(data.format.online)}, offline from {date(data.format.inPerson)}.{data.rotation?.year ? ` The next rotation is expected in ${data.rotation.year} (${data.rotation.label}).` : ''}</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
       </footer>
@@ -155,6 +159,7 @@ function TabIcon({ page }: { page: string }) {
     trends: 'M3 17l6-6 4 4 8-8M15 7h6v6',
     matchups: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
     field: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2z',
+    report: 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7',
     tournaments: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4',
   };
   return (

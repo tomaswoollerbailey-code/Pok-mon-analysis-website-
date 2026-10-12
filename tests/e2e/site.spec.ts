@@ -225,3 +225,15 @@ test('methodology page explains the numbers and is linked from the footer', asyn
   await expect(page.locator('.filters-btn')).toHaveCount(0);
   await expect(page).toHaveTitle(/Methodology/);
 });
+
+test('weekly report shows top decks, movers and winners, and is linked from the footer', async ({ page }) => {
+  await go(page, '');
+  await page.locator('footer').getByRole('link', { name: 'Weekly report' }).click();
+  await expect(page.getByText(/Weekly report · /)).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Top decks' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Risers' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Fallers' })).toBeVisible();
+  await expect(page.locator('.winner-list li').first()).toBeVisible();
+  await expect(page.locator('.filters-btn')).toHaveCount(0);
+  await expect(page).toHaveTitle(/weekly meta report/);
+});

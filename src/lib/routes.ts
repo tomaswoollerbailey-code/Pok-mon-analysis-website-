@@ -6,6 +6,7 @@ export type Route =
   | { page: 'tournaments' }
   | { page: 'field' }
   | { page: 'methodology' }
+  | { page: 'report' }
   | { page: 'tournament'; key: string }
   | { page: 'deck'; key: string };
 
@@ -16,7 +17,7 @@ export function parsePath(path: string): Route {
   const [page, key] = path.replace(/^\/+|\/+$/g, '').split('/');
   if (page === SEGMENTS.tournaments && key) return { page: 'tournament', key: decodeURIComponent(key) };
   if (page === SEGMENTS.decks && key) return { page: 'deck', key: decodeURIComponent(key) };
-  if (page === 'trends' || page === 'matchups' || page === 'tournaments' || page === 'field' || page === 'methodology') return { page };
+  if (page === 'trends' || page === 'matchups' || page === 'tournaments' || page === 'field' || page === 'methodology' || page === 'report') return { page };
   return { page: 'meta' };
 }
 

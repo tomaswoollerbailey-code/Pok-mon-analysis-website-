@@ -14,6 +14,7 @@ export const href = {
   tournaments: url('tournaments'),
   field: url('field'),
   methodology: url('methodology'),
+  report: url('report'),
   tournament: (key: string) => url(routePath({ page: 'tournament', key })),
   deck: (key: string) => url(routePath({ page: 'deck', key })),
 };

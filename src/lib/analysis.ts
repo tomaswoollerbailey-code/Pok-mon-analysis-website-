@@ -265,6 +265,63 @@ export function metaMovers(d: Dataset, f: Filters, days?: number): Movers | null
   return { days: w, now: { from: nowFrom, to: latest }, before: { from: beforeFrom, to: shiftDays(nowFrom, -1) }, rows };
 }
 
+export interface ReportWinner {
+  tournament: number;
+  /** Winning archetype, or -1 when the winner's deck is unknown. */
+  archetype: number;
+}
+
+export interface WeeklyReport {
+  /** The seven days the report covers (ends on the newest online event). */
+  from: string;
+  to: string;
+  events: number;
+  players: number;
+  /** Online decks by share this week, with how each moved vs the week before. */
+  top: (ArchetypeStats & { before: number; delta: number })[];
+  risers: Mover[];
+  fallers: Mover[];
+  /** Events from this window (online and offline), biggest first. */
+  winners: ReportWinner[];
+  /** Events the window held, before the list is cut down. */
+  totalEvents: number;
+}
+
+/** Share change below this many points is not worth calling a riser or faller. */
+const REPORT_MIN_DELTA = 0.002;
+
+/**
+ * The weekly report: the latest 7 days of online data against the 7 before it. Independent of the
+ * user's filters (the page has none), so it reads the same for everyone and can be prerendered.
+ */
+export function weeklyReport(d: Dataset, base: Filters = DEFAULT_FILTERS): WeeklyReport | null {
+  const online: Filters = { ...base, source: 'online', periodDays: null, from: '', to: '', minPlayers: 0 };
+  const dates = d.tournaments.filter((_, i) => tournamentMask(d, online)[i]).map((t) => t.date).sort();
+  if (!dates.length) return null;
+  const to = dates[dates.length - 1], from = shiftDays(to, -6);
+  const week: Filters = { ...online, from, to };
+  const m = metaSummary(d, week);
+  const movers = metaMovers(d, { ...online, from: shiftDays(to, -13) }, 7);
+  if (!m.tournaments || !movers) return null;
+  const move = new Map(movers.rows.map((r) => [r.archetype, r]));
+  const top = m.rows
+    .filter((r) => !isOther(d, r.archetype))
+    .slice(0, 8)
+    .map((r) => ({ ...r, before: move.get(r.archetype)?.before ?? 0, delta: move.get(r.archetype)?.delta ?? 0 }));
+  const solid = movers.rows.filter((r) => r.players >= MOVER_MIN_PLAYERS);
+  const risers = solid.filter((r) => r.delta >= REPORT_MIN_DELTA).slice(0, 3);
+  const fallers = solid.filter((r) => r.delta <= -REPORT_MIN_DELTA).slice(-3).reverse();
+  // Winners from every source in the window: offline majors are the headline results.
+  const inWindow = d.tournaments.map((t, i) => [t, i] as const).filter(([t]) => t.format === online.format && t.date >= from && t.date <= to);
+  const winnerOf = new Map<number, number>();
+  for (const [ti, a, placing] of d.results) if (placing === 1) winnerOf.set(ti, a);
+  const winners = inWindow
+    .sort((x, y) => y[0].players - x[0].players)
+    .slice(0, 8)
+    .map(([, ti]): ReportWinner => ({ tournament: ti, archetype: winnerOf.get(ti) ?? -1 }));
+  return { from, to, events: m.tournaments, players: m.players, top, risers, fallers, winners, totalEvents: inWindow.length };
+}
+
 export interface MatchupCell {
   wins: number;
   losses: number;
