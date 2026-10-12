@@ -1,0 +1,6 @@
+node_modules/
+dist/
+# Built from data/raw/ by `npm run build:data` (CI builds it before deploying).
+public/data/
+*.log
+.DS_Store
