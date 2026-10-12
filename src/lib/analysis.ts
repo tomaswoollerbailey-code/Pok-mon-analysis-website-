@@ -80,15 +80,15 @@ export type View = 'all' | Source;
 export const SOURCE_CAPS: Record<View, { label: string; events: string; matchups: boolean; blurb: string }> = {
   all: {
     label: 'All', events: 'events', matchups: true,
-    blurb: 'Online and offline events together. Win rates and matchups come from the online events, which publish round-by-round results. "Auto" cut is Top 8 online and Top 10% offline.',
+    blurb: 'Online and offline together. Win rates and matchups use the online games.',
   },
   online: {
     label: 'Online', events: 'online events', matchups: true,
-    blurb: 'Limitless Play events with 32+ players and published decklists, with round-by-round results.',
+    blurb: 'Limitless Play events with 32+ players.',
   },
   offline: {
     label: 'Offline', events: 'offline majors', matchups: false,
-    blurb: 'Regionals, Internationals and Worlds. Shares are of the published standings (mostly top finishers); conversion uses the Top 10%. No round-by-round results, so no win rates or matchups.',
+    blurb: 'Regionals, Internationals and Worlds. No win rates: these events don’t publish round-by-round results.',
   },
 };
 
