@@ -3,6 +3,7 @@
 ## Working with the owner
 - Keep replies **short and clear**: a few bullets, no long explanations. The owner has little time to read.
 - Build features first and polish the design later.
+- **Focus: meta tools only.** The main user is a competitive player preparing for an event. No collection tracker (removed Oct 2026); don't add collection or scanning features.
 - The owner wants Claude to do the work end to end: merge PRs and trigger workflows.
 
 ## What this is
@@ -12,8 +13,8 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 
 ## Layout
 - `scripts/fetch-online.ts`, `scripts/fetch-offline.ts` → `data/raw/` (committed cache); `scripts/build-dataset.ts` → `public/data/` (built in CI, gitignored)
-- `src/lib/`: parsers (`limitless/`), `build.ts`, `analysis.ts`, `rotation.ts` (rotating sets config), `collection.ts`, `csv.ts`, `decktext.ts`
-- `src/pages/`: Meta, Trends, Matchups, Tournaments, Deck, Collection, Can I build?
+- `src/lib/`: parsers (`limitless/`), `build.ts`, `analysis.ts`, `rotation.ts` (rotating sets config), `decktext.ts` (TCG Live list parser, used by the deck checker)
+- `src/pages/`: Meta, Trends, Matchups, Tournaments, Deck
 - Workflows:
   - `update-data.yml`: daily fetch and commit; online 60 days, in-person 90 days, capped per run
   - `deploy.yml`: builds and deploys Pages after each data update or push to main
@@ -23,11 +24,10 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 ## Notes
 - The dev sandbox can't reach Limitless or github.io. Check parsers through the Probe workflow logs.
 - Rotation assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). This is unconfirmed; change it in `src/lib/rotation.ts`.
-- Collection CSV importers haven't been checked against real app exports yet.
 - Run `npm test` before every push.
 
 ## Roadmap (agreed next)
 1. Deck checker: paste a list and compare it with the meta version.
 2. Expected win rate vs the field (matchups × meta share).
 3. What should I play? (best deck or counter-pick for an expected field).
-Later: tech finder, card lookup, regional meta, budget view, card scanning, design polish. Also fetch in-person decklists from each event's single decklists page instead of one page per player.
+Later: tech finder, card lookup, regional meta, budget view, design polish. Also fetch in-person decklists from each event's single decklists page instead of one page per player.
