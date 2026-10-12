@@ -127,6 +127,22 @@ test('deck page shows rotation year, price and a TCGplayer link, but no card usa
   await expect(page.getByRole('link', { name: /Buy on TCGplayer/ })).toHaveAttribute('href', /tcgplayer\.com\/massentry/);
 });
 
+test('deck page shows the average list, recent lists and copies it for TCG Live', async ({ page, context, browserName }) => {
+  if (browserName === 'chromium') await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await go(page, 'decks/deck-charlie');
+  await expect(page.getByRole('heading', { name: 'Decklist' })).toBeVisible();
+  await expect(page.locator('.decklist-col').first()).toBeVisible();
+  const picker = page.getByRole('combobox', { name: 'Which list' });
+  await expect(picker.locator('option')).not.toHaveCount(1);
+  await page.getByRole('button', { name: 'Copy for TCG Live' }).click();
+  await expect(page.getByRole('button', { name: 'Copied ✓' })).toBeVisible();
+  const text = await page.evaluate(() => navigator.clipboard.readText());
+  expect(text).toMatch(/^Pokémon: \d+\n/);
+  expect(text).toMatch(/Total Cards: \d+\n$/);
+  await picker.selectOption({ index: 1 });
+  await expect(page.locator('.card-head p').filter({ hasText: 'player event' })).toBeVisible();
+});
+
 test('tournament search and detail page', async ({ page }) => {
   await go(page, 'tournaments');
   await page.getByRole('searchbox').fill('online event 1');
@@ -182,6 +198,7 @@ test('every page is prerendered with its own title, description and canonical', 
   expect(html).toMatch(/<meta name="description" content="Deck Charlie:/);
   expect(html).toContain('<link rel="canonical" href="http://localhost:4174/decks/deck-charlie/"');
   expect(html).toMatch(/<h1>Deck Charlie deck list/);
+  expect(html).toMatch(/<h2>Average decklist \(\d+ lists\)<\/h2><pre>Pokémon: \d+/);
   const sitemap = await (await request.get('./sitemap.xml')).text();
   expect(sitemap).toContain('/decks/deck-charlie/</loc>');
   expect(await (await request.get('./robots.txt')).text()).toContain('Sitemap:');

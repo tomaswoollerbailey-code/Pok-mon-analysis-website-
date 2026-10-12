@@ -1,6 +1,7 @@
 import { DeckIcons } from '../components/Brand';
 import { SOURCE_LABELS } from '../components/FilterBar';
 import { useEffect, useMemo, useState } from 'react';
+import { DeckList } from '../components/DeckList';
 import { DeckPrice } from '../components/DeckPrice';
 import { RotationBadge } from '../components/RotationBadge';
 import { loadLists } from '../data';
@@ -60,6 +61,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
         </div>
       )}
 
+      {aKey !== 'other' && lists && lists !== 'none' && <DeckList data={data} filters={filters} lists={lists} />}
       {aKey !== 'other' && lists && lists !== 'none' && <DeckPrice data={data} filters={filters} lists={lists} />}
 
       <section className="card">

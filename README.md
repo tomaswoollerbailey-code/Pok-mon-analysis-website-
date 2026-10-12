@@ -18,7 +18,7 @@ Only completed Standard events since the last rotation count (April 2026: G mark
 - **Matchups**: a deck-vs-deck win-rate heatmap from online pairings, covering every deck with at least 1% of the field in the chosen period.
 - **Field planner**: set the field you expect and every deck is ranked by expected win rate against it ("what should I play?").
 - **Tournaments**: a searchable event list; each event page shows its deck breakdown and standings.
-- **Deck pages**: rotation status, a price breakdown of a real recent list (with a TCGplayer buy link and per-card Cardmarket links), and best finishes.
+- **Deck pages**: the average list (or a recent top list) with a Copy for TCG Live button, rotation status, a price breakdown of a real recent list (with a TCGplayer buy link and per-card Cardmarket links), and best finishes.
 
 Offline hides win rates (no pairings), and Matchups and the Field planner ask you to switch to Online. Win rate counts games against other decks only (mirrors excluded, ties as half). Archetype names are normalised (case, accents and punctuation are ignored), so the same deck from different events is merged. Limitless's catch-all "Other" deck is shown in tables but left out of rankings.
 
