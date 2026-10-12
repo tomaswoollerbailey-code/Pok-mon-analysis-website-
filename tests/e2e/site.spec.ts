@@ -119,28 +119,28 @@ test('field planner re-ranks when the field changes and expands a breakdown', as
   await expect(page.locator('tr.detail').getByText('Everything else')).toBeVisible();
 });
 
-test('deck page shows rotation year, price and a TCGplayer link, but no card usage', async ({ page }) => {
+test('deck page shows rotation year but no price or card usage', async ({ page }) => {
   await go(page, 'decks/deck-charlie');
   await expect(page.getByRole('heading', { name: 'Card usage' })).toHaveCount(0);
   await expect(page.locator('.rot-line')).toContainText('2027');
-  await expect(page.getByText(/Deck price:/)).toBeVisible();
-  await expect(page.getByRole('link', { name: /Buy on TCGplayer/ })).toHaveAttribute('href', /tcgplayer\.com\/massentry/);
+  await expect(page.getByText(/Deck price:/)).toHaveCount(0);
+  await expect(page.getByRole('link', { name: /Buy on TCGplayer/ })).toHaveCount(0);
 });
 
-test('deck page shows the average list, recent lists and copies it for TCG Live', async ({ page, context, browserName }) => {
+test('deck page shows top finishes and most-played lists, and copies one for TCG Live', async ({ page, context, browserName }) => {
   if (browserName === 'chromium') await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await go(page, 'decks/deck-charlie');
-  await expect(page.getByRole('heading', { name: 'Decklist' })).toBeVisible();
-  await expect(page.locator('.decklist-col').first()).toBeVisible();
-  const picker = page.getByRole('combobox', { name: 'Which list' });
-  await expect(picker.locator('option')).not.toHaveCount(1);
-  await page.getByRole('button', { name: 'Copy for TCG Live' }).click();
+  await expect(page.getByRole('heading', { name: 'Decklists' })).toBeVisible();
+  await expect(page.locator('.list-item').first()).toBeVisible();
+  await expect(page.locator('.decklist-col').first()).toBeVisible(); // the best list opens by default
+  await page.getByRole('button', { name: 'Top 16' }).click();
+  await page.getByRole('button', { name: 'Copy for TCG Live' }).first().click();
   await expect(page.getByRole('button', { name: 'Copied ✓' })).toBeVisible();
   const text = await page.evaluate(() => navigator.clipboard.readText());
   expect(text).toMatch(/^Pokémon: \d+\n/);
   expect(text).toMatch(/Total Cards: \d+\n$/);
-  await picker.selectOption({ index: 1 });
-  await expect(page.locator('.card-head p').filter({ hasText: 'player event' })).toBeVisible();
+  await page.getByRole('button', { name: 'Most played' }).click();
+  await expect(page.getByRole('button', { name: 'Top 16' })).toHaveCount(0);
 });
 
 test('tournament search and detail page', async ({ page }) => {
@@ -194,11 +194,11 @@ test('old #/ links redirect to the new URLs', async ({ page }) => {
 
 test('every page is prerendered with its own title, description and canonical', async ({ request }) => {
   const html = await (await request.get('./decks/deck-charlie/')).text();
-  expect(html).toMatch(/<title>Deck Charlie deck list, meta share &amp; price/);
+  expect(html).toMatch(/<title>Deck Charlie deck list, meta share &amp; top finishes/);
   expect(html).toMatch(/<meta name="description" content="Deck Charlie:/);
   expect(html).toContain('<link rel="canonical" href="http://localhost:4174/decks/deck-charlie/"');
   expect(html).toMatch(/<h1>Deck Charlie deck list/);
-  expect(html).toMatch(/<h2>Average decklist \(\d+ lists\)<\/h2><pre>Pokémon: \d+/);
+  expect(html).toMatch(/<h2>Top decklist: #\d+ at [^<]+<\/h2><pre>Pokémon: \d+/);
   const sitemap = await (await request.get('./sitemap.xml')).text();
   expect(sitemap).toContain('/decks/deck-charlie/</loc>');
   expect(await (await request.get('./robots.txt')).text()).toContain('Sitemap:');

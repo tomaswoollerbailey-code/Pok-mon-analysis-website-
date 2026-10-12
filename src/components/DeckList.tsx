@@ -1,26 +1,19 @@
 import { useMemo, useState } from 'react';
+import { href } from '../router';
 import { tournamentMask, type Filters } from '../lib/analysis';
-import { averageList, deckText, listCards, topLists, type DeckCard } from '../lib/decklist';
-import type { ArchetypeLists, CardCategory, Dataset } from '../lib/types';
-import { date, int, pct } from '../format';
+import { commonLists, deckText, listCards, topLists } from '../lib/decklist';
+import type { ArchetypeLists, CardCategory, Dataset, ListRow } from '../lib/types';
+import { date, int } from '../format';
+import { SOURCE_LABELS } from './FilterBar';
 
-const ORDINAL = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
 const HEAD: Record<CardCategory, string> = { pokemon: 'Pokémon', trainer: 'Trainers', energy: 'Energy' };
+const CUTS = [8, 16, 32];
+const PAGE = 10;
 
-/** The deck's list: the average list or a recent top list, with a one-tap copy for Pokémon TCG Live. */
-export function DeckList({ data, filters, lists }: { data: Dataset; filters: Filters; lists: ArchetypeLists }) {
-  const mask = useMemo(() => tournamentMask(data, filters), [data, filters]);
-  const inPeriod = useMemo(() => lists.lists.filter((r) => mask[r[0]]), [lists, mask]);
-  const avg = useMemo(() => averageList(lists.cards, inPeriod), [lists, inPeriod]);
-  const tops = useMemo(() => topLists(data, lists, mask), [data, lists, mask]);
-  const [pick, setPick] = useState<'avg' | number>('avg');
+/** The cards of one real list, with a one-tap copy for Pokémon TCG Live. */
+function ListBody({ lists, row }: { lists: ArchetypeLists; row: ListRow }) {
   const [copied, setCopied] = useState(false);
-  if (!avg) return null;
-
-  const chosen = pick === 'avg' || !tops[pick] ? null : tops[pick];
-  const cards: DeckCard[] = chosen ? listCards(lists.cards, chosen) : avg.cards;
-  const label = (i: number) => { const r = tops[i], t = data.tournaments[r[0]]; return `${ORDINAL(r[1])} · ${t.name} · ${date(t.date)}`; };
-
+  const cards = useMemo(() => listCards(lists.cards, row), [lists, row]);
   const copy = async () => {
     const text = deckText(cards);
     try { await navigator.clipboard.writeText(text); } catch {
@@ -30,26 +23,8 @@ export function DeckList({ data, filters, lists }: { data: Dataset; filters: Fil
     }
     setCopied(true); setTimeout(() => setCopied(false), 2000);
   };
-
   return (
-    <section className="card">
-      <header className="card-head row">
-        <div>
-          <h2>Decklist</h2>
-          <p>
-            {chosen
-              ? `${int(data.tournaments[chosen[0]].players)}-player event.`
-              : `The average of ${int(avg.lists)} lists in this period: each card's average copies, rounded to a full deck. % = share of lists playing it.`}
-          </p>
-        </div>
-        <div className="decklist-actions">
-          <select aria-label="Which list" value={String(pick)} onChange={(e) => setPick(e.target.value === 'avg' ? 'avg' : Number(e.target.value))}>
-            <option value="avg">Average list ({int(avg.lists)} lists)</option>
-            {tops.map((_, i) => <option key={i} value={i}>{label(i)}</option>)}
-          </select>
-          <button className="primary" onClick={copy} aria-live="polite">{copied ? 'Copied ✓' : 'Copy for TCG Live'}</button>
-        </div>
-      </header>
+    <div className="list-body">
       <div className="decklist">
         {(['pokemon', 'trainer', 'energy'] as const).map((cat) => {
           const cs = cards.filter((c) => c.category === cat);
@@ -62,9 +37,7 @@ export function DeckList({ data, filters, lists }: { data: Dataset; filters: Fil
                   <li key={`${c.name}|${c.set}|${c.number}`}>
                     <span className="dl-count">{c.count}</span>
                     <span className="dl-name">{c.name}</span>
-                    {c.inclusion != null
-                      ? <span className="dl-incl" title="Share of lists that play this card">{pct(c.inclusion, 0)}</span>
-                      : <span className="dl-set">{c.set ? `${c.set} ${c.number ?? ''}` : ''}</span>}
+                    <span className="dl-set">{c.set ? `${c.set} ${c.number ?? ''}` : ''}</span>
                   </li>
                 ))}
               </ul>
@@ -72,6 +45,80 @@ export function DeckList({ data, filters, lists }: { data: Dataset; filters: Fil
           );
         })}
       </div>
+      <button className="primary" onClick={copy} aria-live="polite">{copied ? 'Copied ✓' : 'Copy for TCG Live'}</button>
+    </div>
+  );
+}
+
+/** Real lists for a deck: the ones that finished well, or the ones players run identically. */
+export function DeckList({ data, filters, lists }: { data: Dataset; filters: Filters; lists: ArchetypeLists }) {
+  const mask = useMemo(() => tournamentMask(data, filters), [data, filters]);
+  const [view, setView] = useState<'top' | 'common'>('top');
+  const [cut, setCut] = useState(8);
+  const [shown, setShown] = useState(PAGE);
+  const top = useMemo(() => topLists(data, lists, mask, cut), [data, lists, mask, cut]);
+  const common = useMemo(() => commonLists(data, lists, mask), [data, lists, mask]);
+  const total = useMemo(() => lists.lists.filter((r) => mask[r[0]]).length, [lists, mask]);
+  if (!total) return null;
+
+  const items = view === 'top' ? top : common;
+  const event = (r: ListRow) => data.tournaments[r[0]];
+
+  return (
+    <section className="card">
+      <header className="card-head row">
+        <div>
+          <h2>Decklists</h2>
+          <p>
+            {view === 'top'
+              ? `Lists that finished in the top ${cut}, best placing first.`
+              : `Identical lists (same cards and copies) played more than once, most common first. ${int(total)} lists in this period.`}
+          </p>
+        </div>
+        <div className="decklist-actions">
+          <div className="seg" role="group" aria-label="List view">
+            <button className={view === 'top' ? 'on' : ''} onClick={() => { setView('top'); setShown(PAGE); }}>Top finishes</button>
+            <button className={view === 'common' ? 'on' : ''} onClick={() => { setView('common'); setShown(PAGE); }}>Most played</button>
+          </div>
+          {view === 'top' && (
+            <div className="seg" role="group" aria-label="Finish">
+              {CUTS.map((c) => <button key={c} className={cut === c ? 'on' : ''} onClick={() => { setCut(c); setShown(PAGE); }}>Top {c}</button>)}
+            </div>
+          )}
+        </div>
+      </header>
+      {items.length === 0 && <p className="muted">{view === 'top' ? `No top ${cut} lists in this period.` : 'No list was played more than once in this period.'}</p>}
+      <div className="list-items">
+        {(view === 'top'
+          ? top.slice(0, shown).map((r) => ({ r, key: `${r[0]}|${r[1]}|${r[2].length}`, count: 0, events: 0 }))
+          : common.filter((g) => g.count > 1).slice(0, shown).map((g) => ({ r: g.row, key: `${g.row[0]}|${g.row[1]}|${g.count}`, count: g.count, events: g.events }))
+        ).map(({ r, key, count, events }, i) => {
+          const t = event(r);
+          return (
+            <details key={key} className="list-item" open={i === 0 && view === 'top'}>
+              <summary>
+                {view === 'top'
+                  ? <span className="list-rank">#{r[1]}</span>
+                  : <span className="list-rank">×{count}</span>}
+                <span className="list-title">
+                  <a href={href.tournament(t.key)} onClick={(e) => e.stopPropagation()}>{t.name}</a>
+                  <span className={`badge ${t.source}`}>{SOURCE_LABELS[t.source]}</span>
+                </span>
+                <span className="list-meta">
+                  {view === 'common'
+                    ? `${events} event${events === 1 ? '' : 's'}${r[1] ? ` · best #${r[1]}` : ''} · `
+                    : `${int(t.players)} players · `}
+                  {date(t.date)}
+                </span>
+              </summary>
+              <ListBody lists={lists} row={r} />
+            </details>
+          );
+        })}
+      </div>
+      {(view === 'top' ? top.length : common.filter((g) => g.count > 1).length) > shown && (
+        <button className="show-more" onClick={() => setShown(shown + PAGE)}>Show more</button>
+      )}
     </section>
   );
 }

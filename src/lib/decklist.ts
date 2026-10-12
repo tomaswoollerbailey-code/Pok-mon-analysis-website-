@@ -1,4 +1,4 @@
-// Decklists for a deck page: the "average list" across recent lists, recent top lists, and the
+// Decklists for a deck page: top-finishing lists, identical lists grouped, and the
 // Pokémon TCG Live text format for copying a list into the game.
 import type { ArchetypeLists, CardCategory, CardInfo, Dataset, ListRow } from './types';
 
@@ -8,55 +8,21 @@ export interface DeckCard {
   set?: string;
   number?: string;
   count: number;
-  /** Share of lists that play at least one copy (average list only). */
-  inclusion?: number;
-}
-
-export interface AverageList {
-  cards: DeckCard[];
-  /** Lists the average was built from. */
-  lists: number;
 }
 
 const ORDER: Record<CardCategory, number> = { pokemon: 0, trainer: 1, energy: 2 };
 const byCategory = (a: DeckCard, b: DeckCard) => ORDER[a.category] - ORDER[b.category] || b.count - a.count || a.name.localeCompare(b.name);
-const total = (rows: [number, number][]) => rows.reduce((s, [, n]) => s + n, 0);
 
-/**
- * The average list: each card's mean copies across the lists (0 when a list doesn't play it),
- * rounded to whole cards so the total matches the lists' size (largest-remainder rounding).
- * Printings of the same card are merged and shown as the most-played printing.
- */
-export function averageList(cards: CardInfo[], lists: ListRow[]): AverageList | null {
-  if (!lists.length) return null;
-  const groups = new Map<string, { category: CardCategory; name: string; copies: number; inLists: number; printings: Map<number, number> }>();
-  for (const [, , rows] of lists) {
-    const seen = new Set<string>();
-    for (const [ci, n] of rows) {
-      const c = cards[ci];
-      const key = `${c.category}|${c.name}`;
-      let g = groups.get(key);
-      if (!g) groups.set(key, (g = { category: c.category, name: c.name, copies: 0, inLists: 0, printings: new Map() }));
-      g.copies += n;
-      g.printings.set(ci, (g.printings.get(ci) ?? 0) + n);
-      if (!seen.has(key)) { g.inLists++; seen.add(key); }
-    }
-  }
-  const sizes = lists.map((l) => total(l[2])).sort((a, b) => a - b);
-  const size = sizes[Math.floor(sizes.length / 2)]; // 60 for Standard
-  const entries = [...groups.values()].map((g) => ({ g, mean: g.copies / lists.length }));
-  const scale = size / entries.reduce((s, e) => s + e.mean, 0);
-  const alloc = entries.map((e) => ({ ...e, want: e.mean * scale, count: Math.floor(e.mean * scale) }));
-  let left = size - alloc.reduce((s, e) => s + e.count, 0);
-  for (const e of [...alloc].sort((a, b) => (b.want - b.count) - (a.want - a.count) || b.g.inLists - a.g.inLists)) {
-    if (left <= 0) break;
-    e.count++; left--;
-  }
-  const out = alloc.filter((e) => e.count > 0).map((e): DeckCard => {
-    const ci = [...e.g.printings.entries()].sort((a, b) => b[1] - a[1])[0][0];
-    return { category: e.g.category, name: e.g.name, set: cards[ci].set, number: cards[ci].number, count: e.count, inclusion: e.g.inLists / lists.length };
-  });
-  return { cards: out.sort(byCategory), lists: lists.length };
+/** A group of identical lists (same cards and counts; printings of a card are treated as the same). */
+export interface ListGroup {
+  /** The group's best-placed, then newest, list: the one shown. */
+  row: ListRow;
+  /** Lists in the group. */
+  count: number;
+  /** Distinct events they came from. */
+  events: number;
+  /** Best placing among them (0 when none has a recorded placing). */
+  best: number;
 }
 
 /** One real list as cards, grouped and sorted for display. */
@@ -64,12 +30,31 @@ export function listCards(cards: CardInfo[], row: ListRow): DeckCard[] {
   return row[2].map(([ci, n]): DeckCard => ({ category: cards[ci].category, name: cards[ci].name, set: cards[ci].set, number: cards[ci].number, count: n })).sort(byCategory);
 }
 
-/** The newest lists with the best placings, for the list picker. */
-export function topLists(d: Dataset, l: ArchetypeLists, mask: boolean[], max = 10): ListRow[] {
+/** Lists that finished in the top `cut`, best placing first, then newest, then biggest event. */
+export function topLists(d: Dataset, l: ArchetypeLists, mask: boolean[], cut: number): ListRow[] {
   return l.lists
-    .filter((r) => mask[r[0]] && r[1] > 0)
-    .sort((a, b) => a[1] - b[1] || d.tournaments[b[0]].date.localeCompare(d.tournaments[a[0]].date) || d.tournaments[b[0]].players - d.tournaments[a[0]].players)
-    .slice(0, max);
+    .filter((r) => mask[r[0]] && r[1] > 0 && r[1] <= cut)
+    .sort((a, b) => a[1] - b[1] || d.tournaments[b[0]].date.localeCompare(d.tournaments[a[0]].date) || d.tournaments[b[0]].players - d.tournaments[a[0]].players);
+}
+
+/** Identical lists grouped together, most-played first (ties: best finish, then newest). */
+export function commonLists(d: Dataset, l: ArchetypeLists, mask: boolean[]): ListGroup[] {
+  const groups = new Map<string, ListRow[]>();
+  for (const r of l.lists) {
+    if (!mask[r[0]]) continue;
+    const counts = new Map<string, number>();
+    for (const [ci, n] of r[2]) { const c = l.cards[ci]; counts.set(`${c.category}|${c.name}`, (counts.get(`${c.category}|${c.name}`) ?? 0) + n); }
+    const sig = [...counts].sort(([x], [y]) => x.localeCompare(y)).join(';');
+    (groups.get(sig) ?? groups.set(sig, []).get(sig)!).push(r);
+  }
+  const place = (r: ListRow) => r[1] || 1e9;
+  const newest = (a: ListRow, b: ListRow) => d.tournaments[b[0]].date.localeCompare(d.tournaments[a[0]].date);
+  return [...groups.values()]
+    .map((rows): ListGroup => {
+      const sorted = [...rows].sort((a, b) => place(a) - place(b) || newest(a, b));
+      return { row: sorted[0], count: rows.length, events: new Set(rows.map((r) => r[0])).size, best: sorted[0][1] };
+    })
+    .sort((a, b) => b.count - a.count || (a.best || 1e9) - (b.best || 1e9) || newest(a.row, b.row));
 }
 
 const HEAD: Record<CardCategory, string> = { pokemon: 'Pokémon', trainer: 'Trainer', energy: 'Energy' };

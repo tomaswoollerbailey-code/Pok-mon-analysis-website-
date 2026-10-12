@@ -37,7 +37,7 @@ describe('routes', () => {
 describe('seo', () => {
   it('gives each deck its own title and a stats description', () => {
     const m = pageMeta(d, { page: 'deck', key: 'deck-alpha' });
-    expect(m.title).toBe('Deck Alpha deck list, meta share & price · The Crow’s Nest');
+    expect(m.title).toBe('Deck Alpha deck list, meta share & top finishes · The Crow’s Nest');
     expect(m.description).toContain('50.0% of the online meta');
     expect(m.description.length).toBeLessThan(320);
   });

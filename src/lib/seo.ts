@@ -40,8 +40,8 @@ export function pageMeta(d: Dataset | null, route: Route): PageMeta {
       const stats = [...facts, price].filter(Boolean).join(', ');
       const sentence = stats ? `${a.name}: ${stats} (${events} online events ${since}).` : `${a.name} results from Standard tournaments ${since}.`;
       return {
-        title: `${a.name} deck list, meta share & price · ${SITE}`,
-        description: `${sentence} ${rotation} Recent decklists, best finishes and price.`.replace(/\s+/g, ' ').trim(),
+        title: `${a.name} deck list, meta share & top finishes · ${SITE}`,
+        description: `${sentence} ${rotation} Top-finishing and most-played decklists, plus best finishes.`.replace(/\s+/g, ' ').trim(),
         summary: [sentence, rotation].filter(Boolean),
       };
     }
