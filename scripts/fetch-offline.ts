@@ -16,6 +16,9 @@ const { values: args } = parseArgs({ options: {
   'list-url': { type: 'string', default: `${LIMITLESS_SITE}/tournaments?time=all&show=500` },
   'no-decklists': { type: 'boolean', default: false },
   delay: { type: 'string', default: '1000' },
+  'max-tournaments': { type: 'string', default: '25' },
+  'max-lists': { type: 'string', default: '64' },
+  'time-budget': { type: 'string', default: '40' },
   refresh: { type: 'boolean', default: false },
 } });
 
@@ -23,6 +26,9 @@ const since = isoDaysAgo(Number(args.days));
 const minPlayers = Number(args['min-players']);
 const wantFormat = args.format?.toUpperCase();
 const withLists = !args['no-decklists'];
+const maxTournaments = Number(args['max-tournaments']);
+const maxLists = Number(args['max-lists']);
+const deadline = Date.now() + Number(args['time-budget']) * 60_000;
 const get = createFetcher({ delayMs: Number(args.delay) });
 const dir = join(RAW_DIR, 'offline');
 
@@ -36,6 +42,7 @@ if (!all.length) console.warn('  No tournaments parsed — the limitlesstcg.com 
 
 let fetched = 0, skipped = 0;
 for (const t of tournaments) {
+  if (fetched >= maxTournaments || Date.now() > deadline) { console.log('Reached the per-run limit; the rest will be fetched next run.'); break; }
   const file = join(dir, `${t.id}.json`);
   if (!args.refresh && (await exists(file))) { skipped++; continue; }
   try {
@@ -44,8 +51,9 @@ for (const t of tournaments) {
     const standings = parseStandings(html);
     if (!standings.length) { console.warn(`  skip ${t.name}: no standings table found`); continue; }
     if (withLists) {
-      for (const s of standings) {
-        if (!s.listId) continue;
+      // Lists are fetched best placing first, up to --max-lists per event.
+      const withList = standings.filter((s) => s.listId).sort((a, b) => (a.placing ?? 1e9) - (b.placing ?? 1e9)).slice(0, maxLists);
+      for (const s of withList) {
         try {
           s.decklist = parseDecklist(await get(`${LIMITLESS_SITE}/decks/list/${s.listId}`, 'text'));
         } catch (err: any) {

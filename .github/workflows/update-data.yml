@@ -1,0 +1,44 @@
+# Daily: pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
+name: Update data
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+    inputs:
+      online_days: { description: 'Online look-back (days)', default: '60' }
+      offline_days: { description: 'In-person look-back (days)', default: '180' }
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Fetch online tournaments (Limitless Play API)
+        continue-on-error: true
+        env:
+          LIMITLESS_API_KEY: ${{ secrets.LIMITLESS_API_KEY }}
+        run: npm run fetch:online -- --days ${{ inputs.online_days || '60' }}
+      - name: Fetch in-person tournaments (limitlesstcg.com)
+        continue-on-error: true
+        run: npm run fetch:offline -- --days ${{ inputs.offline_days || '180' }}
+      - name: Check the dataset builds
+        run: npm run build:data
+      - name: Commit raw data
+        run: |
+          git add data/raw
+          if git diff --cached --quiet; then echo "No new tournaments"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update tournament data $(date -u +%F)"
+          git push

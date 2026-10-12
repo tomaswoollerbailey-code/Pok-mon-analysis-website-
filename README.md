@@ -50,8 +50,12 @@ src/  React + Vite site that loads public/data/ and computes everything in the b
 - `src/lib/limitless/offline.ts` parses limitlesstcg.com pages. It maps columns by header text, not position, and falls back to cell text when `data-*` attributes are missing. If the site layout changes and the scraper reports zero tournaments, fix it here.
 - `src/lib/build.ts` builds the compact dataset; `src/lib/analysis.ts` has every metric (all pure functions, covered by `npm test`).
 
-## Deployment
+## Automation
 
-`.github/workflows/deploy.yml` runs daily (and on demand). It fetches new tournaments, commits the raw cache, rebuilds, and deploys to **GitHub Pages**. To turn it on, go to *Settings → Pages* and set the source to **GitHub Actions**. You can optionally add a `LIMITLESS_API_KEY` repository secret. The build output in `dist/` is static and works on any host.
+- **Update data** (`.github/workflows/update-data.yml`) runs daily and on demand. It fetches new tournaments and commits them to `data/raw/`. Each run is capped (in-person: 25 events, 64 decklists per event, a 40-minute budget) so it stays within free Actions minutes. A backlog is worked through over several runs.
+- **Deploy** (`.github/workflows/deploy.yml`) builds the site and publishes it to GitHub Pages after each data update and on every push to `main`.
+- **Probe Limitless** (`.github/workflows/probe.yml`) is a manual diagnostic. It prints the structure of live Limitless pages and API responses into the job log, which helps when updating the parsers.
+
+You can optionally add a `LIMITLESS_API_KEY` repository secret. The build output in `dist/` is static and works on any host.
 
 Data © Limitless TCG. This project is not affiliated with Limitless, Nintendo or The Pokémon Company.

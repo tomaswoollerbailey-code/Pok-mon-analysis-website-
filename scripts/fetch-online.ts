@@ -16,6 +16,7 @@ const { values: args } = parseArgs({ options: {
   game: { type: 'string', default: 'PTCG' },
   'max-tournaments': { type: 'string', default: '400' },
   delay: { type: 'string', default: '400' },
+  'time-budget': { type: 'string', default: '30' },
   refresh: { type: 'boolean', default: false },
 } });
 
@@ -25,6 +26,7 @@ const maxTournaments = Number(args['max-tournaments']);
 const apiKey = process.env.LIMITLESS_API_KEY;
 const get = createFetcher({ delayMs: Number(args.delay), headers: apiKey ? { 'X-Access-Key': apiKey } : {} });
 const dir = join(RAW_DIR, 'online');
+const deadline = Date.now() + Number(args['time-budget']) * 60_000;
 
 async function listTournaments(): Promise<ApiTournamentSummary[]> {
   const found: ApiTournamentSummary[] = [];
@@ -45,6 +47,7 @@ console.log(`Found ${tournaments.length} online ${args.format} tournaments since
 
 let fetched = 0, skipped = 0;
 for (const t of tournaments) {
+  if (Date.now() > deadline) { console.log('Reached the time budget; the rest will be fetched next run.'); break; }
   const file = join(dir, `${t.id}.json`);
   if (!args.refresh && (await exists(file))) { skipped++; continue; }
   try {
