@@ -13,6 +13,7 @@ export const href = {
   matchups: url('matchups'),
   tournaments: url('tournaments'),
   field: url('field'),
+  methodology: url('methodology'),
   tournament: (key: string) => url(routePath({ page: 'tournament', key })),
   deck: (key: string) => url(routePath({ page: 'deck', key })),
 };

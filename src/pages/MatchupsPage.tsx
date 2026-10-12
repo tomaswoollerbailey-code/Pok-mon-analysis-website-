@@ -10,9 +10,9 @@ import { OnlineOnly } from '../components/OnlineOnly';
 import { Empty } from './MetaPage';
 
 /** Decks with at least this share of the field in the chosen period get a row and a column. */
-const MIN_SHARE = 0.01;
+export const MIN_SHARE = 0.01;
 /** Cells with fewer games are shown greyed out as a rough guide. */
-const MIN_GAMES = 10;
+export const MIN_GAMES = 10;
 
 export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filters: Filters; onFilters: (f: Filters) => void }) {
   const { ref, show, hide, node } = useTooltip();

@@ -10,6 +10,7 @@ import { pageMeta } from './lib/seo';
 import { href, useRoute } from './router';
 import { DeckPage } from './pages/DeckPage';
 import { MatchupsPage } from './pages/MatchupsPage';
+import { MethodologyPage } from './pages/MethodologyPage';
 import { MetaPage } from './pages/MetaPage';
 import { FieldPage } from './pages/FieldPage';
 import { TournamentPage } from './pages/TournamentPage';
@@ -88,7 +89,9 @@ export function App() {
       </nav>
 
       <main>
-        {error ? (
+        {route.page === 'methodology' ? (
+          <MethodologyPage data={data} />
+        ) : error ? (
           <NoData error={error} />
         ) : !data ? (
           <div className="card loading">Loading tournament data…</div>
@@ -120,7 +123,7 @@ export function App() {
 
       <footer>
         Tournament data from <a href="https://limitlesstcg.com" target="_blank" rel="noreferrer">Limitless TCG</a> (in person) and{' '}
-        <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online).
+        <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online). <a href={href.methodology}>How the numbers work</a>.
         {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>}
         {data?.format && <> Covers completed Standard events since the {data.format.rotatedYear} rotation ({data.format.marks} marks legal): online from {date(data.format.online)}, offline from {date(data.format.inPerson)}.{data.rotation?.year ? ` The next rotation is expected in ${data.rotation.year} (${data.rotation.label}).` : ''}</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
       </footer>

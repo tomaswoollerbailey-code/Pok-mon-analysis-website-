@@ -48,6 +48,7 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Period is stored as days** (`Filters.periodDays`); the app derives `from` from the newest event each load, so a saved period keeps working as data updates (it used to turn into stale "Custom dates"). Every page with a filter bar uses it: Meta, Trends, Matchups, Field planner, Tournaments, Deck pages. `LineChart` and the series colour slots were deleted. |
 | 2026-10-12 | **Decklists on deck pages:** the "average list" = each card's mean copies across the lists in the filters, rounded to a full deck by largest remainder, printings merged (`src/lib/decklist.ts`). A picker shows the 10 best recent real lists. "Copy for TCG Live" exports the shown list (round-trips through `decktext.ts`). Prerendered deck pages include the average list as text for search. |
 | 2026-10-12 | **Next after decklists (agreed):** Cloudflare Web Analytics, then Field planner presets and share links. Weekly report, share images and methodology wait until there's traffic. |
+| 2026-10-12 | **Methodology page** (`/methodology`, linked from the footer, not in the nav): sources, update times and how each metric is calculated, with live event counts. It reads the same constants as the code (`MIN_SHARE`, `MIN_GAMES`, `SHRINK_GAMES`, `CORE_SHARE`) so the text can't drift. Change the page when a calculation changes. |
 | 2026-10-12 | **No promotion or affiliate links** until the site is finished and polished. |
 
 ## Current state (live)
@@ -58,14 +59,14 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
 - **Deck pages:** rotation status, a **Decklist** card (the average list across the period's lists, with % of lists playing each card, or one of the 10 best recent lists) with a **Copy for TCG Live** button, deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
+- **Methodology:** a static explainer page (data sources, window, update times, every metric, Field planner, rotation rules, prices, limits). No filter bar.
 - **Filters and theme:** see the decisions above. Theme is light, dark or system. Deck sprites are hotlinked from `r2.limitlesstcg.net/pokemon/gen9/{icon}.png` (ask Limitless before launch, or self-host).
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
 ## Roadmap
-**Next to build (agreed order, not started).** Real page URLs are done (see decisions).
-1. **Methodology page:** sources, update times, how win rates, shares and rotation status are calculated. Builds trust with competitive players.
-2. **Weekly meta report page,** generated automatically: risers, fallers, top lists.
-3. **Share images:** an auto-generated preview card for each deck and report on Discord, Reddit and X.
+**Next to build (agreed order, not started).** Real page URLs and the methodology page are done (see decisions).
+1. **Weekly meta report page,** generated automatically: risers, fallers, top lists.
+2. **Share images:** an auto-generated preview card for each deck and report on Discord, Reddit and X.
 
 **Then:** a deck checker (paste a TCG Live list, compare it with the meta version).
 
@@ -100,7 +101,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
   - `rotation.ts`: `CURRENT_FORMAT` and `ROTATION` config
   - `pricing.ts`, `decktext.ts`, `cardname.ts`, `archetype.ts`
 - `src/lib/routes.ts` (pure route paths, shared with build scripts), `src/lib/seo.ts` (titles, descriptions, page list), `src/router.ts` (base-aware links and navigation), `scripts/prerender.ts`.
-- `src/pages/`: Meta, Trends, Matchups, Field, Tournaments, Tournament, Deck. Shared UI is in `src/components/`.
+- `src/pages/`: Meta, Trends, Matchups, Field, Tournaments, Tournament, Deck, Methodology. Shared UI is in `src/components/`.
 - Tests: unit tests in `tests/*.test.ts` (HTML fixtures in `tests/fixtures/`), and Playwright end-to-end tests in `tests/e2e/` that run against synthetic data from `tests/e2e/fixture.ts` on desktop and mobile.
 - Workflows:
   - `update-data.yml`: daily at 06:17 UTC. Fetches online, then offline, then prices, and commits `data/raw`, rebasing onto main first. Capped per run: online 400 uncached events or 30 min (newest first, so each run reaches further back); offline 25 events with 64 lists each, or 40 min. A manual run takes an optional `since` date.

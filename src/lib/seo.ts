@@ -57,6 +57,17 @@ export function pageMeta(d: Dataset | null, route: Route): PageMeta {
       return { title: `Pokémon TCG matchup win rates · ${SITE}`, description: `Deck-vs-deck win-rate heatmap from online tournament pairings ${since}.`, summary: [] };
     case 'field':
       return { title: `What should I play? Field planner · ${SITE}`, description: 'Set the decks you expect at your event and see every deck ranked by expected win rate.', summary: [] };
+    case 'methodology': {
+      const text = 'Where the data comes from, how often it updates, and how meta share, conversion, win rates, matchups, the Field planner, trends, rotation status and prices are calculated.';
+      return {
+        title: `Methodology: how the numbers work · ${SITE}`,
+        description: text,
+        summary: [
+          'Tournament data comes from Limitless: the Play API for online events with 32 or more players, and limitlesstcg.com for in-person Regionals, Internationals and Worlds. It refreshes daily.',
+          'Meta share is a deck’s players divided by all players with an identified deck. Win rate uses head-to-head pairings with mirrors excluded and ties as half a win. The Field planner pulls each matchup toward 50% so small samples do not mislead.',
+        ],
+      };
+    }
     case 'tournaments':
       return { title: `Pokémon TCG tournament results · ${SITE}`, description: `${d?.tournaments.length ?? 0} completed Standard events ${since}, online and in person, with deck breakdowns and standings.`, summary: [] };
     default: {
@@ -74,7 +85,7 @@ export function pageMeta(d: Dataset | null, route: Route): PageMeta {
 /** Every page worth prerendering. */
 export function allRoutes(d: Dataset): Route[] {
   return [
-    { page: 'meta' }, { page: 'trends' }, { page: 'matchups' }, { page: 'field' }, { page: 'tournaments' },
+    { page: 'meta' }, { page: 'trends' }, { page: 'matchups' }, { page: 'field' }, { page: 'tournaments' }, { page: 'methodology' },
     ...d.archetypes.filter((a) => a.key !== 'other').map((a): Route => ({ page: 'deck', key: a.key })),
     ...d.tournaments.map((t): Route => ({ page: 'tournament', key: t.key })),
   ];
