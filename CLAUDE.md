@@ -97,7 +97,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - `src/pages/`: Meta, Trends, Matchups, Field, Tournaments, Tournament, Deck. Shared UI is in `src/components/`.
 - Tests: unit tests in `tests/*.test.ts` (HTML fixtures in `tests/fixtures/`), and Playwright end-to-end tests in `tests/e2e/` that run against synthetic data from `tests/e2e/fixture.ts` on desktop and mobile.
 - Workflows:
-  - `update-data.yml`: daily at 06:17 UTC. Fetches online, then offline, then prices, and commits `data/raw`, rebasing onto main first. Capped per run: online 400 events or 30 min; offline 25 events with 64 lists each, or 40 min. A manual run takes an optional `since` date.
+  - `update-data.yml`: daily at 06:17 UTC. Fetches online, then offline, then prices, and commits `data/raw`, rebasing onto main first. Capped per run: online 400 uncached events or 30 min (newest first, so each run reaches further back); offline 25 events with 64 lists each, or 40 min. A manual run takes an optional `since` date.
   - `deploy.yml`: builds and deploys Pages after each data update or push to main.
   - `ci.yml`: unit tests, build, and the end-to-end tests.
   - `probe.yml`: manual. Prints the structure of live Limitless pages and API responses to the job log, for checking parsers.
@@ -115,7 +115,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **At the next rotation,** update `CURRENT_FORMAT` and `ROTATION` in `src/lib/rotation.ts`.
 
 ## Open items and caveats
-- **History:** online and offline events run from late April 2026; the last few weeks of April may still fill in over the next daily runs.
+- **History backfill (Oct 2026):** online data only reached back to 7 Aug because the fetcher capped the *newest* 400 listed events (cached ones included), so it never went further back; it also lost events to HTTP 429 and wrongly skipped old events as "not finished". Fixed: the cap counts only uncached events, 429s wait longer, unusable events are remembered in `data/raw/online-skipped.json`, and only events under 3 days old wait for final standings. Manual Update data runs fill the gap back to 26 Mar. Offline runs from 25 Apr.
 - **Offline volume:** only major events (Regionals, ICs, Worlds), so there are few events between seasons.
 - **Rotation sets** for 2027 are assumed, not announced.
 - **Prices** are market snapshots (TCGplayer and Cardmarket via Limitless), not shop prices, and new cards swing in their first weeks.

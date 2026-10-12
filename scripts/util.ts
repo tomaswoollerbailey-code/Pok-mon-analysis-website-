@@ -8,7 +8,10 @@ const USER_AGENT = 'pokemon-meta-analysis (+https://github.com/tomaswoollerbaile
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/** Polite fetch: one request at a time, a fixed gap between requests, retries with backoff. */
+/**
+ * Polite fetch: one request at a time, a fixed gap between requests, retries with backoff.
+ * Rate limits (HTTP 429) wait longer: Retry-After when given, else 15s, 30s, 60s, 120s.
+ */
 export function createFetcher(opts: { delayMs: number; headers?: Record<string, string> }) {
   let last = 0;
   return async function get(url: string, as: 'json' | 'text' = 'json'): Promise<any> {
@@ -18,12 +21,16 @@ export function createFetcher(opts: { delayMs: number; headers?: Record<string, 
       last = Date.now();
       try {
         const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, ...opts.headers } });
-        if (res.status === 429 || res.status >= 500) throw new Error(`HTTP ${res.status}`);
+        if (res.status === 429) {
+          const after = Number(res.headers.get('retry-after'));
+          throw Object.assign(new Error('HTTP 429'), { waitMs: after > 0 ? after * 1000 : 15_000 * 2 ** attempt });
+        }
+        if (res.status >= 500) throw new Error(`HTTP ${res.status}`);
         if (!res.ok) throw Object.assign(new Error(`HTTP ${res.status} for ${url}`), { fatal: true });
         return as === 'json' ? await res.json() : await res.text();
       } catch (err: any) {
-        if (err.fatal || attempt >= 3) throw err;
-        const backoff = 2000 * 2 ** attempt;
+        if (err.fatal || attempt >= 4) throw err;
+        const backoff = err.waitMs ?? 2000 * 2 ** attempt;
         console.warn(`  retry ${attempt + 1} for ${url} in ${backoff}ms (${err.message})`);
         await sleep(backoff);
       }

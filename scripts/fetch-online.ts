@@ -8,7 +8,7 @@ import {
   type ApiPairing, type ApiStanding, type ApiTournamentDetails, type ApiTournamentSummary,
 } from '../src/lib/limitless/online';
 import { CURRENT_FORMAT } from '../src/lib/rotation';
-import { RAW_DIR, createFetcher, exists, writeJson } from './util';
+import { RAW_DIR, createFetcher, exists, readJson, writeJson } from './util';
 
 const { values: args } = parseArgs({ options: {
   since: { type: 'string', default: CURRENT_FORMAT.online },
@@ -16,7 +16,7 @@ const { values: args } = parseArgs({ options: {
   format: { type: 'string', default: 'STANDARD' },
   game: { type: 'string', default: 'PTCG' },
   'max-tournaments': { type: 'string', default: '400' },
-  delay: { type: 'string', default: '400' },
+  delay: { type: 'string', default: '700' },
   'time-budget': { type: 'string', default: '30' },
   refresh: { type: 'boolean', default: false },
 } });
@@ -30,6 +30,11 @@ const apiKey = process.env.LIMITLESS_API_KEY;
 const get = createFetcher({ delayMs: Number(args.delay), headers: apiKey ? { 'X-Access-Key': apiKey } : {} });
 const dir = join(RAW_DIR, 'online');
 const deadline = Date.now() + Number(args['time-budget']) * 60_000;
+// Events that can never be used (no decklists, no deck data, no final standings), so later runs
+// don't spend requests on them again. Kept outside online/ so the dataset builder ignores it.
+const skipFile = join(RAW_DIR, 'online-skipped.json');
+const skipped: Record<string, string> = (await exists(skipFile)) ? await readJson(skipFile) : {};
+const recent = new Date(Date.now() - 3 * 86_400_000).toISOString();
 
 async function listTournaments(): Promise<ApiTournamentSummary[]> {
   const found: ApiTournamentSummary[] = [];
@@ -42,24 +47,37 @@ async function listTournaments(): Promise<ApiTournamentSummary[]> {
     // The API lists newest first; stop once a whole page is older than the window.
     if (batch.every((t) => t.date.slice(0, 10) < since)) break;
   }
-  return found.slice(0, maxTournaments);
+  return found;
 }
 
-const tournaments = await listTournaments();
-console.log(`Found ${tournaments.length} online ${args.format} tournaments since ${since} with ≥${minPlayers} players`);
+const listed = await listTournaments();
+// Only events not cached yet count toward the per-run cap, so each run works further back in time.
+const todo: ApiTournamentSummary[] = [];
+for (const t of listed) {
+  if (!args.refresh && (skipped[t.id] || (await exists(join(dir, `${t.id}.json`))))) continue;
+  todo.push(t);
+}
+const tournaments = todo.slice(0, maxTournaments);
+console.log(
+  `Found ${listed.length} online ${args.format} tournaments since ${since} with ≥${minPlayers} players: ` +
+    `${listed.length - todo.length} cached or unusable, ${todo.length} to fetch (this run: up to ${tournaments.length})`,
+);
 
-let fetched = 0, skipped = 0;
+const skip = (t: ApiTournamentSummary, reason: string) => { skipped[t.id] = reason; console.log(`  skip ${t.name}: ${reason}`); };
+let fetched = 0;
 for (const t of tournaments) {
   if (Date.now() > deadline) { console.log('Reached the time budget; the rest will be fetched next run.'); break; }
   const file = join(dir, `${t.id}.json`);
-  if (!args.refresh && (await exists(file))) { skipped++; continue; }
   try {
     const details: ApiTournamentDetails = await get(`${PLAY_API}/tournaments/${t.id}/details`);
-    if (details.decklists === false) { console.log(`  skip ${t.name}: no decklists`); continue; }
+    if (details.decklists === false) { skip(t, 'no decklists'); continue; }
     const standings: ApiStanding[] = await get(`${PLAY_API}/tournaments/${t.id}/standings`);
-    if (!standings.some((s) => s.deck?.name)) { console.log(`  skip ${t.name}: no deck data`); continue; }
-    // A finished event has placings for (nearly) everyone; a running one doesn't.
-    if (standings.filter((s) => s.placing != null).length < standings.length * 0.5) { console.log(`  skip ${t.name}: not finished`); continue; }
+    if (!standings.some((s) => s.deck?.name)) { skip(t, 'no deck data'); continue; }
+    // A finished event has placings for (nearly) everyone. A recent one without them may still be
+    // running, so try again next run; an older one with fewer than 8 placings never got final standings.
+    const placed = standings.filter((s) => s.placing != null).length;
+    if (t.date > recent && placed < standings.length * 0.5) { console.log(`  wait ${t.name}: not finished`); continue; }
+    if (placed < Math.min(8, standings.length)) { skip(t, 'no final standings'); continue; }
     const pairings: ApiPairing[] = await get(`${PLAY_API}/tournaments/${t.id}/pairings`).catch(() => []);
     await writeJson(file, normaliseOnlineTournament({ ...t, ...details }, standings, pairings));
     fetched++;
@@ -68,4 +86,5 @@ for (const t of tournaments) {
     console.warn(`  ✗ ${t.name}: ${err.message}`);
   }
 }
-console.log(`Online: ${fetched} fetched, ${skipped} already cached`);
+await writeJson(skipFile, skipped, true);
+console.log(`Online: ${fetched} fetched, ${todo.length - fetched} left for later runs`);
