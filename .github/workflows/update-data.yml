@@ -5,8 +5,7 @@ on:
     - cron: '17 6 * * *'
   workflow_dispatch:
     inputs:
-      online_days: { description: 'Online look-back (days)', default: '60' }
-      offline_days: { description: 'In-person look-back (days)', default: '90' }
+      since: { description: 'Override the start date (YYYY-MM-DD); default is the last rotation', default: '' }
 
 permissions:
   contents: write
@@ -28,10 +27,10 @@ jobs:
         continue-on-error: true
         env:
           LIMITLESS_API_KEY: ${{ secrets.LIMITLESS_API_KEY }}
-        run: npm run fetch:online -- --days ${{ inputs.online_days || '60' }}
+        run: npm run fetch:online ${{ inputs.since && format('-- --since {0}', inputs.since) || '' }}
       - name: Fetch in-person tournaments (limitlesstcg.com)
         continue-on-error: true
-        run: npm run fetch:offline -- --days ${{ inputs.offline_days || '90' }}
+        run: npm run fetch:offline ${{ inputs.since && format('-- --since {0}', inputs.since) || '' }}
       - name: Fetch Japanese City Leagues (limitlesstcg.com/tournaments/jp)
         continue-on-error: true
         run: npm run fetch:japan -- --days 60

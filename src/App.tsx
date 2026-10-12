@@ -98,7 +98,8 @@ export function App() {
       <footer>
         Tournament data from <a href="https://limitlesstcg.com" target="_blank" rel="noreferrer">Limitless TCG</a> (in person) and{' '}
         <a href="https://play.limitlesstcg.com" target="_blank" rel="noreferrer">Limitless Play</a> (online).
-        {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
+        {data && <> Updated {date(data.generatedAt.slice(0, 10))}.</>}
+        {data?.format && <> Covers completed {data.format.label} events ({data.format.marks} marks) since the last rotation: online from {date(data.format.online)}, in person from {date(data.format.inPerson)}.</>} Not affiliated with Limitless, Nintendo or The Pokémon Company.
       </footer>
     </div>
   );

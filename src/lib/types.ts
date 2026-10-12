@@ -127,6 +127,8 @@ export interface Dataset {
   /** The upcoming rotation the archetype statuses were computed for. */
   rotation?: { label: string; sets: string[] };
   prices?: { asOf: string; fx?: PricesFile['fx'] };
+  /** The Standard format the data covers (from the last rotation). */
+  format?: { label: string; marks: string; online: string; inPerson: string };
 }
 
 export interface CardInfo {

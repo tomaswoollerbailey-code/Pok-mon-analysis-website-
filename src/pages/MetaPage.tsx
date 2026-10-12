@@ -44,7 +44,7 @@ export function MetaPage({ data, filters }: { data: Dataset; filters: Filters })
     <>
       <section className="hero">
         <div className="hero-text">
-          <p className="eyebrow">Meta snapshot</p>
+          <p className="eyebrow">Meta snapshot{data.format ? ` · ${data.format.label}` : ''}</p>
           <h1>{leader ? <>{name(leader.archetype)} leads with {pct(leader.share)}</> : 'The meta'}</h1>
           <p className="hero-sub">
             {int(m.tournaments)} tournaments · {int(m.players)} players

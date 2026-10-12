@@ -1,7 +1,7 @@
 // Turns raw per-tournament files into the compact bundle the website loads.
 import { archetypeKey, cardKey } from './archetype';
 import { archetypePrice, attachPrices, cheapestByName } from './pricing';
-import { classifyArchetype, ROTATION, rotatingCardNames } from './rotation';
+import { classifyArchetype, CURRENT_FORMAT, formatStart, ROTATION, rotatingCardNames } from './rotation';
 import type {
   ArchetypeInfo, ArchetypeLists, CardInfo, Dataset, ListRow, MatchRow, PricesFile, RawTournament,
   ResultRow, StandingsFile, TournamentInfo,
@@ -14,7 +14,12 @@ export interface BuiltDataset {
 }
 
 export function buildDataset(raw: RawTournament[], generatedAt = new Date().toISOString(), rotation = ROTATION, prices?: PricesFile): BuiltDataset {
-  const sorted = [...raw].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
+  // Current format only: online / in-person events from the last rotation on, Standard only.
+  const current = raw.filter((t) => {
+    const start = formatStart(t.source);
+    return (!start || t.date >= start) && (t.source === 'japan' || t.format === 'STANDARD');
+  });
+  const sorted = [...current].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
 
   const archetypes: ArchetypeInfo[] = [];
   const archIdx = new Map<string, number>();
@@ -150,6 +155,7 @@ export function buildDataset(raw: RawTournament[], generatedAt = new Date().toIS
     dataset: {
       generatedAt, archetypes, tournaments, results, matches,
       rotation: { label: rotation.label, sets: rotation.sets },
+      format: CURRENT_FORMAT,
       ...(prices ? { prices: { asOf: prices.fetchedAt, ...(prices.fx ? { fx: prices.fx } : {}) } } : {}),
     },
     lists,

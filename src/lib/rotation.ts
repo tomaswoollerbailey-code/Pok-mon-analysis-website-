@@ -4,6 +4,23 @@
 import { archetypeKey } from './archetype';
 import type { ArchetypeRotation, CardInfo, ListRow } from './types';
 
+/**
+ * The current Standard format started at the last rotation (G mark out; H, I and J legal).
+ * Online events count from the TCG Live switch, in-person events from the Play! Pokémon date.
+ * Source: Bulbapedia "2026-27 Standard format".
+ */
+export const CURRENT_FORMAT = {
+  label: '2026–27 Standard',
+  marks: 'H, I and J',
+  online: '2026-03-26',
+  inPerson: '2026-04-10',
+};
+
+/** First date counted for a source (Japan runs its own rotation schedule and keeps its own window). */
+export function formatStart(source: 'online' | 'offline' | 'japan'): string | null {
+  return source === 'online' ? CURRENT_FORMAT.online : source === 'offline' ? CURRENT_FORMAT.inPerson : null;
+}
+
 export const ROTATION = {
   label: 'H regulation mark',
   /** Set codes (as used by Limitless) whose cards leave Standard. */

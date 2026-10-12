@@ -6,7 +6,7 @@ const PRESETS: { label: string; days: number | null }[] = [
   { label: 'Last 14 days', days: 14 },
   { label: 'Last 30 days', days: 30 },
   { label: 'Last 90 days', days: 90 },
-  { label: 'All time', days: null },
+  { label: 'Since rotation', days: null },
 ];
 
 function daysAgo(latest: string, days: number) {

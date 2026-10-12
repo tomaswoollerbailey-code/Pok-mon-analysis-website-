@@ -28,6 +28,7 @@ Act as a professional web developer, Pokémon TCG expert, designer, data analyst
 4. Grow with sister sites for other games (for example One Piece via Limitless) on the same codebase.
 
 ## Working with the owner
+- The owner is in **Kuala Lumpur (UTC+8)**. Give times in KL time.
 - Keep replies **short and clear**: a few bullets, no long explanations. The owner has little time to read.
 - Every feature ships clean and readable. No "make it pretty later" debt.
 - **Audience: worldwide.** Finish and polish the site before any promotion or affiliate links.
@@ -51,7 +52,7 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 - `src/lib/`: parsers (`limitless/`), `build.ts`, `analysis.ts`, `rotation.ts` (rotating sets config), `decktext.ts` (TCG Live list parser, used by the deck checker)
 - `src/pages/`: Meta, Trends, Matchups, Field planner, Tournaments, Deck
 - Workflows:
-  - `update-data.yml`: daily fetch and commit; online 60 days, in-person 90 days, capped per run
+  - `update-data.yml`: daily fetch and commit of **completed** events since the last rotation (`CURRENT_FORMAT` in `src/lib/rotation.ts`: online from 2026-03-26, in person from 2026-04-10; Japan the last 60 days), capped per run
   - `deploy.yml`: builds and deploys Pages after each data update or push to main
   - `probe.yml`: prints live page and API structure to the job log, for checking parsers
   - `ci.yml`: unit tests, build and Playwright browser tests (desktop + mobile)
@@ -60,6 +61,9 @@ A Pokémon TCG meta analysis site built from Limitless data. Online events come 
 - `scripts/fetch-prices.ts` runs daily. It reads TCGplayer (USD) and Cardmarket (EUR) prices from the newest Limitless decklist pages and writes `data/raw/prices.json`, with USD→EUR/MYR exchange rates from frankfurter (fallback: open.er-api).
 - MYR is converted from USD. It is not a local Malaysian price. The Shiny app has no public API; asking contact@getshiny.io is pending.
 - Live prices: a TCGplayer mass-entry link and per-card Cardmarket links.
+
+## Data window
+- Only completed Standard events from the current format count: H, I and J legal after G rotated out on 10 Apr 2026. At the next rotation, update `CURRENT_FORMAT` and `ROTATION` in `src/lib/rotation.ts`.
 
 ## Notes
 - The dev sandbox can't reach Limitless or github.io. Check parsers through the Probe workflow logs.
