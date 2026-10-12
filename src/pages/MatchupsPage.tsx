@@ -46,7 +46,7 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
         <h2>Matchups</h2>
         <p>
           How often the row deck beats the column deck: every deck with at least {pct(MIN_SHARE, 0)} of the field ({top.length} decks), from {int(total)} online games in this period.
-          Blue = the row deck usually wins, red = it usually loses. Ties count as half a win; mirrors are excluded.
+          Green = the row deck usually wins, red = it usually loses. Ties count as half a win; mirrors are excluded.
         </p>
       </header>
       <div className="filter-bar inline heat-controls">
@@ -66,8 +66,8 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
             <thead>
               <tr>
                 <th className="corner">Row deck vs column deck →</th>
-                <th className="col-head avg-head" title="Average win rate against the decks shown"><span>Average</span></th>
-                {order.map((oj, j) => { const a = top[oj]; return <th key={a} className={`col-head ${hot?.[1] === j ? 'hot' : ''}`} title={name(a)}><span>{name(a)}</span><DeckIcons icons={data.archetypes[a].icons} size={20} /></th>; })}
+                <th className="col-head avg-head" title="Average win rate against the decks shown"><span className="col-label">Average</span><span className="deck-icons" style={{ height: 20 }} aria-hidden /></th>
+                {order.map((oj, j) => { const a = top[oj]; return <th key={a} className={`col-head ${hot?.[1] === j ? 'hot' : ''}`} title={name(a)}><span className="col-label">{name(a)}</span><DeckIcons icons={data.archetypes[a].icons} size={20} /></th>; })}
               </tr>
             </thead>
             <tbody>
