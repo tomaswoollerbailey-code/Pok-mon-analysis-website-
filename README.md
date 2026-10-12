@@ -12,18 +12,18 @@ A static website that analyses the Pokémon TCG meta from both **online** and **
 
 ## What the site shows
 
-- **Meta**: meta share, top-cut count and share, conversion rate (top-cut finishes ÷ pilots), match win rate and tournament wins per archetype. You can filter by source (all, online, in person), period, format, minimum event size, and top-cut definition (Top 8/16/32/10%).
+- **Meta**: meta share, conversion (the share of a deck's players who finished in the Top 8 online, or the Top 10% at majors), win rate, price, rotation status and tournament wins per deck. Switch between **Online** (the default) and **Offline** and pick a period.
 - **Trends**: weekly meta share for up to 8 archetypes, with a table view.
 - **Matchups**: an archetype × archetype win-rate heatmap built from online pairings, with a minimum-games threshold. In-person events on Limitless don't publish pairings, so this view uses online data only.
 - **Tournaments**: a searchable event list. Each event page shows its deck breakdown and standings.
-- **Deck pages**: card usage (share of lists playing each card, average copies, optionally top-cut lists only) and best finishes.
+- **Deck pages**: rotation status, a price breakdown of a real recent list, and best finishes.
 
-**Rotation.** Each archetype is tagged for the next Standard rotation (configured in `src/lib/rotation.ts`, currently the H regulation mark sets TEF, TWM, SFA, SCR, SSP and PRE):
+**Rotation.** Each archetype is tagged for the next Standard rotation, expected in 2027 (the last one was April 2026; configured in `src/lib/rotation.ts`, currently the H regulation mark sets TEF, TWM, SFA, SCR, SSP and PRE):
 - *Rotates*: its signature Pokémon leave Standard.
 - *Loses cards*: it survives but loses cards that appear in at least half its lists.
 - *Survives*: none of its core cards rotate.
 
-A card counts as rotating only if no printing outside those sets appears anywhere in the data, so reprints stay legal. **Hide rotating decks** removes the *Rotates* archetypes and recalculates every metric as a projected post-rotation meta.
+A card counts as rotating only if no printing outside those sets appears anywhere in the data, so reprints stay legal. **Post-rotation meta** removes the *Rotates* archetypes and recalculates every metric as a projected post-rotation meta.
 
 Win rates count ties as half a win. Archetype names are normalised (case, accents and punctuation are ignored), so the same deck from online and in-person events is merged.
 

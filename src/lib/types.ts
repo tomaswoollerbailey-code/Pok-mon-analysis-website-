@@ -124,10 +124,10 @@ export interface Dataset {
   results: ResultRow[];
   matches: MatchRow[];
   /** The upcoming rotation the archetype statuses were computed for. */
-  rotation?: { label: string; sets: string[] };
+  rotation?: { label: string; sets: string[]; year?: number };
   prices?: { asOf: string; fx?: PricesFile['fx'] };
   /** The Standard format the data covers (from the last rotation). */
-  format?: { label: string; marks: string; online: string; inPerson: string };
+  format?: { label: string; rotatedYear: number; marks: string; online: string; inPerson: string };
 }
 
 export interface CardInfo {

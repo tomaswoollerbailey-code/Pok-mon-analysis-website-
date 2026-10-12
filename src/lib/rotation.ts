@@ -1,4 +1,4 @@
-// Next Standard rotation. Limitless labels the current format (Oct 2026) "Temporal Forces – 30th
+// Next Standard rotation (expected 2027). Limitless labels the current format (Oct 2026) "Temporal Forces – 30th
 // Celebration", so the oldest legal sets are the H regulation mark ones listed here. Update this
 // when The Pokémon Company announces the next rotation.
 import { archetypeKey } from './archetype';
@@ -11,6 +11,8 @@ import type { ArchetypeRotation, CardInfo, ListRow } from './types';
  */
 export const CURRENT_FORMAT = {
   label: '2026–27 Standard',
+  /** The last rotation happened this year (April 2026): G mark out. */
+  rotatedYear: 2026,
   marks: 'H, I and J',
   online: '2026-03-26',
   inPerson: '2026-04-10',
@@ -23,6 +25,8 @@ export function formatStart(source: 'online' | 'offline'): string {
 
 export const ROTATION = {
   label: 'H regulation mark',
+  /** The next rotation is expected next year (unconfirmed). */
+  year: 2027,
   /** Set codes (as used by Limitless) whose cards leave Standard. */
   sets: ['TEF', 'TWM', 'SFA', 'SCR', 'SSP', 'PRE'],
 };

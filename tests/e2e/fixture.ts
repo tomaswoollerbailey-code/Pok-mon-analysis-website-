@@ -8,7 +8,7 @@ import type { PricesFile, RawTournament } from '../../src/lib/types';
 const out = process.argv[2] ?? 'dist-e2e/data';
 let seed = 7;
 const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-const decks = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot', 'Golf', 'Hotel', 'India', 'Juliet', 'Kilo', 'Lima'];
+const decks = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot', 'Golf', 'Hotel', 'India', 'Juliet', 'Kilo', 'Lima', 'Other'];
 const weights = decks.map((_, i) => 1 / (i + 1.5));
 const pick = () => { let r = rnd() * weights.reduce((a, b) => a + b); for (let i = 0; i < decks.length; i++) { r -= weights[i]; if (r <= 0) return i; } return 0; };
 const latest = Date.UTC(2026, 9, 10);
@@ -26,7 +26,8 @@ for (let k = 0; k < 30; k++) {
     format: 'STANDARD', players: n, url: 'https://example.com/', fetchedAt: '',
     standings: players.map((p, i) => ({
       playerId: p.id, name: `Player ${i + 1}`, placing: i + 1,
-      archetype: { name: `Deck ${decks[p.deck]}`, icons: [decks[p.deck].toLowerCase()] },
+      // Limitless's catch-all "Other" has no sprites.
+      archetype: decks[p.deck] === 'Other' ? { name: 'Other' } : { name: `Deck ${decks[p.deck]}`, icons: [decks[p.deck].toLowerCase()] },
       ...(source === 'online' ? { record: { wins: Math.max(0, 6 - Math.floor((i / n) * 7)), losses: Math.min(6, Math.floor((i / n) * 7)), ties: 0 } } : {}),
       decklist: [
         { category: 'pokemon' as const, name: `${decks[p.deck]} ex`, set: p.deck % 4 === 1 ? 'TWM' : 'MEG', number: '1', count: 3 },

@@ -23,9 +23,13 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | 2026-10-12 | **Meta tools only.** The collection tracker, CSV import and "Can I build?" were built, then **removed**. No collection or card-scanning features. |
 | 2026-10-12 | **Main user:** a competitive player preparing for an event. |
 | 2026-10-12 | **Data window:** completed Standard events since the last rotation. Online from 2026-03-26 (TCG Live), in person from 2026-04-10 (Play! Pokémon); G rotated out, H, I and J are legal. |
-| 2026-10-12 | **Views: All (default), Offline, Online.** All combines both; win rates and matchups always come from the online part. Pages adapt via `SOURCE_CAPS`: Offline hides win rates, and Matchups / Field planner show a "needs online data" card with a one-tap switch. Top cut "Auto" is resolved per event: Top 8 online, Top 10% offline. Offline shares are of the *listed* standings (mostly top finishers). |
+| 2026-10-12 | **Two views: Online (default) and Offline.** The blended "All" tab was removed: offline standings only list top finishers, so blending skewed shares. Online has the pairings (win rates, matchups, Field planner); Offline is "what wins majors". Pages adapt via `SOURCE_CAPS`: Offline hides win rates, and Matchups / Field planner show a "needs online data" card with a one-tap switch. Offline shares are of the *listed* standings (mostly top finishers). |
 | 2026-10-12 | **Japan removed completely** for now (tab, fetch, data and code). It used official City League results from limitlesstcg.com/tournaments/jp, which is recoverable from git history (PRs #10 and #15). Pokecabook, the official Players site and weekly Gym Battles were rejected earlier as duplicate or unreliable. Japanese-format events (e.g. Champions League) are excluded from the data. |
-| 2026-10-12 | **Filters = source switch + one Filters button** that opens tap-chips: Period (14d / 30d / 90d / Rotation), Top cut (Auto / 8 / 16 / 32 / 10%), Prices (USD / EUR / MYR), and a Post-rotation switch. Custom dates and minimum players were removed for simplicity. Keep the site **sharp and simple**. |
+| 2026-10-12 | **Filters = source switch + one Filters button** that opens tap-chips: Period (14d / 30d / 90d / Since 2026 rotation), Prices (USD / EUR / MYR), and a Post-rotation switch. Custom dates and minimum players were removed for simplicity. Keep the site **sharp and simple**. |
+| 2026-10-12 | **Top-cut picker removed.** Conversion uses a fixed cut: Top 8 online, Top 10% offline (a Top 8 of a 2,000-player Regional is 0.4% of the field). `Filters.topCut` still exists internally and is always `'auto'`. |
+| 2026-10-12 | **Card usage removed from deck pages** (looked ugly). `cardUsage()` stays in `analysis.ts` for when it returns with a better design. Deck pages keep rotation status, a price breakdown and best finishes. |
+| 2026-10-12 | **Rotation wording uses years:** the last rotation was April 2026 (G mark out); the next is expected in **2027** (H mark out, unconfirmed). Config: `CURRENT_FORMAT.rotatedYear` and `ROTATION.year` in `src/lib/rotation.ts`. |
+| 2026-10-12 | **"Other"** (Limitless's unclassified bucket) gets the site's own card-stack icon, because Limitless points it at a sprite that doesn't exist. It has no price or rotation status and is left out of rankings. Any deck whose sprites fail to load shows the same placeholder. |
 | 2026-10-12 | **Meta page = one table.** Inline share bars replace the separate chart. Phones show Deck, Share, Conv. and Win % with short labels. |
 | 2026-10-12 | **Rotation preview** assumes the H mark rotates next (TEF, TWM, SFA, SCR, SSP, PRE). Unconfirmed. "Post-rotation" toggle. |
 | 2026-10-12 | **Prices:** a daily snapshot of TCGplayer USD and Cardmarket EUR read from Limitless decklist pages, plus MYR converted from USD. "Live" prices come only via the TCGplayer mass-entry link. The Shiny app has no API, so Tom will email contact@getshiny.io himself. |
@@ -42,8 +46,8 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - **Matchups:** a win-rate heatmap from online pairings with a minimum-games filter.
 - **Field planner:** an editable expected field → every deck ranked by expected win rate ("what should I play?"). Matchups are shrunk toward 50% by 10 virtual games, and each row expands into a breakdown.
 - **Tournaments:** a searchable list; event pages show the deck breakdown and standings.
-- **Deck pages:** rotation status, card usage (core cards, a rare-techs toggle, top-cut-only), deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
-- **Filters:** an All / Offline / Online switch plus a Filters button showing a summary. It opens chips for period, top cut and prices, and a Post-rotation switch. A one-line note explains the source. The glossary sits in the meta table header and is hidden on phones.
+- **Deck pages:** rotation status, deck price with a cheapest-printings option, a TCGplayer buy link, Cardmarket links per card, and best finishes.
+- **Filters:** an Online / Offline switch plus a Filters button showing a summary. It opens chips for period and prices, and a Post-rotation switch that names the year (2027). A one-line note explains the source. The glossary sits in the meta table header and is hidden on phones.
 - **Theme:** light, dark or system. Deck sprites are hotlinked from Limitless.
 - **Phones (≤720px):** a bottom tab bar (Meta, Trends, Matchups, Planner, Events), a collapsible Filters button and simplified tables.
 
@@ -94,6 +98,7 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 
 ## Rules of thumb
 - Run `npm test` and `npm run test:e2e` before every push. In the sandbox, prefix the e2e run with `PW_CHROMIUM_PATH=/opt/pw-browsers/chromium`.
+- In the sandbox, never put the `pkill -f` pattern for the preview server in the same command as the text of the launch command: it kills its own shell. Run `pkill -f "[v]ite preview"` as a separate call, and check screenshots aren't stale files from an earlier run.
 - The dev sandbox can't reach Limitless or github.io. Check parsers through the Probe workflow logs, and real data by pulling `data/raw` and running `npm run build:data` locally.
 - Never present synthetic data as real. Test fixtures use obviously fake names ("Deck Alpha").
 - Show sources, dates and sample sizes. Flag small samples.

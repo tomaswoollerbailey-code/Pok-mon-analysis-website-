@@ -30,11 +30,11 @@ test('source filter and post-rotation toggle change the results', async ({ page 
   const before = await sub.textContent();
   await page.getByRole('radio', { name: 'Offline' }).click();
   await expect(sub).not.toHaveText(before!);
-  await page.getByRole('radio', { name: 'All' }).click();
+  await page.getByRole('radio', { name: 'Online' }).click();
   // Secondary filters sit behind the "Filters" button.
   await page.locator('.filters-btn').click();
   await page.getByRole('switch', { name: /Post-rotation/ }).check();
-  await expect(page.getByText('Projected post-rotation meta')).toBeVisible();
+  await expect(page.getByText('Projected post-rotation meta (2027)')).toBeVisible();
   await expect(page.locator('table.data tbody').getByText('Rotates')).toHaveCount(0);
 });
 
@@ -45,9 +45,16 @@ test('offline view hides win rates', async ({ page }) => {
   await expect(page.getByRole('columnheader', { name: /Win rate/ })).toHaveCount(0);
 });
 
-test('All, Offline and Online tabs, with one meta table', async ({ page, isMobile }) => {
+test('decks without sprites (Other) get a placeholder icon', async ({ page }) => {
   await go(page, '');
-  await expect(page.getByRole('radio')).toHaveText(['All', 'Offline', 'Online']);
+  await expect(page.locator('main table.data .deck-placeholder').first()).toBeVisible();
+});
+
+test('Online (default) and Offline tabs, one meta table, no top-cut picker', async ({ page, isMobile }) => {
+  await go(page, '');
+  await expect(page.getByRole('radio', { name: 'Online' })).toBeChecked();
+  await expect(page.getByRole('radio', { name: 'All' })).toHaveCount(0);
+  await expect(page.getByText('Top cut', { exact: true })).toHaveCount(0);
   await expect(page.locator('main table.data')).toHaveCount(1);
   // Inline share bars on desktop; phones show just the % to fit the screen.
   if (!isMobile) await expect(page.locator('.share-bar').first()).toBeVisible();
@@ -58,7 +65,7 @@ test('matchups explain and switch when a source has no pairings', async ({ page 
   await page.getByRole('radio', { name: 'Offline' }).click();
   await go(page, 'matchups');
   await expect(page.getByText('Matchups use online events')).toBeVisible();
-  await page.getByRole('button', { name: 'Show all events' }).click();
+  await page.getByRole('button', { name: 'Show online data' }).click();
   await expect(page.locator('table.heat td.cell').first()).toBeVisible();
 });
 
@@ -82,9 +89,10 @@ test('field planner re-ranks when the field changes and expands a breakdown', as
   await expect(page.locator('tr.detail').getByText('Everything else')).toBeVisible();
 });
 
-test('deck page shows usage, price and a TCGplayer link', async ({ page }) => {
+test('deck page shows rotation year, price and a TCGplayer link, but no card usage', async ({ page }) => {
   await go(page, 'deck/deck-charlie');
-  await expect(page.getByRole('heading', { name: 'Card usage' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Card usage' })).toHaveCount(0);
+  await expect(page.locator('.rot-line')).toContainText('2027');
   await expect(page.getByText(/Deck price:/)).toBeVisible();
   await expect(page.getByRole('link', { name: /Buy on TCGplayer/ })).toHaveAttribute('href', /tcgplayer\.com\/massentry/);
 });
@@ -112,7 +120,7 @@ test('filters panel uses chips and has no date inputs', async ({ page }) => {
   await expect(page.locator('.filters-summary')).toContainText('Last 30 days');
   await expect(page.locator('input[type="date"]')).toHaveCount(0);
   await page.getByRole('button', { name: 'Reset filters' }).click();
-  await expect(page.locator('.filters-summary')).toContainText('Since rotation');
+  await expect(page.locator('.filters-summary')).toContainText('Since 2026 rotation');
 });
 
 test('theme toggle switches to dark', async ({ page }) => {
