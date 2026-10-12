@@ -18,7 +18,7 @@ export function MatchupsPage({ data, filters, onFilters }: { data: Dataset; filt
   const total = m.flat().reduce((s, c) => s + c.games, 0) / 2;
   const name = (a: number) => data.archetypes[a].name;
 
-  if (filters.source !== 'online') return <OnlineOnly what="Matchups" filters={filters} onFilters={onFilters} />;
+  if (filters.source === 'offline') return <OnlineOnly what="Matchups" filters={filters} onFilters={onFilters} />;
   if (!top.length) return <Empty />;
 
   return (

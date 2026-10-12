@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { cutLabel, DEFAULT_FILTERS, TOP_CUT_LABELS, type Filters, type TopCut } from '../lib/analysis';
 
-export const SOURCE_LABELS = { online: 'Online', offline: 'In person', japan: 'Japan' } as const;
+export const SOURCE_LABELS = { all: 'All', offline: 'Offline', online: 'Online' } as const;
 
 const PRESETS: { label: string; days: number | null }[] = [
   { label: 'Last 14 days', days: 14 },
@@ -34,7 +34,7 @@ export function FilterBar({ filters, onChange, latest, rotationLabel, showTopCut
     <div className={`toolbar ${open ? 'open' : ''}`} role="group" aria-label="Filters">
       <div className="toolbar-row">
         <div className="seg" role="radiogroup" aria-label="Source">
-          {(['online', 'offline', 'japan'] as const).map((s) => (
+          {(['all', 'offline', 'online'] as const).map((s) => (
             <button key={s} role="radio" aria-checked={filters.source === s} className={filters.source === s ? 'on' : ''} onClick={() => set('source', s)}>
               {SOURCE_LABELS[s]}
             </button>

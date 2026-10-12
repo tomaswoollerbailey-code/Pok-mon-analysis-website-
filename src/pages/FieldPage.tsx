@@ -29,7 +29,7 @@ export function FieldPage({ data, filters, onFilters }: { data: Dataset; filters
   const results = useMemo(() => fieldWinRates(data, filters, field, other, candidates), [data, filters, JSON.stringify(field), other, candidates.join()]);
   const totalGames = results.reduce((s, r) => s + r.games, 0);
 
-  if (filters.source !== 'online') return <OnlineOnly what="Field planner results" filters={filters} onFilters={onFilters} />;
+  if (filters.source === 'offline') return <OnlineOnly what="Field planner results" filters={filters} onFilters={onFilters} />;
   if (!top.length) return <Empty />;
 
   return (

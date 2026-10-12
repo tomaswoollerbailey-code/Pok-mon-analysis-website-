@@ -15,8 +15,8 @@ const latest = Date.UTC(2026, 9, 10);
 
 const raw: RawTournament[] = [];
 for (let k = 0; k < 30; k++) {
-  const source = k % 7 === 6 ? 'japan' : k % 3 === 0 ? 'offline' : 'online';
-  const n = source === 'japan' ? 16 : source === 'online' ? 64 + Math.floor(rnd() * 150) : 300 + Math.floor(rnd() * 500);
+  const source = k % 3 === 0 ? 'offline' : 'online';
+  const n = source === 'online' ? 64 + Math.floor(rnd() * 150) : 300 + Math.floor(rnd() * 500);
   const players = Array.from({ length: n }, (_, i) => ({ id: `p${i}`, deck: pick(), skill: rnd() }));
   players.forEach((p) => (p.skill += (6 - Math.abs(p.deck - 3)) * 0.05));
   players.sort((a, b) => b.skill - a.skill);

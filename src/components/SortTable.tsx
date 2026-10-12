@@ -7,6 +7,8 @@ export interface Column<T> {
   sort?: (row: T) => number | string;
   numeric?: boolean;
   title?: string;
+  /** Shorter header for phone-width screens, e.g. "Conv.". */
+  shortLabel?: string;
   /** Hide this column on phone-width screens. */
   hideOnMobile?: boolean;
 }
@@ -41,9 +43,9 @@ export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
               <th key={c.key} className={cls(c)} title={c.title} aria-sort={sortKey === c.key ? (desc ? 'descending' : 'ascending') : undefined}>
                 {c.sort ? (
                   <button onClick={() => { if (sortKey === c.key) setDesc(!desc); else { setSortKey(c.key); setDesc(true); } }}>
-                    {c.label}{sortKey === c.key ? (desc ? ' ↓' : ' ↑') : ''}
+                    <Label c={c} />{sortKey === c.key ? (desc ? ' ↓' : ' ↑') : ''}
                   </button>
-                ) : c.label}
+                ) : <Label c={c} />}
               </th>
             ))}
           </tr>
@@ -63,4 +65,9 @@ export function SortTable<T>({ rows, columns, initial, rowKey, limit }: {
       )}
     </div>
   );
+}
+
+function Label({ c }: { c: { label: string; shortLabel?: string } }) {
+  if (!c.shortLabel) return <>{c.label}</>;
+  return <><span className="label-long">{c.label}</span><span className="label-short">{c.shortLabel}</span></>;
 }

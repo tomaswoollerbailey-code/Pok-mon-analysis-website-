@@ -23,7 +23,7 @@
   --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100;
   --series-5: #e87ba4; --series-6: #008300; --series-7: #6250d6; --series-8: #e34948;
   --div-pos: #2a78d6; --div-neg: #e34948; --div-mid: #f0efec;
-  --online: #2a78d6; --offline: #eb6834; --japan: #1baf7a;
+  --online: #2a78d6; --offline: #eb6834;
   --good: #0ca30c; --warn: #fab219; --bad: #d03b3b;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --radius: 14px;
@@ -40,7 +40,7 @@
     --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
     --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
     --div-pos: #3987e5; --div-neg: #e66767; --div-mid: #383835;
-    --online: #3987e5; --offline: #d95926; --japan: #199e70;
+    --online: #3987e5; --offline: #d95926;
   }
 }
 :root[data-theme="dark"] {
@@ -54,7 +54,7 @@
   --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
   --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
   --div-pos: #3987e5; --div-neg: #e66767; --div-mid: #383835;
-  --online: #3987e5; --offline: #d95926; --japan: #199e70;
+  --online: #3987e5; --offline: #d95926;
 }
 
 /* Base */
@@ -132,10 +132,35 @@ footer { max-width: 1240px; margin: 0 auto; width: 100%; padding: 20px 16px 32px
 .podium-stats { grid-area: stats; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); }
 .podium-stats b { color: var(--ink-2); font-weight: 600; }
 
+/* Column labels: long on desktop, short on phones */
+.label-short { display: none; }
+
+/* Inline share bars in the meta table */
+.share-cell { display: flex; align-items: center; gap: 10px; min-width: 150px; }
+.share-bar { flex: 1; height: 8px; border-radius: 4px; background: var(--surface-3); overflow: hidden; min-width: 60px; max-width: 220px; }
+.share-bar > span { display: block; height: 100%; background: var(--series-1); border-radius: 0 4px 4px 0; }
+.share-val { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 44px; text-align: right; }
+@media (max-width: 720px) {
+  /* Phones: deck, share %, conversion, win rate fit without sideways scrolling. */
+  .share-cell { min-width: 0; }
+  .share-bar { display: none; }
+  .share-val { min-width: 0; }
+  table.data { font-size: 13px; }
+  table.data td, table.data th { padding: 9px 5px; }
+  table.data th { font-size: 11.5px; }
+  table.data .deck-label { max-width: 28vw; font-size: 13.5px; }
+  table.data .deck-name { gap: 6px; }
+  table.data .deck-icons { width: 30px !important; height: 20px !important; }
+  table.data .deck-icons img { width: 20px; height: 20px; }
+  .label-long { display: none; }
+  .label-short { display: inline; }
+  .top { background: var(--page); }
+}
+
 /* Source note and glossary */
 .source-note { margin: -4px 2px 0; font-size: 12.5px; color: var(--muted); }
 .source-note b { color: var(--ink-2); font-weight: 650; }
-.glossary { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; font-size: 12px; color: var(--muted); }
+.glossary { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 4px 0 0; font-size: 12px; color: var(--muted); }
 .glossary div { display: flex; gap: 5px; }
 .glossary dt { font-weight: 650; color: var(--ink-2); }
 .glossary dd { margin: 0; }
@@ -243,7 +268,6 @@ table.data tbody tr:last-child td { border-bottom: 0; }
 .badge::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; }
 .badge.online::before { background: var(--online); }
 .badge.offline::before { background: var(--offline); }
-.badge.japan::before { background: var(--japan); }
 .usage { position: relative; display: inline-block; min-width: 64px; }
 .usage-bar { position: absolute; left: 0; bottom: -3px; height: 2px; background: var(--series-1); border-radius: 2px; }
 .meter { display: inline-block; width: 90px; height: 8px; border-radius: 4px; background: var(--surface-3); vertical-align: middle; overflow: hidden; }

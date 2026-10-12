@@ -58,9 +58,7 @@ export function DeckPage({ data, filters, aKey }: { data: Dataset; filters: Filt
       {!stats ? <Empty>No results for this archetype with the current filters.</Empty> : (
         <div className="tiles">
           <Tile label="Meta share" value={pct(stats.share)} note={`#${rank} · ${int(stats.players)} players`} />
-          {filters.source !== 'japan'
-            ? <Tile label={`${cut} conversion`} value={pct(stats.conversion)} note={`${int(stats.topCut)} ${cut} finishes`} />
-            : <Tile label={`${cut} finishes`} value={int(stats.topCut)} note="from City League top 16s" />}
+          <Tile label={`${cut} conversion`} value={pct(stats.conversion)} note={`${int(stats.topCut)} ${cut} finishes`} />
           {stats.winRate != null && <Tile label="Win rate" value={pct(stats.winRate)} note={`${stats.wins}-${stats.losses}-${stats.ties} vs other decks`} />}
           <Tile label="Tournament wins" value={int(stats.wins1st)} />
         </div>

@@ -108,12 +108,15 @@ describe('cardUsage', () => {
 });
 
 describe('auto top cut', () => {
-  it('uses Top 8 online and in Japan, Top 10% in person', async () => {
+  it('uses Top 8 online and Top 10% offline, per event in All', async () => {
     const { resolveCut, cutLabel } = await import('../src/lib/analysis');
     expect(resolveCut('auto', 'online')).toBe('top8');
-    expect(resolveCut('auto', 'japan')).toBe('top8');
     expect(resolveCut('auto', 'offline')).toBe('top10pct');
     expect(resolveCut('top32', 'offline')).toBe('top32');
     expect(cutLabel({ topCut: 'auto', source: 'offline' })).toBe('Top 10%');
+    expect(cutLabel({ topCut: 'auto', source: 'all' })).toBe('Top cut');
+    // In All, the online event uses Top 8 and the offline one Top 10% (2 of 20 players).
+    const m = metaSummary(d, F({ source: 'all' }));
+    expect(m.topCutSlots).toBe(3 + 1);
   });
 });

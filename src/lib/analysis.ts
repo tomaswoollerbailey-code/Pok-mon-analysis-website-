@@ -4,8 +4,8 @@ import type { ArchetypeLists, Dataset, ResultRow, Source } from './types';
 export type TopCut = 'auto' | 'top8' | 'top16' | 'top32' | 'top10pct';
 
 export interface Filters {
-  /** Each source is analysed on its own: they publish different data (see SOURCE_CAPS). */
-  source: Source;
+  /** 'all' = online + offline. Win rates and matchups always come from the online part. */
+  source: View;
   format: string; // '' = any
   from: string; // YYYY-MM-DD, '' = open
   to: string;
@@ -18,7 +18,7 @@ export interface Filters {
 }
 
 export const DEFAULT_FILTERS: Filters = {
-  source: 'online',
+  source: 'all',
   format: 'STANDARD',
   from: '',
   to: '',
@@ -37,15 +37,16 @@ export const TOP_CUT_LABELS: Record<TopCut, string> = {
 };
 
 /**
- * "Auto" picks a cut that means something for the source: Top 8 for online events and City
- * Leagues, Top 10% for in-person majors (a Top 8 of a 2,000-player Regional is 0.4% of the field).
+ * "Auto" picks a cut that means something for each event: Top 8 online, Top 10% at in-person
+ * majors (a Top 8 of a 2,000-player Regional is 0.4% of the field).
  */
 export function resolveCut(cut: TopCut, source: Source): Exclude<TopCut, 'auto'> {
   return cut !== 'auto' ? cut : source === 'offline' ? 'top10pct' : 'top8';
 }
 
-/** Label for the cut actually in use, e.g. "Top 10%". */
-export const cutLabel = (f: Pick<Filters, 'topCut' | 'source'>) => TOP_CUT_LABELS[resolveCut(f.topCut, f.source)];
+/** Label for the cut in use, e.g. "Top 10%"; "Top cut" when All mixes both. */
+export const cutLabel = (f: Pick<Filters, 'topCut' | 'source'>) =>
+  f.topCut === 'auto' && f.source === 'all' ? 'Top cut' : TOP_CUT_LABELS[resolveCut(f.topCut, f.source === 'all' ? 'online' : f.source)];
 
 export function cutSize(cut: Exclude<TopCut, 'auto'>, players: number): number {
   switch (cut) {
@@ -60,11 +61,11 @@ export function cutSize(cut: Exclude<TopCut, 'auto'>, players: number): number {
 export function tournamentMask(d: Dataset, f: Filters): boolean[] {
   return d.tournaments.map(
     (t) =>
-      t.source === f.source &&
+      (f.source === 'all' || t.source === f.source) &&
       (!f.format || t.format === f.format) &&
       (!f.from || t.date >= f.from) &&
       (!f.to || t.date <= f.to) &&
-      (t.source === 'japan' || t.players >= f.minPlayers),
+      t.players >= f.minPlayers,
   );
 }
 
@@ -73,19 +74,21 @@ export function archetypeMask(d: Dataset, f: Filters): boolean[] {
   return d.archetypes.map((a) => !(f.hideRotating && a.rotation?.status === 'rotates'));
 }
 
-/** What each source can show. Pages use this to hide metrics a source doesn't publish. */
-export const SOURCE_CAPS: Record<Source, { label: string; events: string; matchups: boolean; conversion: boolean; blurb: string }> = {
+export type View = 'all' | Source;
+
+/** What each view can show. Pages use this to hide metrics a view doesn't have. */
+export const SOURCE_CAPS: Record<View, { label: string; events: string; matchups: boolean; blurb: string }> = {
+  all: {
+    label: 'All', events: 'events', matchups: true,
+    blurb: 'Online and offline events together. Win rates and matchups come from the online events, which publish round-by-round results. "Auto" cut is Top 8 online and Top 10% offline.',
+  },
   online: {
-    label: 'Online', events: 'online events', matchups: true, conversion: true,
-    blurb: 'Limitless Play events with 32+ players and published decklists. Includes round-by-round results, so win rates and matchups are available.',
+    label: 'Online', events: 'online events', matchups: true,
+    blurb: 'Limitless Play events with 32+ players and published decklists, with round-by-round results.',
   },
   offline: {
-    label: 'In person', events: 'in-person majors', matchups: false, conversion: true,
-    blurb: 'Regionals, Internationals and Worlds from Limitless. Shares are of the published standings (mostly day-two and top finishers), and conversion uses the Top 10% by default. There are no round-by-round results, so no win rates or matchups.',
-  },
-  japan: {
-    label: 'Japan', events: 'City Leagues', matchups: false, conversion: false,
-    blurb: 'Official City League top finishes plus Champions League. Japan plays a different card pool (new sets arrive about two months earlier), so it previews the next international meta. Shares are of top placements.',
+    label: 'Offline', events: 'offline majors', matchups: false,
+    blurb: 'Regionals, Internationals and Worlds. Shares are of the published standings (mostly top finishers); conversion uses the Top 10%. No round-by-round results, so no win rates or matchups.',
   },
 };
 
@@ -128,7 +131,7 @@ export function metaSummary(d: Dataset, f: Filters): MetaSummary {
   for (const [ti, a, placing] of d.results) {
     if (!mask[ti] || (a >= 0 && !keep[a])) continue;
     players++;
-    const inCut = placing > 0 && placing <= cutSize(resolveCut(f.topCut, f.source), d.tournaments[ti].players);
+    const inCut = placing > 0 && placing <= cutSize(resolveCut(f.topCut, d.tournaments[ti].source), d.tournaments[ti].players);
     if (a < 0) continue;
     identified++;
     if (inCut) topCutSlots++;
@@ -246,7 +249,7 @@ export function cardUsage(
   let n = 0;
   for (const [ti, placing, cards] of lists.lists) {
     if (!mask[ti]) continue;
-    if (topCutOnly && !(placing > 0 && placing <= cutSize(resolveCut(f.topCut, f.source), d.tournaments[ti].players))) continue;
+    if (topCutOnly && !(placing > 0 && placing <= cutSize(resolveCut(f.topCut, d.tournaments[ti].source), d.tournaments[ti].players))) continue;
     n++;
     for (const [ci, count] of cards) {
       let u = by.get(ci);

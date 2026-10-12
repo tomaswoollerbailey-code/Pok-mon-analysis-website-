@@ -44,7 +44,7 @@ export function TournamentsPage({ data, filters }: { data: Dataset; filters: Fil
             { key: 'date', label: 'Date', render: (r) => date(r.t.date), sort: (r) => r.t.date },
             { key: 'name', label: 'Event', render: (r) => <a href={href.tournament(r.t.key)}>{r.t.name}</a>, sort: (r) => r.t.name },
             { key: 'source', label: 'Type', render: (r) => <span className={`badge ${r.t.source}`}>{SOURCE_LABELS[r.t.source]}</span>, sort: (r) => r.t.source },
-            { key: 'players', label: 'Players', numeric: true, render: (r) => (r.t.source === 'japan' ? <span className="muted">Top {r.t.players}</span> : int(r.t.players)), sort: (r) => r.t.players },
+            { key: 'players', label: 'Players', numeric: true, render: (r) => int(r.t.players), sort: (r) => r.t.players },
             { key: 'winner', label: 'Winning deck', render: (r) => winner(r.i) },
           ]}
         />
