@@ -8,7 +8,7 @@ import {
 } from '../src/lib/limitless/offline';
 import type { RawTournament } from '../src/lib/types';
 import { CURRENT_FORMAT } from '../src/lib/rotation';
-import { RAW_DIR, createFetcher, exists, isoDaysAgo, writeJson } from './util';
+import { RAW_DIR, createFetcher, exists, isoDaysAgo, readJson, writeJson } from './util';
 
 const { values: args } = parseArgs({ options: {
   since: { type: 'string', default: CURRENT_FORMAT.inPerson },
@@ -30,9 +30,13 @@ const withLists = !args['no-decklists'];
 const maxTournaments = Number(args['max-tournaments']);
 const maxLists = Number(args['max-lists']);
 const deadline = Date.now() + Number(args['time-budget']) * 60_000;
-// Regionals run over a weekend and can be listed before the final standings are in. A cached event is
-// never re-fetched, so wait until the event is 2+ days old (checked at every run) before saving it.
-const settled = isoDaysAgo(2);
+// Regionals run over a weekend, and Limitless can list one before the final standings are in. So an event is
+// first saved the day after its listed date, and for the next few days each run re-reads its standings page
+// (one request) and re-fetches the event if the standings changed. Older events are never re-read.
+const settled = isoDaysAgo(1);
+const recheckFrom = isoDaysAgo(4);
+const rows = (ss: { name: string; placing?: number | null; record?: { wins: number; losses: number; ties: number } }[]) =>
+  JSON.stringify(ss.map((s) => [s.name, s.placing ?? null, s.record?.wins ?? null, s.record?.losses ?? null, s.record?.ties ?? null]));
 const get = createFetcher({ delayMs: Number(args.delay) });
 const dir = join(RAW_DIR, 'offline');
 
@@ -44,17 +48,24 @@ const tournaments = all.filter(
 console.log(`Found ${tournaments.length} of ${all.length} listed offline tournaments since ${since}`);
 if (!all.length) console.warn('  No tournaments parsed — the limitlesstcg.com layout may have changed (see src/lib/limitless/offline.ts).');
 
-let fetched = 0, skipped = 0;
+let fetched = 0, skipped = 0, updated = 0;
 for (const t of tournaments) {
   if (fetched >= maxTournaments || Date.now() > deadline) { console.log('Reached the per-run limit; the rest will be fetched next run.'); break; }
   const file = join(dir, `${t.id}.json`);
-  if (!args.refresh && (await exists(file))) { skipped++; continue; }
-  if (t.date > settled) { console.log(`  wait ${t.name} (${t.date}): too recent, final standings may not be in yet`); continue; }
+  const cached = !args.refresh && (await exists(file));
+  if (cached && t.date < recheckFrom) { skipped++; continue; }
+  if (!cached && t.date > settled) { console.log(`  wait ${t.name} (${t.date}): too recent, standings may not be in yet`); continue; }
   try {
     const html: string = await get(t.url, 'text');
     const header = parseTournamentHeader(html);
     const standings = parseStandings(html);
-    if (!standings.length) { console.warn(`  skip ${t.name}: no standings table found`); continue; }
+    if (!standings.length) { if (!cached) console.warn(`  skip ${t.name}: no standings table found`); continue; }
+    if (cached) {
+      const before = await readJson<RawTournament>(file);
+      if (rows(before.standings) === rows(standings)) { skipped++; continue; }
+      updated++;
+      console.log(`  standings changed for ${t.name}, re-fetching`);
+    }
     if (withLists) {
       // Lists are fetched best placing first, up to --max-lists per event.
       const withList = standings.filter((s) => s.listId).sort((a, b) => (a.placing ?? 1e9) - (b.placing ?? 1e9)).slice(0, maxLists);
@@ -85,4 +96,4 @@ for (const t of tournaments) {
     console.warn(`  ✗ ${t.name}: ${err.message}`);
   }
 }
-console.log(`Offline: ${fetched} fetched, ${skipped} already cached`);
+console.log(`Offline: ${fetched} fetched (${updated} re-fetched after the standings changed), ${skipped} already cached`);
