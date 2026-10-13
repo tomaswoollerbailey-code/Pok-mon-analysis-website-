@@ -73,7 +73,7 @@ src/  React + Vite site that loads public/data/ and computes everything in the b
 
 ## Automation
 
-- **Update data** (`.github/workflows/update-data.yml`) runs hourly and on demand. It fetches new tournaments (and prices once a day) and commits them to `data/raw/`; the site is redeployed only when something new was committed. Each run is capped (offline: 25 events, 64 decklists per event, a 40-minute budget) so it stays within free Actions minutes, and a backlog is worked through over several runs.
+- **Update data** (`.github/workflows/update-data.yml`) keeps itself running (a job waits 30 minutes, then starts the next run) and can be run on demand. It fetches new tournaments (and prices once a day) and commits them to `data/raw/`; the site is redeployed only when something new was committed. Each run is capped (offline: 25 events, 64 decklists per event, a 40-minute budget) so it stays within free Actions minutes, and a backlog is worked through over several runs.
 - **Deploy** (`.github/workflows/deploy.yml`) builds the site and publishes it to GitHub Pages after each data update and on every push to `main`.
 - **CI** (`.github/workflows/ci.yml`) runs the unit tests, the build and the browser tests.
 - **Probe Limitless** (`.github/workflows/probe.yml`) is a manual diagnostic. It prints the structure of live Limitless pages and API responses into the job log, which helps when updating the parsers.

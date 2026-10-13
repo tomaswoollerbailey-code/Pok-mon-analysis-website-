@@ -1,9 +1,11 @@
-# Twice an hour (:17 and :47): pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
-# GitHub delays or skips scheduled runs on quiet repos, so two chances an hour keeps data about hourly.
-# A run with nothing new takes about a minute and the concurrency group stops runs overlapping.
-# Card prices refresh once a day (when prices.json is over 20 hours old), or when a manual run asks for it.
-# The site is redeployed only when something was committed. Started by GitHub's schedule and, more reliably,
-# by an external hourly trigger (see CLAUDE.md).
+# Pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
+# A run with nothing new takes about a minute. Card prices refresh once a day (when prices.json is over 20
+# hours old), or when a manual run asks for it. The site is redeployed only when something was committed.
+#
+# GitHub skips most scheduled runs on quiet repos, so the schedule below is only a backup. The `next` job
+# keeps the data job going by itself: after each run it waits on the "pause" environment (Settings >
+# Environments > pause > Wait timer = 30 minutes; waiting uses no runner time) and then starts the next
+# run. To restart the chain, run this workflow by hand.
 name: Update data
 on:
   schedule:
@@ -77,3 +79,17 @@ jobs:
             sleep $((i * 5))
           done
           exit 1
+
+  # Start the next run after the pause, whether or not this run worked.
+  next:
+    needs: update
+    if: always() && needs.update.result != 'cancelled'
+    runs-on: ubuntu-latest
+    environment: pause
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - run: scripts/next-run.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
