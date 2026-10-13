@@ -39,7 +39,7 @@ export function MethodologyPage({ data }: { data: Dataset | null }) {
           </dd>
           <dt>Updates</dt>
           <dd>
-            New events are picked up every hour (at :17 past) and prices refresh once a day.{data && <> The data on this page was built on {date(data.generatedAt.slice(0, 10))}.</>} Events are counted once they have final standings.
+            New events are picked up about every 35 minutes and prices refresh once a day.{data && <> The data on this page was built on {date(data.generatedAt.slice(0, 10))}.</>} Events are counted once they have final standings.
           </dd>
         </dl>
         <p className="footnote">All results are collected by Limitless; this site only analyses them. Not affiliated with Limitless, Nintendo or The Pokémon Company.</p>
