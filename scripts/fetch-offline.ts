@@ -8,7 +8,7 @@ import {
 } from '../src/lib/limitless/offline';
 import type { RawTournament } from '../src/lib/types';
 import { CURRENT_FORMAT } from '../src/lib/rotation';
-import { RAW_DIR, createFetcher, exists, writeJson } from './util';
+import { RAW_DIR, createFetcher, exists, isoDaysAgo, writeJson } from './util';
 
 const { values: args } = parseArgs({ options: {
   since: { type: 'string', default: CURRENT_FORMAT.inPerson },
@@ -30,6 +30,9 @@ const withLists = !args['no-decklists'];
 const maxTournaments = Number(args['max-tournaments']);
 const maxLists = Number(args['max-lists']);
 const deadline = Date.now() + Number(args['time-budget']) * 60_000;
+// Regionals run over a weekend and can be listed before the final standings are in. A cached event is
+// never re-fetched, so wait until the event is 2+ days old (checked at every run) before saving it.
+const settled = isoDaysAgo(2);
 const get = createFetcher({ delayMs: Number(args.delay) });
 const dir = join(RAW_DIR, 'offline');
 
@@ -46,6 +49,7 @@ for (const t of tournaments) {
   if (fetched >= maxTournaments || Date.now() > deadline) { console.log('Reached the per-run limit; the rest will be fetched next run.'); break; }
   const file = join(dir, `${t.id}.json`);
   if (!args.refresh && (await exists(file))) { skipped++; continue; }
+  if (t.date > settled) { console.log(`  wait ${t.name} (${t.date}): too recent, final standings may not be in yet`); continue; }
   try {
     const html: string = await get(t.url, 'text');
     const header = parseTournamentHeader(html);
