@@ -1,6 +1,7 @@
 # Hourly: pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
-# Card prices refresh once a day (when prices.json is over 20 hours old) and on manual runs. The site is
-# redeployed only when something was committed.
+# Card prices refresh once a day (when prices.json is over 20 hours old), or when a manual run asks for it.
+# The site is redeployed only when something was committed. Started by GitHub's schedule and, more reliably,
+# by an external hourly trigger (see CLAUDE.md).
 name: Update data
 on:
   schedule:
@@ -8,6 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       since: { description: 'Override the start date (YYYY-MM-DD); default is the last rotation', default: '' }
+      prices: { description: 'Refresh card prices even if they are less than 20 hours old', type: boolean, default: false }
 
 permissions:
   contents: write
@@ -40,7 +42,7 @@ jobs:
       - name: Decide whether prices are due
         id: prices
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || ! node -e "
+          if [ "${{ inputs.prices }}" = "true" ] || ! node -e "
             const f = JSON.parse(require('fs').readFileSync('data/raw/prices.json', 'utf8'));
             process.exit(Date.now() - Date.parse(f.fetchedAt) < 20 * 3600e3 ? 0 : 1)"; then
             echo "due=true" >> "$GITHUB_OUTPUT"
