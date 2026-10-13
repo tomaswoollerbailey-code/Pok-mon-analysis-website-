@@ -1,14 +1,17 @@
-# Daily: pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
+# Hourly: pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
+# Card prices refresh once a day (when prices.json is over 20 hours old) and on manual runs. The site is
+# redeployed only when something was committed.
 name: Update data
 on:
   schedule:
-    - cron: '17 6 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
     inputs:
       since: { description: 'Override the start date (YYYY-MM-DD); default is the last rotation', default: '' }
 
 permissions:
   contents: write
+  actions: write   # to start the Deploy workflow after a data commit
 
 concurrency:
   group: update-data
@@ -31,21 +34,36 @@ jobs:
       - name: Fetch in-person tournaments (limitlesstcg.com)
         continue-on-error: true
         run: npm run fetch:offline ${{ inputs.since && format('-- --since {0}', inputs.since) || '' }}
+      - name: Decide whether prices are due
+        id: prices
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || ! node -e "
+            const f = JSON.parse(require('fs').readFileSync('data/raw/prices.json', 'utf8'));
+            process.exit(Date.now() - Date.parse(f.fetchedAt) < 20 * 3600e3 ? 0 : 1)"; then
+            echo "due=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Refresh card prices (TCGplayer / Cardmarket via Limitless) and exchange rates
+        if: steps.prices.outputs.due == 'true'
         continue-on-error: true
         run: npm run fetch:prices
       - name: Check the dataset builds
         run: npm run build:data
-      - name: Commit raw data
+      - name: Commit raw data and deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git add data/raw
-          if git diff --cached --quiet; then echo "No new tournaments"; exit 0; fi
+          if git diff --cached --quiet; then echo "Nothing new, no deploy needed"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Update tournament data $(date -u +%F)"
           # main may have moved while fetching; data/raw only gains new files, so a rebase is safe.
           for i in 1 2 3 4; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              # A push with the workflow token doesn't start other workflows, so start the deploy directly.
+              gh workflow run deploy.yml --ref main
+              exit 0
+            fi
             sleep $((i * 5))
           done
           exit 1

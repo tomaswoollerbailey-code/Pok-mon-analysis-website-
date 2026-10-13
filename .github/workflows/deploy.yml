@@ -1,12 +1,9 @@
 # Build the site from data/raw/ and publish it to GitHub Pages.
-# Runs after each data update and on pushes to main.
+# Runs on pushes to main; the Update data workflow starts it after committing new data.
 name: Deploy
 on:
   push:
     branches: [main]
-  workflow_run:
-    workflows: [Update data]
-    types: [completed]
   workflow_dispatch:
 
 permissions:

@@ -81,7 +81,7 @@ export function pageMeta(d: Dataset | null, route: Route): PageMeta {
         title: `Methodology: how the numbers work · ${SITE}`,
         description: text,
         summary: [
-          'Tournament data comes from Limitless: the Play API for online events with 32 or more players, and limitlesstcg.com for in-person Regionals, Internationals and Worlds. It refreshes daily.',
+          'Tournament data comes from Limitless: the Play API for online events with 32 or more players, and limitlesstcg.com for in-person Regionals, Internationals and Worlds. It refreshes hourly.',
           'Meta share is a deck’s players divided by all players with an identified deck. Win rate uses head-to-head pairings with mirrors excluded and ties as half a win. The Field planner pulls each matchup toward 50% so small samples do not mislead.',
         ],
       };

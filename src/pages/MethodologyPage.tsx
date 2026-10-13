@@ -39,7 +39,7 @@ export function MethodologyPage({ data }: { data: Dataset | null }) {
           </dd>
           <dt>Updates</dt>
           <dd>
-            Results, decklists and prices refresh once a day (06:17 UTC).{data && <> The data on this page was built on {date(data.generatedAt.slice(0, 10))}.</>} Events are counted once they have final standings.
+            New events are picked up every hour (at :17 past) and prices refresh once a day.{data && <> The data on this page was built on {date(data.generatedAt.slice(0, 10))}.</>} Events are counted once they have final standings.
           </dd>
         </dl>
         <p className="footnote">All results are collected by Limitless; this site only analyses them. Not affiliated with Limitless, Nintendo or The Pokémon Company.</p>

@@ -26,7 +26,7 @@ Build **The Crow's Nest** ("Spot the meta before it lands") into a fun, clean, e
 | Date | Decision |
 |---|---|
 | 2026-10-12 | **Data comes from Limitless only:** the Play API for online events, limitlesstcg.com for offline (in-person) majors. Japan was tried and removed (below). |
-| 2026-10-12 | **Hosting:** static site on GitHub Pages. The repo is **public** (Pages on a private repo needs a paid plan). A daily data run at 06:17 UTC (14:17 KL) refreshes the data and redeploys. |
+| 2026-10-12 | **Hosting:** static site on GitHub Pages. The repo is **public** (Pages on a private repo needs a paid plan). The data job runs **hourly** (at :17 UTC) and redeploys only when it committed something new. |
 | 2026-10-12 | **Worldwide** audience, not SEA-only (SEA touches like MYR prices are optional extras). **Main user:** a competitive player preparing for an event. |
 | 2026-10-12 | **Meta tools only.** The collection tracker, CSV import and "Can I build?" were built, then **removed**. No collection or card-scanning features. |
 | 2026-10-12 | **Data window:** completed Standard events since the last rotation (April 2026: G mark out; H, I and J legal). Online from 2026-03-26 (TCG Live), offline from 2026-04-10 (Play! Pokémon). Japanese-format events are excluded. |
@@ -107,8 +107,8 @@ Live site: https://tomaswoollerbailey-code.github.io/Pok-mon-analysis-website-/
 - `src/pages/`: Meta, Trends, Matchups, Field, Tournaments, Tournament, Deck, Report, Methodology. Shared UI is in `src/components/`.
 - Tests: unit tests in `tests/*.test.ts` (HTML fixtures in `tests/fixtures/`), and Playwright end-to-end tests in `tests/e2e/` that run against synthetic data from `tests/e2e/fixture.ts` on desktop and mobile.
 - Workflows:
-  - `update-data.yml`: daily at 06:17 UTC. Fetches online, then offline, then prices, and commits `data/raw`, rebasing onto main first. Capped per run: online 400 uncached events or 30 min (newest first, so each run reaches further back); offline 25 events with 64 lists each, or 40 min. A manual run takes an optional `since` date.
-  - `deploy.yml`: builds and deploys Pages after each data update or push to main.
+  - `update-data.yml`: hourly at :17 UTC. Fetches online, then offline, then prices (only when `prices.json` is over 20 hours old, or on a manual run), and commits `data/raw`, rebasing onto main first. After a commit it starts `deploy.yml` itself (`gh workflow run`; a push by the workflow token wouldn't), so runs with nothing new don't redeploy. Offline events wait until 2 days old before being cached, so a Regional still in progress isn't saved half-finished. Capped per run: online 400 uncached events or 30 min (newest first, so each run reaches further back); offline 25 events with 64 lists each, or 40 min. A manual run takes an optional `since` date.
+  - `deploy.yml`: builds and deploys Pages on push to main and when started by the data job.
   - `ci.yml`: unit tests, build, and the end-to-end tests.
   - `probe.yml`: manual. Prints the structure of live Limitless pages and API responses to the job log, for checking parsers.
 
