@@ -22,7 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
+      # Always start from the newest main: a run that waited in the queue would otherwise check out the
+      # commit that was current when it was queued, and conflict with the runs that finished before it.
       - uses: actions/checkout@v4
+        with: { ref: main }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
@@ -57,13 +60,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Update tournament data $(date -u +%F)"
-          # main may have moved while fetching; data/raw only gains new files, so a rebase is safe.
+          # main may have moved while fetching, so rebase onto it before pushing.
           for i in 1 2 3 4; do
-            if git pull --rebase origin main && git push origin HEAD:main; then
+            # -X theirs: if main changed the same data files meanwhile (prices.json is rewritten each time),
+            # keep the newly fetched version.
+            if git pull --rebase -X theirs origin main && git push origin HEAD:main; then
               # A push with the workflow token doesn't start other workflows, so start the deploy directly.
               gh workflow run deploy.yml --ref main
               exit 0
             fi
+            git rebase --abort 2>/dev/null || true
             sleep $((i * 5))
           done
           exit 1
