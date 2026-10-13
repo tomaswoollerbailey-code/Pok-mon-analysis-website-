@@ -1,11 +1,13 @@
-# Hourly: pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
+# Twice an hour (:17 and :47): pull new tournaments from Limitless and commit them to data/raw/ (the cache the site is built from).
+# GitHub delays or skips scheduled runs on quiet repos, so two chances an hour keeps data about hourly.
+# A run with nothing new takes about a minute and the concurrency group stops runs overlapping.
 # Card prices refresh once a day (when prices.json is over 20 hours old), or when a manual run asks for it.
 # The site is redeployed only when something was committed. Started by GitHub's schedule and, more reliably,
 # by an external hourly trigger (see CLAUDE.md).
 name: Update data
 on:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
       since: { description: 'Override the start date (YYYY-MM-DD); default is the last rotation', default: '' }
