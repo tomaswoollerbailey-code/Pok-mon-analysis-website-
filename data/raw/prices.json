@@ -1,237 +1,237 @@
 {
-  "fetchedAt": "2026-10-14T04:52:22.635Z",
+  "fetchedAt": "2026-10-15T00:55:20.794Z",
   "cards": {
     "p|Dreepy|TWM|128": {
-      "usd": 0.64,
-      "eur": 0.2,
+      "usd": 0.76,
+      "eur": 0.32,
       "tcgplayerId": "550172",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Dreepy-TWM128"
     },
     "p|Drakloak|TWM|129": {
-      "usd": 0.84,
-      "eur": 0.48,
+      "usd": 0.8,
+      "eur": 0.52,
       "tcgplayerId": "550173",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Drakloak-TWM129"
     },
     "p|Dragapult ex|TWM|130": {
-      "usd": 4.32,
-      "eur": 4.02,
+      "usd": 3.45,
+      "eur": 4.08,
       "tcgplayerId": "550174",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Dragapult-ex-V1-TWM130"
     },
     "p|Munkidori|TWM|95": {
       "usd": 0.58,
-      "eur": 0.72,
+      "eur": 0.6,
       "tcgplayerId": "550139",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Munkidori-TWM095"
     },
     "p|Budew|ASC|16": {
-      "usd": 0.3,
+      "usd": 0.28,
       "eur": 0.16,
       "tcgplayerId": "675828",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Budew-V1-ASC016"
     },
     "p|Dunsparce|TEF|128": {
-      "usd": 0.23,
-      "eur": 0.09,
+      "usd": 0.19,
+      "eur": 0.1,
       "tcgplayerId": "542872",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Dunsparce-TEF128"
     },
     "p|Dudunsparce|TEF|129": {
-      "usd": 0.98,
-      "eur": 1.23,
+      "usd": 0.89,
+      "eur": 1.13,
       "tcgplayerId": "542873",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Dudunsparce-TEF129"
     },
     "p|Meowth ex|POR|62": {
-      "usd": 2.09,
-      "eur": 5.25,
+      "usd": 2.06,
+      "eur": 5.18,
       "tcgplayerId": "684340",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Meowth-ex-V1-POR062"
     },
     "p|Fezandipiti ex|ASC|142": {
-      "usd": 4.61,
-      "eur": 4.36,
+      "usd": 4.33,
+      "eur": 4.6,
       "tcgplayerId": "675954",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Fezandipiti-ex-V1-ASC142"
     },
     "p|Lillie's Determination|MEG|119": {
-      "usd": 1.64,
-      "eur": 2.32,
+      "usd": 1.32,
+      "eur": 2.28,
       "tcgplayerId": "654458",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Lillies-Determination-V1-MEG119"
     },
     "p|Boss's Orders|MEG|114": {
-      "usd": 0.72,
-      "eur": 0.9,
+      "usd": 0.81,
+      "eur": 0.81,
       "tcgplayerId": "654453",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Bosss-Orders-Ghetsis-MEG114"
     },
     "p|Crispin|SCR|133": {
-      "usd": 0.42,
-      "eur": 0.32,
+      "usd": 0.58,
+      "eur": 0.3,
       "tcgplayerId": "567390",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Crispin-V1-SCR133"
     },
     "p|Rosa's Encouragement|POR|84": {
-      "usd": 0.2,
+      "usd": 0.19,
       "eur": 0.06,
       "tcgplayerId": "684390",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Rosas-Encouragement-V1-POR084"
     },
     "p|Judge|POR|76": {
-      "usd": 0.16,
-      "eur": 0.08,
+      "usd": 0.09,
+      "eur": 0.07,
       "tcgplayerId": "684323",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Judge-POR076"
     },
     "p|Buddy-Buddy Poffin|TEF|144": {
-      "usd": 0.76,
+      "usd": 1.12,
       "eur": 0.48,
       "tcgplayerId": "542659",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Buddy-Buddy-Poffin-TEF144"
     },
     "p|Poké Pad|POR|81": {
-      "usd": 0.92,
-      "eur": 2.36,
+      "usd": 1.2,
+      "eur": 2.24,
       "tcgplayerId": "684332",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Poke-Pad-V1-POR081"
     },
     "p|Crushing Hammer|POR|71": {
       "usd": 0.56,
-      "eur": 0.52,
+      "eur": 0.48,
       "tcgplayerId": "684325",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Crushing-Hammer-POR071"
     },
     "p|Ultra Ball|MEG|131": {
       "usd": 0.63,
-      "eur": 0.45,
+      "eur": 0.42,
       "tcgplayerId": "654470",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Ultra-Ball-MEG131"
     },
     "p|Night Stretcher|ASC|196": {
-      "usd": 0.81,
-      "eur": 0.51,
+      "usd": 0.66,
+      "eur": 0.45,
       "tcgplayerId": "676008",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Night-Stretcher-ASC196"
     },
     "p|Unfair Stamp|TWM|165": {
-      "usd": 14.17,
-      "eur": 10.19,
+      "usd": 13.9,
+      "eur": 10.41,
       "tcgplayerId": "550209",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Unfair-Stamp-TWM165"
     },
     "p|Risky Ruins|MEG|127": {
-      "usd": 0.3,
-      "eur": 0.28,
+      "usd": 0.36,
+      "eur": 0.24,
       "tcgplayerId": "654466",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Risky-Ruins-MEG127"
     },
     "p|Fire Energy|MEE|10": {
-      "usd": 0.45,
-      "eur": 0.18,
+      "usd": 0.48,
+      "eur": 0.21,
       "tcgplayerId": "713249",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Fire-Energy-V2-MEE010"
     },
     "p|Psychic Energy|MEE|13": {
-      "usd": 0.51,
+      "usd": 0.6,
       "eur": 0.18,
       "tcgplayerId": "713252",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Psychic-Energy-V2-MEE013"
     },
     "p|Darkness Energy|MEE|15": {
-      "usd": 0.54,
-      "eur": 0.15,
+      "usd": 0.45,
+      "eur": 0.18,
       "tcgplayerId": "713254",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Darkness-Energy-V2-MEE015"
     },
     "t|Lillie's Determination": {
-      "usd": 1.64,
-      "eur": 2.32,
+      "usd": 1.32,
+      "eur": 2.28,
       "tcgplayerId": "654458",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Lillies-Determination-V1-MEG119"
     },
     "t|Boss's Orders": {
-      "usd": 0.72,
-      "eur": 0.9,
+      "usd": 0.81,
+      "eur": 0.81,
       "tcgplayerId": "654453",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Bosss-Orders-Ghetsis-MEG114"
     },
     "t|Crispin": {
-      "usd": 0.42,
-      "eur": 0.32,
+      "usd": 0.58,
+      "eur": 0.3,
       "tcgplayerId": "567390",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Crispin-V1-SCR133"
     },
     "t|Rosa's Encouragement": {
-      "usd": 0.2,
+      "usd": 0.19,
       "eur": 0.06,
       "tcgplayerId": "684390",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Rosas-Encouragement-V1-POR084"
     },
     "t|Judge": {
-      "usd": 0.16,
-      "eur": 0.08,
+      "usd": 0.09,
+      "eur": 0.07,
       "tcgplayerId": "684323",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Judge-POR076"
     },
     "t|Buddy-Buddy Poffin": {
-      "usd": 0.76,
+      "usd": 1.12,
       "eur": 0.48,
       "tcgplayerId": "542659",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Buddy-Buddy-Poffin-TEF144"
     },
     "t|Poké Pad": {
-      "usd": 0.92,
-      "eur": 2.36,
+      "usd": 1.2,
+      "eur": 2.24,
       "tcgplayerId": "684332",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Poke-Pad-V1-POR081"
     },
     "t|Crushing Hammer": {
       "usd": 0.56,
-      "eur": 0.52,
+      "eur": 0.48,
       "tcgplayerId": "684325",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Crushing-Hammer-POR071"
     },
     "t|Ultra Ball": {
       "usd": 0.63,
-      "eur": 0.45,
+      "eur": 0.42,
       "tcgplayerId": "654470",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Ultra-Ball-MEG131"
     },
     "t|Night Stretcher": {
-      "usd": 0.81,
-      "eur": 0.51,
+      "usd": 0.66,
+      "eur": 0.45,
       "tcgplayerId": "676008",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Night-Stretcher-ASC196"
     },
     "t|Unfair Stamp": {
-      "usd": 14.17,
-      "eur": 10.19,
+      "usd": 13.9,
+      "eur": 10.41,
       "tcgplayerId": "550209",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Unfair-Stamp-TWM165"
     },
     "t|Risky Ruins": {
-      "usd": 0.3,
-      "eur": 0.28,
+      "usd": 0.36,
+      "eur": 0.24,
       "tcgplayerId": "654466",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Risky-Ruins-MEG127"
     },
     "e|Fire Energy": {
-      "usd": 0.45,
-      "eur": 0.18,
+      "usd": 0.48,
+      "eur": 0.21,
       "tcgplayerId": "713249",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Fire-Energy-V2-MEE010"
     },
     "e|Psychic Energy": {
-      "usd": 0.51,
+      "usd": 0.6,
       "eur": 0.18,
       "tcgplayerId": "713252",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Psychic-Energy-V2-MEE013"
     },
     "e|Darkness Energy": {
-      "usd": 0.54,
-      "eur": 0.15,
+      "usd": 0.45,
+      "eur": 0.18,
       "tcgplayerId": "713254",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Darkness-Energy-V2-MEE015"
     },
@@ -243,85 +243,85 @@
     },
     "p|Combusken|DRI|41": {
       "usd": 0.25,
-      "eur": 0.04,
+      "eur": 0.05,
       "tcgplayerId": "632860",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Combusken-DRI041"
     },
     "p|Blaziken ex|JTG|24": {
-      "usd": 2.28,
-      "eur": 3.18,
+      "usd": 2.52,
+      "eur": 3.26,
       "tcgplayerId": "623451",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Blaziken-ex-JTG024"
     },
     "p|Chi-Yu|TWM|39": {
-      "usd": 0.23,
+      "usd": 0.21,
       "eur": 0.09,
       "tcgplayerId": "550083",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Chi-Yu-TWM039"
     },
     "p|Dawn|PFL|87": {
-      "usd": 0.22,
-      "eur": 0.11,
+      "usd": 0.31,
+      "eur": 0.12,
       "tcgplayerId": "660414",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Dawn-V1-PFL087"
     },
     "p|Rare Candy|MEG|125": {
-      "usd": 0.44,
+      "usd": 0.48,
       "eur": 0.26,
       "tcgplayerId": "654464",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Rare-Candy-V1-MEG125"
     },
     "p|Team Rocket's Watchtower|DRI|180": {
-      "usd": 0.48,
+      "usd": 0.52,
       "eur": 0.22,
       "tcgplayerId": "632980",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Watchtower-DRI180"
     },
     "t|Dawn": {
-      "usd": 0.22,
-      "eur": 0.11,
+      "usd": 0.31,
+      "eur": 0.12,
       "tcgplayerId": "660414",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Dawn-V1-PFL087"
     },
     "t|Rare Candy": {
-      "usd": 0.44,
+      "usd": 0.48,
       "eur": 0.26,
       "tcgplayerId": "654464",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Rare-Candy-V1-MEG125"
     },
     "t|Team Rocket's Watchtower": {
-      "usd": 0.48,
+      "usd": 0.52,
       "eur": 0.22,
       "tcgplayerId": "632980",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Watchtower-DRI180"
     },
     "p|Carvanha|PFL|60": {
-      "usd": 0.39,
-      "eur": 0.21,
+      "usd": 0.36,
+      "eur": 0.18,
       "tcgplayerId": "662140",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Carvanha-PFL060"
     },
     "p|Mega Sharpedo ex|PFL|61": {
-      "usd": 3,
-      "eur": 2.8,
+      "usd": 2.28,
+      "eur": 2.72,
       "tcgplayerId": "662191",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Mega-Sharpedo-ex-V1-PFL061"
     },
     "p|Pecharunt ex|SFA|39": {
       "usd": 21.51,
-      "eur": 7.83,
+      "eur": 8.64,
       "tcgplayerId": "560349",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Pecharunt-ex-V1-SFA039"
     },
     "p|Toxel|PFL|67": {
-      "usd": 0.48,
-      "eur": 0.1,
+      "usd": 0.38,
+      "eur": 0.14,
       "tcgplayerId": "660411",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Toxel-PFL067"
     },
     "p|Toxtricity|PFL|68": {
-      "usd": 0.34,
-      "eur": 0.18,
+      "usd": 0.32,
+      "eur": 0.14,
       "tcgplayerId": "660409",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Toxtricity-V1-PFL068"
     },
@@ -338,338 +338,338 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Yveltal-MEG088"
     },
     "p|Team Rocket's Petrel|DRI|176": {
-      "usd": 0.29,
-      "eur": 0.27,
+      "usd": 0.3,
+      "eur": 0.26,
       "tcgplayerId": "632976",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Petrel-V1-DRI176"
     },
     "p|Binding Mochi|PRE|95": {
-      "usd": 0.75,
+      "usd": 0.69,
       "eur": 0.15,
       "tcgplayerId": "610450",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Binding-Mochi-PRE095"
     },
     "p|Gravity Mountain|SSP|177": {
-      "usd": 0.23,
-      "eur": 0.14,
+      "usd": 0.15,
+      "eur": 0.13,
       "tcgplayerId": "589961",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Gravity-Mountain-V1-SSP177"
     },
     "t|Team Rocket's Petrel": {
-      "usd": 0.29,
-      "eur": 0.27,
+      "usd": 0.3,
+      "eur": 0.26,
       "tcgplayerId": "632976",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Petrel-V1-DRI176"
     },
     "t|Binding Mochi": {
-      "usd": 0.75,
+      "usd": 0.69,
       "eur": 0.15,
       "tcgplayerId": "610450",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Binding-Mochi-PRE095"
     },
     "t|Gravity Mountain": {
-      "usd": 0.23,
-      "eur": 0.14,
+      "usd": 0.15,
+      "eur": 0.13,
       "tcgplayerId": "589961",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Gravity-Mountain-V1-SSP177"
     },
     "p|Poltchageist|PBL|5": {
-      "usd": 0.4,
+      "usd": 0.52,
       "eur": 0.16,
       "tcgplayerId": "704762",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Poltchageist-PBL005"
     },
     "p|Sinistcha|PBL|6": {
-      "usd": 0.28,
+      "usd": 0.3,
       "eur": 0.08,
       "tcgplayerId": "704763",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Sinistcha-PBL006"
     },
     "p|Dhelmise|PBL|39": {
-      "usd": 0.84,
-      "eur": 0.12,
+      "usd": 0.64,
+      "eur": 0.16,
       "tcgplayerId": "704796",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Dhelmise-V1-PBL039"
     },
     "p|Shuppet|PBL|33": {
-      "usd": 0.36,
+      "usd": 0.39,
       "eur": 0.12,
       "tcgplayerId": "704790",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Shuppet-PBL033"
     },
     "p|Banette|PBL|34": {
-      "usd": 0.6,
+      "usd": 0.48,
       "eur": 0.16,
       "tcgplayerId": "704791",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Banette-PBL034"
     },
     "p|Dunsparce|JTG|120": {
-      "usd": 3.82,
-      "eur": 5.02,
+      "usd": 3.78,
+      "eur": 4.78,
       "tcgplayerId": "623547",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Dunsparce-JTG120"
     },
     "p|Dudunsparce ex|JTG|121": {
-      "usd": 0.88,
-      "eur": 0.94,
+      "usd": 0.79,
+      "eur": 1,
       "tcgplayerId": "623548",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Dudunsparce-ex-V1-JTG121"
     },
     "p|Lillie's Clefairy ex|JTG|56": {
-      "usd": 3.22,
-      "eur": 3.72,
+      "usd": 3.1,
+      "eur": 3.92,
       "tcgplayerId": "623483",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Lillies-Clefairy-ex-V1-JTG056"
     },
     "p|Latias ex|SSP|76": {
-      "usd": 5.66,
-      "eur": 5.8,
+      "usd": 5.96,
+      "eur": 5.71,
       "tcgplayerId": "589983",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Latias-ex-V1-SSP076"
     },
     "p|Gwynn|PBL|78": {
-      "usd": 0.48,
+      "usd": 0.76,
       "eur": 0.24,
       "tcgplayerId": "704835",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Gwynn-V1-PBL078"
     },
     "p|Explorer's Guidance|TEF|147": {
-      "usd": 0.26,
-      "eur": 0.08,
+      "usd": 0.28,
+      "eur": 0.12,
       "tcgplayerId": "542662",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Explorers-Guidance-V1-TEF147"
     },
     "p|Pokégear 3.0|SVI|186": {
-      "usd": 0.33,
-      "eur": 0.41,
+      "usd": 0.36,
+      "eur": 0.4,
       "tcgplayerId": "488092",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet/Pokegear-30-SV1en186"
     },
     "p|Prism Tower|CRI|80": {
-      "usd": 0.54,
+      "usd": 0.51,
       "eur": 0.18,
       "tcgplayerId": "693534",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Prism-Tower-V1-CRI080"
     },
     "p|Telepathic Psychic Energy|POR|88": {
-      "usd": 1.36,
-      "eur": 2.88,
+      "usd": 1,
+      "eur": 2.8,
       "tcgplayerId": "684396",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Telepath-P-Energy-POR088"
     },
     "p|Legacy Energy|TWM|167": {
-      "usd": 3.24,
-      "eur": 4.39,
+      "usd": 3.62,
+      "eur": 4.2,
       "tcgplayerId": "550211",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Legacy-Energy-TWM167"
     },
     "t|Gwynn": {
-      "usd": 0.48,
+      "usd": 0.76,
       "eur": 0.24,
       "tcgplayerId": "704835",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Gwynn-V1-PBL078"
     },
     "t|Explorer's Guidance": {
-      "usd": 0.26,
-      "eur": 0.08,
+      "usd": 0.28,
+      "eur": 0.12,
       "tcgplayerId": "542662",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Explorers-Guidance-V1-TEF147"
     },
     "t|Pokégear 3.0": {
-      "usd": 0.33,
-      "eur": 0.41,
+      "usd": 0.36,
+      "eur": 0.4,
       "tcgplayerId": "488092",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet/Pokegear-30-SV1en186"
     },
     "t|Prism Tower": {
-      "usd": 0.54,
+      "usd": 0.51,
       "eur": 0.18,
       "tcgplayerId": "693534",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Prism-Tower-V1-CRI080"
     },
     "e|Telepathic Psychic Energy": {
-      "usd": 1.36,
-      "eur": 2.88,
+      "usd": 1,
+      "eur": 2.8,
       "tcgplayerId": "684396",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Telepath-P-Energy-POR088"
     },
     "e|Legacy Energy": {
-      "usd": 3.24,
-      "eur": 4.39,
+      "usd": 3.62,
+      "eur": 4.2,
       "tcgplayerId": "550211",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Legacy-Energy-TWM167"
     },
     "p|Teal Mask Ogerpon ex|TWM|25": {
-      "usd": 10.36,
-      "eur": 11.8,
+      "usd": 10.48,
+      "eur": 12.68,
       "tcgplayerId": "550069",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Teal-Mask-Ogerpon-ex-V1-TWM025"
     },
     "p|Chikorita|ASC|8": {
-      "usd": 0.46,
+      "usd": 0.48,
       "eur": 0.08,
       "tcgplayerId": "675820",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Chikorita-ASC008"
     },
     "p|Bayleef|MEG|9": {
-      "usd": 0.38,
+      "usd": 0.36,
       "eur": 0.2,
       "tcgplayerId": "654348",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Bayleef-MEG009"
     },
     "p|Meganium|MEG|10": {
-      "usd": 0.54,
+      "usd": 0.48,
       "eur": 0.22,
       "tcgplayerId": "654349",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Meganium-MEG010"
     },
     "p|Applin|TWM|17": {
-      "usd": 0.32,
-      "eur": 0.16,
+      "usd": 0.34,
+      "eur": 0.18,
       "tcgplayerId": "550061",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Applin-TWM017"
     },
     "p|Dipplin|TWM|18": {
-      "usd": 0.3,
-      "eur": 0.12,
+      "usd": 0.34,
+      "eur": 0.16,
       "tcgplayerId": "550062",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Dipplin-V1-TWM018"
     },
     "p|Hydrapple ex|SCR|14": {
-      "usd": 3.96,
-      "eur": 2,
+      "usd": 3.9,
+      "eur": 2.02,
       "tcgplayerId": "567240",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Hydrapple-ex-V1-SCR014"
     },
     "p|Celebi|MEG|12": {
-      "usd": 0.21,
-      "eur": 0.06,
+      "usd": 0.2,
+      "eur": 0.05,
       "tcgplayerId": "654351",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Celebi-MEG012"
     },
     "p|Tapu Bulu|SFA|6": {
-      "usd": 0.17,
-      "eur": 0.1,
+      "usd": 0.16,
+      "eur": 0.09,
       "tcgplayerId": "560316",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Tapu-Bulu-V1-SFA006"
     },
     "p|Lana's Aid|TWM|155": {
-      "usd": 0.27,
-      "eur": 0.17,
+      "usd": 0.25,
+      "eur": 0.15,
       "tcgplayerId": "550199",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Lanas-Aid-V1-TWM155"
     },
     "p|Briar|SCR|132": {
-      "usd": 0.2,
+      "usd": 0.19,
       "eur": 0.06,
       "tcgplayerId": "567385",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Briar-V1-SCR132"
     },
     "p|Bug Catching Set|TWM|143": {
       "usd": 1,
-      "eur": 0.6,
+      "eur": 0.52,
       "tcgplayerId": "550187",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Bug-Catching-Set-TWM143"
     },
     "p|Forest of Vitality|MEG|117": {
-      "usd": 1.04,
-      "eur": 0.36,
+      "usd": 1,
+      "eur": 0.32,
       "tcgplayerId": "654456",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Forest-of-Vitality-MEG117"
     },
     "p|Grass Energy|MEE|9": {
-      "usd": 2.24,
-      "eur": 0.98,
+      "usd": 2.1,
+      "eur": 1.12,
       "tcgplayerId": "713248",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Grass-Energy-V2-MEE009"
     },
     "t|Lana's Aid": {
-      "usd": 0.27,
-      "eur": 0.17,
+      "usd": 0.25,
+      "eur": 0.15,
       "tcgplayerId": "550199",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Lanas-Aid-V1-TWM155"
     },
     "t|Briar": {
-      "usd": 0.2,
+      "usd": 0.19,
       "eur": 0.06,
       "tcgplayerId": "567385",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Briar-V1-SCR132"
     },
     "t|Bug Catching Set": {
       "usd": 1,
-      "eur": 0.6,
+      "eur": 0.52,
       "tcgplayerId": "550187",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Bug-Catching-Set-TWM143"
     },
     "t|Forest of Vitality": {
-      "usd": 1.04,
-      "eur": 0.36,
+      "usd": 1,
+      "eur": 0.32,
       "tcgplayerId": "654456",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Forest-of-Vitality-MEG117"
     },
     "e|Grass Energy": {
-      "usd": 2.24,
-      "eur": 0.98,
+      "usd": 2.1,
+      "eur": 1.12,
       "tcgplayerId": "713248",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Grass-Energy-V2-MEE009"
     },
     "p|Mega Kangaskhan ex|MEG|104": {
-      "usd": 5.24,
-      "eur": 6.88,
+      "usd": 6.16,
+      "eur": 7.08,
       "tcgplayerId": "654443",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Kangaskhan-ex-V1-MEG104"
     },
     "p|Mew ex|30C|66": {
-      "usd": 8.61,
-      "eur": 6,
+      "usd": 8.37,
+      "eur": 5.67,
       "tcgplayerId": "716465",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/30th-Celebration/Mew-ex-V1-30C066"
     },
     "p|Wellspring Mask Ogerpon ex|TWM|64": {
-      "usd": 1.9,
-      "eur": 2.08,
+      "usd": 1.86,
+      "eur": 2.04,
       "tcgplayerId": "550108",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Wellspring-Mask-Ogerpon-ex-V1-TWM064"
     },
     "p|Iron Crown ex|TEF|81": {
-      "usd": 1.01,
-      "eur": 0.97,
+      "usd": 1.05,
+      "eur": 0.94,
       "tcgplayerId": "542825",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Iron-Crown-ex-V1-TEF081"
     },
     "p|Jirachi ex|30C|102": {
-      "usd": 0.55,
-      "eur": 0.34,
+      "usd": 0.54,
+      "eur": 0.35,
       "tcgplayerId": "716495",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/30th-Celebration/Jirachi-ex-V1-30C102"
     },
     "p|Unown|30C|72": {
-      "usd": 0.26,
-      "eur": 0.06,
+      "usd": 0.23,
+      "eur": 0.05,
       "tcgplayerId": "716468",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/30th-Celebration/Unown-30C072"
     },
     "p|Chien-Pao|SSP|56": {
-      "usd": 0.23,
+      "usd": 0.24,
       "eur": 0.08,
       "tcgplayerId": "589898",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Chien-Pao-SSP056"
     },
     "p|Koraidon ex|ASC|121": {
-      "usd": 0.73,
-      "eur": 0.84,
+      "usd": 0.79,
+      "eur": 0.86,
       "tcgplayerId": "675933",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Koraidon-ex-ASC121"
     },
     "p|Ciphermaniac's Codebreaking|TEF|145": {
-      "usd": 0.36,
+      "usd": 0.38,
       "eur": 0.16,
       "tcgplayerId": "542660",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Ciphermaniacs-Codebreaking-V1-TEF145"
     },
     "p|Cyrano|SSP|170": {
       "usd": 0.2,
-      "eur": 0.12,
+      "eur": 0.13,
       "tcgplayerId": "589912",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Cyrano-V1-SSP170"
     },
@@ -680,44 +680,44 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Dusk-Ball-SSP175"
     },
     "p|Wondrous Patch|PFL|94": {
-      "usd": 0.69,
-      "eur": 0.21,
+      "usd": 0.63,
+      "eur": 0.18,
       "tcgplayerId": "662241",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Wondrous-Patch-PFL094"
     },
     "p|Prime Catcher|TEF|157": {
-      "usd": 1.2,
-      "eur": 0.91,
+      "usd": 1.26,
+      "eur": 1.05,
       "tcgplayerId": "542674",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Prime-Catcher-TEF157"
     },
     "p|Area Zero Underdepths|SCR|131": {
       "usd": 0.84,
-      "eur": 0.28,
+      "eur": 0.32,
       "tcgplayerId": "567384",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Area-Zero-Underdepths-V1-SCR131"
     },
     "p|Water Energy|MEE|11": {
-      "usd": 0.36,
+      "usd": 0.34,
       "eur": 0.1,
       "tcgplayerId": "713250",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Water-Energy-V2-MEE011"
     },
     "p|Fighting Energy|MEE|14": {
-      "usd": 0.28,
+      "usd": 0.34,
       "eur": 0.12,
       "tcgplayerId": "713253",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Fighting-Energy-V2-MEE014"
     },
     "t|Ciphermaniac's Codebreaking": {
-      "usd": 0.36,
+      "usd": 0.38,
       "eur": 0.16,
       "tcgplayerId": "542660",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Ciphermaniacs-Codebreaking-V1-TEF145"
     },
     "t|Cyrano": {
       "usd": 0.2,
-      "eur": 0.12,
+      "eur": 0.13,
       "tcgplayerId": "589912",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Cyrano-V1-SSP170"
     },
@@ -728,139 +728,139 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Dusk-Ball-SSP175"
     },
     "t|Wondrous Patch": {
-      "usd": 0.69,
-      "eur": 0.21,
+      "usd": 0.63,
+      "eur": 0.18,
       "tcgplayerId": "662241",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Wondrous-Patch-PFL094"
     },
     "t|Prime Catcher": {
-      "usd": 1.2,
-      "eur": 0.91,
+      "usd": 1.26,
+      "eur": 1.05,
       "tcgplayerId": "542674",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Prime-Catcher-TEF157"
     },
     "t|Area Zero Underdepths": {
       "usd": 0.84,
-      "eur": 0.28,
+      "eur": 0.32,
       "tcgplayerId": "567384",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Area-Zero-Underdepths-V1-SCR131"
     },
     "e|Water Energy": {
-      "usd": 0.36,
+      "usd": 0.34,
       "eur": 0.1,
       "tcgplayerId": "713250",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Water-Energy-V2-MEE011"
     },
     "e|Fighting Energy": {
-      "usd": 0.28,
+      "usd": 0.34,
       "eur": 0.12,
       "tcgplayerId": "713253",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Fighting-Energy-V2-MEE014"
     },
     "p|Riolu|MEG|76": {
-      "usd": 0.36,
-      "eur": 0.18,
+      "usd": 0.39,
+      "eur": 0.15,
       "tcgplayerId": "654415",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Riolu-MEG076"
     },
     "p|Mega Lucario ex|MEG|77": {
-      "usd": 2.4,
-      "eur": 3,
+      "usd": 2.19,
+      "eur": 2.91,
       "tcgplayerId": "654416",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Lucario-ex-V1-MEG077"
     },
     "p|Solrock|MEG|75": {
-      "usd": 0.54,
-      "eur": 0.15,
+      "usd": 0.42,
+      "eur": 0.12,
       "tcgplayerId": "654414",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Solrock-MEG075"
     },
     "p|Makuhita|MEG|72": {
-      "usd": 0.32,
+      "usd": 0.26,
       "eur": 0.08,
       "tcgplayerId": "654411",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Makuhita-MEG072"
     },
     "p|Hariyama|MEG|73": {
-      "usd": 0.4,
+      "usd": 0.32,
       "eur": 0.12,
       "tcgplayerId": "654412",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Hariyama-MEG073"
     },
     "p|Lunatone|MEG|74": {
-      "usd": 0.4,
-      "eur": 0.18,
+      "usd": 0.38,
+      "eur": 0.16,
       "tcgplayerId": "654413",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Lunatone-MEG074"
     },
     "p|Wally's Compassion|MEG|132": {
-      "usd": 0.22,
-      "eur": 0.12,
+      "usd": 0.24,
+      "eur": 0.11,
       "tcgplayerId": "654471",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Wallys-Compassion-V1-MEG132"
     },
     "p|Fighting Gong|MEG|116": {
-      "usd": 0.8,
+      "usd": 0.68,
       "eur": 0.24,
       "tcgplayerId": "654455",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Fighting-Gong-V1-MEG116"
     },
     "p|Premium Power Pro|MEG|124": {
-      "usd": 0.92,
-      "eur": 0.24,
+      "usd": 0.84,
+      "eur": 0.2,
       "tcgplayerId": "654463",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Premium-Power-Pro-V1-MEG124"
     },
     "p|Switch|MEG|130": {
-      "usd": 0.11,
-      "eur": 0.09,
+      "usd": 0.13,
+      "eur": 0.08,
       "tcgplayerId": "654469",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Switch-MEG130"
     },
     "p|Air Balloon|ASC|181": {
-      "usd": 0.44,
-      "eur": 0.26,
+      "usd": 0.42,
+      "eur": 0.24,
       "tcgplayerId": "675993",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Air-Balloon-ASC181"
     },
     "t|Wally's Compassion": {
-      "usd": 0.22,
-      "eur": 0.12,
+      "usd": 0.24,
+      "eur": 0.11,
       "tcgplayerId": "654471",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Wallys-Compassion-V1-MEG132"
     },
     "t|Fighting Gong": {
-      "usd": 0.8,
+      "usd": 0.68,
       "eur": 0.24,
       "tcgplayerId": "654455",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Fighting-Gong-V1-MEG116"
     },
     "t|Premium Power Pro": {
-      "usd": 0.92,
-      "eur": 0.24,
+      "usd": 0.84,
+      "eur": 0.2,
       "tcgplayerId": "654463",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Premium-Power-Pro-V1-MEG124"
     },
     "t|Switch": {
-      "usd": 0.11,
-      "eur": 0.09,
+      "usd": 0.13,
+      "eur": 0.08,
       "tcgplayerId": "654469",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Switch-MEG130"
     },
     "t|Air Balloon": {
-      "usd": 0.44,
-      "eur": 0.26,
+      "usd": 0.42,
+      "eur": 0.24,
       "tcgplayerId": "675993",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Air-Balloon-ASC181"
     },
     "p|Slowpoke|SCR|57": {
-      "usd": 13.16,
-      "eur": 6.56,
+      "usd": 13.64,
+      "eur": 6.8,
       "tcgplayerId": "567283",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Slowpoke-SCR057"
     },
     "p|Slowking|SCR|58": {
-      "usd": 0.78,
+      "usd": 0.75,
       "eur": 0.36,
       "tcgplayerId": "567284",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Slowking-SCR058"
@@ -873,25 +873,25 @@
     },
     "p|Kyurem|SFA|47": {
       "usd": 0.3,
-      "eur": 0.18,
+      "eur": 0.16,
       "tcgplayerId": "560358",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Kyurem-SFA047"
     },
     "p|Zeraora|DRI|78": {
-      "usd": 0.25,
+      "usd": 0.26,
       "eur": 0.08,
       "tcgplayerId": "632888",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Zeraora-DRI078"
     },
     "p|Secret Box|TWM|163": {
-      "usd": 5.08,
-      "eur": 8.38,
+      "usd": 5.5,
+      "eur": 8.53,
       "tcgplayerId": "550207",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Secret-Box-TWM163"
     },
     "p|Lucky Helmet|TWM|158": {
-      "usd": 0.24,
-      "eur": 0.1,
+      "usd": 0.22,
+      "eur": 0.11,
       "tcgplayerId": "550202",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Lucky-Helmet-TWM158"
     },
@@ -902,20 +902,20 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Academy-at-Night-SFA054"
     },
     "p|Boomerang Energy|TWM|166": {
-      "usd": 0.32,
-      "eur": 0.22,
+      "usd": 0.36,
+      "eur": 0.2,
       "tcgplayerId": "550210",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Boomerang-Energy-TWM166"
     },
     "t|Secret Box": {
-      "usd": 5.08,
-      "eur": 8.38,
+      "usd": 5.5,
+      "eur": 8.53,
       "tcgplayerId": "550207",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Secret-Box-TWM163"
     },
     "t|Lucky Helmet": {
-      "usd": 0.24,
-      "eur": 0.1,
+      "usd": 0.22,
+      "eur": 0.11,
       "tcgplayerId": "550202",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Lucky-Helmet-TWM158"
     },
@@ -926,31 +926,31 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Academy-at-Night-SFA054"
     },
     "e|Boomerang Energy": {
-      "usd": 0.32,
-      "eur": 0.22,
+      "usd": 0.36,
+      "eur": 0.2,
       "tcgplayerId": "550210",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Boomerang-Energy-TWM166"
     },
     "p|Abra|MEG|54": {
-      "usd": 0.68,
-      "eur": 0.44,
+      "usd": 0.84,
+      "eur": 0.48,
       "tcgplayerId": "654393",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Abra-MEG054"
     },
     "p|Kadabra|MEG|55": {
-      "usd": 0.76,
+      "usd": 0.68,
       "eur": 0.44,
       "tcgplayerId": "654394",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Kadabra-MEG055"
     },
     "p|Alakazam|MEG|56": {
-      "usd": 0.9,
-      "eur": 0.57,
+      "usd": 0.69,
+      "eur": 0.6,
       "tcgplayerId": "654395",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Alakazam-MEG056"
     },
     "p|Genesect|SFA|40": {
-      "usd": 0.17,
+      "usd": 0.16,
       "eur": 0.08,
       "tcgplayerId": "560350",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Genesect-SFA040"
@@ -962,26 +962,26 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Hilda-V1-WHT084"
     },
     "p|Eri|TEF|146": {
-      "usd": 0.16,
-      "eur": 0.12,
+      "usd": 0.15,
+      "eur": 0.1,
       "tcgplayerId": "542661",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Eri-V1-TEF146"
     },
     "p|Sacred Ash|DRI|168": {
-      "usd": 0.24,
-      "eur": 0.1,
+      "usd": 0.22,
+      "eur": 0.08,
       "tcgplayerId": "632970",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Sacred-Ash-DRI168"
     },
     "p|Battle Cage|PFL|85": {
-      "usd": 1.12,
-      "eur": 0.48,
+      "usd": 1.04,
+      "eur": 0.44,
       "tcgplayerId": "662130",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Battle-Cage-V1-PFL085"
     },
     "p|Enriching Energy|SSP|191": {
-      "usd": 4.44,
-      "eur": 4.71,
+      "usd": 4.45,
+      "eur": 4.65,
       "tcgplayerId": "589934",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Enriching-Energy-SSP191"
     },
@@ -992,38 +992,38 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Hilda-V1-WHT084"
     },
     "t|Eri": {
-      "usd": 0.16,
-      "eur": 0.12,
+      "usd": 0.15,
+      "eur": 0.1,
       "tcgplayerId": "542661",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Eri-V1-TEF146"
     },
     "t|Sacred Ash": {
-      "usd": 0.24,
-      "eur": 0.1,
+      "usd": 0.22,
+      "eur": 0.08,
       "tcgplayerId": "632970",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Sacred-Ash-DRI168"
     },
     "t|Battle Cage": {
-      "usd": 1.12,
-      "eur": 0.48,
+      "usd": 1.04,
+      "eur": 0.44,
       "tcgplayerId": "662130",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Battle-Cage-V1-PFL085"
     },
     "e|Enriching Energy": {
-      "usd": 4.44,
-      "eur": 4.71,
+      "usd": 4.45,
+      "eur": 4.65,
       "tcgplayerId": "589934",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Enriching-Energy-SSP191"
     },
     "p|Raging Bolt ex|TEF|123": {
-      "usd": 1.29,
-      "eur": 1.01,
+      "usd": 1.49,
+      "eur": 0.94,
       "tcgplayerId": "542867",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Raging-Bolt-ex-V1-TEF123"
     },
     "p|Iron Leaves ex|TEF|25": {
-      "usd": 0.86,
-      "eur": 0.86,
+      "usd": 0.85,
+      "eur": 0.77,
       "tcgplayerId": "542769",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Iron-Leaves-ex-V1-TEF025"
     },
@@ -1032,32 +1032,32 @@
       "tcgplayerId": "560375"
     },
     "p|Energy Switch|MEG|115": {
-      "usd": 0.88,
-      "eur": 0.32,
+      "usd": 0.92,
+      "eur": 0.4,
       "tcgplayerId": "654454",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Energy-Switch-MEG115"
     },
     "p|Glass Trumpet|SCR|135": {
       "usd": 0.38,
-      "eur": 0.06,
+      "eur": 0.1,
       "tcgplayerId": "567394",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Glass-Trumpet-SCR135"
     },
     "p|Special Red Card|CRI|82": {
-      "usd": 0.13,
-      "eur": 0.15,
+      "usd": 0.14,
+      "eur": 0.14,
       "tcgplayerId": "693547",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Special-Red-Card-V1-CRI082"
     },
     "p|Hero's Cape|TEF|152": {
-      "usd": 34.58,
-      "eur": 14.73,
+      "usd": 30.74,
+      "eur": 14.76,
       "tcgplayerId": "542667",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Heros-Cape-TEF152"
     },
     "p|Lightning Energy|MEE|12": {
       "usd": 0.38,
-      "eur": 0.1,
+      "eur": 0.12,
       "tcgplayerId": "713251",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Lightning-Energy-V2-MEE012"
     },
@@ -1066,92 +1066,92 @@
       "tcgplayerId": "560375"
     },
     "t|Energy Switch": {
-      "usd": 0.88,
-      "eur": 0.32,
+      "usd": 0.92,
+      "eur": 0.4,
       "tcgplayerId": "654454",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Energy-Switch-MEG115"
     },
     "t|Glass Trumpet": {
       "usd": 0.38,
-      "eur": 0.06,
+      "eur": 0.1,
       "tcgplayerId": "567394",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Glass-Trumpet-SCR135"
     },
     "t|Special Red Card": {
-      "usd": 0.13,
-      "eur": 0.15,
+      "usd": 0.14,
+      "eur": 0.14,
       "tcgplayerId": "693547",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Special-Red-Card-V1-CRI082"
     },
     "t|Hero's Cape": {
-      "usd": 34.58,
-      "eur": 14.73,
+      "usd": 30.74,
+      "eur": 14.76,
       "tcgplayerId": "542667",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Heros-Cape-TEF152"
     },
     "e|Lightning Energy": {
       "usd": 0.38,
-      "eur": 0.1,
+      "eur": 0.12,
       "tcgplayerId": "713251",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Lightning-Energy-V2-MEE012"
     },
     "p|Applin|TWM|126": {
-      "usd": 0.51,
-      "eur": 0.21,
+      "usd": 0.54,
+      "eur": 0.24,
       "tcgplayerId": "550170",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Applin-V1-TWM126"
     },
     "p|Grookey|MEP|52": {
-      "usd": 9.42,
-      "eur": 15.3,
+      "usd": 9.54,
+      "eur": 14.73,
       "tcgplayerId": "699876",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEP-Black-Star-Promos/Grookey-MEP052"
     },
     "p|Thwackey|TWM|15": {
       "usd": 1.8,
-      "eur": 2.82,
+      "eur": 2.58,
       "tcgplayerId": "550059",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Thwackey-TWM015"
     },
     "p|Goldeen|TWM|44": {
-      "usd": 0.32,
-      "eur": 0.12,
+      "usd": 0.3,
+      "eur": 0.16,
       "tcgplayerId": "550088",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Goldeen-TWM044"
     },
     "p|Seaking|PRE|21": {
-      "usd": 0.19,
+      "usd": 0.21,
       "eur": 0.05,
       "tcgplayerId": "610376",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Seaking-PRE021"
     },
     "p|Rellor|TEF|23": {
-      "usd": 0.32,
-      "eur": 0.18,
+      "usd": 0.3,
+      "eur": 0.14,
       "tcgplayerId": "542767",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Rellor-TEF023"
     },
     "p|Rabsca|TEF|24": {
-      "usd": 0.32,
+      "usd": 0.3,
       "eur": 0.16,
       "tcgplayerId": "542768",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Rabsca-TEF024"
     },
     "p|Shaymin|DRI|10": {
       "usd": 0.28,
-      "eur": 0.14,
+      "eur": 0.12,
       "tcgplayerId": "632836",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Shaymin-V1-DRI010"
     },
     "p|Psyduck|ASC|39": {
-      "usd": 0.3,
+      "usd": 0.29,
       "eur": 0.06,
       "tcgplayerId": "675851",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Psyduck-V1-ASC039"
     },
     "p|Gladion's Final Battle|PBL|77": {
-      "usd": 0.36,
-      "eur": 0.08,
+      "usd": 0.28,
+      "eur": 0.06,
       "tcgplayerId": "704834",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Gladions-Final-Battle-V1-PBL077"
     },
@@ -1162,26 +1162,26 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Kieran-V1-TWM154"
     },
     "p|Brave Bangle|WHT|80": {
-      "usd": 0.64,
-      "eur": 1.02,
+      "usd": 0.68,
+      "eur": 1,
       "tcgplayerId": "642197",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Brave-Bangle-WHT080"
     },
     "p|Festival Grounds|TWM|149": {
-      "usd": 0.48,
-      "eur": 0.24,
+      "usd": 0.44,
+      "eur": 0.28,
       "tcgplayerId": "550193",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Festival-Grounds-TWM149"
     },
     "p|Growing Grass Energy|POR|86": {
-      "usd": 0.72,
+      "usd": 0.66,
       "eur": 0.45,
       "tcgplayerId": "684375",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Grow-G-Energy-POR086"
     },
     "t|Gladion's Final Battle": {
-      "usd": 0.36,
-      "eur": 0.08,
+      "usd": 0.28,
+      "eur": 0.06,
       "tcgplayerId": "704834",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Gladions-Final-Battle-V1-PBL077"
     },
@@ -1192,62 +1192,62 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Kieran-V1-TWM154"
     },
     "t|Brave Bangle": {
-      "usd": 0.64,
-      "eur": 1.02,
+      "usd": 0.68,
+      "eur": 1,
       "tcgplayerId": "642197",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Brave-Bangle-WHT080"
     },
     "t|Festival Grounds": {
-      "usd": 0.48,
-      "eur": 0.24,
+      "usd": 0.44,
+      "eur": 0.28,
       "tcgplayerId": "550193",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Festival-Grounds-TWM149"
     },
     "e|Growing Grass Energy": {
-      "usd": 0.72,
+      "usd": 0.66,
       "eur": 0.45,
       "tcgplayerId": "684375",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Grow-G-Energy-POR086"
     },
     "p|Duskull|PRE|35": {
-      "usd": 0.64,
+      "usd": 0.72,
       "eur": 0.28,
       "tcgplayerId": "610390",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Duskull-PRE035"
     },
     "p|Dusclops|PRE|36": {
-      "usd": 0.42,
-      "eur": 0.16,
+      "usd": 0.4,
+      "eur": 0.14,
       "tcgplayerId": "610391",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Dusclops-PRE036"
     },
     "p|Dusknoir|PRE|37": {
-      "usd": 0.46,
-      "eur": 0.3,
+      "usd": 0.48,
+      "eur": 0.34,
       "tcgplayerId": "610392",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Dusknoir-PRE037"
     },
     "p|Abra|TWM|80": {
-      "usd": 0.14,
+      "usd": 0.16,
       "eur": 0.07,
       "tcgplayerId": "550124",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Abra-TWM080"
     },
     "p|Strange Timepiece|MEG|128": {
-      "usd": 0.51,
-      "eur": 0.24,
+      "usd": 0.54,
+      "eur": 0.27,
       "tcgplayerId": "654467",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Strange-Timepiece-MEG128"
     },
     "t|Strange Timepiece": {
-      "usd": 0.51,
-      "eur": 0.24,
+      "usd": 0.54,
+      "eur": 0.27,
       "tcgplayerId": "654467",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Strange-Timepiece-MEG128"
     },
     "p|Dwebble|DRI|11": {
-      "usd": 0.81,
-      "eur": 0.24,
+      "usd": 0.87,
+      "eur": 0.3,
       "tcgplayerId": "632837",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Dwebble-DRI011"
     },
@@ -1258,20 +1258,20 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Crustle-V1-DRI012"
     },
     "p|Pokémon Center Lady|MEG|123": {
-      "usd": 0.23,
+      "usd": 0.24,
       "eur": 0.05,
       "tcgplayerId": "654462",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Pokemon-Center-Lady-MEG123"
     },
     "p|Bianca's Devotion|TEF|142": {
-      "usd": 0.18,
+      "usd": 0.17,
       "eur": 0.08,
       "tcgplayerId": "542656",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Biancas-Devotion-V1-TEF142"
     },
     "p|Jumbo Ice Cream|PFL|91": {
-      "usd": 0.84,
-      "eur": 0.32,
+      "usd": 0.72,
+      "eur": 0.28,
       "tcgplayerId": "662172",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Jumbo-Ice-Cream-PFL091"
     },
@@ -1289,31 +1289,31 @@
     },
     "p|Spiky Energy|JTG|159": {
       "usd": 0.88,
-      "eur": 0.52,
+      "eur": 0.56,
       "tcgplayerId": "623586",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Spike-Energy-V1-JTG159"
     },
     "p|Mist Energy|TEF|161": {
-      "usd": 6.6,
-      "eur": 3.84,
+      "usd": 6.8,
+      "eur": 3.88,
       "tcgplayerId": "542681",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Mist-Energy-TEF161"
     },
     "t|Pokémon Center Lady": {
-      "usd": 0.23,
+      "usd": 0.24,
       "eur": 0.05,
       "tcgplayerId": "654462",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Pokemon-Center-Lady-MEG123"
     },
     "t|Bianca's Devotion": {
-      "usd": 0.18,
+      "usd": 0.17,
       "eur": 0.08,
       "tcgplayerId": "542656",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Biancas-Devotion-V1-TEF142"
     },
     "t|Jumbo Ice Cream": {
-      "usd": 0.84,
-      "eur": 0.32,
+      "usd": 0.72,
+      "eur": 0.28,
       "tcgplayerId": "662172",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Jumbo-Ice-Cream-PFL091"
     },
@@ -1331,13 +1331,13 @@
     },
     "e|Spiky Energy": {
       "usd": 0.88,
-      "eur": 0.52,
+      "eur": 0.56,
       "tcgplayerId": "623586",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Spike-Energy-V1-JTG159"
     },
     "e|Mist Energy": {
-      "usd": 6.6,
-      "eur": 3.84,
+      "usd": 6.8,
+      "eur": 3.88,
       "tcgplayerId": "542681",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Mist-Energy-TEF161"
     },
@@ -1348,19 +1348,19 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Patrat-CRI070"
     },
     "p|Jamming Tower|TWM|153": {
-      "usd": 0.34,
-      "eur": 0.34,
+      "usd": 0.44,
+      "eur": 0.4,
       "tcgplayerId": "550197",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Jamming-Tower-TWM153"
     },
     "t|Jamming Tower": {
-      "usd": 0.34,
-      "eur": 0.34,
+      "usd": 0.44,
+      "eur": 0.4,
       "tcgplayerId": "550197",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Jamming-Tower-TWM153"
     },
     "p|Pikipek|PBL|66": {
-      "usd": 0.32,
+      "usd": 0.4,
       "eur": 0.12,
       "tcgplayerId": "704823",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Pikipek-PBL066"
@@ -1372,272 +1372,272 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Trumbeak-PBL067"
     },
     "p|Toucannon|PBL|68": {
-      "usd": 0.44,
+      "usd": 0.56,
       "eur": 0.2,
       "tcgplayerId": "704825",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Toucannon-V1-PBL068"
     },
     "p|Fan Rotom|SCR|118": {
-      "usd": 0.38,
+      "usd": 0.4,
       "eur": 0.06,
       "tcgplayerId": "567344",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Fan-Rotom-SCR118"
     },
     "p|Hassel|TWM|151": {
-      "usd": 0.52,
-      "eur": 0.24,
+      "usd": 0.44,
+      "eur": 0.4,
       "tcgplayerId": "550195",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Hassel-V1-TWM151"
     },
     "t|Hassel": {
-      "usd": 0.52,
-      "eur": 0.24,
+      "usd": 0.44,
+      "eur": 0.4,
       "tcgplayerId": "550195",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Hassel-V1-TWM151"
     },
     "p|Passimian|SSP|111": {
-      "usd": 0.16,
-      "eur": 0.07,
+      "usd": 0.19,
+      "eur": 0.06,
       "tcgplayerId": "590022",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Passimian-SSP111"
     },
     "p|Brock's Scouting|JTG|146": {
       "usd": 0.26,
-      "eur": 0.07,
+      "eur": 0.08,
       "tcgplayerId": "623573",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Brocks-Scouting-V1-JTG146"
     },
     "t|Brock's Scouting": {
       "usd": 0.26,
-      "eur": 0.07,
+      "eur": 0.08,
       "tcgplayerId": "623573",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Brocks-Scouting-V1-JTG146"
     },
     "p|Drilbur|PBL|46": {
-      "usd": 0.48,
-      "eur": 0.2,
+      "usd": 0.44,
+      "eur": 0.16,
       "tcgplayerId": "704803",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Drilbur-V1-PBL046"
     },
     "p|Mega Excadrill ex|PBL|65": {
-      "usd": 1.24,
+      "usd": 0.98,
       "eur": 1.48,
       "tcgplayerId": "704822",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Mega-Excadrill-ex-V1-PBL065"
     },
     "p|Beldum|CRI|59": {
-      "usd": 0.76,
-      "eur": 0.16,
+      "usd": 0.8,
+      "eur": 0.12,
       "tcgplayerId": "693455",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Beldum-CRI059"
     },
     "p|Metang|TEF|114": {
-      "usd": 12.32,
-      "eur": 8.08,
+      "usd": 12.76,
+      "eur": 8.2,
       "tcgplayerId": "542858",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Metang-TEF114"
     },
     "p|Genesect ex|BLK|67": {
-      "usd": 2.06,
+      "usd": 2.14,
       "eur": 1.72,
       "tcgplayerId": "642518",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Black-Bolt/Genesect-ex-V1-BLK067"
     },
     "p|Energy Recycler|DRI|164": {
-      "usd": 0.27,
-      "eur": 0.09,
+      "usd": 0.26,
+      "eur": 0.08,
       "tcgplayerId": "632966",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Energy-Recycler-DRI164"
     },
     "p|Metal Energy|MEE|16": {
-      "usd": 2.4,
+      "usd": 2.88,
       "eur": 0.8,
       "tcgplayerId": "713255",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Metal-Energy-V2-MEE016"
     },
     "t|Energy Recycler": {
-      "usd": 0.27,
-      "eur": 0.09,
+      "usd": 0.26,
+      "eur": 0.08,
       "tcgplayerId": "632966",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Energy-Recycler-DRI164"
     },
     "e|Metal Energy": {
-      "usd": 2.4,
+      "usd": 2.88,
       "eur": 0.8,
       "tcgplayerId": "713255",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution-Energies/Basic-Metal-Energy-V2-MEE016"
     },
     "p|Team Rocket's Murkrow|DRI|127": {
-      "usd": 0.76,
-      "eur": 0.24,
+      "usd": 0.6,
+      "eur": 0.28,
       "tcgplayerId": "632935",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Murkrow-V1-DRI127"
     },
     "p|Team Rocket's Honchkrow|ASC|127": {
-      "usd": 0.66,
-      "eur": 0.33,
+      "usd": 0.75,
+      "eur": 0.39,
       "tcgplayerId": "675939",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Team-Rockets-Honchkrow-ASC127"
     },
     "p|Team Rocket's Porygon|DRI|153": {
-      "usd": 0.4,
+      "usd": 0.38,
       "eur": 0.1,
       "tcgplayerId": "630826",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Porygon-DRI153"
     },
     "p|Team Rocket's Porygon2|DRI|154": {
       "usd": 0.24,
-      "eur": 0.05,
+      "eur": 0.07,
       "tcgplayerId": "630827",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Porygon2-DRI154"
     },
     "p|Team Rocket's Articuno|DRI|51": {
-      "usd": 0.58,
-      "eur": 0.28,
+      "usd": 0.5,
+      "eur": 0.3,
       "tcgplayerId": "632864",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Articuno-DRI051"
     },
     "p|Team Rocket's Archer|DRI|170": {
-      "usd": 0.68,
+      "usd": 0.64,
       "eur": 0.24,
       "tcgplayerId": "632971",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Archer-V1-DRI170"
     },
     "p|Team Rocket's Ariana|DRI|171": {
-      "usd": 0.76,
+      "usd": 0.72,
       "eur": 0.16,
       "tcgplayerId": "632972",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Ariana-V1-DRI171"
     },
     "p|Team Rocket's Proton|DRI|177": {
-      "usd": 0.72,
+      "usd": 0.8,
       "eur": 0.2,
       "tcgplayerId": "632977",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Proton-V1-DRI177"
     },
     "p|Team Rocket's Giovanni|DRI|174": {
-      "usd": 0.92,
-      "eur": 0.32,
+      "usd": 0.8,
+      "eur": 0.36,
       "tcgplayerId": "630830",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Giovanni-V1-DRI174"
     },
     "p|Team Rocket's Transceiver|DRI|178": {
-      "usd": 0.84,
-      "eur": 0.44,
+      "usd": 0.88,
+      "eur": 0.4,
       "tcgplayerId": "632978",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Transceiver-DRI178"
     },
     "p|Roto-Stick|PRE|127": {
-      "usd": 0.48,
-      "eur": 0.15,
+      "usd": 0.42,
+      "eur": 0.21,
       "tcgplayerId": "610482",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Roto-Stick-PRE127"
     },
     "p|Miracle Headset|SSP|183": {
-      "usd": 0.63,
-      "eur": 1.06,
+      "usd": 0.69,
+      "eur": 0.99,
       "tcgplayerId": "590007",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Miracle-Headset-SSP183"
     },
     "p|Team Rocket's Energy|DRI|182": {
-      "usd": 1.08,
-      "eur": 0.44,
+      "usd": 1,
+      "eur": 0.48,
       "tcgplayerId": "632982",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Energy-DRI182"
     },
     "p|Ignition Energy|WHT|86": {
-      "usd": 1,
-      "eur": 1.44,
+      "usd": 1.08,
+      "eur": 1.32,
       "tcgplayerId": "642201",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Ignition-Energy-WHT086"
     },
     "t|Team Rocket's Archer": {
-      "usd": 0.68,
+      "usd": 0.64,
       "eur": 0.24,
       "tcgplayerId": "632971",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Archer-V1-DRI170"
     },
     "t|Team Rocket's Ariana": {
-      "usd": 0.76,
+      "usd": 0.72,
       "eur": 0.16,
       "tcgplayerId": "632972",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Ariana-V1-DRI171"
     },
     "t|Team Rocket's Proton": {
-      "usd": 0.72,
+      "usd": 0.8,
       "eur": 0.2,
       "tcgplayerId": "632977",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Proton-V1-DRI177"
     },
     "t|Team Rocket's Giovanni": {
-      "usd": 0.92,
-      "eur": 0.32,
+      "usd": 0.8,
+      "eur": 0.36,
       "tcgplayerId": "630830",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Giovanni-V1-DRI174"
     },
     "t|Team Rocket's Transceiver": {
-      "usd": 0.84,
-      "eur": 0.44,
+      "usd": 0.88,
+      "eur": 0.4,
       "tcgplayerId": "632978",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Transceiver-DRI178"
     },
     "t|Roto-Stick": {
-      "usd": 0.48,
-      "eur": 0.15,
+      "usd": 0.42,
+      "eur": 0.21,
       "tcgplayerId": "610482",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Roto-Stick-PRE127"
     },
     "t|Miracle Headset": {
-      "usd": 0.63,
-      "eur": 1.06,
+      "usd": 0.69,
+      "eur": 0.99,
       "tcgplayerId": "590007",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Miracle-Headset-SSP183"
     },
     "e|Team Rocket's Energy": {
-      "usd": 1.08,
-      "eur": 0.44,
+      "usd": 1,
+      "eur": 0.48,
       "tcgplayerId": "632982",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Energy-DRI182"
     },
     "e|Ignition Energy": {
-      "usd": 1,
-      "eur": 1.44,
+      "usd": 1.08,
+      "eur": 1.32,
       "tcgplayerId": "642201",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Ignition-Energy-WHT086"
     },
     "p|Marnie's Impidimp|DRI|134": {
       "usd": 0.57,
-      "eur": 0.18,
+      "eur": 0.15,
       "tcgplayerId": "632942",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Marnies-Impidimp-DRI134"
     },
     "p|Marnie's Morgrem|DRI|135": {
       "usd": 0.63,
-      "eur": 0.15,
+      "eur": 0.09,
       "tcgplayerId": "632943",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Marnies-Morgrem-DRI135"
     },
     "p|Marnie's Grimmsnarl ex|DRI|136": {
-      "usd": 1.54,
+      "usd": 1.4,
       "eur": 1.1,
       "tcgplayerId": "630823",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Marnies-Grimmsnarl-ex-DRI136"
     },
     "p|Snorunt|ASC|46": {
-      "usd": 0.66,
+      "usd": 0.6,
       "eur": 0.15,
       "tcgplayerId": "675858",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Snorunt-V1-ASC046"
     },
     "p|Froslass|TWM|53": {
-      "usd": 0.6,
-      "eur": 0.4,
+      "usd": 0.62,
+      "eur": 0.44,
       "tcgplayerId": "550097",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Froslass-V1-TWM053"
     },
     "p|Maractus|JTG|8": {
       "usd": 0.18,
-      "eur": 0.03,
+      "eur": 0.02,
       "tcgplayerId": "623435",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Maractus-V1-JTG008"
     },
@@ -1655,61 +1655,61 @@
     },
     "p|Cynthia's Gible|DRI|102": {
       "usd": 1.24,
-      "eur": 0.2,
+      "eur": 0.16,
       "tcgplayerId": "632910",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Gible-DRI102"
     },
     "p|Cynthia's Gabite|DRI|103": {
       "usd": 1.12,
-      "eur": 0.36,
+      "eur": 0.24,
       "tcgplayerId": "632911",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Gabite-DRI103"
     },
     "p|Cynthia's Garchomp ex|DRI|104": {
-      "usd": 2.94,
-      "eur": 2.19,
+      "usd": 2.88,
+      "eur": 1.98,
       "tcgplayerId": "632912",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Garchomp-ex-V1-DRI104"
     },
     "p|Cynthia's Roselia|DRI|7": {
-      "usd": 0.69,
-      "eur": 0.21,
+      "usd": 0.57,
+      "eur": 0.15,
       "tcgplayerId": "630803",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Roselia-DRI007"
     },
     "p|Cynthia's Roserade|DRI|8": {
-      "usd": 0.78,
-      "eur": 0.39,
+      "usd": 0.72,
+      "eur": 0.33,
       "tcgplayerId": "630804",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Roserade-V1-DRI008"
     },
     "p|Cynthia's Spiritomb|DRI|129": {
       "usd": 0.26,
-      "eur": 0.05,
+      "eur": 0.04,
       "tcgplayerId": "632937",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Spiritomb-DRI129"
     },
     "p|Cynthia's Power Weight|DRI|162": {
-      "usd": 1.04,
-      "eur": 0.4,
+      "usd": 1,
+      "eur": 0.32,
       "tcgplayerId": "632964",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Power-Weight-DRI162"
     },
     "p|Rocky Fighting Energy|POR|87": {
-      "usd": 1.08,
-      "eur": 0.76,
+      "usd": 1.04,
+      "eur": 0.72,
       "tcgplayerId": "684350",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Rock-F-Energy-POR087"
     },
     "t|Cynthia's Power Weight": {
-      "usd": 1.04,
-      "eur": 0.4,
+      "usd": 1,
+      "eur": 0.32,
       "tcgplayerId": "632964",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Cynthias-Power-Weight-DRI162"
     },
     "e|Rocky Fighting Energy": {
-      "usd": 1.08,
-      "eur": 0.76,
+      "usd": 1.04,
+      "eur": 0.72,
       "tcgplayerId": "684350",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Rock-F-Energy-POR087"
     },
@@ -1720,20 +1720,20 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Staryu-POR020"
     },
     "p|Mega Starmie ex|POR|21": {
-      "usd": 1.1,
-      "eur": 1.68,
+      "usd": 1,
+      "eur": 2.06,
       "tcgplayerId": "684360",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Mega-Starmie-ex-V1-POR021"
     },
     "p|Mega Froslass ex|ASC|47": {
-      "usd": 2.94,
-      "eur": 4.74,
+      "usd": 3.06,
+      "eur": 4.84,
       "tcgplayerId": "675859",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Mega-Froslass-ex-V1-ASC047"
     },
     "p|Salvatore|TEF|160": {
-      "usd": 0.34,
-      "eur": 0.16,
+      "usd": 0.38,
+      "eur": 0.22,
       "tcgplayerId": "542679",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Salvatore-V1-TEF160"
     },
@@ -1744,14 +1744,14 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Energy-Search-POR072"
     },
     "p|Bubbly Water Energy|CRI|84": {
-      "usd": 0.36,
+      "usd": 0.42,
       "eur": 0.14,
       "tcgplayerId": "693458",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Bubbly-W-Energy-CRI084"
     },
     "t|Salvatore": {
-      "usd": 0.34,
-      "eur": 0.16,
+      "usd": 0.38,
+      "eur": 0.22,
       "tcgplayerId": "542679",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Salvatore-V1-TEF160"
     },
@@ -1762,104 +1762,104 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Energy-Search-POR072"
     },
     "e|Bubbly Water Energy": {
-      "usd": 0.36,
+      "usd": 0.42,
       "eur": 0.14,
       "tcgplayerId": "693458",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Bubbly-W-Energy-CRI084"
     },
     "p|Riolu|PRE|50": {
-      "usd": 0.45,
-      "eur": 0.12,
+      "usd": 0.48,
+      "eur": 0.09,
       "tcgplayerId": "610405",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Riolu-PRE050"
     },
     "p|Maximum Belt|TEF|154": {
-      "usd": 0.7,
-      "eur": 1.46,
+      "usd": 0.67,
+      "eur": 1.27,
       "tcgplayerId": "542670",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Maximum-Belt-TEF154"
     },
     "t|Maximum Belt": {
-      "usd": 0.7,
-      "eur": 1.46,
+      "usd": 0.67,
+      "eur": 1.27,
       "tcgplayerId": "542670",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Maximum-Belt-TEF154"
     },
     "p|N's Zorua|JTG|97": {
-      "usd": 0.96,
-      "eur": 0.32,
+      "usd": 1.04,
+      "eur": 0.28,
       "tcgplayerId": "623524",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Zorua-JTG097"
     },
     "p|N's Zoroark ex|JTG|98": {
-      "usd": 6.12,
-      "eur": 5.32,
+      "usd": 7.8,
+      "eur": 5.72,
       "tcgplayerId": "623525",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Zoroark-ex-V1-JTG098"
     },
     "p|N's Reshiram|JTG|116": {
-      "usd": 0.2,
-      "eur": 0.06,
+      "usd": 0.22,
+      "eur": 0.07,
       "tcgplayerId": "623543",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Reshiram-V1-JTG116"
     },
     "p|N's Zekrom|ASC|155": {
-      "usd": 0.28,
-      "eur": 0.16,
+      "usd": 0.29,
+      "eur": 0.18,
       "tcgplayerId": "675967",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Ns-Zekrom-V1-ASC155"
     },
     "p|N's Purrloin|JTG|96": {
-      "usd": 0.18,
+      "usd": 0.17,
       "eur": 0.06,
       "tcgplayerId": "623523",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Purrloin-JTG096"
     },
     "p|Janine's Secret Art|PRE|112": {
-      "usd": 0.17,
+      "usd": 0.19,
       "eur": 0.07,
       "tcgplayerId": "610467",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Janines-Secret-Art-V1-PRE112"
     },
     "p|Black Belt's Training|JTG|143": {
-      "usd": 0.22,
-      "eur": 0.07,
+      "usd": 0.23,
+      "eur": 0.08,
       "tcgplayerId": "623570",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Black-Belts-Training-V1-JTG143"
     },
     "p|N's PP Up|JTG|153": {
-      "usd": 0.57,
-      "eur": 0.15,
+      "usd": 0.66,
+      "eur": 0.12,
       "tcgplayerId": "623580",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-PP-Up-JTG153"
     },
     "p|Punk Helmet|PFL|92": {
       "usd": 0.18,
-      "eur": 0.04,
+      "eur": 0.03,
       "tcgplayerId": "660419",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Punk-Helmet-V1-PFL092"
     },
     "t|Janine's Secret Art": {
-      "usd": 0.17,
+      "usd": 0.19,
       "eur": 0.07,
       "tcgplayerId": "610467",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Janines-Secret-Art-V1-PRE112"
     },
     "t|Black Belt's Training": {
-      "usd": 0.22,
-      "eur": 0.07,
+      "usd": 0.23,
+      "eur": 0.08,
       "tcgplayerId": "623570",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Black-Belts-Training-V1-JTG143"
     },
     "t|N's PP Up": {
-      "usd": 0.57,
-      "eur": 0.15,
+      "usd": 0.66,
+      "eur": 0.12,
       "tcgplayerId": "623580",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-PP-Up-JTG153"
     },
     "t|Punk Helmet": {
       "usd": 0.18,
-      "eur": 0.04,
+      "eur": 0.03,
       "tcgplayerId": "660419",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Punk-Helmet-V1-PFL092"
     },
@@ -1870,74 +1870,74 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Buneary-PFL083"
     },
     "p|Mega Lopunny ex|PFL|84": {
-      "usd": 1.14,
-      "eur": 1.18,
+      "usd": 1.04,
+      "eur": 1.12,
       "tcgplayerId": "662188",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Mega-Lopunny-ex-V1-PFL084"
     },
     "p|Nighttime Mine|ASC|197": {
-      "usd": 0.75,
-      "eur": 0.33,
+      "usd": 0.81,
+      "eur": 0.27,
       "tcgplayerId": "676009",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Nighttime-Mine-ASC197"
     },
     "t|Nighttime Mine": {
-      "usd": 0.75,
-      "eur": 0.33,
+      "usd": 0.81,
+      "eur": 0.27,
       "tcgplayerId": "676009",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Nighttime-Mine-ASC197"
     },
     "p|Grookey|TWM|14": {
-      "usd": 0.64,
-      "eur": 0.48,
+      "usd": 0.6,
+      "eur": 0.44,
       "tcgplayerId": "550058",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Grookey-TWM014"
     },
     "p|Hand Trimmer|TEF|150": {
-      "usd": 0.2,
-      "eur": 0.04,
+      "usd": 0.18,
+      "eur": 0.03,
       "tcgplayerId": "542665",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Hand-Trimmer-TEF150"
     },
     "t|Hand Trimmer": {
-      "usd": 0.2,
-      "eur": 0.04,
+      "usd": 0.18,
+      "eur": 0.03,
       "tcgplayerId": "542665",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Hand-Trimmer-TEF150"
     },
     "p|Brute Bonnet|TWM|118": {
-      "usd": 0.17,
+      "usd": 0.15,
       "eur": 0.04,
       "tcgplayerId": "550162",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Brute-Bonnet-TWM118"
     },
     "p|Pecharunt|SVP|149": {
-      "usd": 0.8,
-      "eur": 0.57,
+      "usd": 0.81,
+      "eur": 0.53,
       "tcgplayerId": "562025",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SV-Black-Star-Promos/Pecharunt-SVP149"
     },
     "p|Chi-Yu|PBL|59": {
-      "usd": 0.16,
-      "eur": 0.07,
+      "usd": 0.19,
+      "eur": 0.06,
       "tcgplayerId": "704816",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Chi-Yu-PBL059"
     },
     "p|Team Rocket's Sneasel|DRI|128": {
       "usd": 0.23,
-      "eur": 0.08,
+      "eur": 0.07,
       "tcgplayerId": "632936",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Sneasel-DRI128"
     },
     "p|Mega Absol ex|MEG|86": {
-      "usd": 0.6,
-      "eur": 0.64,
+      "usd": 0.53,
+      "eur": 0.62,
       "tcgplayerId": "654425",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Absol-ex-V1-MEG086"
     },
     "p|Okidogi|TWM|111": {
       "usd": 0.57,
-      "eur": 0.15,
+      "eur": 0.24,
       "tcgplayerId": "550155",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Okidogi-TWM111"
     },
@@ -1948,26 +1948,26 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Binacle-POR042"
     },
     "p|Barbaracle|POR|43": {
-      "usd": 0.2,
-      "eur": 0.08,
+      "usd": 0.24,
+      "eur": 0.06,
       "tcgplayerId": "684335",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Barbaracle-POR043"
     },
     "p|Bloodmoon Ursaluna|PRE|54": {
       "usd": 0.15,
-      "eur": 0.06,
+      "eur": 0.05,
       "tcgplayerId": "610409",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Bloodmoon-Ursaluna-PRE054"
     },
     "p|Moltres|PFL|14": {
-      "usd": 0.22,
+      "usd": 0.2,
       "eur": 0.09,
       "tcgplayerId": "662201",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Moltres-PFL014"
     },
     "p|Tarragon|POR|85": {
-      "usd": 0.32,
-      "eur": 0.06,
+      "usd": 0.34,
+      "eur": 0.04,
       "tcgplayerId": "684344",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Tarragon-V1-POR085"
     },
@@ -1978,14 +1978,14 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet/Energy-Retrieval-SV1en171"
     },
     "p|Prism Energy|ASC|216": {
-      "usd": 0.8,
-      "eur": 0.32,
+      "usd": 0.72,
+      "eur": 0.28,
       "tcgplayerId": "676028",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Prism-Energy-ASC216"
     },
     "t|Tarragon": {
-      "usd": 0.32,
-      "eur": 0.06,
+      "usd": 0.34,
+      "eur": 0.04,
       "tcgplayerId": "684344",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Tarragon-V1-POR085"
     },
@@ -1996,56 +1996,56 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet/Energy-Retrieval-SV1en171"
     },
     "e|Prism Energy": {
-      "usd": 0.8,
-      "eur": 0.32,
+      "usd": 0.72,
+      "eur": 0.28,
       "tcgplayerId": "676028",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Prism-Energy-ASC216"
     },
     "p|Froakie|CRI|20": {
-      "usd": 0.3,
-      "eur": 0.09,
+      "usd": 0.33,
+      "eur": 0.18,
       "tcgplayerId": "693488",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Froakie-V1-CRI020"
     },
     "p|Frogadier|CRI|21": {
       "usd": 0.32,
-      "eur": 0.06,
+      "eur": 0.08,
       "tcgplayerId": "693490",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Frogadier-V1-CRI021"
     },
     "p|Greninja ex|TWM|106": {
-      "usd": 4.1,
-      "eur": 4.62,
+      "usd": 3.98,
+      "eur": 4.34,
       "tcgplayerId": "550150",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Greninja-ex-V1-TWM106"
     },
     "p|Greninja ex|30C|21": {
-      "usd": 0.62,
+      "usd": 0.52,
       "eur": 0.31,
       "tcgplayerId": "696676",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/30th-Celebration/Greninja-ex-V1-30C021"
     },
     "p|Colress's Tenacity|SFA|57": {
       "usd": 0.56,
-      "eur": 0.18,
+      "eur": 0.24,
       "tcgplayerId": "560368",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Colresss-Tenacity-V1-SFA057"
     },
     "p|Grand Tree|SCR|136": {
-      "usd": 0.47,
-      "eur": 0.57,
+      "usd": 0.43,
+      "eur": 0.56,
       "tcgplayerId": "567397",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Grand-Tree-SCR136"
     },
     "t|Colress's Tenacity": {
       "usd": 0.56,
-      "eur": 0.18,
+      "eur": 0.24,
       "tcgplayerId": "560368",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Colresss-Tenacity-V1-SFA057"
     },
     "t|Grand Tree": {
-      "usd": 0.47,
-      "eur": 0.57,
+      "usd": 0.43,
+      "eur": 0.56,
       "tcgplayerId": "567397",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Grand-Tree-SCR136"
     },
@@ -2062,61 +2062,61 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Hops-Trevenant-V1-ASC096"
     },
     "p|Hop's Wooloo|JTG|135": {
-      "usd": 0.13,
+      "usd": 0.15,
       "eur": 0.03,
       "tcgplayerId": "623562",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Wooloo-V1-JTG135"
     },
     "p|Hop's Dubwool|JTG|136": {
-      "usd": 0.18,
-      "eur": 0.05,
+      "usd": 0.19,
+      "eur": 0.03,
       "tcgplayerId": "623563",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Dubwool-JTG136"
     },
     "p|Hop's Snorlax|JTG|117": {
-      "usd": 0.31,
-      "eur": 0.12,
+      "usd": 0.28,
+      "eur": 0.11,
       "tcgplayerId": "623544",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Snorlax-JTG117"
     },
     "p|Hop's Cramorant|JTG|138": {
       "usd": 0.1,
-      "eur": 0.03,
+      "eur": 0.04,
       "tcgplayerId": "623565",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Cramorant-JTG138"
     },
     "p|Hop's Bag|JTG|147": {
-      "usd": 0.34,
+      "usd": 0.3,
       "eur": 0.08,
       "tcgplayerId": "623574",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Bag-JTG147"
     },
     "p|Hop's Choice Band|JTG|148": {
-      "usd": 0.68,
+      "usd": 0.56,
       "eur": 0.12,
       "tcgplayerId": "623575",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Choice-Band-JTG148"
     },
     "p|Postwick|JTG|154": {
-      "usd": 0.52,
+      "usd": 0.48,
       "eur": 0.16,
       "tcgplayerId": "623581",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Postwick-JTG154"
     },
     "t|Hop's Bag": {
-      "usd": 0.34,
+      "usd": 0.3,
       "eur": 0.08,
       "tcgplayerId": "623574",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Bag-JTG147"
     },
     "t|Hop's Choice Band": {
-      "usd": 0.68,
+      "usd": 0.56,
       "eur": 0.12,
       "tcgplayerId": "623575",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Choice-Band-JTG148"
     },
     "t|Postwick": {
-      "usd": 0.52,
+      "usd": 0.48,
       "eur": 0.16,
       "tcgplayerId": "623581",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Postwick-JTG154"
@@ -2135,25 +2135,25 @@
     },
     "p|Bouffalant|SCR|119": {
       "usd": 0.4,
-      "eur": 0.1,
+      "eur": 0.08,
       "tcgplayerId": "567345",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Bouffalant-SCR119"
     },
     "p|Bouffalant|SSP|151": {
       "usd": 0.17,
-      "eur": 0.04,
+      "eur": 0.03,
       "tcgplayerId": "589877",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Bouffalant-SSP151"
     },
     "p|Hoothoot|SCR|114": {
       "usd": 0.81,
-      "eur": 0.18,
+      "eur": 0.27,
       "tcgplayerId": "567340",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Hoothoot-SCR114"
     },
     "p|Noctowl|SCR|115": {
       "usd": 0.84,
-      "eur": 0.24,
+      "eur": 0.42,
       "tcgplayerId": "567341",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Noctowl-SCR115"
     },
@@ -2164,139 +2164,139 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Eevee-SSP143"
     },
     "p|Flareon ex|PRE|14": {
-      "usd": 8.56,
-      "eur": 8.24,
+      "usd": 9.36,
+      "eur": 8,
       "tcgplayerId": "610369",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Flareon-ex-V1-PRE014"
     },
     "p|Leafeon ex|PRE|6": {
-      "usd": 3.88,
-      "eur": 3.81,
+      "usd": 3.9,
+      "eur": 3.7,
       "tcgplayerId": "610361",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Leafeon-ex-V1-PRE006"
     },
     "p|Espeon ex|30C|70": {
-      "usd": 0.72,
-      "eur": 0.35,
+      "usd": 0.79,
+      "eur": 0.36,
       "tcgplayerId": "696834",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/30th-Celebration/Espeon-ex-30C070"
     },
     "p|Victini|SSP|21": {
-      "usd": 0.22,
+      "usd": 0.26,
       "eur": 0.06,
       "tcgplayerId": "590087",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Victini-SSP021"
     },
     "p|Paldean Tauros|SSP|18": {
-      "usd": 0.14,
+      "usd": 0.13,
       "eur": 0.05,
       "tcgplayerId": "590014",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Paldean-Tauros-SSP018"
     },
     "p|Eevee ex|PRE|75": {
-      "usd": 5.97,
-      "eur": 5.8,
+      "usd": 5.62,
+      "eur": 5.95,
       "tcgplayerId": "610430",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Eevee-ex-V1-PRE075"
     },
     "p|Tera Orb|SSP|189": {
-      "usd": 0.36,
+      "usd": 0.32,
       "eur": 0.1,
       "tcgplayerId": "590076",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Tera-Orb-SSP189"
     },
     "p|Sparkling Crystal|SCR|142": {
       "usd": 0.34,
-      "eur": 0.33,
+      "eur": 0.35,
       "tcgplayerId": "567416",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Sparkling-Crystal-SCR142"
     },
     "t|Tera Orb": {
-      "usd": 0.36,
+      "usd": 0.32,
       "eur": 0.1,
       "tcgplayerId": "590076",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Tera-Orb-SSP189"
     },
     "t|Sparkling Crystal": {
       "usd": 0.34,
-      "eur": 0.33,
+      "eur": 0.35,
       "tcgplayerId": "567416",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Sparkling-Crystal-SCR142"
     },
     "p|Chikorita|MEG|8": {
-      "usd": 0.3,
+      "usd": 0.34,
       "eur": 0.1,
       "tcgplayerId": "654347",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Chikorita-MEG008"
     },
     "p|Smoliv|DRI|21": {
-      "usd": 0.44,
+      "usd": 0.46,
       "eur": 0.08,
       "tcgplayerId": "630805",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Smoliv-DRI021"
     },
     "p|Dolliv|DRI|22": {
       "usd": 0.38,
-      "eur": 0.1,
+      "eur": 0.12,
       "tcgplayerId": "630806",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Dolliv-DRI022"
     },
     "p|Arboliva ex|DRI|23": {
-      "usd": 1.22,
-      "eur": 1.08,
+      "usd": 1.16,
+      "eur": 1.16,
       "tcgplayerId": "630807",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Arboliva-ex-V1-DRI023"
     },
     "p|Frillish|WHT|44": {
-      "usd": 0.4,
+      "usd": 0.44,
       "eur": 0.16,
       "tcgplayerId": "642156",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Frillish-V1-WHT044"
     },
     "p|Jellicent ex|WHT|45": {
-      "usd": 1.34,
-      "eur": 1,
+      "usd": 1.36,
+      "eur": 1.06,
       "tcgplayerId": "642157",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/White-Flare/Jellicent-ex-V1-WHT045"
     },
     "p|Mega Diancie ex|PFL|41": {
-      "usd": 1.12,
-      "eur": 0.92,
+      "usd": 0.9,
+      "eur": 0.94,
       "tcgplayerId": "660379",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Mega-Diancie-ex-PFL041"
     },
     "p|Tool Scrapper|ASC|212": {
-      "usd": 0.2,
-      "eur": 0.05,
+      "usd": 0.24,
+      "eur": 0.06,
       "tcgplayerId": "676024",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Tool-Scrapper-ASC212"
     },
     "p|Powerglass|SFA|63": {
       "usd": 0.21,
-      "eur": 0.04,
+      "eur": 0.07,
       "tcgplayerId": "560374",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Powerglass-V1-SFA063"
     },
     "p|Mystery Garden|MEG|122": {
-      "usd": 0.32,
+      "usd": 0.3,
       "eur": 0.1,
       "tcgplayerId": "654461",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mystery-Garden-V1-MEG122"
     },
     "t|Tool Scrapper": {
-      "usd": 0.2,
-      "eur": 0.05,
+      "usd": 0.24,
+      "eur": 0.06,
       "tcgplayerId": "676024",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Tool-Scrapper-ASC212"
     },
     "t|Powerglass": {
       "usd": 0.21,
-      "eur": 0.04,
+      "eur": 0.07,
       "tcgplayerId": "560374",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Powerglass-V1-SFA063"
     },
     "t|Mystery Garden": {
-      "usd": 0.32,
+      "usd": 0.3,
       "eur": 0.1,
       "tcgplayerId": "654461",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mystery-Garden-V1-MEG122"
@@ -2308,32 +2308,32 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Tarountula-DRI019"
     },
     "p|Team Rocket's Spidops|DRI|20": {
-      "usd": 0.96,
-      "eur": 0.24,
+      "usd": 1.12,
+      "eur": 0.28,
       "tcgplayerId": "632846",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Spidops-V1-DRI020"
     },
     "p|Team Rocket's Mewtwo ex|DRI|81": {
-      "usd": 3.82,
-      "eur": 1.76,
+      "usd": 4.06,
+      "eur": 1.7,
       "tcgplayerId": "632891",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Mewtwo-ex-V1-DRI081"
     },
     "p|Team Rocket's Mimikyu|DRI|87": {
-      "usd": 0.58,
-      "eur": 0.06,
+      "usd": 0.54,
+      "eur": 0.08,
       "tcgplayerId": "630821",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Mimikyu-DRI087"
     },
     "p|Weedle|CRI|1": {
-      "usd": 0.64,
+      "usd": 0.72,
       "eur": 0.12,
       "tcgplayerId": "693561",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Weedle-CRI001"
     },
     "p|Kakuna|CRI|2": {
-      "usd": 0.68,
-      "eur": 0.12,
+      "usd": 0.72,
+      "eur": 0.08,
       "tcgplayerId": "693502",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Kakuna-CRI002"
     },
@@ -2350,116 +2350,116 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Ethans-Cyndaquil-DRI031"
     },
     "p|Ethan's Quilava|DRI|33": {
-      "usd": 0.84,
-      "eur": 0.52,
+      "usd": 0.96,
+      "eur": 0.48,
       "tcgplayerId": "632855",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Ethans-Quilava-DRI033"
     },
     "p|Ethan's Typhlosion|DRI|34": {
-      "usd": 0.93,
+      "usd": 0.87,
       "eur": 0.48,
       "tcgplayerId": "630809",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Ethans-Typhlosion-V1-DRI034"
     },
     "p|Ethan's Adventure|DRI|165": {
-      "usd": 0.72,
+      "usd": 0.6,
       "eur": 0.16,
       "tcgplayerId": "632967",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Ethans-Adventure-V1-DRI165"
     },
     "p|Redeemable Ticket|JTG|156": {
-      "usd": 0.19,
+      "usd": 0.2,
       "eur": 0.06,
       "tcgplayerId": "623583",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Reciprocating-Ticket-JTG156"
     },
     "t|Ethan's Adventure": {
-      "usd": 0.72,
+      "usd": 0.6,
       "eur": 0.16,
       "tcgplayerId": "632967",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Ethans-Adventure-V1-DRI165"
     },
     "t|Redeemable Ticket": {
-      "usd": 0.19,
+      "usd": 0.2,
       "eur": 0.06,
       "tcgplayerId": "623583",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Reciprocating-Ticket-JTG156"
     },
     "p|Mega Greninja ex|CRI|22": {
-      "usd": 1.4,
-      "eur": 1.78,
+      "usd": 1.56,
+      "eur": 1.72,
       "tcgplayerId": "693515",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Mega-Greninja-ex-V1-CRI022"
     },
     "p|Transformation Tome|CRI|83": {
       "usd": 0.24,
-      "eur": 0.08,
+      "eur": 0.06,
       "tcgplayerId": "693555",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Transformation-Tome-CRI083"
     },
     "t|Transformation Tome": {
       "usd": 0.24,
-      "eur": 0.08,
+      "eur": 0.06,
       "tcgplayerId": "693555",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Transformation-Tome-CRI083"
     },
     "p|Charcadet|SSP|32": {
-      "usd": 1.08,
-      "eur": 0.2,
+      "usd": 1,
+      "eur": 0.24,
       "tcgplayerId": "589896",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Charcadet-SSP032"
     },
     "p|Ceruledge ex|SSP|36": {
-      "usd": 4.29,
-      "eur": 4.95,
+      "usd": 3.54,
+      "eur": 4.89,
       "tcgplayerId": "589892",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Ceruledge-ex-SSP036"
     },
     "p|Drilbur|TEF|85": {
       "usd": 0.16,
-      "eur": 0.06,
+      "eur": 0.05,
       "tcgplayerId": "542829",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Drilbur-TEF085"
     },
     "p|Carmine|TWM|145": {
       "usd": 0.48,
-      "eur": 0.12,
+      "eur": 0.28,
       "tcgplayerId": "550189",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Carmine-V1-TWM145"
     },
     "p|Pokémon Catcher|POR|82": {
-      "usd": 0.76,
-      "eur": 0.24,
+      "usd": 0.64,
+      "eur": 0.2,
       "tcgplayerId": "684324",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Pokemon-Catcher-POR082"
     },
     "p|Brilliant Blender|SSP|164": {
-      "usd": 0.82,
+      "usd": 0.9,
       "eur": 1.34,
       "tcgplayerId": "589880",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Brilliant-Blender-SSP164"
     },
     "t|Carmine": {
       "usd": 0.48,
-      "eur": 0.12,
+      "eur": 0.28,
       "tcgplayerId": "550189",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Carmine-V1-TWM145"
     },
     "t|Pokémon Catcher": {
-      "usd": 0.76,
-      "eur": 0.24,
+      "usd": 0.64,
+      "eur": 0.2,
       "tcgplayerId": "684324",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Pokemon-Catcher-POR082"
     },
     "t|Brilliant Blender": {
-      "usd": 0.82,
+      "usd": 0.9,
       "eur": 1.34,
       "tcgplayerId": "589880",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Brilliant-Blender-SSP164"
     },
     "p|Beldum|TEF|113": {
-      "usd": 0.6,
-      "eur": 0.15,
+      "usd": 0.54,
+      "eur": 0.21,
       "tcgplayerId": "542857",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Beldum-TEF113"
     },
@@ -2470,62 +2470,62 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Heatran-TWM123"
     },
     "p|Mega Skarmory ex|POR|55": {
-      "usd": 0.6,
-      "eur": 0.59,
+      "usd": 0.51,
+      "eur": 0.64,
       "tcgplayerId": "684351",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Mega-Skarmory-ex-V1-POR055"
     },
     "p|Precious Trolley|SSP|185": {
-      "usd": 3.1,
-      "eur": 2.86,
+      "usd": 3.03,
+      "eur": 2.8,
       "tcgplayerId": "590028",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Precious-Trolley-SSP185"
     },
     "t|Precious Trolley": {
-      "usd": 3.1,
-      "eur": 2.86,
+      "usd": 3.03,
+      "eur": 2.8,
       "tcgplayerId": "590028",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Precious-Trolley-SSP185"
     },
     "p|Electrike|MEG|49": {
-      "usd": 0.68,
-      "eur": 0.12,
+      "usd": 0.76,
+      "eur": 0.16,
       "tcgplayerId": "654388",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Electrike-MEG049"
     },
     "p|Manectric|PBL|24": {
-      "usd": 0.21,
-      "eur": 0.06,
+      "usd": 0.3,
+      "eur": 0.12,
       "tcgplayerId": "704781",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Manectric-V1-PBL024"
     },
     "p|Mega Manectric ex|MEG|50": {
-      "usd": 1.2,
+      "usd": 1.08,
       "eur": 1.24,
       "tcgplayerId": "654389",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Manectric-ex-V1-MEG050"
     },
     "p|Tynamo|ASC|59": {
-      "usd": 0.6,
-      "eur": 0.09,
+      "usd": 0.69,
+      "eur": 0.12,
       "tcgplayerId": "675871",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Tynamo-ASC059"
     },
     "p|Eelektrik|ASC|60": {
-      "usd": 0.75,
+      "usd": 0.84,
       "eur": 0.15,
       "tcgplayerId": "675872",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Eelektrik-ASC060"
     },
     "p|Iono's Wattrel|JTG|54": {
-      "usd": 0.17,
-      "eur": 0.04,
+      "usd": 0.18,
+      "eur": 0.05,
       "tcgplayerId": "623481",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ionos-Wattrel-JTG054"
     },
     "p|Iono's Kilowattrel|JTG|55": {
-      "usd": 0.15,
-      "eur": 0.07,
+      "usd": 0.16,
+      "eur": 0.06,
       "tcgplayerId": "623482",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ionos-Kilowattrel-V1-JTG055"
     },
@@ -2536,7 +2536,7 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Canari-V1-ASC185"
     },
     "p|Voltaic Lightning Energy|PBL|84": {
-      "usd": 0.57,
+      "usd": 0.63,
       "eur": 0.18,
       "tcgplayerId": "704841",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Voltaic-L-Energy-PBL084"
@@ -2548,86 +2548,86 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Canari-V1-ASC185"
     },
     "e|Voltaic Lightning Energy": {
-      "usd": 0.57,
+      "usd": 0.63,
       "eur": 0.18,
       "tcgplayerId": "704841",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Voltaic-L-Energy-PBL084"
     },
     "p|N's Castle|JTG|152": {
-      "usd": 0.42,
+      "usd": 0.4,
       "eur": 0.12,
       "tcgplayerId": "623579",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Castle-JTG152"
     },
     "t|N's Castle": {
-      "usd": 0.42,
+      "usd": 0.4,
       "eur": 0.12,
       "tcgplayerId": "623579",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Castle-JTG152"
     },
     "p|Piplup|PFL|27": {
-      "usd": 0.4,
-      "eur": 0.06,
+      "usd": 0.34,
+      "eur": 0.08,
       "tcgplayerId": "662214",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Piplup-V1-PFL027"
     },
     "p|Empoleon ex|PFL|70": {
-      "usd": 0.57,
-      "eur": 0.42,
+      "usd": 0.54,
+      "eur": 0.44,
       "tcgplayerId": "662155",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Empoleon-ex-V1-PFL070"
     },
     "p|Annihilape|SSP|100": {
-      "usd": 0.17,
-      "eur": 0.06,
+      "usd": 0.19,
+      "eur": 0.05,
       "tcgplayerId": "589863",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Annihilape-SSP100"
     },
     "p|Smoochum|SSP|75": {
-      "usd": 0.19,
+      "usd": 0.18,
       "eur": 0.07,
       "tcgplayerId": "590059",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Smoochum-SSP075"
     },
     "p|Surfer|SSP|187": {
-      "usd": 0.19,
+      "usd": 0.17,
       "eur": 0.03,
       "tcgplayerId": "590066",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Surfer-V1-SSP187"
     },
     "t|Surfer": {
-      "usd": 0.19,
+      "usd": 0.17,
       "eur": 0.03,
       "tcgplayerId": "590066",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Surfer-V1-SSP187"
     },
     "p|Dedenne|SSP|87": {
-      "usd": 0.24,
-      "eur": 0.05,
+      "usd": 0.22,
+      "eur": 0.06,
       "tcgplayerId": "589914",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Dedenne-SSP087"
     },
     "p|Enhanced Hammer|TWM|148": {
-      "usd": 0.36,
-      "eur": 0.24,
+      "usd": 0.38,
+      "eur": 0.22,
       "tcgplayerId": "550192",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Enhanced-Hammer-V1-TWM148"
     },
     "t|Enhanced Hammer": {
-      "usd": 0.36,
-      "eur": 0.24,
+      "usd": 0.38,
+      "eur": 0.22,
       "tcgplayerId": "550192",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Enhanced-Hammer-V1-TWM148"
     },
     "p|Flutter Mane|TEF|78": {
       "usd": 0.27,
-      "eur": 0.13,
+      "eur": 0.12,
       "tcgplayerId": "542822",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Flutter-Mane-TEF078"
     },
     "p|Enamorus|TWM|93": {
-      "usd": 0.17,
-      "eur": 0.13,
+      "usd": 0.15,
+      "eur": 0.11,
       "tcgplayerId": "550137",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Enamorus-V1-TWM093"
     },
@@ -2638,146 +2638,146 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Armarouge-V1-PBL012"
     },
     "p|Neo Upper Energy|TEF|162": {
-      "usd": 12.2,
-      "eur": 8.03,
+      "usd": 11.92,
+      "eur": 7.92,
       "tcgplayerId": "542682",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Neo-Upper-Energy-TEF162"
     },
     "e|Neo Upper Energy": {
-      "usd": 12.2,
-      "eur": 8.03,
+      "usd": 11.92,
+      "eur": 7.92,
       "tcgplayerId": "542682",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Neo-Upper-Energy-TEF162"
     },
     "p|Handheld Fan|TWM|150": {
-      "usd": 0.25,
-      "eur": 0.17,
+      "usd": 0.24,
+      "eur": 0.14,
       "tcgplayerId": "550194",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Handheld-Fan-TWM150"
     },
     "t|Handheld Fan": {
-      "usd": 0.25,
-      "eur": 0.17,
+      "usd": 0.24,
+      "eur": 0.14,
       "tcgplayerId": "550194",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Handheld-Fan-TWM150"
     },
     "p|Bloodmoon Ursaluna ex|TWM|141": {
-      "usd": 0.88,
-      "eur": 0.93,
+      "usd": 0.87,
+      "eur": 0.89,
       "tcgplayerId": "550185",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Bloodmoon-Ursaluna-ex-V1-TWM141"
     },
     "p|Yveltal|30C|100": {
-      "usd": 0.17,
+      "usd": 0.16,
       "eur": 0.03,
       "tcgplayerId": "716493",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/30th-Celebration/Yveltal-30C100"
     },
     "p|Stunfisk|ASC|62": {
-      "usd": 0.18,
-      "eur": 0.05,
+      "usd": 0.17,
+      "eur": 0.04,
       "tcgplayerId": "675874",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Stunfisk-ASC062"
     },
     "p|AZ's Tranquility|CRI|76": {
-      "usd": 0.17,
+      "usd": 0.19,
       "eur": 0.04,
       "tcgplayerId": "693449",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/AZs-Tranquility-V1-CRI076"
     },
     "t|AZ's Tranquility": {
-      "usd": 0.17,
+      "usd": 0.19,
       "eur": 0.04,
       "tcgplayerId": "693449",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/AZs-Tranquility-V1-CRI076"
     },
     "p|Steven's Beldum|DRI|143": {
-      "usd": 0.42,
-      "eur": 0.15,
+      "usd": 0.39,
+      "eur": 0.12,
       "tcgplayerId": "632950",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Stevens-Beldum-DRI143"
     },
     "p|Steven's Metang|DRI|144": {
-      "usd": 0.42,
+      "usd": 0.4,
       "eur": 0.1,
       "tcgplayerId": "632951",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Stevens-Metang-DRI144"
     },
     "p|Steven's Metagross ex|DRI|145": {
-      "usd": 3,
-      "eur": 2.28,
+      "usd": 2.46,
+      "eur": 2.07,
       "tcgplayerId": "630824",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Stevens-Metagross-ex-DRI145"
     },
     "p|Deoxys|CRI|32": {
-      "usd": 0.11,
+      "usd": 0.1,
       "eur": 0.04,
       "tcgplayerId": "693475",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Deoxys-CRI032"
     },
     "p|Bronzor|TEF|68": {
-      "usd": 0.22,
-      "eur": 0.12,
+      "usd": 0.2,
+      "eur": 0.14,
       "tcgplayerId": "542812",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Bronzor-V1-TEF068"
     },
     "p|Bronzong|TEF|69": {
       "usd": 0.26,
-      "eur": 0.12,
+      "eur": 0.14,
       "tcgplayerId": "542813",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Bronzong-TEF069"
     },
     "p|Minccino|CRI|72": {
-      "usd": 0.51,
+      "usd": 0.48,
       "eur": 0.06,
       "tcgplayerId": "693525",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Minccino-CRI072"
     },
     "p|Cinccino ex|CRI|73": {
-      "usd": 1.71,
-      "eur": 1.35,
+      "usd": 1.83,
+      "eur": 1.47,
       "tcgplayerId": "693463",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Cinccino-ex-V1-CRI073"
     },
     "p|Philippe|CRI|79": {
-      "usd": 0.17,
+      "usd": 0.14,
       "eur": 0.03,
       "tcgplayerId": "693532",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Philippe-V1-CRI079"
     },
     "t|Philippe": {
-      "usd": 0.17,
+      "usd": 0.14,
       "eur": 0.03,
       "tcgplayerId": "693532",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Philippe-V1-CRI079"
     },
     "p|Hop's Zacian ex|JTG|111": {
-      "usd": 0.49,
-      "eur": 0.57,
+      "usd": 0.62,
+      "eur": 0.59,
       "tcgplayerId": "623538",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Hops-Zacian-ex-V1-JTG111"
     },
     "p|Litwick|PBL|36": {
-      "usd": 0.6,
-      "eur": 0.16,
+      "usd": 0.68,
+      "eur": 0.12,
       "tcgplayerId": "704793",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Litwick-PBL036"
     },
     "p|Lampent|PBL|37": {
-      "usd": 0.68,
-      "eur": 0.12,
+      "usd": 0.64,
+      "eur": 0.08,
       "tcgplayerId": "704794",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Lampent-PBL037"
     },
     "p|Chandelure|TWM|38": {
-      "usd": 0.88,
+      "usd": 0.92,
       "eur": 0.44,
       "tcgplayerId": "550082",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Chandelure-TWM038"
     },
     "p|Mega Chandelure ex|PBL|38": {
-      "usd": 2.22,
-      "eur": 1.83,
+      "usd": 1.92,
+      "eur": 1.89,
       "tcgplayerId": "704795",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Mega-Chandelure-ex-V1-PBL038"
     },
@@ -2794,236 +2794,236 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Clefairy-V1-POR030"
     },
     "p|Comfey|SCR|63": {
-      "usd": 0.18,
-      "eur": 0.05,
+      "usd": 0.19,
+      "eur": 0.04,
       "tcgplayerId": "567289",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Comfey-SCR063"
     },
     "p|Acerola's Mischief|MEG|113": {
-      "usd": 0.19,
+      "usd": 0.16,
       "eur": 0.03,
       "tcgplayerId": "654452",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Acerolas-Mischief-V1-MEG113"
     },
     "t|Acerola's Mischief": {
-      "usd": 0.19,
+      "usd": 0.16,
       "eur": 0.03,
       "tcgplayerId": "654452",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Acerolas-Mischief-V1-MEG113"
     },
     "p|N's Plan|BLK|83": {
-      "usd": 0.21,
-      "eur": 0.06,
+      "usd": 0.23,
+      "eur": 0.05,
       "tcgplayerId": "642532",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Black-Bolt/Ns-Plan-V1-BLK083"
     },
     "t|N's Plan": {
-      "usd": 0.21,
-      "eur": 0.06,
+      "usd": 0.23,
+      "eur": 0.05,
       "tcgplayerId": "642532",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Black-Bolt/Ns-Plan-V1-BLK083"
     },
     "p|Annihilape|PBL|41": {
-      "usd": 0.16,
+      "usd": 0.15,
       "eur": 0.03,
       "tcgplayerId": "704798",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Annihilape-PBL041"
     },
     "p|N's Darumaka|JTG|26": {
       "usd": 0.16,
-      "eur": 0.04,
+      "eur": 0.03,
       "tcgplayerId": "623453",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Darumaka-JTG026"
     },
     "p|N's Darmanitan|JTG|27": {
-      "usd": 0.17,
+      "usd": 0.16,
       "eur": 0.03,
       "tcgplayerId": "623454",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ns-Darmanitan-JTG027"
     },
     "p|Team Rocket's Kangaskhan ex|ASC|162": {
-      "usd": 0.78,
-      "eur": 0.81,
+      "usd": 0.69,
+      "eur": 0.79,
       "tcgplayerId": "675974",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Team-Rockets-Kangaskhan-ex-ASC162"
     },
     "p|Counter Gain|SSP|169": {
-      "usd": 0.16,
+      "usd": 0.15,
       "eur": 0.05,
       "tcgplayerId": "589907",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Counter-Gain-V1-SSP169"
     },
     "t|Counter Gain": {
-      "usd": 0.16,
+      "usd": 0.15,
       "eur": 0.05,
       "tcgplayerId": "589907",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Counter-Gain-V1-SSP169"
     },
     "p|Mega Signal|MEG|121": {
-      "usd": 0.2,
+      "usd": 0.22,
       "eur": 0.05,
       "tcgplayerId": "654460",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Signal-V1-MEG121"
     },
     "t|Mega Signal": {
-      "usd": 0.2,
+      "usd": 0.22,
       "eur": 0.05,
       "tcgplayerId": "654460",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Signal-V1-MEG121"
     },
     "p|Surfing Beach|MEG|129": {
-      "usd": 0.42,
-      "eur": 0.16,
+      "usd": 0.38,
+      "eur": 0.14,
       "tcgplayerId": "654468",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Surfing-Beach-MEG129"
     },
     "t|Surfing Beach": {
-      "usd": 0.42,
-      "eur": 0.16,
+      "usd": 0.38,
+      "eur": 0.14,
       "tcgplayerId": "654468",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Surfing-Beach-MEG129"
     },
     "p|Ruffian|JTG|157": {
-      "usd": 0.23,
-      "eur": 0.06,
+      "usd": 0.21,
+      "eur": 0.07,
       "tcgplayerId": "623584",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ruffian-V1-JTG157"
     },
     "t|Ruffian": {
-      "usd": 0.23,
-      "eur": 0.06,
+      "usd": 0.21,
+      "eur": 0.07,
       "tcgplayerId": "623584",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Ruffian-V1-JTG157"
     },
     "p|Relicanth|TEF|84": {
-      "usd": 0.3,
-      "eur": 0.12,
+      "usd": 0.31,
+      "eur": 0.1,
       "tcgplayerId": "542828",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Relicanth-V1-TEF084"
     },
     "p|Cornerstone Mask Ogerpon ex|TWM|112": {
-      "usd": 0.77,
+      "usd": 0.78,
       "eur": 1,
       "tcgplayerId": "550156",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Cornerstone-Mask-Ogerpon-ex-V1-TWM112"
     },
     "p|Goldeen|PBL|13": {
-      "usd": 0.08,
-      "eur": 0.02,
+      "usd": 0.06,
+      "eur": 0.03,
       "tcgplayerId": "704770",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Goldeen-V1-PBL013"
     },
     "p|Lucian|TWM|157": {
-      "usd": 0.17,
-      "eur": 0.03,
+      "usd": 0.15,
+      "eur": 0.02,
       "tcgplayerId": "550201",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Lucian-V1-TWM157"
     },
     "t|Lucian": {
-      "usd": 0.17,
-      "eur": 0.03,
+      "usd": 0.15,
+      "eur": 0.02,
       "tcgplayerId": "550201",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Lucian-V1-TWM157"
     },
     "p|Team Rocket's Wobbuffet|DRI|82": {
-      "usd": 0.2,
-      "eur": 0.08,
+      "usd": 0.22,
+      "eur": 0.07,
       "tcgplayerId": "632892",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Wobbuffet-DRI082"
     },
     "p|Terapagos ex|SCR|128": {
-      "usd": 1.1,
-      "eur": 0.78,
+      "usd": 1.15,
+      "eur": 0.8,
       "tcgplayerId": "567376",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Terapagos-ex-V1-SCR128"
     },
     "p|Dialga|MEG|95": {
-      "usd": 0.19,
+      "usd": 0.18,
       "eur": 0.06,
       "tcgplayerId": "654434",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Dialga-MEG095"
     },
     "p|Mega Darkrai ex|PBL|48": {
-      "usd": 1.65,
-      "eur": 2.37,
+      "usd": 1.68,
+      "eur": 2.43,
       "tcgplayerId": "704805",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Mega-Darkrai-ex-V1-PBL048"
     },
     "p|Volcanion ex|JTG|31": {
-      "usd": 0.56,
-      "eur": 0.58,
+      "usd": 0.52,
+      "eur": 0.62,
       "tcgplayerId": "623458",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Volcanion-ex-V1-JTG031"
     },
     "p|Dark Bell|PBL|75": {
-      "usd": 0.45,
+      "usd": 0.54,
       "eur": 0.12,
       "tcgplayerId": "704832",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Dark-Bell-V1-PBL075"
     },
     "p|Lively Stadium|SSP|180": {
       "usd": 0.38,
-      "eur": 0.16,
+      "eur": 0.14,
       "tcgplayerId": "589991",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Lively-Stadium-SSP180"
     },
     "t|Dark Bell": {
-      "usd": 0.45,
+      "usd": 0.54,
       "eur": 0.12,
       "tcgplayerId": "704832",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Dark-Bell-V1-PBL075"
     },
     "t|Lively Stadium": {
       "usd": 0.38,
-      "eur": 0.16,
+      "eur": 0.14,
       "tcgplayerId": "589991",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Lively-Stadium-SSP180"
     },
     "p|Mega Meganium ex|ASC|10": {
-      "usd": 0.63,
+      "usd": 0.66,
       "eur": 1.2,
       "tcgplayerId": "675822",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Mega-Meganium-ex-V1-ASC010"
     },
     "p|Bulbasaur|MEG|1": {
-      "usd": 0.5,
-      "eur": 0.12,
+      "usd": 0.4,
+      "eur": 0.1,
       "tcgplayerId": "654340",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Bulbasaur-V1-MEG001"
     },
     "p|Ivysaur|MEG|2": {
-      "usd": 0.6,
+      "usd": 0.56,
       "eur": 0.14,
       "tcgplayerId": "654341",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Ivysaur-V1-MEG002"
     },
     "p|Mega Venusaur ex|MEG|3": {
-      "usd": 2.12,
-      "eur": 2.06,
+      "usd": 1.72,
+      "eur": 2.1,
       "tcgplayerId": "654342",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Venusaur-ex-V1-MEG003"
     },
     "p|Great Haul Net|CRI|78": {
-      "usd": 0.21,
+      "usd": 0.2,
       "eur": 0.03,
       "tcgplayerId": "693499",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Great-Haul-Net-CRI077"
     },
     "t|Great Haul Net": {
-      "usd": 0.21,
+      "usd": 0.2,
       "eur": 0.03,
       "tcgplayerId": "693499",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Great-Haul-Net-CRI077"
     },
     "p|Ethan's Ho-Oh ex|DRI|39": {
-      "usd": 1.48,
-      "eur": 1.34,
+      "usd": 1.22,
+      "eur": 1.38,
       "tcgplayerId": "632858",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Ethans-Ho-Oh-ex-V1-DRI039"
     },
     "p|Iron Thorns ex|TWM|77": {
-      "usd": 0.66,
-      "eur": 0.67,
+      "usd": 0.58,
+      "eur": 0.64,
       "tcgplayerId": "550121",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Iron-Thorns-ex-V1-TWM077"
     },
@@ -3034,26 +3034,26 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Genesect-PFL008"
     },
     "p|Max Rod|PRE|116": {
-      "usd": 0.44,
-      "eur": 0.78,
+      "usd": 0.49,
+      "eur": 0.75,
       "tcgplayerId": "610471",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Max-Rod-PRE116"
     },
     "t|Max Rod": {
-      "usd": 0.44,
-      "eur": 0.78,
+      "usd": 0.49,
+      "eur": 0.75,
       "tcgplayerId": "610471",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Max-Rod-PRE116"
     },
     "p|Joltik|SCR|50": {
       "usd": 0.48,
-      "eur": 0.12,
+      "eur": 0.1,
       "tcgplayerId": "567276",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Joltik-V1-SCR050"
     },
     "p|Galvantula|SFA|2": {
-      "usd": 0.13,
-      "eur": 0.04,
+      "usd": 0.11,
+      "eur": 0.03,
       "tcgplayerId": "560312",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shrouded-Fable/Galvantula-SFA002"
     },
@@ -3064,7 +3064,7 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Super-Potion-JTG158"
     },
     "p|Backtrack Badge|PBL|74": {
-      "usd": 0.14,
+      "usd": 0.13,
       "eur": 0.03,
       "tcgplayerId": "704831",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Backtrack-Badge-PBL074"
@@ -3076,176 +3076,176 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Super-Potion-JTG158"
     },
     "t|Backtrack Badge": {
-      "usd": 0.14,
+      "usd": 0.13,
       "eur": 0.03,
       "tcgplayerId": "704831",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pitch-Black/Backtrack-Badge-PBL074"
     },
     "p|Regigigas|PRE|86": {
-      "usd": 0.16,
-      "eur": 0.07,
+      "usd": 0.14,
+      "eur": 0.06,
       "tcgplayerId": "610441",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Regigigas-PRE086"
     },
     "p|Blowtorch|PFL|86": {
-      "usd": 0.14,
+      "usd": 0.13,
       "eur": 0.03,
       "tcgplayerId": "662132",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Blowtorch-V1-PFL086"
     },
     "t|Blowtorch": {
-      "usd": 0.14,
+      "usd": 0.13,
       "eur": 0.03,
       "tcgplayerId": "662132",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Blowtorch-V1-PFL086"
     },
     "p|Mega Audino ex|ASC|172": {
-      "usd": 1.92,
-      "eur": 2.1,
+      "usd": 1.84,
+      "eur": 2.14,
       "tcgplayerId": "675984",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Mega-Audino-ex-V1-ASC172"
     },
     "p|Pikachu ex|SSP|57": {
-      "usd": 4.86,
-      "eur": 4.28,
+      "usd": 4.82,
+      "eur": 4.01,
       "tcgplayerId": "590025",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Pikachu-ex-V1-SSP057"
     },
     "p|Eevee|TWM|135": {
-      "usd": 1.04,
-      "eur": 0.4,
+      "usd": 1,
+      "eur": 0.36,
       "tcgplayerId": "550179",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Eevee-V1-TWM135"
     },
     "p|Sylveon|PRE|40": {
       "usd": 1.14,
-      "eur": 1.17,
+      "eur": 0.99,
       "tcgplayerId": "610395",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Sylveon-PRE040"
     },
     "p|Espeon ex|PRE|34": {
-      "usd": 3.94,
-      "eur": 3.31,
+      "usd": 4.04,
+      "eur": 3.38,
       "tcgplayerId": "610389",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Espeon-ex-V1-PRE034"
     },
     "p|Fezandipiti|TWM|96": {
-      "usd": 0.16,
-      "eur": 0.07,
+      "usd": 0.17,
+      "eur": 0.08,
       "tcgplayerId": "550140",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Fezandipiti-TWM096"
     },
     "p|Jacinthe|POR|75": {
-      "usd": 0.56,
+      "usd": 0.52,
       "eur": 0.12,
       "tcgplayerId": "684393",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Jacinthe-V1-POR075"
     },
     "t|Jacinthe": {
-      "usd": 0.56,
+      "usd": 0.52,
       "eur": 0.12,
       "tcgplayerId": "684393",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Jacinthe-V1-POR075"
     },
     "p|Lisia's Appeal|SSP|179": {
       "usd": 0.34,
-      "eur": 0.08,
+      "eur": 0.1,
       "tcgplayerId": "589988",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Lisias-Appeal-V1-SSP179"
     },
     "t|Lisia's Appeal": {
       "usd": 0.34,
-      "eur": 0.08,
+      "eur": 0.1,
       "tcgplayerId": "589988",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Lisias-Appeal-V1-SSP179"
     },
     "p|Kofu|SCR|138": {
       "usd": 0.34,
-      "eur": 0.1,
+      "eur": 0.08,
       "tcgplayerId": "567404",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Kofu-V1-SCR138"
     },
     "t|Kofu": {
       "usd": 0.34,
-      "eur": 0.1,
+      "eur": 0.08,
       "tcgplayerId": "567404",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Kofu-V1-SCR138"
     },
     "p|Glalie|TWM|52": {
-      "usd": 0.15,
-      "eur": 0.04,
+      "usd": 0.17,
+      "eur": 0.03,
       "tcgplayerId": "550096",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Glalie-TWM052"
     },
     "p|Larry's Skill|PRE|115": {
-      "usd": 0.28,
-      "eur": 0.14,
+      "usd": 0.26,
+      "eur": 0.16,
       "tcgplayerId": "610470",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Larrys-Skill-V1-PRE115"
     },
     "t|Larry's Skill": {
-      "usd": 0.28,
-      "eur": 0.14,
+      "usd": 0.26,
+      "eur": 0.16,
       "tcgplayerId": "610470",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Larrys-Skill-V1-PRE115"
     },
     "p|Duraludon|SCR|106": {
       "usd": 0.52,
-      "eur": 0.12,
+      "eur": 0.08,
       "tcgplayerId": "567332",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Crown/Duraludon-SCR106"
     },
     "p|Archaludon ex|SSP|130": {
-      "usd": 1.71,
-      "eur": 1.59,
+      "usd": 1.5,
+      "eur": 1.5,
       "tcgplayerId": "589867",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Archaludon-ex-V1-SSP130"
     },
     "p|Mega Mawile ex|MEG|94": {
-      "usd": 0.68,
-      "eur": 0.48,
+      "usd": 0.54,
+      "eur": 0.47,
       "tcgplayerId": "654433",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Mawile-ex-V1-MEG094"
     },
     "p|Scoop Up Cyclone|TWM|162": {
-      "usd": 0.32,
-      "eur": 0.42,
+      "usd": 0.33,
+      "eur": 0.38,
       "tcgplayerId": "550206",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Scoop-Up-Cyclone-TWM162"
     },
     "t|Scoop Up Cyclone": {
-      "usd": 0.32,
-      "eur": 0.42,
+      "usd": 0.33,
+      "eur": 0.38,
       "tcgplayerId": "550206",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Twilight-Masquerade/Scoop-Up-Cyclone-TWM162"
     },
     "p|Morty's Conviction|TEF|155": {
-      "usd": 0.32,
-      "eur": 0.18,
+      "usd": 0.3,
+      "eur": 0.12,
       "tcgplayerId": "542671",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Mortys-Conviction-V1-TEF155"
     },
     "t|Morty's Conviction": {
-      "usd": 0.32,
-      "eur": 0.18,
+      "usd": 0.3,
+      "eur": 0.12,
       "tcgplayerId": "542671",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Temporal-Forces/Mortys-Conviction-V1-TEF155"
     },
     "p|Light Ball|ASC|191": {
-      "usd": 0.16,
-      "eur": 0.05,
+      "usd": 0.17,
+      "eur": 0.04,
       "tcgplayerId": "676003",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Light-Ball-ASC191"
     },
     "t|Light Ball": {
-      "usd": 0.16,
-      "eur": 0.05,
+      "usd": 0.17,
+      "eur": 0.04,
       "tcgplayerId": "676003",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Light-Ball-ASC191"
     },
     "p|Deoxys|CRI|33": {
-      "usd": 0.08,
-      "eur": 0.04,
+      "usd": 0.09,
+      "eur": 0.03,
       "tcgplayerId": "693476",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chaos-Rising/Deoxys-CRI033"
     },
@@ -3263,31 +3263,31 @@
     },
     "p|Spewpa|POR|8": {
       "usd": 0.24,
-      "eur": 0.09,
+      "eur": 0.06,
       "tcgplayerId": "684364",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Spewpa-V1-POR008"
     },
     "p|Vivillon|POR|9": {
-      "usd": 0.24,
+      "usd": 0.27,
       "eur": 0.06,
       "tcgplayerId": "684366",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Vivillon-POR009"
     },
     "p|Rowlet|POR|10": {
-      "usd": 0.21,
+      "usd": 0.3,
       "eur": 0.12,
       "tcgplayerId": "684367",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Rowlet-V1-POR010"
     },
     "p|Dartrix|POR|11": {
-      "usd": 0.36,
+      "usd": 0.33,
       "eur": 0.09,
       "tcgplayerId": "684369",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Dartrix-POR011"
     },
     "p|Decidueye ex|POR|12": {
-      "usd": 1.71,
-      "eur": 1.26,
+      "usd": 1.5,
+      "eur": 1.38,
       "tcgplayerId": "684370",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Perfect-Order/Decidueye-ex-V1-POR012"
     },
@@ -3299,55 +3299,55 @@
     },
     "p|Team Rocket's Venture Bomb|DRI|179": {
       "usd": 0.88,
-      "eur": 0.24,
+      "eur": 0.2,
       "tcgplayerId": "632979",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Venture-Bomb-DRI179"
     },
     "t|Team Rocket's Venture Bomb": {
       "usd": 0.88,
-      "eur": 0.24,
+      "eur": 0.2,
       "tcgplayerId": "632979",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Team-Rockets-Venture-Bomb-DRI179"
     },
     "p|Sylveon ex|SSP|86": {
-      "usd": 2.94,
-      "eur": 1.92,
+      "usd": 2.82,
+      "eur": 1.87,
       "tcgplayerId": "590069",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Sylveon-ex-SSP086"
     },
     "p|Bronzor|PRE|66": {
       "usd": 0.18,
-      "eur": 0.04,
+      "eur": 0.06,
       "tcgplayerId": "610421",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Prismatic-Evolutions/Bronzor-PRE066"
     },
     "p|Iris's Fighting Spirit|JTG|149": {
-      "usd": 0.32,
-      "eur": 0.08,
+      "usd": 0.3,
+      "eur": 0.06,
       "tcgplayerId": "623576",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Iriss-Fighting-Spirit-V1-JTG149"
     },
     "t|Iris's Fighting Spirit": {
-      "usd": 0.32,
-      "eur": 0.08,
+      "usd": 0.3,
+      "eur": 0.06,
       "tcgplayerId": "623576",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Journey-Together/Iriss-Fighting-Spirit-V1-JTG149"
     },
     "p|Ralts|MEG|58": {
-      "usd": 0.78,
+      "usd": 0.81,
       "eur": 0.09,
       "tcgplayerId": "654397",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Ralts-MEG058"
     },
     "p|Kirlia|MEG|59": {
       "usd": 0.54,
-      "eur": 0.08,
+      "eur": 0.1,
       "tcgplayerId": "654398",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Kirlia-MEG059"
     },
     "p|Mega Gardevoir ex|MEG|60": {
       "usd": 1.16,
-      "eur": 1.08,
+      "eur": 1.06,
       "tcgplayerId": "654399",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mega-Evolution/Mega-Gardevoir-ex-V1-MEG060"
     },
@@ -3358,13 +3358,13 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Marill-V1-ASC083"
     },
     "p|Azumarill ex|ASC|84": {
-      "usd": 0.69,
-      "eur": 0.75,
+      "usd": 0.66,
+      "eur": 0.73,
       "tcgplayerId": "675896",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ascended-Heroes/Azumarill-ex-ASC084"
     },
     "p|Zacian|PFL|45": {
-      "usd": 0.18,
+      "usd": 0.15,
       "eur": 0.05,
       "tcgplayerId": "662244",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Phantasmal-Flames/Zacian-V1-PFL045"
@@ -3376,18 +3376,18 @@
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Yanma-V1-DRI002"
     },
     "p|Yanmega ex|DRI|3": {
-      "usd": 1.68,
-      "eur": 1.41,
+      "usd": 1.71,
+      "eur": 1.5,
       "tcgplayerId": "632831",
       "cardmarketUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Destined-Rivals/Yanmega-ex-V1-DRI003"
     }
   },
   "fx": {
-    "date": "2026-10-13",
+    "date": "2026-10-14",
     "source": "api.frankfurter.dev",
     "usd": {
-      "EUR": 0.89381,
-      "MYR": 4.086
+      "EUR": 0.89326,
+      "MYR": 4.0825
     }
   }
 }
